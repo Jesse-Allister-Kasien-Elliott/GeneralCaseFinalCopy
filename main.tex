@@ -30,7 +30,7 @@
     colorlinks,
     citecolor=red,
     filecolor=black,
-    linkcolor=red,
+    linkcolor=red ,
     urlcolor=black
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -595,7 +595,7 @@ so that
 %
 %
 \begin{lemma}\label{lem:3.3}
-Consider $f_1,\hdots,f_p$ in $\C[X_1,\hdots,X_n]$ and $\xb \in V(f_1,\hdots,f_p).$ Let $J$ denote the Jacobian matrix $\jac_{\xb}( F)$ and let $T$ denote $\ker J.$ Assume that $\dim T = d$ so that $\rank(J) = n-d.$ Then, for $i \in \{1,\hdots,n-1\},$  $\dim\pi_i(T) < i$ if and only if $\rk (\jac(\textbf{f})[-,i+1,n]) < n-d.$
+Consider $F=(f_1,\hdots,f_p)$ in $\C[X_1,\hdots,X_n]$ and $\xb \in V(f_1,\hdots,f_p).$ Let $J$ denote the Jacobian matrix $\jac_{\xb}( F)$ and let $T$ denote $\ker J.$ Assume that $\dim T = d$ so that $\rank(J) = n-d.$ Then, for $i \in \{1,\hdots,n-1\},$  $\dim\pi_i(T) < i$ if and only if $\rk (\jac(F)[-,i+1,n]) < n-d.$
 \end{lemma} 
 %
 %
@@ -872,7 +872,13 @@ revisited using the techniques introduced here. The techniques would apply to al
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Weak Transversality}
+\section{Transversality}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Sard's lemma}
 Sard's lemma states that the set of critical values of a smooth
 function $\R^n \to \R^m$ has measure zero. One can give ``algebraic''
 versions of it, for semi-algebraic mappings $\R^n \to \R^m$ as
@@ -888,7 +894,9 @@ item in property ${\bf H}_i$, as well as property ${\bf H}'_i$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Weak transversality}
 Transversality to a point can be rephrased entirely in terms of
 critical and regular values. Recall that if $\bm \Psi$ is a mapping
 from a smooth algebraic set $Y$ to $\C^t$, with $t\le \dim(Y)$, a {\em
@@ -916,8 +924,11 @@ Let $\mathscr{O} \subset \C^n$ be a Zariski open set and suppose that $\bm 0$ is
     $\Gamma(\thetab)\ne 0$, then $\bm 0$ is a regular value
     of~$\bm\Phi_{\thetab}$ on $\mathscr{O}$.
 \end{prop}
-
-The following simple example shows this result at work. Consider a
+\noindent 
+The following simple example shows this result at work. 
+%
+\begin{ex}
+Consider a
 squarefree $f$ in $\C[X_1,X_2]$, such that $V(f)$ is a smooth curve in
 $\C^2$, and let the mapping $\bm\Phi:\C^2\times \C \to \C^2$ be
 defined by $\bm\Phi(X_1,X_2,\Theta) = (f(X_1,X_2), X_1-\Theta)$. One
@@ -928,7 +939,14 @@ generic $\vartheta$ in $\C$, that is, for all $\vartheta$ in $\C$
 except a finite number, the ideal $(f(X_1,X_2), X_1-\vartheta)$ is
 radical in $\C[X_1,X_2]$; equivalently, $f(\vartheta, X_2)$ is
 squarefree. We will revisit this example in Section~\ref{ssec:fiber} ($H_i^{'}$).
+\end{ex}
+%
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Proof of weak transversality: Proposition 4.1}
 The rest of the subsection is devoted to the proof of the proposition.
 The proof of \cite[Theorem B.3]{TWT} already shows the existence of
 $\Gamma$; it is essentially the classical proof for smooth
@@ -936,22 +954,34 @@ mappings~\cite[Section~3.7]{demazure2000bifurcations}, written in an
 algebraic context. In what follows, we revisit this proof,
 establishing a bound on the degree of $\Gamma$.
 
-    Put $V^{'} = \bm\Phi^{-1}(\bm 0) \cap (\sO \times \C^s)$, and let $V$ be the Zariski closure of $V^{'}.$ If $V$ is empty, there is nothing to do, since all values $\thetab$ in $\C^\dt$ satisfy the conclusion of the proposition. Thus, we assume that $V$ is not empty. Take $(\xb, \vt)$ in $V^{'}$; then by assumption, $\jac_{(\xb,\vt)}(\Phi)$ has full rank $m$. Since in a neighborhood of $(\xb,\vt), V$ coincides with $\Phi^{-1}(0),$ the Jacobian criterion implies that there is a unique irreducible component $V_{(\xb,\vt)}$ of $V$ that contains $(\xb,\vt),$ that $(\xb,\vt)$ is regular on this component, that $\dim V_{(\xb,\vt)}=n+s-m$ and that $T_{(\xb,\vt)}$ is the nullspace of $\jac_{(\xb,\vt)}(\Phi).$
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Characterizing the critical points}
+    Put $V^{'} = \bm\Phi^{-1}(\bm 0) \cap (\sO \times \C^s)$, and let $V$ be the Zariski closure of $V^{'}.$ If $V$ is empty, there is nothing to do, since all values $\thetab$ in $\C^\dt$ satisfy the conclusion of the proposition. Thus, we assume that $V$ is not empty. Take $(\xb, \vt)$ in $V^{'}$; then by assumption, $\jac_{(\xb,\vt)}({\bm \Phi})$ has full rank $m$. Since in a neighborhood of $(\xb,\vt), V$ coincides with ${\bm \Phi}^{-1}(0) \cap \sO,$ the Jacobian criterion implies that there is a unique irreducible component $V_{(\xb,\vt)}$ of $V$ that contains $(\xb,\vt),$ that $(\xb,\vt)$ is regular on this component, that $\dim V_{(\xb,\vt)}=n+s-m$ and that $T_{(\xb,\vt)}$ is the nullspace of $\jac_{(\xb,\vt)}({\bm \Phi}).$
     
     Since every irreducible component of $V$ intersects $V^{'}$, this implies that $V$ itself is equidimensional of dimension $n+s-m$, and thus that $V^{'}$ is contained in $\reg (V)$. Furthermore, it also follows that for $(\xb,\vt) \in V^{'}, T_{(\xb,\vt)}V$ is the nullspace of $\jac_{(\xb,\vt)}(\Phi)$ in $\C^n \times \C^s.$  
     
     We will reuse the following fact, proved in~\cite{TWT}.  Consider the
-    projection $\pi:(\xb, \thetab) \in \C^n \times \C^{\dt} \mapsto
-    \thetab \in\C^{\dt}$.  Let $Z$ be the set of critical points of
-    $\pi_{|V}$, and consider its projection $\pi(Z)$ in $\C^s$. This is
-    the set of critical values of $\pi_{|V}$; hence, by the algebraic form
-    of Sard's lemma (see \cite[Theorem~3.7]{Mumford76} for irreducible $V$
-    and~\cite[Proposition~B.2]{TWT} for general $V$), its Zariski closure
-    $\overline{\pi(Z)}$ is a strict closed subset of $\C^s$. As we will
+    projection 
+    %
+    \begin{align*}
+    \pi: \C^n \times \C^{\dt} &\rightarrow\C^{\dt} \\
+    (\xb, \thetab)&\mapsto\thetab, 
+    \end{align*}
+    %
+    let $Z$ be the set of critical points of
+    $\pi_{|V^{'}}$, and consider its projection $\pi(Z)$ in $\C^s$. This is
+    the set of critical values of $\pi_{|V^{'}}$. Also let $Z^{'}$ be the critical values of $\pi_{|\reg(V)}$ so that, by the algebraic form
+    of Sard's lemma (see \cite[Theorem~3.7]{Mumford76} for irreducible $V^{'}$
+    and~\cite[Proposition~B.2]{TWT} for general $V^{'}$), its Zariski closure
+    $\overline{\pi(Z^{'})}$ is a strict closed subset of $\C^s$. Then, since $V^{'} \subset \reg(V)$ and since $Z \subset Z^{'},$ the Zariski closure $\overline{\pi(Z^{'})}$ is a strict closed subset of $\C^s$.  As we will
     see below, if $\thetab \in \C^{\dt}$ is not in $\overline{\pi(Z)}$,
     then $\bm 0$ is a regular value of $\bm\Phi_{\thetab}$ on $\sO.$
     
-    To describe the set $Z$ of critical points of $\pi_{|V}$, let $\bm M$
+    To describe the set $Z$ of critical points of $\pi_{|V^{'}}$, let $\bm M$
     denote the $(s+m) \times (s+n)$ Jacobian matrix with entries in
     $\C[\Xb,\Thetab]$ given by $\bm M = \jac_{\Xb,\Thetab}(\pi,\bm\Phi)$,
     that is,
@@ -969,7 +999,7 @@ establishing a bound on the degree of $\Gamma$.
     \end{align*}
 
     \begin{lemma} 
-      For $(\xb,\thetab)$ in $V$, $(\xb,\thetab)$ is in $Z$ if and only if
+      For $(\xb,\thetab)$ in $V^{'}$, $(\xb,\thetab)$ is in $Z$ if and only if
       the matrix $\bm M$ has rank less than $\dt+m$ at $(\xb,\thetab)$.
     \end{lemma}
     \begin{proof}
@@ -982,7 +1012,7 @@ establishing a bound on the degree of $\Gamma$.
           \times n}~\textbf{I}_{\dt}]$ to the nullspace of
       $\bm K(\xb,\thetab)$.
     
-      Since $V$ is smooth {\bf it is not}, $\bm K(\xb,\thetab)$ has full rank ${\rm codim}
+      Since $V$ is smooth (no longer smooth), $\bm K(\xb,\thetab)$ has full rank ${\rm codim}
       (V) = m$. On the other hand, the nullspace of $\bm K(\xb,\thetab)$
       is the tangent space $T_{\xb,\thetab} V$, and
       $\textup{rank}([\textbf{0}_{\dt \times n}~\textbf{I}_{\dt}] \mid
@@ -1002,7 +1032,7 @@ establishing a bound on the degree of $\Gamma$.
     submatrix of the Jacobian of $\bm\Phi$ consisting of the first $n$
     columns. This is the Jacobian matrix of $\bm \Phi$ with respect to $\Xb$.
     \begin{lemma} 
-      For $(\xb,\thetab)$ in $V$, $(\xb,\thetab)$ is in $Z$ if and only if
+      For $(\xb,\thetab)$ in $V^{'}$, $(\xb,\thetab)$ is in $Z$ if and only if
       $\bm J(\xb,\thetab)$ has rank less than $m$.
     \end{lemma}
     \begin{proof}
@@ -1030,12 +1060,19 @@ establishing a bound on the degree of $\Gamma$.
 
     In particular, take $\thetab$ in $\C^\dt - \overline{\pi(Z)}$.
     Then for all $\xb$ in $\bm \Phi_{\thetab}^{-1}(\bm 0)$ on $\sO$, $(\xb,\thetab)$
-    is in $V$, so it is not in $Z$. The previous lemma then implies that
+    is in $V^{'}$, so it is not in $Z$. The previous lemma then implies that
     the Jacobian matrix $\bm J$ of $\bm\Phi_{\thetab}$ has full rank $m$ at
     $(\xb,\thetab)$. In other words, $\bm 0$ is a regular value of $\bm
     \Phi_{\thetab}$, as claimed.
     
-    Our next step is to bound the degree of $Z$.  In that, we use the
+    
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \subsubsection{Bounding the degree of the critical points}
+    %
+    Our next step is to bound the degree of $Z$, from which we can bound the degree of $\overline{\pi(Z)}$ and prove Proposition 4.1.  In that, we use the
     definition of degree given in~\cite{H}: the degree of an irreducible
     algebraic set is the number of intersection points it has with a
     generic hyperplane of complementary dimension, and the degree of an
@@ -1069,7 +1106,7 @@ establishing a bound on the degree of $\Gamma$.
       The algebraic set $Z$ is equal to the projection $\mu(\frak{Z}')$.
     \end{lemma}
     \begin{proof}
-      Take $(\xb,\thetab)$ in $Z$. Then, $(\xb,\thetab)$ cancels all
+      Take $(\xb,\thetab)$ in $Z$. Then, $\xb \in \sO, (\xb,\thetab)$ cancels all
       polynomials $\bm \Phi$, and there exists $\bm
       \ell=(\ell_1,\dots,\ell_m)$, not identically zero, such that
       $(\xb,\thetab,\bm \ell)$ cancels the Lagrange polynomials. This
@@ -1084,11 +1121,11 @@ establishing a bound on the degree of $\Gamma$.
       $Z \subset \mu(\frak{Z}')$.
     
       Conversely, take an irreducible component $Y$ of $\frak Z'$. We
-      prove that $\mu(Y)$ is contained in $Z$.  By construction, there
+      prove that $\mu(Y)$ is contained in $Z$ (now in addition, we need to show that $\xb \in \sO$).  By construction, there
       exists an open dense subset $Y^o \subset Y$ such that for any
       $(\xb,\thetab,\bm \ell)$ in $Y^o$, $\bm \ell$ is not identically
-      zero. As a result, $(\xb,\thetab)$ is in $Z$, that is, $\mu(Y^o)$ is
-      in $Z$. This implies that its Zariski closure $\overline{\mu(Y^o)}$
+      zero. As a result, $(\xb,\thetab)$ is in $Z$; that is, $\mu(Y^o)$ is
+      in $Z$. (Note that $(\xb,\thetab)$ is in $Z$ implies that $\xb \in \sO$.) This implies that its Zariski closure $\overline{\mu(Y^o)}$
       is in $Z$. Since $\mu(Y)$ is contained in $\overline{\mu(Y^o)}$, we
       deduce $\mu(Y) \subset Z$. Taking the union over all $Y$, we get
       $\mu(\frak Z') \subset Z$, as claimed.

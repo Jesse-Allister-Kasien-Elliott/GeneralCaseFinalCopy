@@ -865,7 +865,7 @@ further randomized algorithms in real algebraic geometry.  In particular, random
   connectivity queries} on smooth, compact algebraic sets have been
 developed in a series of papers
 \cite{SchostMohabBabySteps2011,SchostMohabBabySteps2014}, and could be
-revisited using the techniques introduced here. The techniques would apply to algorithms in real algebraic geometry where transversality or Noether position are required geometric properties established by a random change of coordinates. 
+revisited using the techniques introduced here. The techniques would apply to algorithms in real algebraic geometry where transversality or Noether position are required geometric properties established by a random change of coordinates.
 
 
 
@@ -968,7 +968,7 @@ establishing a bound on the degree of $\Gamma$.
     projection 
     %
     \begin{align*}
-    \pi: \C^n \times \C^{\dt} &\rightarrow\C^{\dt} \\
+    \pi: \C^{n+\dt} &\rightarrow\C^{\dt} \\
     (\xb, \thetab)&\mapsto\thetab, 
     \end{align*}
     %
@@ -977,7 +977,7 @@ establishing a bound on the degree of $\Gamma$.
     the set of critical values of $\pi_{|V^{'}}$. Also let $Z^{'}$ be the critical values of $\pi_{|\reg(V)}$ so that, by the algebraic form
     of Sard's lemma (see \cite[Theorem~3.7]{Mumford76} for irreducible $V^{'}$
     and~\cite[Proposition~B.2]{TWT} for general $V^{'}$), its Zariski closure
-    $\overline{\pi(Z^{'})}$ is a strict closed subset of $\C^s$. Then, since $V^{'} \subset \reg(V)$ and since $Z \subset Z^{'},$ the Zariski closure $\overline{\pi(Z^{'})}$ is a strict closed subset of $\C^s$.  As we will
+    $\overline{\pi(Z^{'})}$ is a strict closed subset of $\C^s$. Then, since $V^{'} \subset \reg(V)$ and since $Z \subset Z^{'},$ the Zariski closure $\overline{\pi(Z)}$ is a strict closed subset of $\C^s$.  As we will
     see below, if $\thetab \in \C^{\dt}$ is not in $\overline{\pi(Z)}$,
     then $\bm 0$ is a regular value of $\bm\Phi_{\thetab}$ on $\sO.$
     
@@ -1003,7 +1003,7 @@ establishing a bound on the degree of $\Gamma$.
       the matrix $\bm M$ has rank less than $\dt+m$ at $(\xb,\thetab)$.
     \end{lemma}
     \begin{proof}
-      Take $(\xb,\thetab)$ on $V$, and let $\bm K(\xb,\thetab)$ be the
+      Take $(\xb,\thetab)$ on $V^{'}$, and let $\bm K(\xb,\thetab)$ be the
       Jacobian matrix $\jac_{\Xb,\Thetab}(\bm\Phi)$ taken at $(\xb,\thetab)$.
       Then, the rank of $\bm M(\xb,\thetab)$ can be written as
       $\textup{rank}(\bm K(\xb,\thetab)) + \textup{rank}([\textbf{0}_{\dt
@@ -1012,7 +1012,7 @@ establishing a bound on the degree of $\Gamma$.
           \times n}~\textbf{I}_{\dt}]$ to the nullspace of
       $\bm K(\xb,\thetab)$.
     
-      Since $V$ is smooth (no longer smooth), $\bm K(\xb,\thetab)$ has full rank ${\rm codim}
+      Since $(\xb,\thetab) \in V^{'}$, and since $\bz$ is a regular value of $\bm, \Phi$ $\bm K(\xb,\thetab)$ has full rank ${\rm codim}
       (V) = m$. On the other hand, the nullspace of $\bm K(\xb,\thetab)$
       is the tangent space $T_{\xb,\thetab} V$, and
       $\textup{rank}([\textbf{0}_{\dt \times n}~\textbf{I}_{\dt}] \mid

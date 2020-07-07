@@ -1101,9 +1101,13 @@ establishing a bound on the degree of $\Gamma$.
     \mu :~ \C^{n+\dt+m} &\rightarrow \C^{n+\dt}\\
     (\xb,\thetab,\bm \ell)~ &\mapsto (\xb,\thetab).
     \end{align*}
-    
+    \noindent 
+    Furthermore, we have to remove points where $\xb \not\in \sO;$ we thus define 
+    \[
+    \frak{Z}^{''} := \overline{\frak{Z}^{'}-\sO^{c}}.
+    \]
     \begin{lemma}  
-      The algebraic set $Z$ is equal to the projection $\mu(\frak{Z}')$.
+      The algebraic set $Z$ is equal to the projection $\mu(\frak{Z}{''})$.
     \end{lemma}
     \begin{proof}
       Take $(\xb,\thetab)$ in $Z$. Then, $\xb \in \sO, (\xb,\thetab)$ cancels all
@@ -1117,15 +1121,15 @@ establishing a bound on the degree of $\Gamma$.
       \C^{n+\dt+m}~|~(\xb',\thetab',0\hdots,0) \in
       \frak{Z}\}, 
       \]
-      and thus $(\xb,\thetab,\bm \ell) \in\frak{Z}'$. This proves the inclusion
-      $Z \subset \mu(\frak{Z}')$.
+      and thus $(\xb,\thetab,\bm \ell) \in\frak{Z}'$. Since $\xb \in \sO$, we also have $(\xb,\thetab,\bm \ell) \in\frak{Z}{''}$. This proves the inclusion
+      $Z \subset \mu(\frak{Z}{''})$.
     
-      Conversely, take an irreducible component $Y$ of $\frak Z'$. We
-      prove that $\mu(Y)$ is contained in $Z$ (now in addition, we need to show that $\xb \in \sO$).  By construction, there
+      Conversely, take an irreducible component $Y$ of $\frak Z{''}$. We
+      prove that $\mu(Y)$ is contained in $Z$.  By construction, there
       exists an open dense subset $Y^o \subset Y$ such that for any
       $(\xb,\thetab,\bm \ell)$ in $Y^o$, $\bm \ell$ is not identically
-      zero. As a result, $(\xb,\thetab)$ is in $Z$; that is, $\mu(Y^o)$ is
-      in $Z$. (Note that $(\xb,\thetab)$ is in $Z$ implies that $\xb \in \sO$.) This implies that its Zariski closure $\overline{\mu(Y^o)}$
+      zero. As a result, $(\xb,\thetab)$ is in $Z$, which implies that $\xb \in \sO$ and $\mu(Y^o)$ is
+      in $Z$. This implies that its Zariski closure $\overline{\mu(Y^o)}$
       is in $Z$. Since $\mu(Y)$ is contained in $\overline{\mu(Y^o)}$, we
       deduce $\mu(Y) \subset Z$. Taking the union over all $Y$, we get
       $\mu(\frak Z') \subset Z$, as claimed.

@@ -37,6 +37,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % new commands and shortcuts
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+\newcommand\myeq{\mathrel{\stackrel{\makebox[0pt]{\mbox{\normalfont\tiny ?}}}{=}}}
+
+
+
+
+
 % script variables 
 \def\sO{\mathscr{O}}
 \def\sL{\mathscr{L}}
@@ -50,6 +61,8 @@
 % frak variables 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\fA{{\mathfrak A}}
+\def\fZ{{\mathfrak Z}}
+\def\fZp{{\mathfrak Z^{'}}}
 \def\fB{{\mathfrak B}}
 \def\fN{{\mathfrak N}}
 \def\fD{{\mathfrak D}}
@@ -198,7 +211,7 @@
 %
 %
 %
-\title{Bit complexity for computing one point in each connected component of a smooth real algebraic set}
+\title{Bit complexity for computing one point on each connected component of a smooth real algebraic set}
 \author{Jesse Elliott$\dagger$, Mark Giesbrecht$\dagger$, Eric Schost$\dagger$  \\
         \small $\dagger$David R. Cheriton School of Computer Science, University of Waterloo, On, Canada \\
 }
@@ -218,28 +231,18 @@
 \begin{abstract}
 We present a full analysis of the bit complexity of an efficient
   algorithm for the computation of at least one point in each
-  connected component of a smooth real algebraic set. This is a basic
-  and important operation in semi-algebraic geometry: it gives an
-  upper bound on the number of connected components of a real
-  algebraic set, and is 
-  also used in many higher level algorithms.
-  
-  Our starting point is an algorithm by Safey El Din and Schost ({\em
+  connected component of a smooth real algebraic set. This work is a continuation of an analysis by Elliott, Giesbrecht, and Schost ({\em On the bit complexity of finding points on connecting components of a smooth real hypersurface}, ISSAC'20), where the hypersurface case was analyzed. In this paper, we extend the analysis to the algebrabraic set case. This more general setting requires us to work with Lagrangean re-formulations of polar varieties. And it requires us to re-prove the genericity statements using different techniques.  
+    
+    The analysis is of an algorithm by Safey El Din and Schost ({\em
     Polar varieties and computation of one point in each connected
     component of a smooth real algebraic set}, ISSAC'03). This
-  algorithm uses random changes of variables, that are proved to
-  generically ensure certain desirable geometric properties. The
+  algorithm uses random changes of variables that are proved to
+  generically ensure certain desirable geometric properties. And the
   cost of the algorithm was given in an algebraic complexity
-  model; the analysis of the bit complexity and the error probability
-  were left for future work.
+  model. In our contribution here, we analyze the bit complexity and the error probability for the algebraic set case. And we provide a
+  quantitative analysis of the genericity statements. 
 
-  Our paper answer these questions. Our main contribution is a
-  quantitative analysis of several genericity statements, such as
-  Thom's weak transversality theorem or Noether normalization
-  properties for polar varieties.
-
-\keywords{Real algebraic geometry; weak transversality; Noether
-  position; complexity}
+\keywords{Real algebraic geometry; regular sequences; complexity}
 \end{abstract}
 %
 %
@@ -258,14 +261,13 @@ We present a full analysis of the bit complexity of an efficient
 \subsection{Background and problem statement}
 %
 Computing one point in each connected component of a real algebraic
-set $S$ is a basic subroutine in real algebraic and semi-algebraic
-geometry; it is also useful in its own right, since it allows one to
-decide if $S$ is empty or not. 
+set $S$ is a basic and important subroutine in real algebraic and semi-algebraic
+geometry; it is also useful on its own, since it allows one to
+decide if $S$ is empty or not, and it allows one to determine an upper bound on the number of connected components of $S$.  
 
-In this paper, we consider the case where $S$ is given as $S=V \cap
+We consider the case where $S$ is given as $S=V \cap
 \R^n$, where $V=V(F) \subset \C^n$ is a complex algebraic set defined
-by a sequence of polynomials $F = (f_1,\hdots,f_p)$ in $\ZZ[X_1,\dots,X_n]$. Algorithms for this task have been known for decades, and their
-complexity is to some extent well understood. Suppose that $F = (f_1,\hdots,f_p)$ have degree at most $d$, and coefficients of bit-size $h$. Without making any assumption on $F$, the algorithm given
+by a sequence of polynomials $F = (f_1,\hdots,f_p)$ in $\ZZ[X_1,\dots,X_n]$. Suppose that $F = (f_1,\hdots,f_p)$, with total degrees at most $d$, and coefficients of bit-size $h$. Without making any assumption on $F$, the algorithm given
 in~\cite[Section~13.1]{BaPoRo03} solves our problem using $p^{n+1}d^{O(n)}$
 operations in $\Q$; in addition, the output of the algorithm is
 represented by polynomials of degree $d^{O(n)}$, with coefficients of
@@ -274,13 +276,11 @@ to~\cite{GrVo88}: sample points are found through the computation of
 critical points of well-chosen functions on $V(F)$.
 
 
-
 The number of connected components of $V(F)$ admits the lower bound $\td$, so up to polynomial factors this result is
 optimal. However, due to the generality of the algorithm, the constant
-hidden in the exponent $O(n)$ in its runtime turns out to be rather
+hidden in the exponent $O(n)$ in its runtime is
 large: the algorithm relies on infinitesimal deformations, that affect
 runtime non-trivially.
-
 
 
 In this paper, we will work under the additional assumption that
@@ -298,13 +298,12 @@ dropped in~\cite{BaGiHe14,BaGiHeLePa12}.
 
 
 
-Our starting point is the algorithm in~\cite{EMP}. In the hypersurface
-case, its runtime is $\td$ operations in $\Q$.  As with many
-results in this vein, the algorithm is randomized: we need to assume
+Our starting point is the algorithm in~\cite{EMP}. Its runtime is  polynomial in the
+complexity of evaluation of the input system. The algorithm is randomized: we need to assume
 that we are in generic coordinates; this is done by applying a random
 change of coordinates prior to all computations. In addition, the
 algorithm relies on procedures for solving systems of polynomial
-equations that are themselves randomized.  Altogether, we choose
+equations that are also randomized.  Altogether, we choose
 $n^{O(1)}$ random vectors, each of them in an affine space of
 dimension $n^{O(1)}$; every time a choice is made, there exists a
 hypersurface of the parameter space that one has to avoid in order to
@@ -313,13 +312,15 @@ complete analysis of its probability of success and its bit complexity.
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Main result} To state our main result, we need to define 
-the {\em height} of a rational number, and of a polynomial with
-rational coefficients.
 
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Bit size and data structures}
 The {\em height} of a non-zero $a=u/v \in \Q$ is the maximum of
 $\ln(|u|)$ and $\ln(v),$ where $u \in \mathbb{Z}$ and $v \in
 \mathbb{N}$ are coprime. For a polynomial $f$ with rational
@@ -327,6 +328,49 @@ coefficients, if $v \in \mathbb N$ is the minimal common denominator
 of all non-zero coefficients of $f$, then the \textit{height}
 $\htt(f)$ of $f$ is defined as the maximum of the logarithms of $v$
 and of the absolute values of the coefficients of $vf$.
+
+
+The output of the algorithm is a finite set in $\overline{\Q}{}^n$. To
+represent it, we rely on a widely used data structure based on
+univariate
+polynomials~\cite{Kronecker82,Macaulay16,GiMo89,GiHeMoPa95,ABRW,GiHaHeMoMoPa97,GiHeMoMoPa98,Rouillier99}.
+Consider a zero-dimensional algebraic set $S \subset \C^n$ defined
+over $\Q$. A {\em zero-dimensional parametrization}
+$\scrQ=((q,v_1,\dots,v_n),\lambda)$ of $S$ consists in polynomials
+$(q,v_1,\dots,v_n)$, such that $q\in \Q[T]$ is monic and squarefree,
+all $v_i$'s are in $\Q[T]$ and satisfy $\deg(v_i) < \deg(q)$, and in a
+$\Q$-linear form $\lambda$ in variables $X_1,\dots,X_n$, such that
+\begin{itemize}
+\item $\lambda(v_1,\dots,v_n)=T q' \bmod q$;
+\item we have the equality
+  $S=\left \{\left(
+      \frac{v_1(\tau)}{q'(\tau)},\dots,\frac{v_n(\tau)}{q'(\tau)}\right
+    ) \ \mid \ q(\tau)=0 \right \}.$
+\end{itemize}
+The constraint on $\lambda$ says that the roots of $q$ are the values
+taken by $\lambda$ on $S$. The parametrization of the coordinates by
+rational functions having $q'$ as a denominator goes back
+to~\cite{Kronecker82,Macaulay16}: as pointed out in~\cite{ABRW}, it
+allows one to control precisely the size of the coefficients of
+$v_1,\dots,v_n$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Main result} 
+
 %
 %
 \begin{theorem}\label{theo:main}
@@ -357,6 +401,42 @@ would be possible to refine the runtime estimate by assuming that $F$
 is given by a {\em straight-line program} (that is, a sequence of
 operations $+,-,\times$ that takes as input $X_1,\dots,X_n$ and
 evaluates $F$). Any polynomial of degree $d$ in $n$ variables can be computed by a straight-line program that does $O(d^n)$ operations: evaluate all monomials of degree up to $d$ in $n$ variables, multiply them by their respective coefficients and sum the results. However, some inputs may be given by shorter straight-line program, and the algorithm would actually be able to benefit from this. 
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Related work}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Outline}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -472,32 +552,6 @@ then at any point $\xb$ of $\reg(V),$ $\jac_{\xb}(G)$ has full rank $n - \dim(V)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Data structures} 
-%
-The output of the algorithm is a finite set in $\overline{\Q}{}^n$. To
-represent it, we rely on a widely used data structure based on
-univariate
-polynomials~\cite{Kronecker82,Macaulay16,GiMo89,GiHeMoPa95,ABRW,GiHaHeMoMoPa97,GiHeMoMoPa98,Rouillier99}.
-Consider a zero-dimensional algebraic set $S \subset \C^n$ defined
-over $\Q$. A {\em zero-dimensional parametrization}
-$\scrQ=((q,v_1,\dots,v_n),\lambda)$ of $S$ consists in polynomials
-$(q,v_1,\dots,v_n)$, such that $q\in \Q[T]$ is monic and squarefree,
-all $v_i$'s are in $\Q[T]$ and satisfy $\deg(v_i) < \deg(q)$, and in a
-$\Q$-linear form $\lambda$ in variables $X_1,\dots,X_n$, such that
-\begin{itemize}
-\item $\lambda(v_1,\dots,v_n)=T q' \bmod q$;
-\item we have the equality
-  $S=\left \{\left(
-      \frac{v_1(\tau)}{q'(\tau)},\dots,\frac{v_n(\tau)}{q'(\tau)}\right
-    ) \ \mid \ q(\tau)=0 \right \}.$
-\end{itemize}
-The constraint on $\lambda$ says that the roots of $q$ are the values
-taken by $\lambda$ on $S$. The parametrization of the coordinates by
-rational functions having $q'$ as a denominator goes back
-to~\cite{Kronecker82,Macaulay16}: as pointed out in~\cite{ABRW}, it
-allows one to control precisely the size of the coefficients of
-$v_1,\dots,v_n$.
-
 %
 \subsection{Changes of Variables}
 For a matrix $\mA$ in $\C^{n\times n}$ and $g$ in
@@ -525,8 +579,10 @@ $\C(\A)[X_1,\dots,X_n]$ or $\C[\A,X_1,\dots,X_n]$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Critical points and polar varieties} 
-The algorithm itself is rather simple. To describe it, we need to
-define {\em polar varieties}, which will play a crucial role in this paper. Let $V=V(F)$ be a $d$-equidimensional algebraic set, with $F = (f_1,\hdots,f_p) \in \C[X_1,\hdots,X_n]^p$. For $i \in
+Let $V=V(F)$ be a $d$-equidimensional algebraic set, with $F = (f_1,\hdots,f_p) \in \C[X_1,\hdots,X_n]^p$. 
+To describe the algorithm, we need to
+define {\em polar varieties}. The algorithm works by computing suitable sections of the
+polar varieties associated to generic projections of $V$. For $i \in
 \{1,\hdots,n-p\},$  let $\pi_i$ denote the projection 
 %
 \begin{align*}
@@ -541,7 +597,32 @@ The $i$-th
 \Wi := \left\{\xb \in V~|~\dim \pi_i(T_\xb
 V) < i\right\}
 \]
-is the set of critical points of $\pi_i$ on $V$. Let $J_i$ denote the truncated Jacobian matrix of $F=(f_1,\hdots,f_p)$ with respect to $\Xb:$
+is the set of critical points of $\pi_i$ on $V$. 
+%
+\begin{ex}
+Let $f = X_1^2 + X_2^2 + X_3^2-1\in \C[X_1,X_2,X_3]$ and consider 
+\[
+         V=V(X_1^2 + X_2^2 + X_3^2-1) \subset \mathbb{C}^{3}.
+\]
+The critical points  of the projection $\pi_2: (x_1,x_2,x_3) \mapsto (x_1,x_2)$ on $V(f)$ are defined by $V\left(f,\pa f/\pa X_3\right).$ Hence, the polar variety is defined by those points where
+\[
+X_1^2 + X_2^2 + X_3^2-1=X_3=0.
+\]
+The critical points of the projection $\pi_1: (x_1,x_2,x_3) \mapsto (x_1)$ on $V(f)$ are defined by $V\left(f,\pa f/\pa X_2,\pa f/\pa X_3\right).$ Hence, the polar variety is defined by those points where
+\[
+X_1^2 + X_2^2 + X_3^2-1=X_2=X_3=0.
+\]
+\begin{figure}[h]
+%\includegraphics[width=0.25\linewidth]{polarvariety.png}
+\includegraphics[width=0.75\linewidth]{pi1Andpi2.png}
+\centering
+\caption{The polar varieties $W(0, 1, V)$ and $W(0, 2, V),$ where $V = V (X_1^2 + X_2^2 + X_3^2-1)}$
+\end{figure}
+%
+\end{ex}
+%
+\noindent 
+Let $J_i$ denote the truncated Jacobian matrix of $F=(f_1,\hdots,f_p)$ with respect to $\Xb:$
 \[
 J_i = 
 \left[ 
@@ -972,9 +1053,9 @@ establishing a bound on the degree of $\Gamma$.
     (\xb, \thetab)&\mapsto\thetab, 
     \end{align*}
     %
-    let $Z$ be the set of critical points of
-    $\pi_{|V^{'}}$, and consider its projection $\pi(Z)$ in $\C^s$. This is
-    the set of critical values of $\pi_{|V^{'}}$. Also let $Z^{'}$ be the critical values of $\pi_{|\reg(V)}$ so that, by the algebraic form
+    and let $Z$ be the set of critical points of
+    $\pi_{|V^{'}}$. That is,  \[Z := \{(\xb,\bm \vt) \in V^{'}~|~\dim (\pi(T_{\xb,\bm \vt}V^{'}))<s\}.\] Consider its projection $\pi(Z)$ in $\C^s$. This is
+    the set of critical values of $\pi_{|V^{'}}$. Also let $Z^{'}$ be the critical points of $\pi_{|\reg(V)}$ so that, by the algebraic form
     of Sard's lemma (see \cite[Theorem~3.7]{Mumford76} for irreducible $V^{'}$
     and~\cite[Proposition~B.2]{TWT} for general $V^{'}$), its Zariski closure
     $\overline{\pi(Z^{'})}$ is a strict closed subset of $\C^s$. Then, since $V^{'} \subset \reg(V)$ and since $Z \subset Z^{'},$ the Zariski closure $\overline{\pi(Z)}$ is a strict closed subset of $\C^s$.  As we will
@@ -1070,7 +1151,7 @@ establishing a bound on the degree of $\Gamma$.
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \subsubsection{Bounding the degree of the critical points}
+    \subsubsection{Bounding the degree of the set of critical points}
     %
     Our next step is to bound the degree of $Z$, from which we can bound the degree of $\overline{\pi(Z)}$ and prove Proposition 4.1.  In that, we use the
     definition of degree given in~\cite{H}: the degree of an irreducible
@@ -1092,7 +1173,7 @@ establishing a bound on the degree of $\Gamma$.
     the vanishing of $\mathscr{L}_1,\hdots,\mathscr{L}_{n},$ and
     $\bm\Phi$, and by $\frak{Z}'$ the algebraic set
     \[
-    \frak{Z}' := \overline{\frak{Z} - \{(\xb,\thetab,0,\hdots,0) \in \C^{n+\dt+m}~|~(\xb,\thetab,0\hdots,0) \in \frak{Z}\}},
+    \frak{Z}' := \overline{\frak{Z} \cap \sO \times \C^s \times \C^n - \{(\xb,\thetab,0,\hdots,0) \in \C^{n+\dt+m}~|~(\xb,\thetab,0\hdots,0) \in \frak{Z}\}},
     \]
     where the bar denotes Zariski closure (we have to remove such points,
     since $L_1=\cdots=L_m=0$ is always a trivial solution to the Lagrange
@@ -1102,40 +1183,62 @@ establishing a bound on the degree of $\Gamma$.
     (\xb,\thetab,\bm \ell)~ &\mapsto (\xb,\thetab).
     \end{align*}
     \noindent 
-    Furthermore, we have to remove points where $\xb \not\in \sO;$ we thus define 
+    %
+    \begin{lemma}
+    The critical points $Z$ are contained in $\mu(\frak{Z}').$
+    \end{lemma}
+    %
+    \begin{proof}
+    Take $(\xb,\bm \vt) \in Z.$ Then, there exists $\lb \not = (0,\hdots,0) \in \C^n$ and $\xb \in \sO$, with 
     \[
-    \frak{Z}^{''} := \overline{\frak{Z}^{'}-\sO^{c}}.
+    \lb \cdot \bm J(\xb,\thetab) = \bz.
     \]
-    \begin{lemma}  
-      The algebraic set $Z$ is equal to the projection $\mu(\frak{Z}{''})$.
+    Thus, $(\xb,\bm \vt) \in \mu(\frak{Z}')$ so that $Z \subset \mu(\frak{Z}').$
+    \end{proof}
+    %
+    \noindent
+    Let $Y$ be an irreducible component of $\frak{Z}'.$ There exists an open and dense subset $Y^o \subset Y$ such that for all $(\xb,\bm \vt,\lb) \in Y^o,$ $\xb \in \sO$ and $\lb \not = \bz.$ It then follows that 
+    $\mu(Y^o) \subset Z$ and $\mu(\cup_Y Y^o) \subset Z.$ Thence, 
+    \begin{align}
+    \overline{\mu(\cup_Y Y^o)} \subset \overline{Z}.
+    \end{align}
+    Now put $W := \overline{\mu(\fZp)}$.
+    %
+    \begin{lemma}
+    The algebraic set $\overline{\pi(Z)}$ is equal to $\overline{\pi(W)}.$
     \end{lemma}
     \begin{proof}
-      Take $(\xb,\thetab)$ in $Z$. Then, $\xb \in \sO, (\xb,\thetab)$ cancels all
-      polynomials $\bm \Phi$, and there exists $\bm
-      \ell=(\ell_1,\dots,\ell_m)$, not identically zero, such that
-      $(\xb,\thetab,\bm \ell)$ cancels the Lagrange polynomials. This
-      implies that 
-      \[
-      (\xb,\thetab,\bm \ell) \in\frak{Z} -
-      \{(\xb',\thetab',0,\hdots,0) \in
-      \C^{n+\dt+m}~|~(\xb',\thetab',0\hdots,0) \in
-      \frak{Z}\}, 
-      \]
-      and thus $(\xb,\thetab,\bm \ell) \in\frak{Z}'$. Since $\xb \in \sO$, we also have $(\xb,\thetab,\bm \ell) \in\frak{Z}{''}$. This proves the inclusion
-      $Z \subset \mu(\frak{Z}{''})$.
-    
-      Conversely, take an irreducible component $Y$ of $\frak Z{''}$. We
-      prove that $\mu(Y)$ is contained in $Z$.  By construction, there
-      exists an open dense subset $Y^o \subset Y$ such that for any
-      $(\xb,\thetab,\bm \ell)$ in $Y^o$, $\bm \ell$ is not identically
-      zero. As a result, $(\xb,\thetab)$ is in $Z$, which implies that $\xb \in \sO$ and $\mu(Y^o)$ is
-      in $Z$. This implies that its Zariski closure $\overline{\mu(Y^o)}$
-      is in $Z$. Since $\mu(Y)$ is contained in $\overline{\mu(Y^o)}$, we
-      deduce $\mu(Y) \subset Z$. Taking the union over all $Y$, we get
-      $\mu(\frak Z') \subset Z$, as claimed.
-    \end{proof} 
-    
-    
+    Since 
+    \[
+    \overline{\cup_Y Y^o} = \fZp,
+    \]
+    we get 
+    \[
+    \overline{\mu(\fZp)} = \overline{\mu(\overline{\cup_Y Y^o})}
+    \myeq \overline{\mu(\cup_Y Y^o)} \subset \overline{Z},
+    \]
+    where the last inclusion follows by (3).
+    Hence, by lemma 4.5,
+    \[
+    Z\subset\mu(\frak{Z}')\subset \overline{\mu(\frak{Z}')} = W \subset \overline{Z}.
+    \]
+    Then 
+    \[
+    \pi(Z) \subset \pi(W) \subset \pi(\overline{Z}).
+    \]
+    And thus
+    \[
+    \overline{\pi(Z)} \subset \overline{\pi(W)} \subset \overline{\pi(\overline{Z})} \myeq\overline{\pi(Z)}.
+    \]
+    Therefore,
+    \[
+    \overline{\pi(Z)} = \overline{\pi(W)}.
+    \]
+    \end{proof}
+    %
+    %
+    %
+    %
     \begin{corollary} 
       The degree of $Z$ is at most $d^{m+n}.$
     \end{corollary}
@@ -1144,13 +1247,21 @@ establishing a bound on the degree of $\Gamma$.
       them having degree at most $d$. It follows from B\'ezout's
       Theorem~\cite{H} that $\deg(\frak{Z}) \leq d^{m+n}$, and the same
       upper bound holds for $\deg(\frak{Z}')$, since it consists of
-      certain irreducible components of $\frak Z$. Applying the projection
-      $\mu$ yields the result, since degree cannot increase through
-      projection.
+      certain irreducible components of $\frak Z$. Since degree will not increase after projection or closure, 
+      \[
+      \deg (W) = \deg( \overline{\mu(\fZp)}) \leq \deg(\fZp).
+      \]
+      And by Lemma 4.6,
+      \[
+      \deg(\overline{\pi(Z)})
+      =
+      \deg(\overline{\pi(W)})
+      \leq
+      \deg(W).
+      \]
     \end{proof}
-
-    In particular, we obtain the same degree bound for
-    $\overline{\pi(Z)}$.  It then suffices to take for $\Gamma$ any
+    \noindent
+    It then suffices to take for $\Gamma$ any
     non-zero polynomial of degree at most $d^{m+n}$ that vanishes on
     $\overline{\pi(Z)}$; this proves Proposition~\ref{prop:weak_t}.
 

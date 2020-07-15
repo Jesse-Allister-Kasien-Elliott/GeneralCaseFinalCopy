@@ -260,31 +260,32 @@ We present a full analysis of the bit complexity of an efficient
 %
 \subsection{Background and problem statement}
 %
-Computing one point in each connected component of a real algebraic
-set $S$ is a basic and important subroutine in real algebraic and semi-algebraic
-geometry; it is also useful on its own, since it allows one to
+In this work, we focus on the problem of computing one point in each connected component of a real algebraic
+set $S$. This is a basic but important subroutine in real algebraic and semi-algebraic
+geometry that is used in higher level algorithms. It is also useful on its own, since it allows one to
 decide if $S$ is empty or not, and it allows one to determine an upper bound on the number of connected components of $S$.  
 
 We consider the case where $S$ is given as $S=V \cap
 \R^n$, where $V=V(F) \subset \C^n$ is a complex algebraic set defined
-by a sequence of polynomials $F = (f_1,\hdots,f_p)$ in $\ZZ[X_1,\dots,X_n]$. Suppose that $F = (f_1,\hdots,f_p)$, with total degrees at most $d$, and coefficients of bit-size $h$. Without making any assumption on $F$, the algorithm given
+by a sequence of polynomials $F = (f_1,\hdots,f_p)$ in $\ZZ[X_1,\dots,X_n]$.  This work is a continuation of an analysis by Elliott, Giesbrecht, and Schost ({\em On the bit complexity of finding points on connecting components of a smooth real hypersurface}, ISSAC'20), where the hypersurface case was analyzed. In this paper, we extend the analysis to the algebraic set case.
+
+Suppose that the polynomials in $F = (f_1,\hdots,f_p)$ each have total degree at most $d$, and coefficients of bit-size $h$. Without making any assumption on $F$, the algorithm given
 in~\cite[Section~13.1]{BaPoRo03} solves our problem using $p^{n+1}d^{O(n)}$
-operations in $\Q$; in addition, the output of the algorithm is
-represented by polynomials of degree $d^{O(n)}$, with coefficients of
-bit-size $hd^{O(n)}$.  The key idea behind this algorithm goes back
-to~\cite{GrVo88}: sample points are found through the computation of
+operations in $\Q$. And in addition, the output of the algorithm is
+represented by polynomials of degree $d^{O(n)}$ and with coefficients of
+bit-size $hd^{O(n)}$.  The key idea of the algorithm originates with~\cite{GrVo88}, where sample points are found through the computation of
 critical points of well-chosen functions on $V(F)$.
 
 
 The number of connected components of $V(F)$ admits the lower bound $\td$, so up to polynomial factors this result is
 optimal. However, due to the generality of the algorithm, the constant
 hidden in the exponent $O(n)$ in its runtime is
-large: the algorithm relies on infinitesimal deformations, that affect
-runtime non-trivially.
+large, because the algorithm relies on infinitesimal deformations that affect
+the runtime non-trivially.
 
 
-In this paper, we will work under the additional assumption that
-$V=V(F)$ is a {\em smooth} complex hypersurface. We place ourselves in
+In this paper, we assume that
+$V=V(F)$ is a {\em smooth} complex algebraic set. And we place ourselves in
 the continuation of the line of work initiated by~\cite{BaGiHeMb97}:
 that reference deals with cases where $V$ is smooth and $V \cap \R^n$
 is compact, pointing out how {\em polar varieties} (that were
@@ -298,8 +299,8 @@ dropped in~\cite{BaGiHe14,BaGiHeLePa12}.
 
 
 
-Our starting point is the algorithm in~\cite{EMP}. Its runtime is  polynomial in the
-complexity of evaluation of the input system. The algorithm is randomized: we need to assume
+As already mentioned, this work is a continuation of \cite{ElGiSh20}, where the starting point is the algorithm in~\cite{EMP}. Its runtime is  polynomial in the
+complexity of evaluation of the input system. The algorithm is randomized and we need to assume
 that we are in generic coordinates; this is done by applying a random
 change of coordinates prior to all computations. In addition, the
 algorithm relies on procedures for solving systems of polynomial
@@ -307,8 +308,8 @@ equations that are also randomized.  Altogether, we choose
 $n^{O(1)}$ random vectors, each of them in an affine space of
 dimension $n^{O(1)}$; every time a choice is made, there exists a
 hypersurface of the parameter space that one has to avoid in order to
-guarantee success. In this paper, we revisit this algorithm and give a
-complete analysis of its probability of success and its bit complexity.
+guarantee success. In this paper, we extend the work started in \cite{ElGiSh20}, from te hypersurface case to algebraic sets defined by regular sequences. And we give a
+complete analysis of the probability of success and the bit complexity.
 
 
 
@@ -327,7 +328,8 @@ $\ln(|u|)$ and $\ln(v),$ where $u \in \mathbb{Z}$ and $v \in
 coefficients, if $v \in \mathbb N$ is the minimal common denominator
 of all non-zero coefficients of $f$, then the \textit{height}
 $\htt(f)$ of $f$ is defined as the maximum of the logarithms of $v$
-and of the absolute values of the coefficients of $vf$.
+and of the absolute values of the coefficients of $vf$. Note that when $f$ has integer coefficients, this is simply the maximum of the logarithms of the absolute values
+of these coefficients.
 
 
 The output of the algorithm is a finite set in $\overline{\Q}{}^n$. To
@@ -374,7 +376,7 @@ $v_1,\dots,v_n$.
 %
 %
 \begin{theorem}\label{theo:main}
-  Let $F= (f_1,\hdots,f_p)\in\ZZ[X_1\hdots,X_n]^p$ be a sequence of polynomials with $\deg(f_i) \leq d$ and $\htt(f_i) \leq b$. Suppose that the ideal $\langle f_1,\hdots, f_p \rangle $ is radical and that $V=V(F) \subset \C^n$ is 
+  Let $F= (f_1,\hdots,f_p)\in\ZZ[X_1,\hdots,X_n]^p$ be a sequence of polynomials with $\deg(f_i) \leq d$ and $\htt(f_i) \leq b$. Suppose that the ideal $\langle f_1,\hdots, f_p \rangle $ is radical and that $V=V(F) \subset \C^n$ is 
   smooth with $\dim V = n-p$. Also suppose that $0 < \epsilon < 1.$
 
   There exists a randomized algorithm that takes $F$ and $\epsilon$ as input and produces $n$ zero-dimensional parameterizations, the union
@@ -454,12 +456,32 @@ Let $\Q, \R$ and $\C$ be the fields of rational, real and complex numbers, and $
 \subsection{Algebraic sets} 
 Consider a sequence of polynomials $F=(f_1,\hdots,f_p)$ in $\C[X_1,\hdots,X_n].$
 An \textit{algebraic set} 
+\begin{align*}
+V = ~&V\big(F) = V(f_1,\hdots,f_p) \\
+= ~&\left\{(a_1,\hdots,a_n) \in \C^n~|~f_1(a_1,\hdots,a_n)=\hdots=f_p(a_1,\hdots,a_n)=0\right\}
+\end{align*}
+is the set of common zeros of $F$.  The set of polynomials in $\C[X_1,\hdots, X_n]$ that vanish at all points of $V$ is called the \textit{ideal of $V$,} and which we denote by 
 \[
-V = V\big(F) = V(f_1,\hdots,f_p) \subset \C^n
+I(V) := \left\{f \in \C[X_1,\hdots,X_n]~|~(a_1,\hdots,a_n) \in V \Rightarrow f(a_1,\hdots,a_n)=0\right\}. 
 \]
-is the set of common zeros of $F$.  The set of polynomials in $\C[X_1,\hdots, X_n]$ that vanish at all points of $V$ is called the \textit{ideal of $V$.} We let $I(V)$ denote this set.
-%
-\subsubsection{Dimension and degree}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Irreducibility}
+An algebraic set $V \subset \C^n$ is \textit{irreducible} when $V = V_1 \cup V_2$ implies $V=V_1$  or $V=V_2$, for any $V_1,V_2 \subset V$. Furthermore, an algebraic set $V \subset \C^n$ can be uniquely decomposed into a finite union of irreducible algebraic sets:
+\[
+V = V_1 \cup V_2 \cup \hdots V_r,
+\]
+where $V_j, 1\leq j \leq r,$ are called the irreducible
+components of $V$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Dimension}
 The \textit{dimension} of an algebraic set $V \subset \C^n$, denoted $\dim V,$ can be defined in the following ways:
 \begin{enumerate}
     \item The number of generic hyperplanes needed to intersect with $V$ to obtain a finite set. 
@@ -467,7 +489,14 @@ The \textit{dimension} of an algebraic set $V \subset \C^n$, denoted $\dim V,$ c
 \end{enumerate}
 The \textit{codimension} of $V$ is defined to be $n - \dim V$. An algebraic set is \textit{equidimensional} if each irreducible component has the same dimension.  If each component has dimension $d$ then we say the algebraic set is $d$-equidimensional.
 \par
-The \textit{degree} of an algebraic set is the number of intersection points between itself and $\dim V$ generic hyperplanes.
+We special care about algebraic sets that have dimensions zero. These sets are finite and have degree equal to cardinality.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Degree}
+The \textit{degree} of an irreducible algebraic set is the number of intersection points between itself and $\dim (V)$ generic hyperplanes. And the degree of an arbitrary algebraic set is defined as the sum of the degrees of its irreducible components.
 %
 \begin{ex}
 An algebraic set of dimension zero is a finite set, with degree equal to its cardinality.
@@ -477,24 +506,45 @@ An algebraic set of dimension zero is a finite set, with degree equal to its car
 An algebraic set of dimension 1 is a curve, with degree equal to the number of intersection points with a generic hyperplane.
 \end{ex}
 %
+We will often apply Bezout’s bound \cite{}, which gives us that for sequence of polynomials $F = (f_1,\hdots,f_p)$ with degrees at most $D$ then $V(F)$ has degree at most $D^p$. 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Noether position}
+For $i \in
+\{1,\hdots,n-p\},$  let $\pi_i$ denote the projection 
+%
+\begin{align*}
+\C^n~~~~~ &\rightarrow~~~~~ \C^i \\
+(x_1,\hdots,x_n) &\mapsto  (x_1,\hdots,x_i).    
+\end{align*} 
+A $d$-equidimensional algebraic set $Y \subset \C^n$ is in \textit{Noether position} for the projection
+$\pi_d$ when the extension $\C[X_1,\hdots,X_{d}] \rightarrow
+\C[X_1,\hdots,X_n]/I(Y)$ is integral; here, $I(Y) \subset
+\C[X_1,\hdots,X_n]$ is the defining ideal of $Y$. It then follows that, for any $\xb \in \C^d,$ the fiber $Y \cap \pi_d^{-1}(\xb)$ has dimension zero and is thus finite and not empty.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{The Zariski topology}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Zariski-tangent space}
-Let $\grad_{\xb}(f)$ be the evaluation of the gradient vector of $f \in \C[X_1,\hdots,X_n]$ at $\xb \in \C$. The \textit{Zariski-tangent space} to $V$ at $\xb \in V$ is the vector space $T_{\xb}V$ defined by the equations 
+Assume that $V$ is a $d$-equidimensional algebraic set. Let $\grad_{\xb}(f)$ be the evaluation of the gradient vector of $f \in \C[X_1,\hdots,X_n]$ at $\xb \in \C$. The \textit{Zariski-tangent space} to $V$ at $\xb \in V$ is the vector space $T_{\xb}V$ defined by the equations 
 \[
 \grad_{\xb} (g) \cdot \bm v = 0,
 \] 
 for all polynomials $g$ that vanish on $V$. 
+\par 
+The point $\xb \in V$ is a \textit{regular point} if $\dim (T_{\xb}V) = d.$ Otherwise $\xb$ is a \textit{singular point}. We let $\reg(V)$ and $\sing(V)$ respectively denote the regular and singular points of $V$. The image of a regular point is a \textit{regular value} and the image of a singular point is a \textit{singular value}. When $\sing(V)$ is empty then we refer to $V$ as \textit{smooth}.
 %
-\subsubsection{Regular and singular points}
-%
-Let $V$ be a $d$-equidimensional algebraic set. 
-The point $\xb \in V$ is a \textit{regular point} if $\dim (T_{\xb}V) = d.$ Otherwise $\xb$ is a \textit{singular point}. We let $\reg(V)$ and $\sing(V)$ respectively denote the regular and singular points of $V$. The image of a regular point is a \textit{regular value} and the image of a singular point is a \textit{singular value}.
-%
+\par 
 The following is a direct consequence of \cite[Corollary 16.20]{ECA}
 %
 \begin{prop}
@@ -553,7 +603,7 @@ then at any point $\xb$ of $\reg(V),$ $\jac_{\xb}(G)$ has full rank $n - \dim(V)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-\subsection{Changes of Variables}
+\subsection{Changes of variables}
 For a matrix $\mA$ in $\C^{n\times n}$ and $g$ in
 $\C[X_1,\hdots,X_n]$ we write $g^\mA:=g(\mA \Xb) \in
 \C[X_1,\dots,X_n]$, where $\Xb$ is the column vector with entries
@@ -582,8 +632,8 @@ $\C(\A)[X_1,\dots,X_n]$ or $\C[\A,X_1,\dots,X_n]$.
 Let $V=V(F)$ be a $d$-equidimensional algebraic set, with $F = (f_1,\hdots,f_p) \in \C[X_1,\hdots,X_n]^p$. 
 To describe the algorithm, we need to
 define {\em polar varieties}. The algorithm works by computing suitable sections of the
-polar varieties associated to generic projections of $V$. For $i \in
-\{1,\hdots,n-p\},$  let $\pi_i$ denote the projection 
+polar varieties associated to generic projections of $V$. Recall that, for $i \in
+\{1,\hdots,n-p\},$ we let $\pi_i$ denote the projection 
 %
 \begin{align*}
 \C^n~~~~~ &\rightarrow~~~~~ \C^i \\
@@ -759,14 +809,6 @@ to the proof of Theorem~\ref{theo:main} is the following quantitative
 version of facts we stated above, namely that in generic coordinates,
 polar varieties are  equidimensional and in Noether position
 (or empty).
-
-
-We recall that an equidimensional algebraic set $Y \subset \C^n$ of
-dimension $d$ is in \textit{Noether position} for the projection
-$\pi_d$ when the extension $\C[X_1,\hdots,X_{d}] \rightarrow
-\C[X_1,\hdots,X_n]/I(Y)$ is integral; here, $I(Y) \subset
-\C[X_1,\hdots,X_n]$ is the defining ideal of $Y$. In this case, for any $\xb \in \C^d,$ the fiber $Y \cap \pi_d^{-1}(\xb)$ has dimension zero (so it is finite and not empty).
-
 
 Then, we say that $F$ satisfies $\textbf{H}_i$ if
 \begin{enumerate}

@@ -629,9 +629,8 @@ $\C(\A)[X_1,\dots,X_n]$ or $\C[\A,X_1,\dots,X_n]$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Critical points and polar varieties} 
-Let $V=V(F)$ be a $d$-equidimensional algebraic set, with $F = (f_1,\hdots,f_p) \in \C[X_1,\hdots,X_n]^p$. 
-To describe the algorithm, we need to
-define {\em polar varieties}. The algorithm works by computing suitable sections of the
+Let $V=V(F)$ be a $d$-equidimensional algebraic set, with $F = (f_1,\hdots,f_p)$ a sequence of polynomials in  $\C[X_1,\hdots,X_n]$. 
+{\em Polar varieties} are higher dimensional critical loci introduced by $\td$ and play a central role to the algorithm, which computes suitable sections of the
 polar varieties associated to generic projections of $V$. Recall that, for $i \in
 \{1,\hdots,n-p\},$ we let $\pi_i$ denote the projection 
 %
@@ -671,7 +670,28 @@ X_1^2 + X_2^2 + X_3^2-1=X_2=X_3=0.
 %
 \end{ex}
 %
-\noindent 
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Critical points of polynomials mappings}
+If $\bm \Psi : Y \rightarrow \C^t$ is a mapping
+from a smooth algebraic set $Y$ to $\C^t$, with $t\le \dim(Y)$, a {\em
+  critical point} of $\bm \Psi$ is a point $\bm y \in Y$ such that the
+image of the tangent space $T_{\bm y} Y$ by the differential $d_{\bm
+  Y} \bm \Psi$ has dimension less than $t$. When for instance
+$Y=\C^v$, we have $T_{\bm y} Y=\C^v$ and this condition is equivalent
+to the Jacobian of $\bm \Psi$ having rank less than $t$ at $\bm y$.
+{\em Critical values} are the images by $\Psi$ of critical points; the
+complement of this set are the {\em regular values} (so a regular
+value is not necessarily in the image of~$\bm\Psi$).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Determinantal modeling of polar varieties} 
 Let $J_i$ denote the truncated Jacobian matrix of $F=(f_1,\hdots,f_p)$ with respect to $\Xb:$
 \[
 J_i = 
@@ -758,13 +778,7 @@ denote the sequence of polynomials
 \big( F, \minors \right\big).
 \]
 %
-%
-%
-\subsubsection{Critical points of polynomials mappings}
-Let $\phi : V \rightarrow \C^m$ be a polynomial mapping. A \textit{critical point} of $\phi$ is a regular point of $V$ with $d_x \phi(T_xV) \not = \C^m,$ where $d_x \phi$ is the differential of $\phi$ at $x.$ We denote by $W^o(\phi,V) \subset \reg(V)$ the set of critical points of $\phi.$ A \textit{critical} value of $\phi$ is the image of a critical point by $\phi$.
-\begin{remark}
-The set of critical points of $\phi$ may be an open set. Hence, we denote the set by $W^o(\phi,V)$.
-\end{remark}
+
 
 
 
@@ -774,11 +788,11 @@ The set of critical points of $\phi$ may be an open set. Hence, we denote the se
 \subsection{Lagrange Systems} 
 %
 When $n-i \sim 2p,$ 
-then $S_i = \binom{n-i}{p}\sim 2^{n-i+1}$ and consequentially our degree estimates become exponentially large after an application of B\'ezout’s theorem. To avoid this problem and obtain better degree estimates, we will rely on an alternative description of polar varieties as Lagrange systems. Let $\Lb = (L_1,\hdots,L_p)$ be new indeterminants and consider the ``Lagrange polynomials'' $\mathscr{L}_1,\dots,\mathscr{L}_{n-i}$, with
+then $S_i = \binom{n-i}{p}\sim 2^{n-i+1}$ and consequentially our degree estimates become exponentially large after an application of B\'ezout’s bound. To avoid this problem and obtain better degree estimates, we will rely on a Lagrangean reformulation of polar varieties. Let $\Lb = (L_1,\hdots,L_p)$ be new indeterminants and consider the ``Lagrange polynomials'' $\mathscr{L}_1,\dots,\mathscr{L}_{n-i}$, with
 \[
 [\mathscr{L}_1, \hdots, \mathscr{L}_{n-i}]=[L_1,\hdots,L_p]\cdot \jac_{\xb} (F,i).
 \] 
-Since $p \leq n-i$, if there exists a non-zero vector $\lb = (l_1,\hdots,l_p) \in \C^p$ that cancels $[L_1,\hdots,L_p]\cdot \ji$ then $\ji$ is a rank deficient matrix and the minors of size $p$ vanish. We can therefore describe polar varieties as \textit{projections} of zeros of such systems. Denote by $\sW(\pi_i,V)$ the variety
+Since $p \leq n-i$, if there exists a non-zero vector $\lb = (l_1,\hdots,l_p) \in \C^p$ that cancels $[L_1,\hdots,L_p]\cdot \ji$ then $\ji$ is a rank deficient matrix and the minors of size $p$ vanish. We can therefore describe polar varieties as projections of zeros of such systems. Denote by $\sW(\pi_i,V)$ the variety
 \[
 V\left(F, [L_1,\hdots,L_p] \cdot \ji\right)
 =
@@ -788,10 +802,10 @@ To enforce that $\lb \not = (0,\hdots,0)$, we add a linear form $\udl-1$, for $\
 \[
 V\left(F, \mathscr{L}_1, \hdots, \mathscr{L}_{n-i},\udl-1\right).
 \]
-We will let $\sI(i,V)$
+We will let $\sI(i,F)$
 denote the polynomials 
 \[
-\left( F, \mathscr{L}_1, \hdots, \mathscr{L}_{n-i},\udl-1 \right),
+\left( F, \mathscr{L}_1, \hdots, \mathscr{L}_{n-i} \right),
 \]
 and for $\ub = (u_1,\hdots,u_p) \in \C^p,$ we will let $\Iil$
 denote 
@@ -804,13 +818,12 @@ denote
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Genericity Properties}\label{sec:gen}
-Consider $F= (f_1,\hdots,f_p) \in \ZZ[X_1,\hdots,X_n]^p$ with $\deg(f_i) \leq d$ and $\htt(f_i) \leq b$. Assume that the ideal $\langle f_1,\hdots, f_p \rangle $ is radical and that $V=V(F) \subset \C^n$ is smooth with $\dim V = n-p$. The key
-to the proof of Theorem~\ref{theo:main} is the following quantitative
+Consider $F= (f_1,\hdots,f_p) \in \ZZ[X_1,\hdots,X_n]^p$ with $\deg(f_i) \leq d$ and $\htt(f_i) \leq b$. Assume that the ideal $\langle f_1,\hdots, f_p \rangle $ is radical and that $V=V(F) \subset \C^n$ is smooth with $\dim V = n-p$. To prove Theorem~\ref{theo:main}, we need quantitative
 version of facts we stated above, namely that in generic coordinates,
 polar varieties are  equidimensional and in Noether position
 (or empty).
 
-Then, we say that $F$ satisfies $\textbf{H}_i$ if
+We say that $F$ satisfies $\textbf{H}_i$ if ($F$ and $\ub$?)
 \begin{enumerate}
 \item  $W(\pi_i,V(F))$ is either empty or $(i-1)$-equidimensional.
 \item For any $(\xb,\lb)$ in $\mathscr{W}_{\ub}(\pi_i,V(F))$, the Jacobian matrix of $\Iil$ has full rank $p+n-i+1$ at $(\xb,\lb)$. {\em By the Jacobian Criterion~\cite[Corollary 16.20]{ECA}, this
@@ -843,7 +856,7 @@ statement is as follows.
 \end{theorem}
 %
 \begin{theorem}\label{theo:Hp}
-  Suppose that $F$ satisfies $\textbf{H}_i$. Then, for all $i\in\{1,\dots,n-p+1\}$, there exists a non-zero
+  For all $i\in\{1,\dots,n-p+1\}$, suppose that $F$ satisfies $\textbf{H}_i$, then there exists a non-zero
   polynomial $\Xi_{i} \in \C[S_1,\dots,S_{p+i-1}]$ of degree at most
   $d^{3n}$ such that if $(\bm \sigma,\ub) \in \C^{p+i-1}$ does not
   cancel $\Xi_{i}$, then $F$ and $(\bm \sigma,\ub)$ satisfy $\textbf{H}_i'$.
@@ -854,7 +867,7 @@ statement is as follows.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Polar varieties and Lagrange systems}
+\subsection{Determinantal and Lagrangian modeling of polar varieties}
 %
 Assume in all that follows that $F$ satisfies $\bm H_i$. Let $Z$ be an irreducible component of the polar variety $W$.  
 %

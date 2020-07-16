@@ -672,21 +672,6 @@ X_1^2 + X_2^2 + X_3^2-1=X_2=X_3=0.
 %
 %
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Critical points of polynomials mappings}
-If $\bm \Psi : Y \rightarrow \C^t$ is a mapping
-from a smooth algebraic set $Y$ to $\C^t$, with $t\le \dim(Y)$, a {\em
-  critical point} of $\bm \Psi$ is a point $\bm y \in Y$ such that the
-image of the tangent space $T_{\bm y} Y$ by the differential $d_{\bm
-  Y} \bm \Psi$ has dimension less than $t$. When for instance
-$Y=\C^v$, we have $T_{\bm y} Y=\C^v$ and this condition is equivalent
-to the Jacobian of $\bm \Psi$ having rank less than $t$ at $\bm y$.
-{\em Critical values} are the images by $\Psi$ of critical points; the
-complement of this set are the {\em regular values} (so a regular
-value is not necessarily in the image of~$\bm\Psi$).
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1009,6 +994,24 @@ revisited using the techniques introduced here. The techniques would apply to al
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Transversality}
+Many of our genericity properties are consequences of weak transversality. We develop a quantitative extension of Thom’s weak transversality theorem, specialized to the particular case of transversality to a point. And we apply this result in bounding the degree of particular hypersurfices we have to avoid; by choosing changes of variables that do not cancel these hypersurfaces, we show that particular cases of transversality hold for conveniently defined polynomial mappings, thus establishing some of our generosity properties.  
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Critical points of polynomials mappings}
+We will need the following definitions. Consider a mapping $\bm \Psi : Y \rightarrow \C^t$ 
+from a smooth algebraic set $Y$ to $\C^t$, with $t\le \dim(Y)$. A {\em
+  critical point} of $\bm \Psi$ is a point $\bm y \in Y$ with the
+image of the tangent space $T_{\bm y} Y$ by the differential $d_{\bm
+  Y} \bm \Psi$ having dimension less than $t$. For instance, if
+$Y=\C^v$, then we have $T_{\bm y} Y=\C^v$ and this condition is equivalent
+to the Jacobian of $\bm \Psi$ having rank less than $t$ at $\bm y$.
+{\em Critical values} are the images by $\Psi$ of critical points. And the
+complement of this set are the {\em regular values}. (Notice then, a regular
+value is not necessarily in the image of~$\bm\Psi$).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1033,25 +1036,14 @@ item in property ${\bf H}_i$, as well as property ${\bf H}'_i$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Weak transversality}
-Transversality to a point can be rephrased entirely in terms of
-critical and regular values. Recall that if $\bm \Psi$ is a mapping
-from a smooth algebraic set $Y$ to $\C^t$, with $t\le \dim(Y)$, a {\em
-  critical point} of $\bm \Psi$ is a point $\bm y \in Y$ such that the
-image of the tangent space $T_{\bm y} Y$ by the differential $d_{\bm
-  Y} \bm \Psi$ has dimension less than $t$. When for instance
-$Y=\C^v$, we have $T_{\bm y} Y=\C^v$ and this condition is equivalent
-to the Jacobian of $\bm \Psi$ having rank less than $t$ at $\bm y$.
-{\em Critical values} are the images by $\Psi$ of critical points; the
-complement of this set are the {\em regular values} (so a regular
-value is not necessarily in the image of~$\bm\Psi$).
-
-Let then $n,\dt,$ and $m$ be positive integers, with $m \le n$, and denote
+Let $n,\dt,$ and $m$ be positive integers, with $m \le n$, and denote
 by $\bm\Phi :\C^n \times \C^{\dt} ~ \rightarrow \C^{m}$ a mapping
 defined by polynomials in $\C[\Xb,\Thetab]$, where $\Xb$,
 resp.\ $\Thetab$, is a set of $n$, resp.\ $\dt$, indeterminates.  For
 $\thetab$ in $\C^{\dt}$, let $\bm\Phi_{\thetab} : \C^n \rightarrow
-\C^{m}$ be the induced mapping $\xb\mapsto \bm\Phi(\xb,\thetab)$.  The
-transversality result we will need is the following.
+\C^{m}$ be the induced mapping $\xb\mapsto \bm\Phi(\xb,\thetab)$.  
+
+Thom’s weak transversality theorem tells us that, when $\bz$ is a regular value of the big mapping, $\bm \Phi$, then $\bz$ is a regular value of the induced mapping $\bm \Phi_{\bm \vt}$, for a generic $\bm \vt$. Here, we are dealing with the particular case of transversality to a point, which we have rephrased entirely in terms of regular and critical values. We have developed a quantitative version of Thom’s weak transversality, which is the following.
 
 \begin{prop} [Weak transversality]\label{prop:weak_t}
 Let $\mathscr{O} \subset \C^n$ be a Zariski open set and suppose that $\bm 0$ is a regular value of $\bm\Phi$ on $\mathscr{O} \times \C^{s}$. Then there
@@ -1065,16 +1057,18 @@ The following simple example shows this result at work.
 %
 \begin{ex}
 Consider a
-squarefree $f$ in $\C[X_1,X_2]$, such that $V(f)$ is a smooth curve in
+squarefree polynomial $f$ in $\C[X_1,X_2]$, with degree at most $d$, defining a smooth curve  $V(f)$ in
 $\C^2$, and let the mapping $\bm\Phi:\C^2\times \C \to \C^2$ be
 defined by $\bm\Phi(X_1,X_2,\Theta) = (f(X_1,X_2), X_1-\Theta)$. One
 checks that the Jacobian of $\bm\Phi$ with respect to
-$(X_1,X_2,\Theta)$ has rank two at any point in $\bm\Phi^{-1}(\bm 0)$,
-so the assumptions of the proposition apply. We deduce that for a
-generic $\vartheta$ in $\C$, that is, for all $\vartheta$ in $\C$
+$(X_1,X_2,\Theta)$ has full rank two at any point in $\bm\Phi^{-1}(\bm 0)$, which is to say that $\bz$ is a regular value of $\bm \Phi$ and therefore the assumptions of the proposition apply. We then deduce that a non-zero polynomial $\Gamma \in \C[\Theta]$ exists, with degree at most $d^{4}$ with the property that, if $\vartheta$ in $\C$ does not cancel $\Gamma$ then $\bz$ is a regular value of the induced mapping $\bm \Phi_{\bm \vt}$. That is, for all $\vartheta$ in $\C$
 except a finite number, the ideal $(f(X_1,X_2), X_1-\vartheta)$ is
 radical in $\C[X_1,X_2]$; equivalently, $f(\vartheta, X_2)$ is
-squarefree. We will revisit this example in Section~\ref{ssec:fiber} ($H_i^{'}$).
+squarefree. Now, if we take a finite subset $S \subset \C$, then for $\bm \vt \in S$ chosen randomly, independently and uniformly, it then follows by DeMillo-Lipton-Schwartz–Zippel that 
+\[
+\mathbb{P}[\Gamma(\bm \vt) = \bz] \leq \frac{d^4}{|S|}.
+\]
+We will revisit this example in Section~\ref{ssec:fiber} ($H_i^{'}$).
 \end{ex}
 %
 
@@ -1090,13 +1084,13 @@ mappings~\cite[Section~3.7]{demazure2000bifurcations}, written in an
 algebraic context. In what follows, we revisit this proof,
 establishing a bound on the degree of $\Gamma$.
 
-
+As mentioned above, Thom’s weak transversality theorem is a generalization of Sard’s Lemma, which states that the set of critical values of a smooth function has measure zero. In Thom’s weak transversality, the bad parameters (for us, the changes of variables that do not give us our desired genericity properties) show up as the critical values of a smooth function. The proof begins by characterizing the critical points of this function.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Characterizing the critical points}
-    Put $V^{'} = \bm\Phi^{-1}(\bm 0) \cap (\sO \times \C^s)$, and let $V$ be the Zariski closure of $V^{'}.$ If $V$ is empty, there is nothing to do, since all values $\thetab$ in $\C^\dt$ satisfy the conclusion of the proposition. Thus, we assume that $V$ is not empty. Take $(\xb, \vt)$ in $V^{'}$; then by assumption, $\jac_{(\xb,\vt)}({\bm \Phi})$ has full rank $m$. Since in a neighborhood of $(\xb,\vt), V$ coincides with ${\bm \Phi}^{-1}(0) \cap \sO,$ the Jacobian criterion implies that there is a unique irreducible component $V_{(\xb,\vt)}$ of $V$ that contains $(\xb,\vt),$ that $(\xb,\vt)$ is regular on this component, that $\dim V_{(\xb,\vt)}=n+s-m$ and that $T_{(\xb,\vt)}$ is the nullspace of $\jac_{(\xb,\vt)}({\bm \Phi}).$
+    Put $V^{'} = \bm\Phi^{-1}(\bm 0) \cap (\sO \times \C^s)$, and let $V$ be the Zariski closure of $V^{'}.$ If $V$ is empty, there is nothing to do, since all values $\thetab$ in $\C^\dt$ satisfy the conclusion of the proposition. We therefore assume that $V$ is not empty. Take $(\xb, \vt)$ in $V^{'}$; then by assumption, $\jac_{(\xb,\vt)}({\bm \Phi})$ has full rank $m$. Since in a neighborhood of $(\xb,\vt), V$ coincides with ${\bm \Phi}^{-1}(0) \cap \sO,$ the Jacobian criterion ~\cite[Corollary 16.20]{ECA} implies that there is a unique irreducible component $V_{(\xb,\vt)}$ of $V$ that contains $(\xb,\vt),$ that $(\xb,\vt)$ is regular on this component, that $\dim V_{(\xb,\vt)}=n+s-m$ and that $T_{(\xb,\vt)}$ is the nullspace of $\jac_{(\xb,\vt)}({\bm \Phi}).$
     
     Since every irreducible component of $V$ intersects $V^{'}$, this implies that $V$ itself is equidimensional of dimension $n+s-m$, and thus that $V^{'}$ is contained in $\reg (V)$. Furthermore, it also follows that for $(\xb,\vt) \in V^{'}, T_{(\xb,\vt)}V$ is the nullspace of $\jac_{(\xb,\vt)}(\Phi)$ in $\C^n \times \C^s.$  
     
@@ -1148,7 +1142,7 @@ establishing a bound on the degree of $\Gamma$.
           \times n}~\textbf{I}_{\dt}]$ to the nullspace of
       $\bm K(\xb,\thetab)$.
     
-      Since $(\xb,\thetab) \in V^{'}$, and since $\bz$ is a regular value of $\bm, \Phi$ $\bm K(\xb,\thetab)$ has full rank ${\rm codim}
+      Since $(\xb,\thetab) \in V^{'}$ and since $\bz$ is a regular value of $\bm \Phi$, $\bm K(\xb,\thetab)$ has full rank ${\rm codim}
       (V) = m$. On the other hand, the nullspace of $\bm K(\xb,\thetab)$
       is the tangent space $T_{\xb,\thetab} V$, and
       $\textup{rank}([\textbf{0}_{\dt \times n}~\textbf{I}_{\dt}] \mid
@@ -1193,7 +1187,7 @@ establishing a bound on the degree of $\Gamma$.
     \end{align*}
     and the conclusion follows.
     \end{proof}
-
+\noindent
     In particular, take $\thetab$ in $\C^\dt - \overline{\pi(Z)}$.
     Then for all $\xb$ in $\bm \Phi_{\thetab}^{-1}(\bm 0)$ on $\sO$, $(\xb,\thetab)$
     is in $V^{'}$, so it is not in $Z$. The previous lemma then implies that
@@ -1206,23 +1200,16 @@ establishing a bound on the degree of $\Gamma$.
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \subsubsection{Bounding the degree of the set of critical points}
+    \subsubsection{Bounding the degree of the set of critical values}
     %
-    Our next step is to bound the degree of $Z$, from which we can bound the degree of $\overline{\pi(Z)}$ and prove Proposition 4.1.  In that, we use the
-    definition of degree given in~\cite{H}: the degree of an irreducible
-    algebraic set is the number of intersection points it has with a
-    generic hyperplane of complementary dimension, and the degree of an
-    arbitrary algebraic set is the sum of the degrees of its irreducible
-    components.  To obtain an estimate on the degree of $Z$, rather than
+    Our next step is to bound the degree of the critical points $Z$, from which we can bound the degree of $\overline{\pi(Z)},$ the Zariski closure of the critical values, and prove Proposition 4.1. To obtain an estimate on the degree of $Z$, rather than
     considering minors of $\bm J$, we will rewrite the condition that $\bm
     J(\xb,\thetab)$ has rank less than $m$ as the existence of a
-    non-trivial left kernel element.
-    
-       For this, we let $\textit{\textbf{L}}=[L_1,\hdots,L_m]$ be new
+    non-trivial left kernel element. For this, we once again introduce Lagrangian systems. We let $\textit{\textbf{L}}=[L_1,\hdots,L_m]$ be new
     variables, thought of as Lagrange multipliers, and consider the
     ``Lagrange polynomials'' $\mathscr{L}_1,\dots,\mathscr{L}_{n}$, with
     \[
-    [\mathscr{L}_1 \cdots \mathscr{L}_{n}]=\textit{\textbf{L}}\cdot \bm J(\xb,\thetab).
+    [\mathscr{L}_1 ,\dots, \mathscr{L}_{n}]=\textit{\textbf{L}}\cdot \bm J(\xb,\thetab).
     \] 
     Denote by $\frak{Z} \subset \C^{n+\dt+m}$ the algebraic set defined by
     the vanishing of $\mathscr{L}_1,\hdots,\mathscr{L}_{n},$ and
@@ -1269,10 +1256,10 @@ establishing a bound on the degree of $\Gamma$.
     \]
     we get 
     \[
-    \overline{\mu(\fZp)} = \overline{\mu(\overline{\cup_Y Y^o})}
+    W = \overline{\mu(\fZp)} = \overline{\mu(\overline{\cup_Y Y^o})}
     \myeq \overline{\mu(\cup_Y Y^o)} \subset \overline{Z},
     \]
-    where the last inclusion follows by (3).
+    where the last inclusion follows by (3) above.
     Hence, by lemma 4.5,
     \[
     Z\subset\mu(\frak{Z}')\subset \overline{\mu(\frak{Z}')} = W \subset \overline{Z}.
@@ -1295,7 +1282,7 @@ establishing a bound on the degree of $\Gamma$.
     %
     %
     \begin{corollary} 
-      The degree of $Z$ is at most $d^{m+n}.$
+      The degree of $\overline{\pi(Z)}$ is at most $d^{m+n}.$
     \end{corollary}
     \begin{proof}
       The algebraic set $\frak Z$ is defined by $m+n$ equations, all of
@@ -1748,7 +1735,7 @@ Consider elements $\bm a \in \C^{in}$ as vectors of length $i$ of the form $\bm 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Proof of $\textbf{H}_i^{'}$}
+\subsection{Proof of $\textbf{H}_i^{'}$}\label{ssec:fiber}
 Let $F = (f_1,\hdots,f_p) \in \ZZ[X_1,\hdots,X_n]^p$ and $i$ be as before. We now assume
 that $F$ satisfies $\textbf{H}_i$, and we prove the following: {\em
   there exists a non-zero polynomial $\Xi_{i} \in

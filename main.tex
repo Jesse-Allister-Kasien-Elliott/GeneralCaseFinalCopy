@@ -867,7 +867,7 @@ For $\xb \in Z,$ there exists a non-zero vector $\lb_{\xb}\in \C^p$ in the left 
 \end{lemma}
 %
 \begin{proof}
-Recall that for $\xb \in Z, \rk \ji \leq p-1$, as $W$ is defined by the vanishing of $F$ and $\minors$. Note that since $Z$ is irreducible, the function field $\C(Z)$ is well defined. Let $\mathscr{B}$ denote a Gr\"obner basis (in what monomial order?) of $\I$ and consider $\jac_{\xb}(F,i)$  with entries taken modulo the ideal defined by $\mathscr{B}.$ Let $\jt$ denote this matrix. Since the entries of $\jt$ are defined over the field $\C(Z)$, we know that  $\lb_{\xb} \in \C(Z)^p-\{\bz\}$ exists, thus having rational entries in $\xb$ and with $\lb_{\xb} \cdot \jt = \bz$. 
+Recall that for $\xb \in Z,$ the rank of $\ji$ is at most $p-1$, because $W$ is defined by the vanishing of $F$ and $\minors$. Note that since $Z$ is irreducible, the function field $\C(Z)$ is well defined. Consider $\jac_{\xb}(F,i)$  with entries taken modulo the ideal $I(Z)$, and consider these entries as elements evaluated over $\C(Z);$ let $\jt$ denote this matrix. Since the $p$-minors of $\ji$ are zero over $\xb \in Z,$ the $p$-minors of $\jt$ are zero over $\bm y \in \C(Z).$ And therefore the rank of $\jt$ is also at most $p-1$ at $\bm y \in \C(Z).$ Thus, $\lb_{\xb} \in \C(Z)^p-\{\bz\}$ exists with having rational entries in $\xb$ and with $\lb_{\xb} \cdot \jt = \bz$. And therefore with $\lb_{\xb} \cdot \ji = \bz$ as well.
 \end{proof}
 %
 \noindent
@@ -897,7 +897,7 @@ Z  &\rightarrow \C(Z)\\
 \[
 \psi(\xb) = \sum_{i=1}^p\frac{N_{\xb,i}}{D_{\xb,i}},~N_{\xb,i} \in \C[Z], D_{\xb,i} \in \C[Z]-\{0\}. 
 \]
-Put $D_{\xb} := \LCM_{1\leq i \leq p}(D_{\xb,i}),$ notice that $D_{\xb} \not = \bz$, and put  
+Put $D_{\xb} := \prod_{1\leq i \leq p}D_{\xb,i},$ notice that $D_{\xb} \not = \bz$, and put  
 \[
 Z^o := \left\{\xb \in Z~|~D_{\xb}\psi(\xb) = D_{\xb}(\ub^T \cdot \lb_{\xb})\not = \bz\right\}.
 \]
@@ -1560,7 +1560,7 @@ Consider elements $\bm a \in \C^{in}$ as vectors of length $i$ of the form $\bm 
     \jac_{\xb}(\pi_i)
      \ebm.
     \] 
-    Now, let $L_1, \hdots , L_c$ and $T_1, \hdots , T_d$ be new variables, and notice that 
+    Now, let $L_1, \hdots , L_c$ and $T_1, \hdots , T_d$ be new variables, and notice that the Jacobian
     \[
     \jac\left(F,[L_1, ~\cdots~, L_c, T_1, ~\cdots~, T_i ] \cdot 
     \bbm 
@@ -1569,12 +1569,11 @@ Consider elements $\bm a \in \C^{in}$ as vectors of length $i$ of the form $\bm 
     \ebm
     \right)
     \]    
-    has full rank $p + n.$  Indexing columns 
-    by 
-    \[
+    taken with respect to the variables
+     \[
     X_1,\dots,X_n,L_1,\hdots,L_p,T_1,\hdots,T_i,
     \]
-    this Jacobian is the following matrix:
+    has full rank $p + n.$  This Jacobian is the following matrix:
     \[
     \left[ 
     \begin{array}{c|c|c}

@@ -124,6 +124,7 @@
 \def\minors{\textrm{Minors}(F,p)}
 \def\minorsA{\textrm{Minors}(F^{\mA},p)}
 \def\minorsfA{\textrm{Minors}(F^{\A},p)}
+\DeclareMathOperator{\lag}{Lagrange}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % other math notation shortcuts  
 \def\pa{\partial}
@@ -142,33 +143,41 @@
 % polar varieties
 % minors 
 \def\Wi{W(\pi_i,V)}
-\def\WiA{W(\pi_i,V(F^{\mA})}
+\def\WiA{W(\pi_i,V(F^{\mA}))}
 \def\I{\mathfrak{I}}
 \def\IA{\mathfrak{I}^{\mA}}
 \def\IfA{\mathfrak{I}^{\A}}
 \def\Ii{\mathfrak{I}(i,F)}
 \def\Ir{\sqrt{\mathfrak{I}}}
+\def\Iir{\sqrt{\mathfrak{I}(i,F)}}
 \def\IAr{\sqrt{\mathfrak{I}^{\mA}}}
 \def\IfAr{\sqrt{\mathfrak{I}^{\A}}}
 \def\IifAr{\sqrt{\mathfrak{I}(\pi_i,F^{\A})}}
+\def\IifA{\mathfrak{I}(\pi_i,F^{\A})}
 \def\ji{\jac_{\xb}(F,i)}
 \def\jiA{\jac_{\xb}(F^{\mA},i)}
 \def\jifA{\jac_{\xb}(F^{\A},i)}
+\def\lagF{{\bm\lag}(F,i,(L_1,\hdots,L_c))}
+\def\lagFA{{\bm\lag}(F^{\mA},i,(L_1,\hdots,L_c))}
+\def\lagFfA{{\bm\lag}(F^{\A},i,(L_1,\hdots,L_c))}
 %\def\W{\mathfrak{I}}
 % lagrange 
 \def\Il{\mathscr{I}_{\ub}}
 \def\Iil{\mathscr{I}_{\ub}(i,F)}
 \def\IilA{\mathscr{I}_{\ub}(i,F^{\mA})}
 \def\IilfA{\mathscr{I}_{\ub}(i,F^{\A})}
+
 \def\IlfA{\mathscr{I}_{\ub}^{\A}}
 \def\IlA{\mathscr{I}_{\ub}^{\mA}}
 \def\jiA{\jac_{\xb}(F^{\mA},i)}
 \def\Wil{\mathscr{W}_{\ub}(\pi_i,V)}
 \def\WilA{\mathscr{W}_{\ub}(\pi_i,V^{\mA})}
+\def\WilAnu{\mathscr{W}(\pi_i,V^{\mA})}
 \def\WilfA{\mathscr{W}_{\ub}(\pi_i,V^{\fA})}
 \def\Wl{\mathscr{W}_{\ub}}
 \def\WlA{\mathscr{W}_{\ub}^{\mA}}
 \def\udl{\sum_{i=1}^pu_il_i}
+\def\Vdl{\sum_{i=1}^pV_iL_i}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % brackets
 \def\la{\langle}
@@ -635,7 +644,7 @@ Let $V=V(F)$ be an equidimensional algebraic set, with $F = (f_1,\hdots,f_p)$ a 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Critical points and polar varieties} 
 {\em Polar varieties} are higher dimensional critical loci that were in the 1930's in order to define characteristic
-classes~\cite{Piene78,Teissier88}); they play a central role in the algorithm, which computes suitable sections of the
+classes~\cite{Piene78,Teissier88}; they play a central role in the algorithm, which computes particular sections of the
 polar varieties associated to generic projections of $V$. Recall that, for $i \in
 \{1,\hdots,n-p\},$ we denote by $\pi_i$ the projection 
 %
@@ -659,7 +668,7 @@ is the set of critical points of $\pi_i$ on $V$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Determinantal modeling of polar varieties} 
-Let $J_i$ denote the truncated Jacobian matrix of $F=(f_1,\hdots,f_p)$ with respect to $\Xb:$
+Let $J_i$ denote the truncated Jacobian matrix of $F=(f_1,\hdots,f_p)$ with respect to $\Xb = (X_1,\hdots,X_n):$
 \[
 J_i = 
 \left[ 
@@ -670,9 +679,15 @@ J_i =
 \end{array}
 \right] 
 \]
-and let $\minors = \left(M_{i,1},\hdots,M_{i,S_i}\right)$ be the minors of size $p$ of $J_i$. Notice that
+and let \[\minors = \left(M_{i,1},\hdots,M_{i,S_i}\right)\] be the minors of size $p$ of $J_i$. Notice that
 \[
 S_i = \binom{p}{p}\binom{n-i}{p}=\binom{n-i}{p}.
+\]
+%
+For each $i$ in $\{1,\dots,n-p+1\}$ and $F$ as above, we will let $\Ii$
+denote the sequence of polynomials 
+\[
+\Ii := \big( F, \minors \right\big) = (f_1,\hdots,f_p,M_{i,1},\hdots,M_{i,S_i})
 \]
 %
 \begin{prop}\label{prop:3.1}
@@ -739,11 +754,6 @@ Equating both we have $i + \rank(J_{>i}) = n-d + \dim\pi_i(T)$ which implies tha
 Now Proposition \ref{prop:3.1} follows from Lemma \ref{lem:3.3}.
 %
 Thus, $\Wi$ is defined by the vanishing of $F$ and $\minors.$
-For each $i$ in $\{1,\dots,n-p+1\}$ and $F$ as above, we will let $\Ii$
-denote the sequence of polynomials 
-\[
-\big( F, \minors \right\big).
-\]
 %
 Now consider the following example ( $\td$: better to have an example with $V$ not a hypersurface). 
 \begin{ex}
@@ -778,40 +788,165 @@ Note the dimensions of the polar varieties: $i-1.$
 \subsection{Lagrange Systems} 
 %
 When $n-i \sim 2p,$ 
-then the number of minors in the determinantal modeling of the polar varieties: \[S_i = \binom{n-i}{p}\sim 2^{n-i+1}\] and consequentially after applying B\'ezout’s bound to obtain degree estimates, the bound grows exponentially and is thus too large. To avoid this problem and obtain better degree estimates, we will rely on a Lagrangean reformulation of polar varieties. Let $\Lb = (L_1,\hdots,L_p)$ be new indeterminants and consider the ``Lagrange polynomials'' $\mathscr{L}_1,\dots,\mathscr{L}_{n-i}$, with
+then the number of minors in the determinantal modeling of the polar varieties: \[S_i = \binom{n-i}{p}\sim 2^{n-i+1}.\] Consequentially, after applying B\'ezout’s bound to obtain degree estimates, the bound grows exponentially. To avoid having exponential growth in our degree estimates, we will introduce a Lagrangean reformulation of polar varieties. 
+
+\begin{definition}
+Let $\Lb = (L_1,\hdots,L_p)$ be new indeterminants. Then $\lagF$ denotes the entries of the vector
 \[
-[\mathscr{L}_1, \hdots, \mathscr{L}_{n-i}]=[L_1,\hdots,L_p]\cdot \jac (F,i),
+[L_1,\hdots,L_p]\cdot \jac (F,i),
 \] 
-in the variables $\Xb=(X_1,\hdots,X_n).$
+where the Jacobian is in the variables $\Xb=(X_1,\hdots,X_n).$
+\end{definition}
 Since $p \leq n-i$, if there exists a non-zero vector $\lb = (l_1,\hdots,l_p) \in \C^p$ that cancels $[L_1,\hdots,L_p]\cdot \jac (F,i)$ then $\ji$ is a rank deficient matrix and the minors of size $p$ vanish. We can therefore describe polar varieties as projections of zeros of such systems. Denote by $\sW(\pi_i,V)$ the variety
 \[
-V\left(F, [L_1,\hdots,L_p] \cdot \jac (F,i)\right)
-=
-V\left(F, \mathscr{L}_1,\dots,\mathscr{L}_{n-i}\right).
+\sW(\pi_i,V) := V\left(F, \lagF\right). 
 \]
 To enforce that $\lb \not = (0,\hdots,0)$, we add a linear form $\udl-1$, for $\ub = (u_1,\hdots,u_p) \subset \C^p.$ Denote by $\Wil$ the variety
 \[
-V\left(F, \mathscr{L}_1, \hdots, \mathscr{L}_{n-i},\udl-1\right).
+\Wil := V\left(F, \lagF,\udl-1\right).
 \]
 We will let $\sI(i,F)$
 denote the polynomials 
 \[
-\left( F, \mathscr{L}_1, \hdots, \mathscr{L}_{n-i} \right),
+\sI(i,F) := \left(F, \lagF \right),
 \]
 and for $\ub = (u_1,\hdots,u_p) \in \C^p,$ we will let $\Iil$
 denote 
 \[
-\left( F, \mathscr{L}_1, \hdots, \mathscr{L}_{n-i},\udl-1 \right).
+\Iil := \left(F, \lagF,\udl-1 \right).
 \]
+\begin{prop}
+The degree of $\Wil$ is at most $d^{\hspace{.5mm}p+n-i+1}.$
+\end{prop}
+\begin{proof}
+Let $g_1,\hdots,g_{n-i}$ denote the ``Lagrange polynomials''
+\[
+[g_1,\hdots,g_{n-i}] := \lagF = [L_1,\hdots,L_p]\cdot \jac (F,i).
+\]
+Since each polynomial in the sequence $F=(f_1,\hdots,f_p)$ has degree at most $d$, the degrees each $g_i$ are also bounded by $d.$  Thus, after adding the linear form $\udl,$ by Bezout's bound, we obtain
+\[
+\deg \Wil \leq d^{\hspace{.5mm}p+n-i+1}. 
+\]
+\end{proof}
 %
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lagrangian modeling of polar varieties}
+%
+%
+%
+\subsubsection{Notation}
+Let $i \in \{1,\hdots,n-p\},$ and assume in all that follows that $F$ satisfies $\bm H_i$. Let $Z$ be an irreducible component of the polar variety $\Wi$.  
+%
+\begin{lemma}\label{lem:3.7}
+For $\xb \in Z,$ there exists a non-zero vector $\lb_{\xb}\in \C^p$ in the left nullspace of $\ji,$ such that $\lb_{\xb}$ has rational entries in $\xb.$
+\end{lemma}
+%
+\begin{proof}
+Recall that for $\xb \in Z,$ the rank of $\ji$ is at most $p-1$, because $\Wi$ is defined by the vanishing of $F$ and $\minors$. Note that since $Z$ is irreducible, the function field $\C(Z)$ is well defined. Consider $\jac_{\xb}(F,i)$  with entries taken modulo the ideal $I(Z)$, and consider these entries as elements evaluated over $\C(Z);$ let $\jt$ denote this matrix. Since the $p$-minors of $\ji$ are zero over $\xb \in Z,$ the $p$-minors of $\jt$ are zero over $\frac{\bm a}{\bm b} \in \C(Z).$ And therefore the rank of $\jt$ is also at most $p-1$ at $\frac{\bm a}{\bm b} \in \C(Z).$ Thus, $\lb_{\xb} \in \C(Z)^p-\{\bz\}$ exists with rational entries in $\xb$ and with $\lb_{\xb} \cdot \jt = \bz$. And therefore $\lb_{\xb} \cdot \ji = \bz$ as well.
+\end{proof}
+%
+\noindent
+Take some $\xb_Z \in Z$ and consider the open set
+\[
+\mathscr{O}_{Z} = 
+\left\{\ub \in \C^p~|~\ub^T\cdot \lb_{\xb_Z} \not = \textit{\textbf{0}}\right\}.
+\]
+Notice that, trivially, $\mathscr{O}_Z$ is not empty because $\lb_{\xb_Z} \not = \bz$.  Now, set
+\[
+\mathscr{O} = 
+\bigcap_Z \mathscr{O}_{Z}.
+\]
+We also know that $\mathscr{O}$ is Zariski open and non-empty, because it is a finite intersection of non-empty Zariski open sets.
+%
+%
+\subsubsection{Determinental and Lagrangian modeling of polar varieties}
+In this section we prove the following proposition.
+%
+\begin{prop}\label{prop:polarVs}
+For $\ub \in \mathscr{O}, \Iil \cap \C[X_1,\hdots,X_n] \subset \Iir.$
+\end{prop}
+%
+%
+\begin{lemma}\label{lem:3.8}
+For all irreducible components $Z$ of $\Wi$, and for $\ub \in \mathscr{O},$ there exists $Z^o \subset Z,$ Zariski open and dense in $Z$, such that for all $\xb \in Z^o, \ub^T\cdot \lb_{\xb} \not = \bz.$
+\end{lemma}
+%
+\begin{proof}
+For $\xb \in Z$, let $\psi$ denote the function 
+\begin{align*}
+Z  &\rightarrow \C(Z)\\    
+    \xb &\mapsto \ub^T \cdot \lb_{\xb}.    
+\end{align*}
+ By Lemma \ref{lem:3.7}, we know $\psi$ is a rational function in $\xb.$ Let us write 
+\[
+\psi(\xb) = \sum_{i=1}^p\frac{N_{\xb,i}}{D_{\xb,i}},~N_{\xb,i} \in \C[Z], D_{\xb,i} \in \C[Z]-\{0\}. 
+\]
+Let $D_{\xb}$ denote the product $D_{\xb,1}\cdot D_{\xb,2} \cdot \hdots \cdot D_{\xb,p},$ notice that $D_{\xb} \not = \bz$, and put  
+\[
+Z^o := \left\{\xb \in Z~|~D_{\xb}\psi(\xb) = D_{\xb}(\ub^T \cdot \lb_{\xb})\not = \bz\right\}.
+\]
+We then have that $D_{\xb_Z}\psi(\xb_Z) \not = \bz,$
+because $\ub \in \mathscr{O}$ implies that $\psi(\xb_Z)= \ub \cdot \lb_{\xb_Z} \not = \bz$ and because $D_{\xb_Z} \not = \bz$.  Hence, $Z^o$ is both open and dense in $Z$, because $Z^o \not = \O$ and $Z$ is irreducible. By construction we also have that if $\xb \in Z^o$ then $D_{\xb}\psi(\xb) = D_{\xb}(\ub^T \cdot \lb_{\xb})\not = \bz$ so that $\ub^T \cdot \lb_{\xb}\not = \bz$.
+\end{proof}
+%
+\begin{lemma}\label{lem:3.9}
+For $\ub \in \mathscr{O}$ and for all irreducible components $Z$ of $\Wi,$ we have $Z^o \subset \pi_{\Xb}\left(\Wil\right).$
+\end{lemma}
+%
+\begin{proof}
+By Lemma \ref{lem:3.8}, $\xb \in Z^o$ implies that $\ub^T \cdot \lb_{\xb} \not = \bz.$ Set
+\[
+\bm \alpha_{\xb} = \left(\xb,\left(\frac{1}{\ub^T\cdot \lb_{\xb}}\right)\lb_{\xb}\right). 
+\]
+Then $F(\xb)=\bz,$
+\begin{align*}
+    \left(\frac{1}{\ub^T\cdot \lb_{\xb}}\right)\lxb\cdot \ji = \left(\frac{1}{\ub^T\cdot \lb_{\xb}}\right)\cdot \bz = \bz,
+\end{align*}
+and
+\[
+\ub^T\cdot\left(\frac{1}{\ub^T\cdot \lxb}\right)\lxb-1 =
+    \cdot\left(\frac{\ub^T\cdot\lxb}{\ub^T\cdot \lxb}\right)-1=1-1=0,
+\]
+so that $\ax \in \Wil.$ Therefore $Z^o \subset \pi_{\Xb}(\Wil).$
+%
+\end{proof}
+%
+%
+%
+\noindent 
+Now take $P \in \Iil\cap \C[X_1,\hdots,X_n],$ and $Z$ an irreducible component of $\Wi.$ Then, for $\xb \in Z^o$ it follows from Lemma \ref{lem:3.9} that there exists $\bm \alpha \in \C^p$ with $(\xb, \bm \alpha) \in \Wil.$ Then 
+\[
+P(\xb, \bm \alpha) = P(\xb) = \bz.
+\]
+Hence, $P$ is zero on $Z^o$ and thus $P$ is also zero on $Z$. Therefore, $P$ is zero on $\Wi$ and thus $P$ is in $\Iir.$ This finishes the proof of Proposition \ref{prop:polarVs}. 
+%
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Genericity Properties}\label{sec:gen}
-Recall that $V=V(F)$ is equidimensional with $F = (f_1,\hdots,f_p)$ a sequence of polynomials in  $\C[X_1,\hdots,X_n]$. And recall that we suppose the ideal $\langle f_1,\hdots, f_p \rangle $ is radical and that $V$ is smooth with $\dim V = n-p$. To prove Theorem~\ref{theo:main}, we need quantitative
-version of facts we stated in the introcution, namely that in generic coordinates,
+Recall that $V=V(F)$ is equidimensional with $F = (f_1,\hdots,f_p)$ a sequence of polynomials in  $\C[X_1,\hdots,X_n]$. And recall that we suppose the ideal $\langle f_1,\hdots, f_p \rangle $ is radical and that $V$ is smooth with $\dim V = n-p$. 
+
+To prove Theorem~\ref{theo:main}, we need quantitative
+versions of facts we stated in the introduction, namely that in generic coordinates,
 polar varieties are  equidimensional and in Noether position
 (or empty).
 
@@ -855,96 +990,20 @@ If $F$ does not initially satisfy $\textbf{H}_i$, it does after applying a gener
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Determinantal and Lagrangian modeling of polar varieties}
-%
-Assume in all that follows that $F$ satisfies $\bm H_i$. Let $Z$ be an irreducible component of the polar variety $W$.  
-%
-\begin{lemma}\label{lem:3.7}
-For $\xb \in Z,$ there exists a non-zero vector $\lb_{\xb}\in \C^p$ in the left nullspace of $\ji,$ such that $\lb_{\xb}$ has rational entries in $\xb.$
-\end{lemma}
-%
-\begin{proof}
-Recall that for $\xb \in Z,$ the rank of $\ji$ is at most $p-1$, because $W$ is defined by the vanishing of $F$ and $\minors$. Note that since $Z$ is irreducible, the function field $\C(Z)$ is well defined. Consider $\jac_{\xb}(F,i)$  with entries taken modulo the ideal $I(Z)$, and consider these entries as elements evaluated over $\C(Z);$ let $\jt$ denote this matrix. Since the $p$-minors of $\ji$ are zero over $\xb \in Z,$ the $p$-minors of $\jt$ are zero over $\bm y \in \C(Z).$ And therefore the rank of $\jt$ is also at most $p-1$ at $\bm y \in \C(Z).$ Thus, $\lb_{\xb} \in \C(Z)^p-\{\bz\}$ exists with having rational entries in $\xb$ and with $\lb_{\xb} \cdot \jt = \bz$. And therefore with $\lb_{\xb} \cdot \ji = \bz$ as well.
-\end{proof}
-%
-\noindent
-Take some $\xb_Z \in Z$ and consider the open set
-\[
-\mathscr{O}_{Z} = 
-\left\{\ub \in \C^p~|~\ub^T\cdot \lb_{\xb_Z} \not = \textit{\textbf{0}}\right\}.
-\]
-Notice that, trivially, $\mathscr{O}_Z$ is not empty because $\lb_{\xb_Z} \not = \bz$. Now, set
-\[
-\mathscr{O} = 
-\bigcap_Z \mathscr{O}_{Z}.
-\]
-We also know that $\mathscr{O}$ is Zariski open and non-empty, because it is a finite intersection of non-empty Zariski open sets.
-%
-\begin{lemma}\label{lem:3.8}
-For all irreducible components $Z$ of $W$, and for $\ub \in \mathscr{O},$ there exists $Z^o \subset Z,$ Zariski open and dense in $Z$, such that for all $\xb \in Z^o, \ub^T\cdot \lb_{\xb} \not = \bz.$
-\end{lemma}
-%
-\begin{proof}
-For $\xb \in Z$, let $\psi$ denote the function 
-\begin{align*}
-Z  &\rightarrow \C(Z)\\    
-    \xb &\mapsto \ub^T \cdot \lb_{\xb}.    
-\end{align*}
- By Lemma \ref{lem:3.7}, we know $\psi$ is a rational function in $\xb.$ Let us write 
-\[
-\psi(\xb) = \sum_{i=1}^p\frac{N_{\xb,i}}{D_{\xb,i}},~N_{\xb,i} \in \C[Z], D_{\xb,i} \in \C[Z]-\{0\}. 
-\]
-Put $D_{\xb} := \prod_{1\leq i \leq p}D_{\xb,i},$ notice that $D_{\xb} \not = \bz$, and put  
-\[
-Z^o := \left\{\xb \in Z~|~D_{\xb}\psi(\xb) = D_{\xb}(\ub^T \cdot \lb_{\xb})\not = \bz\right\}.
-\]
-We then have that $D_{\xb_Z}\psi(\xb_Z) \not = \bz,$
-because $\ub \in \mathscr{O}$ implies that $\psi(\xb_Z)= \ub \cdot \lb_{\xb_Z} \not = \bz$ and because $D_{\xb_Z} \not = \bz$.  Hence, $Z^o$ is both open and dense in $Z$, because $Z^o \not = \O$ and $Z$ is irreducible. By construction we also have that if $\xb \in Z^o$ then $D_{\xb}\psi(\xb) = D_{\xb}(\ub^T \cdot \lb_{\xb})\not = \bz$ so that $\ub^T \cdot \lb_{\xb}\not = \bz$.
-\end{proof}
-%
-\begin{lemma}\label{lem:3.9}
-For $\ub \in \mathscr{O}$ and for all irreducible components $Z$ of $W,$ $Z^o \subset \pi_{\Xb}(\Wl)$.
-\end{lemma}
-%
-\begin{proof}
-By Lemma \ref{lem:3.8}, $\xb \in Z^o$ implies that $\ub^T \cdot \lb_{\xb} \not = \bz.$ Set
-\[
-\bm \alpha_{\xb} = \left(\xb,\left(\frac{1}{\ub^T\cdot \lb_{\xb}}\right)\lb_{\xb}\right). 
-\]
-Then $F(\xb)=\bz,$
-\begin{align*}
-    \left(\frac{1}{\ub^T\cdot \lb_{\xb}}\right)\lxb\cdot \ji = \left(\frac{1}{\ub^T\cdot \lb_{\xb}}\right)\cdot \bz = \bz,
-\end{align*}
-and
-\[
-\ub^T\cdot\left(\frac{1}{\ub^T\cdot \lxb}\right)\lxb-1 =
-    \cdot\left(\frac{\ub^T\cdot\lxb}{\ub^T\cdot \lxb}\right)-1=1-1=0,
-\]
-so that $\ax \in \Wl.$ Therefore $Z^o \subset \pi_{\Xb}(\Wl).$
-%
-\end{proof}
-%
-\begin{lemma}\label{lem:3.10}
-For $\ub \in \mathscr{O}, \Il \cap \C[X_1,\hdots,X_n] \subset \Ir.$
-\end{lemma}
-%
-\begin{proof}
-%
-%\begin{align*}
-%&\Il^{\mA} \cap \C[X_1,\hdots,X_n]\\ 
-%=&~I(V(\Il^{\mA} \cap \C[X_1,\hdots,X_n]))\\  
-%\subset &~ I(W^{\mA}) = \I^{\mA}.
-%\end{align*}
-Take $P \in \Il\cap \C[X_1,\hdots,X_n],$ and $Z$ an irreducible component of $W.$ Then, for $\xb \in Z^o$ it follows from Lemma \ref{lem:3.9} that there exists $\bm \alpha \in \C^p$ with $(\xb, \bm \alpha) \in \Wl.$ Then 
-\[
-P(\xb, \bm \alpha) = P(\xb) = \bz.
-\]
-Hence, $P$ is zero on $Z^o$ and thus $P$ is zero on $Z$ also. Therefore, $P$ is zero on $W$ and $P \in \Ir.$ 
-%
-\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -952,26 +1011,26 @@ Hence, $P$ is zero on $Z^o$ and thus $P$ is zero on $Z$ also. Therefore, $P$ is 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Computing at least one point in each connected component of $V(F) \cap \R^n$} 
 %
-In general, we cannot say much about the geometry of $\Wi$, but if we apply a generic change of coordinates $\mA$ to $F$, then $\WiA$ is then known to be equidimensional of dimension $(i-1)$ or
-empty~\cite{BaGiHeMb97}, and to be in so-called {\em Noether
-  position}~\cite{EMP} (background notions in algebraic geometry are
-in~\cite{Mumford76,Shafarevich77,ECA}). If this is the case, it suffices to choose arbitrary
-$\sigma_1,\dots,\sigma_{n-1}$ in $\Q$, and solve the systems defined
+If we apply a generic change of coordinates $\mA$ to $F$, then $\WiA$ is then known to be equidimensional of dimension $(i-1)$ or
+empty~\cite{BaGiHeMb97}, and to be in Noether
+  position~\cite{EMP} (Note that $\WiA$ is not necessarily equal to $W(\pi_i,V(f))^{\mA}$, as their dimensions may vary). If this is the case, it suffices to choose a generic point
+$\bm \sigma = (\sigma_1,\dots,\sigma_{n-1})$ in $\Q$, and solve the systems defined
 by
 %
 \begin{equation}\label{eq:syst1}
-X_1-\sigma_1,\dots,X_{i-1}-\sigma_{i-1}, f_1^{\mA},\hdots,f_p^{\mA},  \minorsA,  
+X_1-\sigma_1,\dots,X_{i-1}-\sigma_{i-1}, F^{\mA},  \minorsA,  
 \end{equation}
 %
 for each $i\in \{1,\dots,n-p+1\}$.  They all admit finitely many solutions, and
 Theorem~2 in~\cite{EMP} proves that the union of their solution sets
-contains one point on each connected component of $V \cap \R^n$. However, since the number of minors can grow exponentially in $n$, we avoid explicitly solving the equations in \eqref{eq:syst1}. Instead, we use the Lagrangean reformulation of  polar varieties, which reduces the number of equations. We instead solve the equations
+contains one point on each connected component of $V \cap \R^n$. However, since the number of minors can grow exponentially in $n$ (recall that the number of minors equals $S_i \sim  \binom{n-i}{p}\sim 2^{n-i+1}$)
+we avoid explicitly solving the equations in \eqref{eq:syst1} and instead use the Lagrangean modeling of polar varieties. We instead solve the equations
 %
 \begin{equation}\label{eq:syst2}
-X_1-\sigma_1,\dots,X_{i-1}-\sigma_{i-1}, f_1^{\mA},\hdots,f_p^{\mA}, \mathscr{L}_1^{\mA}, \hdots, \mathscr{L}_{n-i}^{\mA},\udl-1,
+X_1-\sigma_1,\dots,X_{i-1}-\sigma_{i-1}, F^{\mA}, \lagFA ,\udl-1,
 \end{equation}
 %
-and then compute the projection of the solution on the $\Xb$-space.
+and then compute the projections of each solution set on the $\Xb$-space.
 
 Our main contribution is to analyse precisely what conditions on our
 change of coordinates $\mA$ guarantee success. This is done by
@@ -1263,7 +1322,7 @@ As mentioned above, Thom’s weak transversality theorem is a generalization of 
     we get 
     \[
     W = \overline{\mu(\fZp)} = \overline{\mu(\overline{\cup_Y Y^o})}
-    \myeq \overline{\mu(\cup_Y Y^o)} \subset \overline{Z},
+    = \overline{\mu(\cup_Y Y^o)} \subset \overline{Z},
     \]
     where the last inclusion follows by (3) above.
     Hence, by lemma 4.5,
@@ -1276,7 +1335,7 @@ As mentioned above, Thom’s weak transversality theorem is a generalization of 
     \]
     And thus
     \[
-    \overline{\pi(Z)} \subset \overline{\pi(W)} \subset \overline{\pi(\overline{Z})} \myeq\overline{\pi(Z)}.
+    \overline{\pi(Z)} \subset \overline{\pi(W)} \subset \overline{\pi(\overline{Z})} =\overline{\pi(Z)}.
     \]
     Therefore,
     \[
@@ -1320,9 +1379,11 @@ As mentioned above, Thom’s weak transversality theorem is a generalization of 
 \section{Applications of weak transversality: $\textbf{H}_i(1), \textbf{H}_i(2),$ and $\textbf{H}_i^{'}$}\label{sec:5}
 
 Let $F=(f_1,\hdots,f_p) \in \ZZ[X_1,\hdots,X_n]^p$ with $\deg(f_i)\leq d$, with $V(F)
-\subset \C^n$ smooth. Let $\J_i(\Xb,\A)$ denote the matrix
+\subset \C^n$ smooth. Recall that $\A$ denotes the matrix of indeterminates with entries $(\frak
+A_{j,k})_{1\le j,k \le n}$ and let $\J_i(\Xb,\A)$ denote the matrix
     
     \[
+    \J_i(\Xb,\A) := 
     \bbm 
     \jac_{\xb}(F)\\
     \A_{1,1}~~ \hdots ~~\A_{1,n}\\
@@ -1330,7 +1391,7 @@ Let $F=(f_1,\hdots,f_p) \in \ZZ[X_1,\hdots,X_n]^p$ with $\deg(f_i)\leq d$, with 
      \A_{i,1}~~ \hdots ~~\A_{i,n}
      \ebm.
     \]
-Consider elements $\bm a \in \C^{in}$ as vectors of length $i$ of the form $\bm a = (\bm a_1,\hdots,\bm a_i)$ with $\bm a_i \in \C^n$. For such an $\bm a, \J_i(\Xb,\bm a)$ is naturally defined with the indeterminates evaluated at $\bm a$. We say that $\bm a$ has rank $i$ when $\bm a$ is a sequence of linearly independent vectors. Let $\Phi$ define the polynomial mapping
+Consider elements $\bm a \in \C^{in}$ as vectors of length $i$ of the form $\bm a = (\bm a_1,\hdots,\bm a_i)$ with $\bm a_i \in \C^n$. Then for such an $\bm a, \J_i(\Xb,\bm a)$ is naturally defined with the indeterminates evaluated at $\bm a$. We say that $\bm a$ has rank $i$ when $\bm a$ is a sequence of linearly independent vectors. Let $\Phi$ define the polynomial mapping
     %
     \begin{align*}
     \C^{n+p+i}\times \C^{i n} &\rightarrow \C^{p+n}\\
@@ -1371,7 +1432,7 @@ Consider elements $\bm a \in \C^{in}$ as vectors of length $i$ of the form $\bm 
     
     Consider $\bm A \in \C^{n \times n}$ such that the first $i$ rows of $\bm A^{-1}$ do not cancel $\gi$, and let $\bm b$ denote the first $i$ rows of $\bm A^{-1}$. Note that $\bm b$ has full rank $i$. Let $\fB \in \C(\A)-\C$ denote $\A^{-1}$ and let $\fB_1=[\fB_{1,1},\hdots,\fB_{1,n}],\hdots,\fB_n=[\fB_{n,1},\hdots,\fB_{n,n}]$ denote the rows of $\fB.$ Set  
     \[
-    \Delta_{i,1} := \Gamma_i(\fB_1,\hdots,\fB_i)\cdot (\det \A)^{d^{5n}}. 
+    \Delta_{i,1} := \Gamma_i(\fB_1,\hdots,\fB_i)\cdot (\det \A)^{\deg \gi}. 
     \]
     By multiplying through by $(\det \A)^{\deg \gi},$ we cancel all denominators and thus make $\D_{i,1}$ a polynomial. 
     %
@@ -1382,7 +1443,7 @@ Consider elements $\bm a \in \C^{in}$ as vectors of length $i$ of the form $\bm 
     \begin{proof}
         Assume that 
         \[
-        \fB_{i,j}=\fN_{i,j}/\fD_{i,j},~ \textrm{ for } \fN_{i,j},\fD_{i,j} \in \C[\A]-\{\C\}.
+        \fB_{i,j}=\fN_{i,j}/\fD_{i,j},~ \fN_{i,j} \in \C[\A]-\{\C\}.
         \]
         Then, $\deg \fN_{i,j} \leq n-1 \leq n,$ and since we have cleared all denominators $\fD_{i,j}$ by multiplying through with $(\det \A)^{\deg \gi},$ we therefore obtain 
         \[
@@ -1419,7 +1480,7 @@ Consider elements $\bm a \in \C^{in}$ as vectors of length $i$ of the form $\bm 
    \J_i(\Xb,\bm b)
     \right)
     \]
-    has full rank $p + n$. We have that
+    has full rank $p + n$. We then have that
     \[
     Y^{\mA}(\bm b) = \left\{\xb \in V\left(F^{\mA}\right)~
     |~\rk     
@@ -1517,7 +1578,11 @@ Consider elements $\bm a \in \C^{in}$ as vectors of length $i$ of the form $\bm 
     %
     Take $\mA \in \C^{n \times n}$ so that $\Delta_{i,1}(\mA) \not = 0$, and again let $\bm b$ denote the first $i$ rows of $\mA^{-1}.$
     \begin{prop}
-    The Jacobian of $F^{\mA},\sLA_1,\hdots,\sLA_{n-i}$ at $(\xb,\lb) \in \sW$ has full rank $p+n-i$. 
+    The Jacobian 
+    \[
+    \jac_{(\xb,\lb)}\left(F^{\mA},\lagFA\right)
+    \]
+    at $(\xb,\lb) \in \WilAnu$ has full rank $p+n-i$. 
     \end{prop}
     %
     \begin{proof}
@@ -1560,9 +1625,9 @@ Consider elements $\bm a \in \C^{in}$ as vectors of length $i$ of the form $\bm 
     \jac_{\xb}(\pi_i)
      \ebm.
     \] 
-    Now, let $L_1, \hdots , L_c$ and $T_1, \hdots , T_d$ be new variables, and notice that the Jacobian
+    Now, let $L_1, \hdots , L_p$ and $T_1, \hdots , T_i$ be new variables, and notice that the Jacobian
     \[
-    \jac\left(F,[L_1, ~\cdots~, L_c, T_1, ~\cdots~, T_i ] \cdot 
+    \jac\left(F,[L_1, ~\cdots~, L_p, T_1, ~\cdots~, T_i ] \cdot 
     \bbm 
     \jac(F^{\mA})\\
     \jac(\pi_i)\\
@@ -1573,17 +1638,9 @@ Consider elements $\bm a \in \C^{in}$ as vectors of length $i$ of the form $\bm 
      \[
     X_1,\dots,X_n,L_1,\hdots,L_p,T_1,\hdots,T_i,
     \]
-    has full rank $p + n.$  This Jacobian is the following matrix:
-    \[
-    \left[ 
-    \begin{array}{c|c|c}
-    \jac_{\Xb}(F^{\mA}) & \bz_{p\times p} & \bz_{p\times i}\\
-    \ast \ast \ast & \ast \ast \ast & \bm I_{i}\\
-    \ast \ast \ast & \ast \ast \ast & \bz_{p\times i}
-    \end{array}
-    \right].
-    \]
-    Notice 
+    has full rank $p + n.$
+    %
+    This Jacobian matrix has the following structure 
     \begin{align*}
     \left[ 
     \begin{array}{c|c|c}
@@ -1613,7 +1670,9 @@ Consider elements $\bm a \in \C^{in}$ as vectors of length $i$ of the form $\bm 
     \end{array}
     \right].
     \end{align*}
-    Hence
+    %
+    We can therefore see by rearranging blocks of the matrix that 
+    %
     \begin{align}
     \jac_{\Xb, \Lb}\left( F^{\mA},\bm L \cdot \jac_{\Xb}(F^{\mA},i)\right) =
     \left[ 
@@ -1627,7 +1686,7 @@ Consider elements $\bm a \in \C^{in}$ as vectors of length $i$ of the form $\bm 
     \end{proof}
     %
     \begin{corollary}
-     The ideal defined by $\sI^{\mA} = \left( f_1^{\mA},\hdots,f_p^{\mA},\sLA_1,\hdots,\sLA_{n-i}\right)$ is radical.
+     The ideal defined by $\sI^{\mA} = \left(F^{\mA},\lagFA\right)$ is radical.
     \end{corollary}
     %
     \begin{proof}
@@ -1720,9 +1779,9 @@ Consider elements $\bm a \in \C^{in}$ as vectors of length $i$ of the form $\bm 
     \end{proof}
     %
     %
-    \begin{prop}
+    \begin{prop}\label{prop:polV2}
     $
-    \IAr \subset \IlA. 
+    \sqrt{\frak{I}(i,F^{\mA})} \subset \IilA.
     $
     \end{prop}
     \begin{proof}
@@ -1730,7 +1789,7 @@ Consider elements $\bm a \in \C^{in}$ as vectors of length $i$ of the form $\bm 
     \par 
     Now we claim that the ideal defined by $\IlA:\left\langle F^{\mA},\sLA_1,\hdots,\sLA_{n-i},\udl-1 \right\rangle$ is radical. The claim follows from the Jacobian Criterion~\cite[Corollary 16.20]{ECA}. Therefore 
     \[
-    \IAr \subset \sqrt{\IlA} = \IlA.
+    \sqrt{\frak{I}(i,F^{\mA})} \subset \sqrt{\IilA} = \IilA.
     \]
     \end{proof}
 
@@ -1746,14 +1805,14 @@ that $F$ satisfies $\textbf{H}_i$, and we prove the following: {\em
   there exists a non-zero polynomial $\Xi_{i} \in
   \C[S_1,\dots,S_{p+i-1}]$ of degree at most $d^{3n}$ such that if $
   (\bm \sigma,\ub) \in \C^{p+i-1}$ does not cancel
-  $\Xi_{i}$, then for any $(\xb,\lb) \in \Wl$, the Jacobian matrix
-  $$\jac_{(\xb,\lb)}\left(X_1-\sigma_1,\dots,X_{i-1}-\sigma_{i-1},F,\sL_1,\hdots,\sL_{n-i},\udl-1\right)$$ has full rank $p+n$.}
+  $\Xi_{i}$, then for any $(\xb,\lb) \in \Wil$, the Jacobian matrix
+  $$\jac_{(\xb,\lb)}\left(X_1-\sigma_1,\dots,X_{i-1}-\sigma_{i-1},F,\lagF,\udl-1\right)$$ has full rank $p+n$.}
 
 \smallskip
 
 Let $\bm\Psi: \C^{n+p} \times \C^{p+i-1} \rightarrow \C^{n}$ be the mapping defined by the polynomials
 \[
-  \left(X_1-S_1,\dots,X_{i-1}-S_{i-1},F,\sL_1,\hdots,\sL_{n-i},\udl-1\right).
+  \left(X_1-S_1,\dots,X_{i-1}-S_{i-1},F,\lagF,\Vdl-1\right).
 \]
 %
 \begin{lemma}
@@ -1764,18 +1823,18 @@ At all zeros $(\xb,\lb,\ub,\bm \sigma)$ of $\bm\Psi,$ the Jacobian matrix of
 $\bm\Psi$ has full rank $n+p$. Indeed, indexing columns 
     by 
     \[
-    X_1,\dots,X_n,L_1,\hdots,L_p,u_1,\hdots,u_p,S_1,\dots,S_{i-1},
+    X_1,\dots,X_n,L_1,\hdots,L_p,V_1,\hdots,V_p,S_1,\dots,S_{i-1},
     \]
     this matrix is equal to
     \[
     \left[ 
     \begin{array}{ccc}
     \bI_{i-1}\hspace{11mm} \bz_{(i-1)\times 2p}&\hspace{-10mm}-\bI_{i-1}\\
-    \jac_{(\xb,\bm l,\bm u)}\left( F,\Lb \cdot \jac_{\xb} (F,i),\udl-1  \right)&\bz_{(p+n-i+1)\times (i-1)}
+    \jac_{(\xb,\bm l)}\left( F,\lb \cdot \jac_{\xb} (F,i),\udl-1  \right)&\bz_{(p+n-i+1)\times (i-1)}
     \end{array}
     \right].
     \]
-    By $H_i(2)$, $\jac_{(\xb,\bm l,\bm u)}\left( F,\Lb \cdot \jac_{\xb} (F,i), \udl-1 \right)$ has full rank $p+n-i+1$. Hence, the entire    
+    By $H_i(2)$, $\jac_{(\xb,\bm l)}\left( F,\lb \cdot \jac_{\xb} (F,i), \udl-1 \right)$ has full rank $p+n-i+1$. Hence, the entire    
     matrix must have full rank $p+n$. Thus,  $\bz$ is a regular value of $\bm\Psi.$
     \end{proof}
 
@@ -1815,12 +1874,12 @@ $\C(\A)[\Xb,\Lb]$. Let $W^\A$ denote  $W(\pi_i,V(F^\A))$ and let $\Wl^\A$ denote
 %
 \begin{lemma}\label{lem:6.1}
  The extension $$\C(\A)[\Xb_{\leq i-1}]\rightarrow
- \C(\A)[\Xb]/\sqrt{\I^{\A}}$$ is integral.
+ \C(\A)[\Xb]/\IifAr$$ is integral.
 \end{lemma}
 %
 \begin{proof}
   Let $(\fp_\ell)_{1 \le \ell \leq L}$ be the prime components of
-  the $\sqrt{\I^\A}$. By \cite[Proposition 1]{EMP}, for all
+  the $\IifAr$. By \cite[Proposition 1]{EMP}, for all
   $\ell$,
   \[
     \C(\A)[\textbf{X}_{\leq i-1}]\rightarrow\C(\A)[\Xb]/\fp_\ell
@@ -1835,16 +1894,24 @@ $\C(\A)[\Xb,\Lb]$. Let $W^\A$ denote  $W(\pi_i,V(F^\A))$ and let $\Wl^\A$ denote
 %
 \begin{corollary}\label{lem:6.2}
  The extension $$\C(\A)[\Xb_{\leq i-1}]\rightarrow
- \C(\A)[\Xb]/(\Il^{\A} \cap \C(\A)[\Xb])$$ is integral.
+ \C(\A)[\Xb]/(\Iil^{\A} \cap \C(\A)[\Xb])$$ is integral.
 \end{corollary}
 %
 \begin{proof}
 By Lemma \ref{lem:6.1}, polynomials
   $P_{j}\in\C(\A)[\Xb_{\leq i-1},X_j]$ exist, all monic in
-  $X_j$, with $P_{j}(X_j)\in \sqrt{\I^{\A}}$ for each $j$ in
-  $\{i,\hdots,n-p+1\}.$ By Proposition 4.9, $\sqrt{\I^{\A}} \subset \Il^{\A}$, and therefore $P_{j}(X_j)\in \Il^{\A}$ for each $j$ in 
-  $\{i,\hdots,n-p+1\}$ and $$\C(\A)[\Xb_{\leq i-1}]\rightarrow
- \C(\A)[\Xb]/(\Il^{\A} \cap \C(\A)[\Xb])$$ is integral.
+  $X_j$, with $P_{j}(X_j)\in \IifAr$ for each $j$ in
+  $\{i,\hdots,n-p+1\}.$ By Proposition \ref{prop:polV2}, 
+  \[
+  \sqrt{\IifA} \subset \IilfA,
+  \]
+  and therefore $P_{j}(X_j)\in \IilfA$ for each $j$ in 
+  $\{i,\hdots,n-p+1\}$ and 
+  \[
+  \C(\A)[\Xb_{\leq i-1}]\rightarrow
+ \C(\A)[\Xb]/(\IilfA \cap \C(\A)[\Xb])
+  \]
+ is integral.
 \end{proof}
 %
 %\noindent
@@ -1857,21 +1924,25 @@ $\overline P$ is in $\C[\A,\Xb]$.
     \begin{lemma} 
     For each $j \in \{i,\dots,n-p+1\}$, there exists $P_j$ in $
     \C(\A)[\Xb_{\leq i-1},X_j]$, monic in $X_j$, with $\pjb$ in
-    $\Il^\A$, and such that $\deg(\pjb)\leq (2d)^{2n}.$
+    $\IilfA$, and such that $\deg(\pjb)\leq (2d)^{2n}.$
     \end{lemma} 
 
 \begin{proof}
-     We let $\frak L^\A$ denote the extension of $\Il^{\A} \cap \C(\A)[\Xb]$ given by 
+     We let $\frak L^\A$ denote the extension of $\IilfA \cap \C(\A)[\Xb]$ given by 
   \[
   \frak
-  L^\A =(\Il^{\A} \cap \C(\A)[\Xb])\cdot \C(\frak A, \Xb_{\leq i-1})[X_i,\dots,X_n].
+  L^\A =(\IilfA \cap \C(\A)[\Xb])\cdot \C(\frak A, \Xb_{\leq i-1})[X_i,\dots,X_n].
   \]
   Then,
   \begin{equation}\label{eq:1}
     \C(\frak A, \Xb_{\leq i-1}) \to \C(\frak A,
     \Xb_{\leq i-1})[X_i,\dots,X_n]/\frak L^\A
   \end{equation}
-    is an algebraic extension. Let $P_j \in \C(\A)(\textbf{X}_{\leq i-1})[X_j]$ be the minimal polynomial of $X_j$ in \eqref{eq:1}}, and note that $P_j$ is monic in $X_j.$ By Corollary \ref{lem:6.2}, $Q_j\in\C(\A)[\textbf{X}_{\leq i-1},X_j],$ exists, monic in $X_j$, with $Q_j(X_j) \in \Il^\A \cap \C(\A)[\Xb]$.  Hence, $Q_j$ is also in the extension $\frak{L}^\A$, and thus $P_j$ divides $Q_j$ in $\C(\A)(\textbf{X}_{\leq i-1})[X_j].$ We can therefore write 
+    is an algebraic extension. Let $P_j \in \C(\A)(\textbf{X}_{\leq i-1})[X_j]$ be the minimal polynomial of $X_j$ in \eqref{eq:1}}, and note that $P_j$ is monic in $X_j.$ By Corollary \ref{lem:6.2}, $Q_j\in\C(\A)[\textbf{X}_{\leq i-1},X_j],$ exists, monic in $X_j$, with 
+    \[
+    Q_j(X_j) \in \IilfA \cap \C(\A)[\Xb].
+    \]
+    Hence, $Q_j$ is also in the extension $\frak{L}^\A$, and thus $P_j$ divides $Q_j$ in $\C(\A)(\textbf{X}_{\leq i-1})[X_j].$ We can therefore write 
     \begin{align*}
     &Q_j = P_jR_j,~~~~ P_j,R_j \in \C(\A)(\textbf{X}_{\leq i-1})[X_j]-\C(\A)(\textbf{X}_{\leq i-1}).
     \end{align*}
@@ -1885,15 +1956,11 @@ $\overline P$ is in $\C[\A,\Xb]$.
     \]
     Since $Q_j$ is monic in $X_j$, $p_j$ and $r_j$ must also be monic in $X_j$, and $\mu_j$ must be the coefficient of the highest degree term of $P_j$ in $X_j.$ Since $P_j$ is monic in $X_j$, $\mu_j =1$ and hence $P_j=1\cdot p_j=p_j \in \C(\A)[\textbf{X}_{\leq i-1}][X_j].$
 
-  Now consider again the ``Lagrange polynomials'' $\mathscr{L}_1,\dots,\mathscr{L}_{n-i}$, with
-    \[
-    [\mathscr{L}_1^\A, \hdots, \mathscr{L}_{n-i}^\A]=\textit{\textbf{L}}\cdot \jac_{\xb} (F^\A,i),
-    \] 
-    and consider the polynomials \[
-    F^\A, \mathscr{L}_1^\A, \hdots, \mathscr{L}_{n-i}^\A, \udl-1
-    \]
-    in $\C[\A,\Xb,\Lb,\ub]$.
-  Let $\frak W$ be their zero-set, and let $\deg(\frak W)$ be its
+  Now, consider the polynomials
+  \[
+\IilfA := \left(F, \lagFfA,\udl-1 \right)
+\]
+in $\C[\A,\Xb,\Lb,\ub]$, let $\frak W$ be their zero-set, and let $\deg(\frak W)$ be its
   degree, in the sense of~\cite{H}. Proposition~1 in~\cite{CGR}
   implies that $\pjb$ has degree at most $\deg(\frak W)$. Since all
   polynomials defining $\frak W$, seen in $\C[\A,\Xb,\Lb,\ub]$, have

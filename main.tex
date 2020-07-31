@@ -151,6 +151,7 @@
 \def\IiA{\mathfrak{I}(i,F^A)}
 \def\Ir{\sqrt{\mathfrak{I}}}
 \def\Iir{\sqrt{\mathfrak{I}(i,F)}}
+\def\IiAr{\sqrt{\mathfrak{I}(i,F^{\mA})}}
 \def\IAr{\sqrt{\mathfrak{I}^{\mA}}}
 \def\IfAr{\sqrt{\mathfrak{I}^{\A}}}
 \def\IifAr{\sqrt{\mathfrak{I}(\pi_i,F^{\A})}}
@@ -1462,7 +1463,7 @@ Consider elements $\bm a \in \C^{in}$ as vectors of length $i$ of the form $\bm 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \subsection{Proof of $\textbf{H}_i(1)$} 
-     In what follows, we fix $i$ in $\{1,\dots,n-p+1\}$, and
+    In what follows, we fix $i$ in $\{1,\dots,n-p+1\}$, and
     we prove the following: {\em There exists a non-zero polynomial
     $\D_{i,1} \in \C[\A]$ of degree at most $nd^{5n}$ such that if $\mA
     \in \C^{n\times n}$ does not cancel $\D_{i,1}$, then $\mA$ is
@@ -1736,7 +1737,7 @@ Consider elements $\bm a \in \C^{in}$ as vectors of length $i$ of the form $\bm 
     The claim now follows from the Jacobian Criterion~\cite[Corollary 16.20]{ECA}.
     \end{proof}
     %
-    \begin{prop}
+    \begin{prop}\label{prop:RadLagPolarV}
      Let $\ub = (u_1,\hdots,u_p) \in \C^p$ be any complex point such that $\udl=1.$ Then, for any $(\xb,\lb)$ in $\mathscr{W}_{\ub}(\pi_i,V(F^{\mA}))$, the Jacobian matrix of the polynomials
      \[
   \left( F^{\mA},\lagFA,\udl-1\right) 
@@ -1918,7 +1919,7 @@ $\C(\A)[\Xb,\Lb]$. Let $W^\A$ denote  $W(\pi_i,V(F^\A))$ and let $\Wl^\A$ denote
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Degree bounds for polynomials of integral extensions} 
+\subsection{Degree bounds of the integral dependence relationship} 
 %
 \begin{lemma}\label{lem:6.1}
  The extension $$\C(\A)[\Xb_{\leq i-1}]\rightarrow
@@ -1949,7 +1950,7 @@ $\C(\A)[\Xb,\Lb]$. Let $W^\A$ denote  $W(\pi_i,V(F^\A))$ and let $\Wl^\A$ denote
 By Lemma \ref{lem:6.1}, polynomials
   $P_{j}\in\C(\A)[\Xb_{\leq i-1},X_j]$ exist, all monic in
   $X_j$, with $P_{j}(X_j)\in \IifAr$ for each $j$ in
-  $\{i,\hdots,n-p+1\}.$ By Proposition \ref{prop:polV2}, 
+  $\{i,\hdots,n-p+1\}.$ By Proposition \ref{prop:polarVs2}, 
   \[
   \sqrt{\IifA} \subset \IilfA,
   \]
@@ -2004,14 +2005,14 @@ $\overline P$ is in $\C[\A,\Xb]$.
     \]
     Since $Q_j$ is monic in $X_j$, $p_j$ and $r_j$ must also be monic in $X_j$, and $\mu_j$ must be the coefficient of the highest degree term of $P_j$ in $X_j.$ Since $P_j$ is monic in $X_j$, $\mu_j =1$ and hence $P_j=1\cdot p_j=p_j \in \C(\A)[\textbf{X}_{\leq i-1}][X_j].$
 
-  Now, let $\bm V = (V_1,\hdots,V_p)$ be new indeterminants and consider the polynomials
+  Now, consider the polynomials
   \[
-\IilfAV := \left(F^{\A}, \lagFfA,\Vdl-1 \right)
+\IilfA := \left(F^{\A}, \lagFfA,\udl-1 \right)
 \]
-in $\C[\A,\Xb,\Lb,\bm V]$, let $\frak W$ be their zero-set, and let $\deg(\frak W)$ be its
+in $\C[\A,\Xb,\Lb]$, let $\frak W$ be their zero-set, and let $\deg(\frak W)$ be its
   degree, in the sense of~\cite{H}. Proposition~1 in~\cite{CGR}
   implies that $\pjb$ has degree at most $\deg(\frak W)$. Since all
-  polynomials defining $\frak W$, seen in $\C[\A,\Xb,\Lb,\ub]$, have
+  polynomials defining $\frak W$, seen in $\C[\A,\Xb,\Lb]$, have
   degree at most $2d$, the B\'ezout inequality of~\cite{H} gives
   $\deg(\pjb) \le (2d)^{p+n-i+1} \le (2d)^{2n}$.
 \end{proof}
@@ -2024,15 +2025,15 @@ in $\C[\A,\Xb,\Lb,\bm V]$, let $\frak W$ be their zero-set, and let $\deg(\frak 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Applying the effective Nullstellensatz}
-Now we apply the Nullstellensatz for $\pjb$ with the ideal membership for $\IilfAV.$ Let $T$ be a new variable; applying the
-Nullstellensatz in $\C(\A)[\Xb,\Lb,\bm V][T]$, and clearing
+Now we apply the Nullstellensatz for $\pjb$ with the ideal membership for $\IilfA.$ Let $T$ be a new variable; applying the
+Nullstellensatz in $\C(\A)[\Xb,\Lb][T]$, and clearing
 denominators, we obtain the existence of $\alpha_j$ in
-$\C(\bm V)[\A]-\{0\}$ and $ C_{j,\ell},B_j$ in
-$\C(\bm V)[\A][\Xb,\Lb,\bm V][T]$, such that
+$\C[\A]-\{0\}$ and $ C_{j,\ell},B_j$ in
+$\C[\A][\Xb,\Lb][T]$, such that
 \begin{align*}
 \alpha_j = \sum_{\ell=1}^{p+n-i+1} C_{j,\ell} G_\ell + B_j (1-\pjb T),\\  G_\ell \in 
 \left\{ 
-F^\A,\lagFfA, \Vdl-1
+F^\A,\lagFfA, \udl-1
 \right\}.
 \end{align*}
 Let us then define 
@@ -2050,18 +2051,18 @@ is integral.
 By assumption, $\D_{i,1}(\mA)$ is non-zero so that $\mA$ is
 invertible, the
 ideal defined by $\IilA$ is radical, and 
-$\WiA$ is either empty or $(i-1)$-equidimensional (would this imply that $\Wl^{\mA}$ is either empty or $(i-1)$-equidimensional?, or would we need that?). If
+$\WiA$ is either empty or $(i-1)$-equidimensional. And by Proposition \ref{prop:RadLagPolarV} and the Jacobian Criterion~\cite[Corollary 16.20]{ECA}, $\WilA$ is also either empty or $(i-1)$-equidimensional. If
 it is empty, we are done. Otherwise, for $j=i,\dots,n-p+1$, evaluate all indeterminates in $\A$ at the
 corresponding entries of $\mA$. This gives us
-an equality in $\C[\Xb,\Lb,\ub,T]$ of the form
+an equality in $\C[\Xb,\Lb,T]$ of the form
 \begin{align*}
 a_j = \sum_{\ell=1}^{p+n-i+1} c_{j,\ell} g_\ell + b_j (1-p_j T),\ \  g_\ell \in 
 \left\{ 
-f_1^A,\hdots,f_p^A,\mathscr{L}_1^A,\dots,\mathscr{L}_{n-i}^A, \udl-1
+F^{\mA}, \lagFA, \udl-1
 \right\},
 \end{align*}
 for $a_j$ in $\C$, polynomials $c_{j,\ell}$ and $b_j$ in
-$\C[\Xb,\Lb,\ub,T]$ and $p_j$ in
+$\C[\Xb,\Lb,T]$ and $p_j$ in
 $\C[\Xb_{\leq i-1},X_j]$. Since neither $\alpha_j$ nor $D_j$
 vanish at $\mA$, $a_j$ is non-zero and the leading coefficient of
 $p_j$ in $X_j$ is a non-zero constant.
@@ -2070,12 +2071,12 @@ The conclusion is now routine. Replace $T$ by $1/p_j$ in the
 previous equality; after clearing denominators, this gives a
 membership equality of the form 
 \[
-p_j{}^k \in \Il^{\mA} \cap \C[\Xb],
+p_j{}^k \in \IilA \cap \C[\Xb],
 \]
-for some integer $k \ge 1$ (we cannot have $k=0$, since we assumed that $W^{\mA}$ is not empty, which implies that $\Wl^{\mA}$ is not empty?). Since $\Il^{\mA}$ is radical,
-$p_j$ is in $\Il^{\mA}$. Repeating this for all $j$ proves that 
+for some integer $k \ge 1$ (we cannot have $k=0$, since we assumed that $\WiA$ is not empty, which implies that $\WilA$ is not empty). Since $\IilA$ is radical,
+$p_j$ is in $\IilA$. Repeating this for all $j$ proves that 
 \[
-\C[\Xb_{\leq i-1}]\rightarrow\C[\Xb]/(\Il^{\mA} \cap \C[\Xb])
+\C[\Xb_{\leq i-1}]\rightarrow\C[\Xb]/(\IilA \cap \C[\Xb])
 \]
 is integral.
 \end{proof}
@@ -2084,21 +2085,21 @@ is integral.
 To estimate the degree of $\D_{i}$, what remains is to give an upper
 bound on the degrees of $\alpha_i,\dots,\alpha_n$. This will come as an
 application of the effective Nullstellensatz given in~\cite{EN}, for
-which we first need to determine degree bounds, separately in $\Xb,\Lb,\ub,T$
+which we first need to determine degree bounds, separately in $\Xb,\Lb,T$
 and $\A,$ of the polynomials in the membership relationship. We have
 \begin{align*}
-\deg_{\Xb,\Lb,\ub,T}
+\deg_{\Xb,\Lb,T}
 \left\{ 
-f_1^\A,\hdots,f_p^\A,\mathscr{L}_1^\A, \hdots, \mathscr{L}_{n-i}^\A, \udl-1
+F^{\A},\lagFfA, \udl-1
 \right\}
 \leq d, ~
-\deg_{\Xb,\Lb,\ub,T}(1-T\pjb) \leq (2d)^{2n} +1, 
+\deg_{\Xb,\Lb,T}(1-T\pjb) \leq (2d)^{2n} +1, 
 \end{align*}
 and we have 
 \begin{align*}
 \deg_{\A}  
 \left\{ 
-f_1^\A,\hdots,f_p^\A,\mathscr{L}_1^\A, \hdots, \mathscr{L}_{n-i}^\A, \udl-1
+F^{\A},\lagFfA, \udl-1
 \right\} 
 \leq d,~\textrm{and }
 \deg_{\A}(1-T\pjb)& \leq (2d)^{2n}.
@@ -2121,26 +2122,26 @@ $$\deg(\D_i) \le nd^{5n} +  4n^2(2d)^{4n} + n(2d)^{2n} \leq 6n^2(2d)^{5n}.$$
 \subsection{Proof of $\textbf{H}_i(3)$}
 Now it remains to show that if $\mA \in \C^{n\times n}$ does not cancel $\D_{i}$ then
 \[
- \C[\Xb_{\leq i-1}]\rightarrow \C[\Xb]/\I^{\mA}
+ \C[\Xb_{\leq i-1}]\rightarrow \C[\Xb]/\IiA
 \]
 is integral. 
 \noindent
 By Lemma \ref{lem:6.4}, the extension
 \[
- \C[\Xb_{\leq i-1}]\rightarrow \C[\Xb]/(\Il^{\mA} \cap \C(\mA)[\Xb])
+ \C[\Xb_{\leq i-1}]\rightarrow \C[\Xb]/(\IilA \cap \C[\Xb])
 \]
 is integral, and thus polynomials 
 \[
-Q_j \in \C(\ub)[\Xb_{\leq i-1},T]
+Q_j \in \C[\Xb_{\leq i-1},T]
 \]
 exists, monic in $T$, for each $j \in \{i,\hdots,n-p+1\},$ with
 \begin{align*}
-Q_j(X_1,\hdots,X_{i-1},X_j) \in \Il^{\mA} \cap \C(\ub)[\Xb].
+Q_j(X_1,\hdots,X_{i-1},X_j) \in \IilA \cap \C[\Xb].
 \end{align*}
 %
-By Lemma \ref{lem:3.10}, $Q_j \in \sqrt{\I^{\mA}}.$ Hence, there exists some $k \in \mathbb{N}-\{0\}$ with $Q_j^{k} \in\I^{\mA}$, where $Q_j^k$ is monic in $X_j,$ and therefore
+By Proposition~\ref{prop:polarVs1}, $Q_j \in \IiAr.$ Hence, there exists some $k \in \mathbb{N}-\{0\}$ with $Q_j^{k} \in\IiA$, where $Q_j^k$ is monic in $X_j,$ and therefore
 \[
- \C[\Xb_{\leq i-1}]\rightarrow \C[\Xb]/\I^{\mA}
+ \C[\Xb_{\leq i-1}]\rightarrow \C[\Xb]/\IiA
 \]
 is integral.
 

@@ -124,7 +124,7 @@
 \def\minors{\textrm{Minors}(F,p)}
 \def\minorsA{\textrm{Minors}(F^{\mA},p)}
 \def\minorsfA{\textrm{Minors}(F^{\A},p)}
-\DeclareMathOperator{\lag}{Lagrange}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % other math notation shortcuts  
 \def\pa{\partial}
@@ -160,10 +160,11 @@
 \def\ji{\jac_{\xb}(F,i)}
 \def\jiA{\jac_{\xb}(F^{\mA},i)}
 \def\jifA{\jac_{\xb}(F^{\A},i)}
-\def\lagF{{\bm\lag}(F,i,(L_1,\hdots,L_c))}
-\def\lagFA{{\bm\lag}(F^{\mA},i,(L_1,\hdots,L_c))}
-\def\lagFAl{{\bm\lag}(F^{\mA},i,(l_1,\hdots,l_c))}
-\def\lagFfA{{\bm\lag}(F^{\A},i,(L_1,\hdots,L_c))}
+\DeclareMathOperator{\lag}{Lagrange}
+\def\lagF{{\bm{Lagrange}}(F,i,(L_1,\hdots,L_c))}
+\def\lagFA{{\bm{Lagrange}}(F^{\mA},i,(L_1,\hdots,L_c))}
+\def\lagFAl{{\bm{Lagrange}}(F^{\mA},i,(l_1,\hdots,l_c))}
+\def\lagFfA{{\bm{Lagrange}}(F^{\A},i,(L_1,\hdots,L_c))}
 %\def\W{\mathfrak{I}}
 % lagrange 
 \def\Il{\mathscr{I}_{\ub}}
@@ -699,7 +700,7 @@ S_i = \binom{p}{p}\binom{n-i}{p}=\binom{n-i}{p}.
 For each $i$ in $\{1,\dots,n-p+1\}$ and $F$ as above, we will let $\Ii$
 denote the sequence of polynomials 
 \[
-\big( F, \minors \right\big) = \big(f_1,\hdots,f_p,M_{i,1},\hdots,M_{i,S_{i}}\big).
+\big( F, \minors \big) = \big(f_1,\hdots,f_p,M_{i,1},\hdots,M_{i,S_{i}}\big).
 \]
 %
 \begin{prop}\label{prop:3.1}
@@ -749,7 +750,7 @@ Let $\jt$ denote the matrix
 \[ 
 \left[
 \begin{array}{c|c}
-\bz_{p \times i} & $\jac(F,i)$  \\
+\bz_{p \times i} & \jac(F,i)  \\
 \hline \\
 \bm I_i & \bz_{i \times n-i}  
 \end{array}
@@ -2219,7 +2220,8 @@ $\overline P$ is in $\C[\A,\Xb]$.
     \C(\frak A, \Xb_{\leq i-1}) \to \C(\frak A,
     \Xb_{\leq i-1})[X_i,\dots,X_n]/\frak L^\A
   \end{equation}
-    is an algebraic extension. Let $P_j \in \C(\A)(\textbf{X}_{\leq i-1})[X_j]$ be the minimal polynomial of $X_j$ in \eqref{eq:3}}, and note that $P_j$ is monic in $X_j.$ 
+    is an algebraic extension. Let $P_j \in \C(\A)(\textbf{X}_{\leq i-1})[X_j]$ 
+be the minimal polynomial of $X_j$ in \eqref{eq:3}, and note that $P_j$ is monic in $X_j.$ 
     Hence, $Q_j$ is also in the extension $\frak{L}^\A$, and thus $P_j$ divides $Q_j$ in $\C(\A)(\textbf{X}_{\leq i-1})[X_j].$ We can therefore write 
     \begin{align*}
     &Q_j = P_jR_j,~~~~ P_j,R_j \in \C(\A)(\textbf{X}_{\leq i-1})[X_j]-\C(\A)(\textbf{X}_{\leq i-1}).

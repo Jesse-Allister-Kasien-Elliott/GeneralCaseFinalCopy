@@ -431,7 +431,16 @@ evaluates $F$). Any polynomial of degree $d$ in $n$ variables can be computed by
 \subsection{Related work}
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Further Work}
+This work should be seen as a generalization of \cite{ElGiSh20}, where the analysis was done for the hypersurface case. In addition, this work should also be seen as a step toward the analysis of
+further randomized algorithms in real algebraic geometry.  In particular, randomized algorithms for deciding {\em
+  connectivity queries} on smooth, compact algebraic sets have been
+developed in a series of papers
+\cite{SchostMohabBabySteps2011,SchostMohabBabySteps2014}, and could be
+revisited using the techniques introduced here. The techniques would apply to algorithms in real algebraic geometry where transversality or Noether position are required geometric properties established by a random change of coordinates.
 
 
 
@@ -641,7 +650,7 @@ $\C(\A)[X_1,\dots,X_n]$ or $\C[\A,X_1,\dots,X_n]$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The algorithm}
+\section{Polar varieties}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -703,74 +712,8 @@ denote the sequence of polynomials
 Consider $F=(f_1,\hdots,f_p)$ in $\C[X_1,\hdots,X_n].$ If the ideal defined by $F$ is radical and $V = V(F)$ is smooth with $\dim V= d,$ then the polar variety \[W(\pi_i,V) = \{\xb \in V~|~\dim \pi_i(T_{\xb}V) < i\}\] is defined by $F$ and $\minors$.  
 \end{prop}
 %
-\noindent 
-To prove Proposition~\ref{prop:3.1}, we will use the following two lemmas.
-%
-\begin{lemma}\label{lem:3.2} 
-Let $\widetilde{A} = \bbm A \\ B \ebm \in \mathbb{R}^{m\times n}$ be a matrix. Then, 
-\[ 
-\rank(\widetilde{A}) = 
-\rank(A) + \rank(B|\ker(A)),
-\]
-where $B|\ker(A)$ is the restriction of the linear map defined by $B$ to the kernel of $A$. 
-\end{lemma}
-%
-\begin{proof}
-By the rank nullity theorem, we have that \begin{align*} 
-\dim \ker(A) &= 
-\rank(B|\ker(A)) +
-\dim \ker(B| \ker(A)) \\
-&= \rank(B|\ker(A)) +
-\dim (\ker(B \cap \ker(A)) \\
-&= \rank(B|\ker(A)) +
-\dim (\ker(\widetilde{A}))
-\end{align*}
-Therefore, 
-\[
-m - \rank(A) = \rank(B|\ker(A)) + m - \rank(\At)
-\]
-so that 
-\[
-\rank(\At) = \rank(A) + \rank(B| \ker (A)).
-\]
-\end{proof}
-%
-%
-\begin{lemma}\label{lem:3.3}
-Consider $F=(f_1,\hdots,f_p)$ in $\C[X_1,\hdots,X_n]$ and $\xb \in V(f_1,\hdots,f_p).$ Let $J$ denote the Jacobian matrix $\jac_{\xb}( F)$ and let $T$ denote the kernal of $J.$ Assume the dimension of $T$ is equal to $d$ so that the rank of $J$ is equal to $n-d.$ Then, for $i \in \{1,\hdots,n-p+1\},$  the dimension of $\pi_i(T)$ is less than $i$ if and only if the rank of $\jac(F,i)$ is less than $n-d.$
-\end{lemma} 
-%
-%
-\begin{proof}
-Let $\jt$ denote the matrix 
-\[ 
-\left[
-\begin{array}{c|c}
-\bz_{p \times i} & \jac(F,i)  \\
-\hline \\
-\bm I_i & \bz_{i \times n-i}  
-\end{array}
-\right].
-\]
-Now we can calculate the rank of $\jt$ in two different ways. We have 
-\[
-\rank(\jt) = i + \rank(\jac(F,i)).\] And, by Lemma ~\ref{lem:3.2}, 
-\begin{align*}
-    \rank(\jt) &= \rank(J) + \dim(\pi_i(\ker(J)))\\ 
-    &= \rank(J) + \dim(\pi_iT) \\
-    &= n-d + \dim \pi_i (T).
-\end{align*}
-Equating both we have \[
-i + \rank(\jac(F,i)) = n-d + \dim\pi_i(T),
-\]
-which implies that 
-\[
-\rank(\jac(F,i)) + (i -\dim\pi_i (T) )= n-d.
-\]
-Therefore, the rank of $\jac(F,i)$ is less than $n-d$ if and only if the dimension of $\pi_i (T)$ is less than $i.$
-\end{proof}
-%
-Now Proposition \ref{prop:3.1} follows from Lemma \ref{lem:3.3} and therefore the polar variety $\Wi$ is defined by the vanishing of $F$ and $\minors.$ Furthermore, this means that when $V=V(F)=V(f)$ is a hypersurface, then the polar variety $W(\pi_i,V(f))$ is defined by  
+\noindent
+It follows that when $V=V(F)=V(f)$ is a hypersurface, then the polar variety $W(\pi_i,V(f))$ is defined by  
 \[
 V\left(f,\frac{\pa f}{\pa
   X_{i+1}},\hdots,\frac{\pa f}{\pa X_n}\right).
@@ -909,6 +852,15 @@ Since each polynomial in the sequence $F=(f_1,\hdots,f_p)$ has degree at most $d
 \[
 \deg \Wil \leq d^{\hspace{.5mm}p+n-i+1} \leq d^{\hspace{.5mm}p+n}. 
 \]
+In Section \ref{sec:additionalStatementsLagSysms}, we prove Proposition \ref{prop:polarVs2}, which tells us that for any $\ub \in \C^p$, assuming that $F$ satisfies $\bm H_i(1)$ and $\bm H_i(2)$, we have the inclusion 
+    \[
+    \sqrt{\frak{I}(i,F)} \subset \Iil.
+    \]
+And it therefore follows that, 
+\[
+\pi_{\Xb}\left(\Wil\right) \subset V\left(\sqrt{\Ii}\right) = W(\pi_i,V).
+\]
+This means that, if we take any point that satisfies the Lagrangian system \eqref{eq:syst2}, then its image by the projection mapping to the $\Xb$-space is in the polar variety. 
 \end{proof}
 %
 
@@ -918,15 +870,15 @@ Since each polynomial in the sequence $F=(f_1,\hdots,f_p)$ has degree at most $d
 
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Genericity Statements}\label{sec:gen}
+\section{Genericity Statements}\label{sec:gen}
 Consider a sequence of polynomials $F= (f_1,\hdots,f_p) \in \ZZ[X_1,\hdots,X_n]^p,$ with degrees at most $d$, defining a radical ideal $\langle F \rangle \subset \C[X_1,\hdots,X_n]$ and a smooth variety $V=V(F) \subset \C^n$ with $\dim V = n-p$. %
 %
 %
-
-\paragraph*{Establishing correctness for Lagrange systems.}
+\subsection{Establishing correctness for Lagrange systems}
 %
 We need to prove that for a carefully chosen $\ub \in \C^p,$ we have the inclusion 
 \[\Iil \cap \C[X_1,\hdots,X_n] \subset \Iir.\] For $i \in \{1,\hdots,n-p+1\},$ let $Z$ be an irreducible component of the polar variety $\Wi$.
@@ -944,8 +896,8 @@ with $\lb(\xb) \cdot \ji = \bz,$  when $\xb \in Z^{'}$.
 \end{lemma}
 %
 \begin{proof}
-Recall that for $\xb \in Z,$ the rank of $\ji$ is at most $p-1$, because $\Wi$ is defined by the vanishing of $F$ and $\minors$. Now,  at $\xb \in Z,$ consider the Jacobian matrix $\jac_{\xb}(F,i)$  with entries taken modulo the ideal $I(Z)$. Consider these entries as elements in $\C(Z)$ and note that since $Z$ is irreducible, the function field $\C(Z)$ is well defined; let $\jt$ denote this matrix.  Since the $p$-minors of $\ji$ are zero over $\xb \in Z,$ the $p$-minors of $\jt$ are also zero at $\xb \in Z.$ And therefore the rank of $\jt$ is also at most $p-1$ at $\xb \in Z.$ Thus, some well defined null space ellement 
-\[\lb_Z = (l_{1},\hdots,l_p)=\left(\frac{N_1}{D_1},\hdots,\frac{N_p}{D_p}\right)\in \C(Z)^p-\{\bz\},\]
+Recall that for $\xb \in Z,$ the rank of $\ji$ is at most $p-1$, because $\Wi$ is defined by the vanishing of $F$ and $\minors$. Now,  at $\xb \in Z,$ consider the Jacobian matrix $\jac_{\xb}(F,i)$  with entries taken modulo the ideal $I(Z)$. Consider these entries as elements in $\C(Z)$ and note that since $Z$ is irreducible, the function field $\C(Z)$ is well defined; let $\jt$ denote this matrix.  Since the $p$-minors of $\ji$ are zero over $\xb \in Z,$ the $p$-minors of $\jt$ are also zero. And therefore the rank of $\jt$ is also at most $p-1$. Thus, some well defined null space element 
+\[\lb = (l_{1},\hdots,l_p)=\left(\frac{N_1}{D_1},\hdots,\frac{N_p}{D_p}\right)\in \C(Z)^p-\{\bz\},\]
 \noindent 
 exists. Note that when $\xb \in Z$ with $\lb({\xb}) \cdot \jt = \bz$, then $\lb({\xb}) \cdot \ji = \bz$ as well. Let $Z^{'} \subset Z$ denote the open set defined by $D_1(\xb)\cdot D_2(\xb) \cdots D_p(\xb) \not = 0$ and $N_j(\xb) \not = 0,$ for some $j \in \{1,\hdots,p\}$ (we know such a $j$ exists because $\lb \not = \bz)$. We know that $Z^{'}\not=\emptyset$ because $Z$ is irreducible and 
 \[
@@ -974,10 +926,10 @@ Let $\lb_Z$ be the vector of rational functions corresponding to the irreducible
 \left\{\ub \in \C^p~|~\ub^T\cdot \lb_{Z} \not = \textit{\textbf{0}}\right\}.
 \]
 Clearly $\mathscr{O}_Z$ is not empty because $\lb_{Z} \not = \bz$.  Let $\sO$ denote the intersection
-\[
+\begin{equation}\label{eq:sO}
 \mathscr{O} := 
 \bigcap_Z \mathscr{O}_{Z},
-\]
+\end{equation}
 which we also know to be open and non-empty, because finite intersection of non-empty open sets are non-empty.
 
 \begin{prop}\label{prop:polarVs1}
@@ -1049,7 +1001,13 @@ P(\xb, \bm \alpha) = P(\xb) = \bz.
 Hence, $P$ is zero on $Z^o,$ and thus $P$ is also zero on $Z$ by the definition of Zariski closure. Therefore, $P$ is zero on $\Wi,$ and thus $P$ is in $\Iir.$ This finishes the proof of Proposition \ref{prop:polarVs1}. 
 
 \noindent
-\paragraph*{Genericity statements.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Genericity statements}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 For $i \in \{1,\hdots,n-p+1\},$ consider the system of polynomials 
 \begin{equation}\label{sys:minors}
     X_1-\sigma_1,\dots,X_{i-1}-\sigma_{i-1},F, \minors
@@ -1124,9 +1082,9 @@ We prove the following.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Proof of Theorem \ref{the:u}}
-Let $Z$ be an irreducible component of the polar variety $W(\pi_i,V),$ and assume that $\xb \in Z$ and $l_Z(\xb) \not = \bz.$ Put
+For each $\xb$ that is a solution of $\eqref{sys:lag},$ there exists an irreducible component $Z$ with $\xb \in Z$ and $\lb_Z(\xb)$ defined and not zero. Let $\upsilon_{\xb}(\ub)$ denote $\ub\cdot \lb_{Z}(\xb)$ and put
 \[
-\Upsilon_i(\ub) := \prod_{\xb \textrm{ a solution of } \eqref{sys:minors}} \ub \cdot \lb_Z(\xb).
+\Upsilon_i(\ub) := \prod_{\xb \textrm{ a solution of \eqref{sys:minors}}} \upsilon_{\xb}(\ub).
 \]
 %
 Since the number of solutions of $\eqref{sys:minors}$ is bound by the degree of the polar variety, 
@@ -1179,7 +1137,7 @@ we need to understand when $W(\pi_i,V(F^\mA))$ is. And these two sets are in gen
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Computing at least one point in each connected component of $V(F) \cap \R^n$} 
+\section{The algorithm: Computing at least one point in each connected component of $V(F) \cap \R^n$}
 %
 Assuming that $F$ satisfies $\bm H_i$, and assuming that $F$ and $\bm \sigma = (\sigma_1,\hdots,\sigma_{i-1}) \in \C^{i-1}$ satisfy $\bm H_i^{'}$, it suffices to solve the systems defined by \eqref{sys:minors}
 for $i=1,\dots,n-p+1$.  They all admit finitely many solutions, and
@@ -1205,18 +1163,10 @@ X_1 - \sigma_1,\hdots,X_{i-1} - \sigma_{i-1}, F,\lagF,\sum_{i=1}^p u_i L_i -1
 after projecting to the $\Xb$-space. 
 \end{prop}
 \begin{proof}
-Since $\xb$ is a solution of $\eqref{sys:minors}$, there exists an irreducible component $Z$ of $W(\pi_i,V)$ with $\xb \in Z$. Then, by $\bm H_i^{'}(2),$ the rational function $\lb_Z(\xb)$ is well defined and not zero. Now, by the same argument given in the proof of Lemma \ref{lem:3.9}, we have that $\xb \in \pi_{\Xb} ( \Wil)$ and thus $W(\pi_i,V) \subset \pi_{\Xb} ( \Wil).$ 
+Since $\xb$ is a solution of $\eqref{sys:minors}$, there exists an irreducible component $Z$ of $W(\pi_i,V)$ with $\xb \in Z$. Then, by $\bm H_i^{'}(2),$ the rational function $\lb_Z(\xb)$ is well defined and not zero. Now, by the same argument given in the proof of Lemma \ref{lem:3.9}, we have that $\xb \in \pi_{\Xb} ( \Wil)$ and $\xb$ is a solution of $\eqref{sys:lag}.$  
 \end{proof}
 \noindent 
-Therefore, by computing the solutions of the equations \eqref{eq:syst2} and then computing the projection on the $\Xb$-space, we will not miss any points on the polar varieties $W(\pi_i,V).$ Furthermore, in Section \ref{sec:additionalStatementsLagSysms}, we prove Proposition \ref{prop:polarVs2}, which tells us that for any $\ub \in \C^p$, assuming that $F$ satisfies $\bm H_i(1)$ and $\bm H_i(2)$, we have the inclusion 
-    \[
-    \sqrt{\frak{I}(i,F)} \subset \Iil.
-    \]
-And it therefore follows that, 
-\[
-\pi_{\Xb}\left(\Wil\right) \subset V\left(\sqrt{\Ii}\right) = W(\pi_i,V).
-\]
-This means that, if we take any point that satisfies the Lagrangian system \eqref{eq:syst2}, then its image by the projection mapping to the $\Xb$-space is in the polar variety. 
+Therefore, by computing the solutions of the equations \eqref{eq:syst2} and then computing the projection on the $\Xb$-space, we will not miss any points on the polar varieties $W(\pi_i,V).$ 
 \par 
 To solve the equations~\eqref{eq:syst2}, we use the algorithm
 in~\cite{SH}, for which a complete bit complexity analysis is
@@ -1224,16 +1174,7 @@ available.
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Further Work}
-This work should be seen as a generalization of \cite{ElGiSh20}, where the analysis was done for the hypersurface case. In addition, this work should also be seen as a step toward the analysis of
-further randomized algorithms in real algebraic geometry.  In particular, randomized algorithms for deciding {\em
-  connectivity queries} on smooth, compact algebraic sets have been
-developed in a series of papers
-\cite{SchostMohabBabySteps2011,SchostMohabBabySteps2014}, and could be
-revisited using the techniques introduced here. The techniques would apply to algorithms in real algebraic geometry where transversality or Noether position are required geometric properties established by a random change of coordinates.
+
 
 
 
@@ -1955,7 +1896,7 @@ Let $\ub = (u_1,\hdots,u_p) \in \C^p$ be any complex point. Then, for any \[(\xb
     %
     %
     \begin{prop}\label{prop:polarVs2}
-Let $\ub = (u_1,\hdots,u_p) \in \C^p$ be any complex point. Then, for any \[(\xb,\lb)\in \mathscr{W}_{\ub}(\pi_i,V(F^{\mA})) \subset \C^{n+p}\]we have the inclusion
+Let $\ub = (u_1,\hdots,u_p) \in \C^p$ be any complex point. Then we have the inclusion
     \[
     \sqrt{\frak{I}(i,F^{\mA})} \subset \IilA.
     \]
@@ -2410,7 +2351,7 @@ $$\deg(\D_i) \le nd^{5n} +  4n^2(2d)^{4n} + n(2d)^{2n} \leq 6n^2(2d)^{5n}.$$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Proof of $\textbf{H}_i(3)$}
-Now assume that $\ub \in \C^p$ satisfies $\bm H_i^{''}$. It remains to show that if $\mA \in \C^{n\times n}$ does not cancel $\D_{i}$ then
+Now assume that $\ub \in \mathscr{O}$, where $\sO$ is from $\eqref{eq:sO}.$ It remains to show that if $\mA \in \C^{n\times n}$ does not cancel $\D_{i}$ then
 \[
  \C[\Xb_{\leq i-1}]\rightarrow \C[\Xb]/\IiA
 \]
@@ -2429,13 +2370,11 @@ exists, monic in $T$, for each $j \in \{i,\hdots,n-p+1\},$ with
 Q_j(X_1,\hdots,X_{i-1},X_j) \in \IilA \cap \C[\Xb].
 \end{align*}
 %
-Since we are assuming that $\ub \in \C^p$ satisfies $\bm H_i^{''}$, by Proposition~\ref{prop:polarVs1}, $Q_j \in \IiAr.$ Hence, there exists some $k \in \mathbb{N}-\{0\}$ with $Q_j^{k} \in\IiA$, where $Q_j^k$ is monic in $X_j,$ and therefore
+Since $\ub \in \sO$, by Proposition~\ref{prop:polarVs1}, $Q_j \in \IiAr.$ Hence, there exists some $k \in \mathbb{N}-\{0\}$ with $Q_j^{k} \in\IiA$, where $Q_j^k$ is monic in $X_j,$ and therefore
 \[
  \C[\Xb_{\leq i-1}]\rightarrow \C[\Xb]/\IiA
 \]
-is integral.
-\par 
-This completes the proof of Theorem \ref{theo:NoetherPositionG}.
+is integral. This completes the proof of Theorem \ref{theo:NoetherPositionG}.
 
 
 
@@ -2487,18 +2426,22 @@ $X_1-\sigma_1,\hdots,X_{i-1}-\sigma_{i-1}$; this gives $\Gamma_i$, and the total
     \KwOut{$n$ zero-dimensional parameterizations, the union of whose zeros
     includes at least one point in each connected component of $V(F) \cap \R^n$, with probability at least $1-\epsilon$} 
 
-    \nl Construct $S := \{1,2,\hdots,\lceil 3\epsilon^{-1}6n^3(2d)^{5n} \rceil\}$ and $T :=
-    \{1,2,\hdots,\lceil 3\epsilon^{-1}nd^{5n} \rceil \},$ and randomly choose $\mA \in
-    S^{n^2}$ and $(\bm \sigma,\ub) \in T^{p+n-1}$\; 
+    \nl Construct \[S := \{1,2,\hdots,\lceil 4\epsilon^{-1}6n^3(2d)^{5n} \rceil\},\] \[T :=
+    \{1,2,\hdots,\lceil 4\epsilon^{-1}3n^2(nd)^{3n} \rceil \},\] and 
+    \[R :=
+    \{1,2,\hdots,\lceil 4\epsilon^{-1}(nd)^n \rceil \},\]
+    and randomly choose $\mA \in
+    S^{n^2}, \bm \sigma \in T^{n-1},$ and $\ub \in R^p$\; 
+
 
     \caption{{Main Algorithm} \label{alg:1}} 
 
     \nl \For{$i\gets1$ \KwTo $n$}{
     \nl Build a straight-line program $\Gamma_i$ that computes the equations
     \[
-    \left\{X_1-\sigma_1,\hdots,X_{i-1}-\sigma_{i-1},f_1^{\mA},\hdots,f_p^{\mA}, \sLA_1,\hdots,\sLA_{n-i},\sum_{i=1}^{c}u_iL_i-1 \right\}\;
+    \left\{X_1-\sigma_1,\hdots,X_{i-1}-\sigma_{i-1},F^{\mA}, \lagFA,\sum_{i=1}^{p}u_iL_i-1 \right\}\;
     \]
-    \nl Run \cite[Algorithm 2]{SH} $k \geq \lg(3n/\epsilon)$ times
+    \nl Run \cite[Algorithm 2]{SH} $k \geq \lg(4n/\epsilon)$ times
     with input $\Gamma_i$\;
 
     \nl Let $\mathscr{Q}_i$ be the highest cardinality
@@ -2514,20 +2457,7 @@ $X_1-\sigma_1,\hdots,X_{i-1}-\sigma_{i-1}$; this gives $\Gamma_i$, and the total
     
 
 
-
-
-
-
-
-
-
-
-
-
-\noindent 
-If $F^\mA$ satisfies ${\bf H}_i$, and $F^\mA$ and
-$(\bm \sigma,\ub)$ satisfy ${\bf H}'_i$ for all $i$, then
-Theorem~2 in~\cite{EMP} establishes correctness.
+If $F^\mA$ satisfies ${\bm H}_i$, and $F^\mA$ and $\bm \sigma $ satisfy ${\bf H}'_i$, for all $i \in \{1,\hdots,n-p+1\}$, then Theorem~2 in~\cite{EMP}  tells us that the parameterizations returned in step 5 are zero dimensional. Then, if $\ub$ satisfies $\bm H_{i}^{''},$ for all $i \in \{1,\hdots,n-p+1\}$, Proposition \ref{prop:correctness} gives us that the polar varieties are contained in the projections of the Lagrangian systems, and therefore Theorem~2 in~\cite{EMP} also establishes that the parameterizations returned in step 7 will contain one point on each connected component of $V \cap \R^n$. 
 
 
 
@@ -2545,7 +2475,7 @@ The following lists the costs for each step of Algorithm \ref{alg:1}:
     \[
     \log 3/{\epsilon} + \log(6n^3(2d)^{5n}) \in O^{\sim}(\log 1/{\epsilon} + n\log d).
     \]
-Since $|T| < |S|,$ we also have that the height of any $b_{i,j} \in T$ is at most the same.
+Since $|R| < |T| < |S|,$ we also have that the height of any $\sigma_{k} \in T$ and $u_{l} \in R$ is at most the same.
 \newline 
 \noindent  
     (3)
@@ -2590,60 +2520,106 @@ of the output.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Probability of success} 
 Let $\Delta_i \in \C[\A]$ be the polynomials from
-Theorem~\ref{theo:gen}. Denote by $\Delta := \prod_{i=1}^n \D_i,$ and
+Theorem~\ref{theo:NoetherPositionG}. Denote by $\Delta := \prod_{i=1}^n \D_i,$ and
 note that
 \begin{align}
     \deg \Delta \leq \sum_{i=1}^{n-p+1} \deg \Delta_i \leq 6n^3(2d)^{5n}.
 \end{align}
 If $\mA \in \C^{n \times n}$ does not cancel $\Delta,$ then $\mA$ is
-invertible and $F^\mA$ satisfies $\textbf{H}_i$ for all $i$ in
+invertible and $F^\mA$ satisfies $\bm H_i$ for all $i$ in
 $\{1,\hdots,n-p+1\}.$ Now, assuming that $\mA$ is such a matrix, let
-$\Xi_i\in \C[S_1,\dots,S_{p+i-1}]$ be the polynomials from Theorem \ref{theo:Hp} applied to
+$\Xi_i\in \C[S_1,\dots,S_{p+i-1}]$ be the polynomials from Theorem \ref{theo:sigmaG} applied to
 $F^{\mA}.$ Denote by $\Xi := \prod_{i=1}^n \Xi_i,$ and note that
 \begin{align}
     \deg \Xi \leq \sum_{i=1}^{n-p+1} \deg \Xi_i \leq nd^{5n}.
 \end{align}
-If $(\bm \sigma,\ub) \in \C^{p+i-1}$ does not cancel $\Xi$, then $F^{\mA}$ and
-$(\bm \sigma,\ub)$ satisfy $\textbf{H}_i^{'}$ for all $i \in
-\{1,\hdots,n-p+1\};$ as we argued above, the algorithm is guaranteed to
+If $\bm \sigma \in \C^{i-1}$ does not cancel $\Xi$, then $F^{\mA}$ and
+$\bm \sigma$ satisfy $\bm H_i^{'}$ for all $i \in
+\{1,\hdots,n-p+1\}.$ And finally, denote by $\Upsilon := \prod_{i=1}^{n-p+1} \Upsilon_i,$ and
+note that
+\begin{align}
+    \deg \Upsilon \leq \sum_{i=1}^{n-p+1} \deg \Upsilon_i \leq n(nd)^n.
+\end{align}
+If $\ub \in \C^{p}$ does not cancel $\Upsilon$, then $\ub$ satisfies $\bm H_i^{''}$ for all $i \in
+\{1,\hdots,n-p+1\}.$
+\par 
+As we argued above, the algorithm is guaranteed to
 succeed, as long as our call to Algorithm 2 in~\cite{SH} succeeds. That latter reference establishes that by repeating the calculation $k$ times, and keeping the output of highest degree among those $k$ results, we succeed with probability at least $1-(1/2)^k$. When Algorithm 2 does not succeed, it either returns a proper subset of the solutions, or FAIL. Note that Algorithm 2 is shown to succeed in a single run with  probability at least $1-11/32,$ and we bound the probability of success with $1-1/2$ for simplicity. 
 Now, by construction of
 \[
-S := \{1,2,\hdots,\lceil 3\epsilon^{-1}6n^3(2d)^{5n}\rceil \}
+S := \{1,2,\hdots,\lceil 4\epsilon^{-1}6n^3(2d)^{5n}\rceil \},
+\] 
+\[
+T := \{1,2,\hdots,\lceil 4\epsilon^{-1}3n^2(nd)^{3n} \rceil \},
 \] 
 and 
 \[
-T := \{1,2,\hdots,\lceil 3\epsilon^{-1}nd^{5n} \rceil \},
-\] 
-where $\mA \in S^{n^2}$ and  $(\bm \sigma,\ub) \in T^{p+n-1}$ are randomly chosen, we have 
+R := \{1,2,\hdots,\lceil 4\epsilon^{-1}n(nd)^n \rceil \},
+\]
+where $\mA \in S^{n^2}, \bm \sigma \in T^{n-1}$ and $\ub \in R^{p}$ are randomly chosen, we have 
 %
 \[
-\pr[\Delta(\mA)=0] \leq  \frac{\deg\Delta}{|S|} = \epsilon/3
+\pr[\Delta(\mA)=0] \leq  \frac{\deg\Delta}{|S|} = \epsilon/4,
+\]
+\[
+\pr[\Xi(\bm \sigma)=0] \leq  \frac{\deg\Xi}{|T|} = \epsilon/4
 \]
 and
 \[
-\pr[\Xi(\bm \sigma,\ub)=0] \leq  \frac{\deg\Xi}{|T|} = \epsilon/3.
+\pr[\Upsilon(\ub)=0] \leq  \frac{\deg\Upsilon}{|R|} = \epsilon/4.
 \]
 Let $\mathscr{E}$ be the event that the parameterizations
-$[\mathscr{Q}_1^{'},\hdots,\mathscr{Q}_n^{'}]$ returned in step 7 of
+$[\mathscr{Q}_1^{'},\hdots,\mathscr{Q}_{n}^{'}]$ returned in step 7 of
 Algorithm \ref{alg:1} are correct. Then, the probability of success is equal to
 \begin{align*}
- \pr[\Delta(\mA)\ne 0] \times \pr[\Xi(\bm \sigma,\ub)\ne 0 ~|~\Delta(\mA) \ne 0] \times \pr[\mathscr{E}~|~
-   \Delta(\mA)\Xi(\bm \sigma,\ub) \ne 0].
+ &\pr[\Delta(\mA)\ne 0] \times \pr[\Xi(\bm \sigma)\ne 0 ~|~\Delta(\mA) \ne 0] \times \pr[\Upsilon(\ub)\ne 0 ~|~\Delta(\mA)\Xi(\bm \sigma) \ne 0]\\ \times ~& \pr[\mathscr{E}~|~
+   \Delta(\mA)\Xi(\bm \sigma)\Upsilon(\ub) \ne 0].
 \end{align*}
-Set $k = \lg(3n/\epsilon)$ so that 
+Set $k = \lg(4n/\epsilon)$ so that 
 \[
-(1-2^{-k})^n = (1 - \epsilon/(3n))^n \geq 1 - \epsilon/3,
+(1-2^{-k})^n = (1 - \epsilon/(4n))^n \geq 1 - \epsilon/4,
 \]
 by Bernoulli's inequality. Therefore, 
 \begin{align*}
-\pr[\textrm{success}] &\geq (1- \epsilon/3)(1-
-\epsilon/3)\pr[\mathscr{E}~|~   \Delta(\mA)\Xi(\bm \sigma,\ub) \ne 0]\\ 
-& \geq (1- \epsilon/3)(1-
-\epsilon/3)(1-2^{-k})^n \\ & \geq (1- \epsilon/3)(1- \epsilon/3)(1-
-\epsilon/3)\\ & \geq 1 - \epsilon.
+\pr[\textrm{success}] &\geq (1- \epsilon/4)(1- \epsilon/4)(1-
+\epsilon/4) \pr[\mathscr{E}~|~
+   \Delta(\mA)\Xi(\bm \sigma)\Upsilon(\ub) \ne 0]\\ 
+& \geq (1- \epsilon/4)(1- \epsilon/4)(1-
+\epsilon/4)(1-2^{-k})^n \\ & \geq (1- \epsilon/4)(1- \epsilon/4)(1- \epsilon/4)(1-
+\epsilon/4)\\ & \geq 1 - \epsilon.
 \end{align*}
-This finishes the proof of our main theorem.
+This finishes the proof of theorem \ref{theo:main}.
+%
+
+
+
+%======================================================================
+\section{Conclusions}\label{chap:conclusions}
+%======================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Contributions}
+Our main contributions were to analyze precisely what conditions on our
+parameter choices guarantee success. And we accomplished this by
+revisiting key ingredients in the proofs given
+in~\cite{BaGiHeMb97} and~\cite{EMP}, and giving quantitative versions
+of these results, bounding the degrees of the hypersurfaces we have to
+avoid.  
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Further work}
+This work should be seen as a step toward the analysis of
+further randomized algorithms in real algebraic geometry.  In particular, randomized algorithms for deciding {\em
+  connectivity queries} on smooth and bounded algebraic sets have been
+developed in a series of papers
+\cite{SchostMohabBabySteps2011,SchostMohabBabySteps2014}, and could be
+revisited using the techniques introduced here. Indeed, we have accomplished some of the work that is needed for these references; these algorithms require Noether position for polar varieties and transversality for algebraic sets. 
 
 
 

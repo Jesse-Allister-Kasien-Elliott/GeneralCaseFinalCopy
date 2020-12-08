@@ -31,6 +31,7 @@
 
 
 \newcommand\myeq{\mathrel{\stackrel{\makebox[0pt]{\mbox{\normalfont\tiny ?}}}{=}}}
+\def\X{S}
 % script variables 
 \def\sO{\mathscr{O}}
 \def\sL{\mathscr{L}}
@@ -43,6 +44,8 @@
 \def\sI{\mathscr{I}}
 % frak variables 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\frkJ{\mathfrak{J}}
+\def\frkL{\mathfrak{L}}
 \def\fA{{\mathfrak A}}
 \def\fZ{{\mathfrak Z}}
 \def\fZp{{\mathfrak Z^{'}}}
@@ -489,12 +492,9 @@ established by a random change of coordinates.
 
 \section{Preliminaries}
 
-%% Let $\Xb = (X_1, \hdots , X_n)$ be a sequence of variables, and for $\ell
-%% \in \{1,\hdots,n\}$ let $\Xb_{\leq \ell}$ be the subsequence of variables
-%% $(X_1, \hdots , X_\ell)$.
-
-
-In this section, \td
+In this section, we gather several basic definitions and properties of
+algebraic sets and locally closed sets. General references for this
+material are~\cite{Mumford76,Shafarevich77,ECA}.
 
 \paragraph*{Algebraic sets.} An algebraic set $V \subset \C^n$ is the set of common 
 zeros of an ideal $I$ in $\C[X_1,\hdots,X_n].$ Conversely, the ideal
@@ -502,21 +502,24 @@ of a subset $V$ of $\C^n$, the set of polynomials in
 $\C[X_1,\dots,X_n]$ that vanish at all points of $V$ is called the
 \textit{ideal} of $V$; this is a radical ideal, which we write $I(V)$.
 
+The smallest algebraic set containing an arbitrary $Y$ is called 
+the {\em Zariski closure} of $Y$ and written $\overline Y$.
+
 \paragraph*{Irreducible decomposition.}
 An algebraic set $V \subset \C^n$ is \textit{irreducible} when $V =
-V_1 \cup V_2$ implies $V=V_1$ or $V=V_2$, for any $V_1,V_2 \subset V$;
-this is the case if and only if $I(V)$ is prime.  An algebraic set $V
-\subset \C^n$ can be decomposed into a finite union of irreducible
-algebraic sets
+V_1 \cup V_2$, with $V_1,V_2$ algebraic sets, implies $V=V_1$ or
+$V=V_2$; this is the case if and only if $I(V)$ is prime.  An
+algebraic set $V \subset \C^n$ can be decomposed into a finite union
+of irreducible algebraic sets
 \[
-V = V_1 \cup V_2 \cup \hdots V_r,
+V = V_1 \cup V_2 \cup \cdots \cup V_r,
 \]
-with $V_i \not \subset V_j$ for all $i \ne j$. The sets where $V_j,
-1\leq j \leq r$, are called the {\em irreducible components} of $V$;
+with $V_i \not \subset V_j$ for all $i \ne j$. The sets
+$V_1,\dots,V_r$ are called the {\em irreducible components} of $V$;
 they are uniquely defined, up to order. In terms of ideals, $I(V)$
-being radical, it admits a decomposition an intersection of prime ideals
-$I_1,\dots,I_r$; the irreducible algebraic sets $V(I_1),\dots,V(I_r)$ are the 
-irreducible components of $V$.
+being radical, it admits a decomposition an irredundant intersection
+of prime ideals $I_1,\dots,I_r$; the irreducible algebraic sets
+$V(I_1),\dots,V(I_r)$ are the irreducible components of $V$.
 
 \paragraph*{Dimension.}
 The \textit{dimension} of an algebraic set $V \subset \C^n$, denoted
@@ -543,7 +546,8 @@ cardinality.
 
 We will often apply the B\'ezout’s bound from \cite[Theorem 1]{H},
 which says that $\deg(V \cap V') \le \deg(V) \deg(V')$ holds for all
-algebraic sets $V,V'$.
+algebraic sets $V,V'$. A last useful property is that for any linear
+mapping $\psi: \C^n \to \C^m$, $\deg(\overline{ \psi(V)}) \le \deg(V)$.
 
 \paragraph*{Noether position.}
 Suppose that the ambient dimension $n$ is fixed.  For $i$ in
@@ -555,19 +559,35 @@ $\{1,\dots,n\},$ let $\pi_i$ denote the projection
 A $d$-equidimensional algebraic set $V \subset \C^n$ is in
 \textit{Noether position} for the projection $\pi_d$ when the
 extension \[\C[X_1,\hdots,X_{d}] \rightarrow \C[X_1,\hdots,X_n]/I(V)\]
-is integral; here, $I(V) \subset \C[X_1,\hdots,X_n]$ is the ideal of
-$V$. It is then a consequence that for any $\xb$ in $\C^d,$ the fiber
-$V \cap \pi_d^{-1}(\xb)$ has dimension zero and is thus finite and not
-empty.
+is injective and integral; here, $I(V) \subset \C[X_1,\hdots,X_n]$ is
+the defining ideal of $V$. It is then a consequence that for any $\xb$ in
+$\C^d,$ the fiber $V \cap \pi_d^{-1}(\xb)$ has dimension zero and is
+thus finite and not empty.
+
+\paragraph*{Gradient vectors and Jacobian matrices.} The gradient vector 
+of a polynomial $f \in \C[X_1,\dots,X_n]$ is written $\grad(f) \in
+\C[X_1,\dots,X_n]^{1 \times n}$ (so this is a row vector). Most of the
+time, the variables with respect to which we differentiate is clear
+from the context, but we may write $\grad_{\bm X}(f)$ for clarity,
+with $\bm X=X_1,\dots,X_n$.
+
+The Jacobian matrix of polynomials $F=f_1,\dots,f_s$ is the $s \times
+n$ matrix $\jac(F)$, with $\partial f_i/\partial X_j$ at entry
+$(i,j)$, for $1\le i \le s$ and $1 \le j \le n$. As we do for
+gradients, we will write $\jac_{\bm X}(F)$ if we want to highlight
+what variables we differentiate with respect to.
+
+Given $\xb$ in $\C^n$, we then write $\grad(f,\xb)$, resp.\ $\jac(F,
+\xb)$, for the evaluation of respectively $\grad(f)$ and $\jac(F)$ 
+at $\xb$.
 
 \paragraph*{Tangent spaces, regular and singular points.}
-Assume that $V \subset \C^n$ is a $d$-equidimen\-sional algebraic set;
-let also $\grad_{\xb}(f)$ be the evaluation of the gradient vector of
-$f \in \C[X_1,\hdots,X_n]$ at $\xb \in \C^n$. The
-\textit{Zariski-tangent space} to $V$ at $\xb \in V$ is the vector
-space $T_{\xb}V \subset \C^n$ defined by the equations
+Assume that $V \subset \C^n$ is a $d$-equidimen\-sional algebraic
+set. The \textit{Zariski-tangent space} to $V$ at $\xb \in V$ is the
+vector space $T_{\xb}V \subset \C^n$ defined by the equations
 \[
-\grad_{\xb} (g) \cdot \bm v = 0, \quad g \in I(V).
+\grad (g,\xb) \cdot \bm v = 0 \text{~for all $g \in I(V)$}, \quad \bm
+v \in \C^{n \times 1}.
 \] 
 Then, the point $\xb \in V$ is a \textit{regular point} (or
 non-singular) if $\dim (T_{\xb}V) = d$; otherwise, $\xb$ is a
@@ -575,8 +595,8 @@ non-singular) if $\dim (T_{\xb}V) = d$; otherwise, $\xb$ is a
 denote the regular and singular points of $V$; when the latter is
 empty, we say that $V$ is \textit{smooth}. If $I(V)$ is generated by
 polynomials $G=(g_1,\hdots,g_s) \in \C[X_1,\hdots,X_n]^s$, then at any
-point $\xb$ of $\reg(V)$, the Jacobian matrix $\jac_{\xb}(G)$ has full
-rank $n - d$ and the kernel of $\jac_{\xb}(G)$ is $T_{\xb}V.$
+point $\xb$ of $\reg(V)$, the Jacobian matrix $\jac(G,\xb)$ has rank
+$n - d$ and the right kernel of $\jac(G,\xb)$ is $T_{\xb}V.$
 
 \paragraph*{Changes of variables.}
 For a matrix $\mA$ in $\C^{n\times n}$ and a polynomial $g$ in
@@ -584,16 +604,16 @@ $\C[X_1,\hdots,X_n],$ we write \[g^\mA:=g(\mA \Xb) \in
 \C[X_1,\dots,X_n],\] where $\Xb$ is the column vector with entries
 $X_1,\dots,X_n$. Similarly, for a sequence of polynomials
 $G=(g_1,\hdots,g_s)$ in $\C[X_1,\hdots,X_n]^s$, we write $G^{\mA} =
-\left(g_1^{\mA},\hdots,g_p^{\mA}\right).$ For an algebraic set $V
+\left(g_1^{\mA},\hdots,g_s^{\mA}\right).$ For an algebraic set $V
 \subset \C^n$ and a matrix $\mA \in \GL(n),$ we define $V^{\mA}$ as
 the image of $V$ by the map $\phi_{\mA} : \xb \mapsto \mA^{-1}\xb.$
  Notice in particular that
 $V(G^{\mA}) = \phi_{\mA}(V(G)) = V(G)^{\mA}. $
 
-\paragraph*{Locally open sets.}
-We will also need to work with {\em locally open} sets: we say that $Y
-\subset \C^n$ is locally open if we can write it as $Y=V-V'$, for some
-algebraic sets $V,V'$. 
+\paragraph*{Locally closed sets.}
+We will also need to work with {\em locally closed} sets: we say that
+$Y \subset \C^n$ is locally closed if we can write it as $Y=V-V'$, for
+some algebraic sets $V,V'$.
 
 The notions of dimension and equidimensionality carry over to this
 context (they are defined through the Zariski closure of $Y$), as does
@@ -606,7 +626,7 @@ that $Y$ is smooth if all its points are regular.
 
 Open sets are locally closed. As another example, for any
 $d$-equidimensional algebraic set $V$, $\reg(V)$ is a smooth
-$d$-equidimensional locally open set.
+$d$-equidimensional locally closed set.
 
 %% We will also have to consider matrices with generic entries. For this,
 %% we introduce $n^2$ new indeterminates $(\frak A_{j,k})_{1\le j,k \le
@@ -624,34 +644,36 @@ $d$-equidimensional locally open set.
 
 \section{Describing determinantal varieties}\label{ssec:detvar}
 
-In this section, we work with polynomials in $\C[Y_1,\dots,Y_N]$.
-Given a matrix $\bm A$ in $\C[Y_1,\dots,Y_N]^{q \times r}$, with $q
-\le r$, together with some equations $b_1,\dots,b_s$ in
-$\C[Y_1,\dots,Y_N]$, we consider the locus
-\[X = \{\yb \in \C^N \ \mid \ b_1(\yb) = \cdots = b_s(\yb) =0 
+In this section, we work with polynomials in $\C[Y_1,\dots,Y_N]$, for
+some positive integer $N$. Given a matrix $\bm A$ in
+$\C[Y_1,\dots,Y_N]^{q \times r}$, with $q \le r$, together with some
+equations $B=(b_1,\dots,b_s)$ in $\C[Y_1,\dots,Y_N]$, we consider the
+locus $\X$ defined as 
+\[\X = \{\yb \in \C^N \ \mid \ b_1(\yb) = \cdots = b_s(\yb) =0 
      \text{~and~} {\rm rank}(\bm A(\yb)) < q\}.\]
-\noindent
-Our first goal here is to give a degree bound for $X$; this will be
+Our first goal here is to give a degree bound for $\X$; this will be
 used twice, in the next section for our discussion of the weak
 transversality lemma (in a slightly general context where we work in
 an open subset of $\C^N$), then also to control the degrees of polar
 varieties.
 
-A direct approach involves using the B\'ezout bound on the system of
-polynomials mentioned above, $b_1,\dots,b_s$ and the minors of $\bm
-A$, but even the refined form given in \cite[Proposition
-  2.3]{Heintz1980} involves an exponential dependency in either the
-ambient dimension $N$ or the number of minors $r \choose q$. This
-might be acceptable in some contexts (such as when estimating the
-degrees of polar varieties), but is way beyond our target bound in the
-context of weak transversality, for instance.
+Consider the polynomials
+\[\frkJ(\bm A, B) = (b_1,\dots,b_s,M_1,\dots,M_P),\]
+where $M_1,\dots,M_P$ are the $q$-minors of $\bm A$, with $P={r \choose
+q}$. Since we have $V(\frkJ(\bm A, B)) = \X$, we may derive a degree
+bound on $\X$ using the B\'ezout inequality. However, even the refined
+form given in \cite[Proposition 2.3]{Heintz1980} involves an
+exponential dependency in either the ambient dimension $N$ or the
+number of minors $P$. This might be acceptable in some contexts (such
+as when estimating the degrees of polar varieties), but is way beyond
+our target bound in the context of weak transversality, for instance.
 
 Instead, we use Lagrange systems. We let $L_1,\hdots,L_q$ be new
 variables, thought of as Lagrange multipliers, and consider the
 ``Lagrange polynomials'' given by the entries of $ [ L_1 ~\cdots~
   L_q]\cdot \bm A$. We denote by $Z \subset \C^{N+q}$ the algebraic set
 defined by the vanishing of
-\[\mathscr{I} = ( b_1,\dots,b_s, \  [ L_1 ~\cdots~ L_q]\cdot \bm A )\]
+\[ ( b_1,\dots,b_s, \  [ L_1 ~\cdots~ L_q]\cdot \bm A )\]
 and by $Z'$ the algebraic set
 \[
 Z' := \overline{Z - \{(\yb,0,\dots,0) \in \C^{N+q}~|~(\yb,0,\dots,0) \in Z\}},
@@ -663,129 +685,148 @@ equations). Finally, consider the projection
   \mu :~ \C^{N+q} &\rightarrow \C^{N}\\
   (\yb,\bm \ell)~ &\mapsto \yb.
 \end{align*}
-\begin{lemma}\label{lemma:Z_W}
-  $X$ is the Zariski closure of ${\mu(Z')}$.
-\end{lemma}
-\begin{proof}
-  Put $W := \overline{\mu(Z')}$, so that we want to prove the equality $X=W$.
+It is then possible to prove that $\X$ is the Zariski closure of
+${\mu(Z')}$, and derive degree bounds using the equations defining
+$Z$. However, while introducing $Z'$ is convenient, computing defining
+equations for it is non-trivial, as it involves saturation; besides,
+in several contexts, it will be advantageous to work with equations in
+complete intersection, which the following construction will guarantee  in
+certain cases. For $\bm u = (u_1,\dots,u_q) \in \C^q$, consider the
+equations
+\[\frkL(\bm A, B,\bm u) = ( b_1,\dots,b_s, \  [ L_1 ~\cdots~ L_q]\cdot \bm A,\ u_1 L_1 + \cdots + u_q L_q -1 ),\]
+and let $Z_{\bm u} \subset \C^{N+q}$ be its zero-set. Using the linear
+equation $u_1 L_1 + \cdots + u_q L_q -1$ allows us to discard
+solutions where $L_1 = \cdots =L_q = 0$, but unlucky choices of $\bm
+u$ may discard other components as well. The following lemma makes this 
+precise.
 
-  Let $C$ be an irreducible component of $Z'.$ There exists an open
-  and dense subset $C' \subset C$ such that for all $(\yb,\bm \ell)$
-  in $C'$, $\yb$ is in $\C^N$ and $\bm\ell$ is not identically
-  zero. For such points, $\bm A(\yb)$ has rank less than $m$; since
-  $b_1(\yb)=\cdots=b_s(\yb)=0$, $\yb$ is in $X$. In other words,
-  $\mu(C')$ is contained in $X$.  Taking the union over all
-  irreducible components $C$ of $Z'$, then the Zariski closure, yields
-  $ \overline{\mu(\cup_{C} C')} \subset {X}$.
-  Since $\overline{\cup_{C} C'} = Z'$,
-  we get 
-  \[
-  W = \overline{\mu(Z')} = \overline{\mu(\overline{\cup_{C} C'})}
-  = \overline{\mu(\cup_{C} C')} \subset {X},
-  \]
-  where the last inclusion follows from the previous paragraph. On the
-  other hand, by construction, $X$ is contained in $\mu(Z')$, since
-  for any $\yb$ in $X$, there exists $\bm \ell$ non-zero in $\C^q$
-  such that $ \bm \ell \cdot \bm A(\yb) = \bm 0.$ Hence, we have
-  \[
-  X\subset\mu(Z')\subset \overline{\mu(Z')} = W \subset{X}.\qedhere
-  \]
-\end{proof}
+%% \begin{lemma}\label{lemma:Z_W}
+%%   
+%% \end{lemma}
+%% \begin{proof}
+%%   Put $W := \overline{\mu(Z')}$, so that we want to prove the equality $\X=W$.
 
-\begin{corollary} \label{coro:degree}
-  If all polynomials $b_1,\dots,b_s$ have degree at most $d$, and all
-  entries of $\bm A$ have degree at most $d'$, then the degree of
-  $\overline{X}$ is at most $d^s (d'+1)^r.$
-\end{corollary}
-\begin{proof}
-  The algebraic set $Z$ is defined by $s$ equations of degree at most
-  $d$ and $r$ equations of degre at most $d'+1$. It follows from
-  B\'ezout's Theorem~\cite{H} that $\deg(Z) \leq d^s (d'+1)^r$, and
-  the same upper bound holds for $\deg(Z')$, since it consists of
-  certain irreducible components of $Z$. Degree does not increase
-  through projection, so the conclusion follows from the previous
-  lemma.
-\end{proof}
-
-While introducing $Z'$ is convenient, computing defining equations for
-it is non-trivial, as it involves saturation; besides, in several
-contexts, it will be advantageous to work with equations in complete
-intersection; the following construction will guarantee it in certain
-cases. For $\bm u = (u_1,\dots,u_q) \in \C^q$, consider the equations
-\[\mathscr{I}_{\bm u} = ( b_1,\dots,b_s, \  [ L_1 ~\cdots~ L_q]\cdot \bm A,\ u_1 L_1 + \cdots + u_q L_q -1 ),\]
-and let $Z_{\bm u} \subset \C^{N+q}$ be its zero-set.
+%%   Let $C$ be an irreducible component of $Z'.$ There exists an open
+%%   and dense subset $C' \subset C$ such that for all $(\yb,\bm \ell)$
+%%   in $C'$, $\yb$ is in $\C^N$ and $\bm\ell$ is not identically
+%%   zero. For such points, $\bm A(\yb)$ has rank less than $m$; since
+%%   $b_1(\yb)=\cdots=b_s(\yb)=0$, $\yb$ is in $\X$. In other words,
+%%   $\mu(C')$ is contained in $\X$.  Taking the union over all
+%%   irreducible components $C$ of $Z'$, then the Zariski closure, yields
+%%   $ \overline{\mu(\cup_{C} C')} \subset {\X}$.
+%%   Since $\overline{\cup_{C} C'} = Z'$,
+%%   we get 
+%%   \[
+%%   W = \overline{\mu(Z')} = \overline{\mu(\overline{\cup_{C} C'})}
+%%   = \overline{\mu(\cup_{C} C')} \subset {\X},
+%%   \]
+%%   where the last inclusion follows from the previous paragraph. On the
+%%   other hand, by construction, $\X$ is contained in $\mu(Z')$, since
+%%   for any $\yb$ in $\X$, there exists $\bm \ell$ non-zero in $\C^q$
+%%   such that $ \bm \ell \cdot \bm A(\yb) = \bm 0.$ Hence, we have
+%%   \[
+%%   \X\subset\mu(Z')\subset \overline{\mu(Z')} = W \subset{\X}.\qedhere
+%%   \]
+%% \end{proof}
 
 \begin{prop}\label{prop:projection}
   For any $\bm u$ in $\C^q$, we have the inclusion $\mu(Z_{\bm u})
-  \subset X$. There exists a non-empty open set $\mathscr{O} \subset
+  \subset \X$. There exists a non-empty open set $\mathscr{O} \subset
   \C^q$ such that for $\bm u$ in $\mathscr{O}$, we have the inclusion
-  $X \subset \overline{\mu(Z_{\bm u})}$, and thus the equality $X =
-  \overline{\mu(Z_{\bm u})}$.
+  $\X \subset \overline{\mu(Z_{\bm u})}$, and thus the equalities $\X =
+  \overline{\mu(Z_{\bm u})}$ and 
+  \[\sqrt{\langle \frkL(\bm A, B,\bm u)\rangle\cap \C[Y_1,\dots,Y_N]} = 
+  \sqrt{\langle \frkJ(\bm A, B) \rangle}.\]
+  The set $\mathscr{O}$ is the complement of at most $\deg(\X)$ 
+  hyperplanes.
 \end{prop}
 \begin{proof}
-  If $(\bm y, \bm \ell)$ cancels all polynomials in $\mathscr{I}_{\bm
-    u}$, then $\bm \ell$ is non-zero, so that $\bm A(\bm y)$ is
-  rank-defective. As a consequence, $\bm y$ is in $X$.
+  If $(\bm y, \bm \ell)$ cancels all polynomials in ${\frkJ(\bm
+    A, B)}$, then $\bm \ell$ is non-zero, so that $\bm A(\bm y)$ is
+  rank-defective. As a consequence, $\bm y$ is in $\X$.
 
-  For the converse, let $X_1,\dots,X_K$ be the irreducible components
-  of $X$.  For any given $k$ in $\{1,\dots,K\}$, since all $q$-minors
-  of $\mA$ vanish on $X_k$, they vanish in the function field
-  $\C(X_k)$, so $\mA$ has rank less than $q$ as a matrix over
-  $\C(X_k)$. Thus, there exists a non-zero vector of rational
+  For the converse, let $\X_1,\dots,\X_K$ be the irreducible components
+  of $\X$.  For any given $k$ in $\{1,\dots,K\}$, since all $q$-minors
+  of $\mA$ vanish on $\X_k$, they vanish in the function field
+  $\C(\X_k)$, so $\mA$ has rank less than $q$ as a matrix over
+  $\C(\X_k)$. Thus, there exists a non-zero vector of rational
   functions
-  \[\bm \ell_k = (\ell_{k,1},\hdots,\ell_{k,q})=\left(\frac{N_{k,1}}{D_k},\hdots,\frac{N_{k,q}}{D_k}\right)\in \C(X_k)^q,\]
-  such that $\bm \ell_k  \cdot \bm A = 0$ in $\C(X_k)^r$. 
+  \[\bm \ell_k = (\ell_{k,1},\hdots,\ell_{k,q})=\left(\frac{N_{k,1}}{D_k},\hdots,\frac{N_{k,q}}{D_k}\right)\in \C(\X_k)^q,\]
+  such that $\bm \ell_k  \cdot \bm A = 0$ in $\C(\X_k)^r$ 
+(here, we see $\bm \ell_k$ in $\C(\X_k)^{1 \times q}$).
   For definiteness, assume that $N_{k,\iota_k} \ne 0.$ Then, in particular,
-  $X'_k = X_k - V( D_k N_{k,\iota_k})$ is dense in $X_k$; for 
-  $\bm y$ in $X'_k$, $\ell_k(\bm y)$ is well-defined and still
+  $\X'_k = \X_k - V( D_k N_{k,\iota_k})$ is dense in $\X_k$; for 
+  $\bm y$ in $\X'_k$, $\bm\ell_k(\bm y)$ is well-defined and still
   satisfies $\bm \ell_k(\bm y) \cdot \bm A(\bm y) = 0$.
   
-  Then, pick a point $\bm y_k$ in $X'_k$, so that
+  Then, pick a point $\bm y_k$ in $\X'_k$, so that
   $\bm \ell_k(\bm y_k)$ is a well-defined, non-zero vector in
   $\C^q$. This allows us to define a non-empty Zariski open set
   $\mathscr{O}_k \subset \C^q$ by the condition
   \[
   \mathscr{O}_k := 
-  \left\{\bm u \in \C^q~|~ \bm u \cdot \bm \ell_k(\bm y_k) \ne 0\right \}.
+  \left\{\bm u \in \C^q~|~ \bm \ell_k(\bm y_k) \cdot \bm u \ne 0\right \},
   \]
-  Finally, we let $\mathscr{O} := \cap_{1 \le k \le K}
-  \mathscr{O}_{k}$, which is open and non-empty. We claim that for
-  $\bm u$ in $\mathscr{O}$, the inclusion $X \subset
-  \overline{\mu(Z_{\bm u})}$ holds. 
+  with $\bm \ell_k(\bm y_k)$ in $\C^{1 \times q}$ and $\bm u$ in
+  $\C^{q \times 1}$.  Finally, we let $\mathscr{O} := \cap_{1 \le k
+    \le K} \mathscr{O}_{k}$, which is open, non-empty, and defined 
+  as the complement of $K \le \deg(\X)$ hyperplanes, as claimed. We now prove
+  that for $\bm u$ in $\mathscr{O}$, the inclusion $\X \subset
+  \overline{\mu(Z_{\bm u})}$ holds.
 
   For this, we take $k$ as above, 
-  and we prove that $X_k$ is contained in $\overline{\mu(Z_{\bm u})}$.
+  and we prove that $\X_k$ is contained in $\overline{\mu(Z_{\bm u})}$.
   Consider the rational mapping 
   \begin{align*}
-    X'_k  &\rightarrow \C\\    
-    \bm y &\mapsto \ub \cdot \bm \ell_k(\bm y) = \frac{ u_1 N_{k,1}(\bm y) + \cdots + u_q N_{k,q}(\bm y)}{D_k(\bm y)}.    
+    \X'_k  &\rightarrow \C\\    
+    \bm y &\mapsto  \bm \ell_k(\bm y)\cdot \bm u = \frac{ u_1 N_{k,1}(\bm y) + \cdots + u_q N_{k,q}(\bm y)}{D_k(\bm y)}.    
   \end{align*}
-  Put $X''_k = X'_k - V(u_1 N_{k,1} + \cdots + u_q N_{k,q})$; this is
-  again an open subset of $X_k$, and the fact that $\bm u \cdot \bm
-  \ell_k(\bm y_k)$ is non-zero, with $\bm y_k$ in $X'_k$, shows that
-  $X''_k$ is not empty. In particular, it is dense in $X_k$.   
+  Put $\X''_k = \X'_k - V(u_1 N_{k,1} + \cdots + u_q N_{k,q})$; this is
+  again an open subset of $\X_k$, and the fact that $ \bm
+  \ell_k(\bm y_k)\cdot \bm u$ is non-zero, with $\bm y_k$ in $\X'_k$, shows that
+  $\X''_k$ is not empty. In particular, it is dense in $\X_k$.   
 
-  Take $\bm y$ in $X_k$. Then, $\alpha:=\bm u \cdot \bm \ell(\bm y)$
-  is non-zero, set we can define $\bm \ell' := 1/\alpha\ \ell(\bm y)$.
+  Take $\bm y$ in $\X_k$. Then, $\alpha:=\bm \ell(\bm y)\cdot \bm u$
+  is non-zero, set we can define $\bm \ell' := 1/\alpha\ \bm\ell(\bm y)$.
   Then, $\bm \ell'$ is still in the left nullspace of $\bm A(\bm y)$,
-  and by construction $\bm y \cdot \bm \ell' =1$, so that $(\bm y, \bm
-  \ell')$ is in $Z_{\bm u}$. In other words, $X''_k$ is contained in
-  $\mu(Z_{\bm u})$. Taking the Zariski closure, we obtain that $X_k$ 
-  is contained in $\overline{\mu(Z_{\bm u})}$, as claimed.
+  and by construction $ \bm \ell'\cdot \bm u =1$, so that $(\bm y, \bm
+  \ell')$ is in $Z_{\bm u}$. In other words, $\X''_k$ is contained in
+  $\mu(Z_{\bm u})$. Taking the Zariski closure, we obtain that $\X_k$ 
+  is contained in $\overline{\mu(Z_{\bm u})}$, as claimed. 
+  The equality $\X = \overline{\mu(Z_{\bm u})}$ follows, as does the
+  claimed equality between ideals.
 \end{proof}
 
+\begin{corollary} \label{coro:degree}
+  If all polynomials $b_1,\dots,b_s$ have respective degrees at most
+  $d_1,\dots,d_s$, and all entries of $\bm A$ have degree at most
+  $d'$, then the degree of $\X$ is at most $d_1 \cdots d_s (d'+1)^r.$
+\end{corollary}
+\begin{proof}
+  Choose $\bm u$ in the set $\mathscr{O}$ of the previous lemma.  The
+  algebraic set $Z_{\bm u}$ is defined by $s$ equations of respective
+  degrees at most $d_1,\dots,d_s$, $r$ equations of degre at most
+  $d'+1$ and a linear equation. It follows from B\'ezout's
+  Theorem~\cite{H} that $\deg(Z_{\bm u}) \leq d_1 \cdots d_s
+  (d'+1)^r$. Degree does not increase through projection, so the
+  conclusion follows from the previous lemma.
+\end{proof}
 
+\begin{remark}\label{rk:degree}
+  In the next section, we will consider the following slight variant
+  of the problem considered here, where we are interested in the
+  locally closed set
+  \[\X' = \{\yb \in \Omega \ \mid \ b_1(\yb) = \cdots = b_s(\yb) =0 
+  \text{~and~} {\rm rank}(\bm A(\yb)) < q\},\] for some Zariski open
+  set $\Omega \subset \C^N$.  The Zariski closure $\overline{\X'}$ is
+  the union of certain irreducible components of the set $\X$ defined
+  above, so the degree bound of Corollary~\ref{coro:degree} still
+  holds for $\overline{\X'}$.
+\end{remark}
 
+\todo{cite PJ-Mohab on the degrees of polar varieties}
 
-
-\subsection{Extension to locally closed determinantal sets}
-
-This is a locally closed set, since we can define it as the
-intersection of $\Omega$ with the zero-set of $b_1,\dots,b_s$ and all
-$q$-minors of $\bm A$.
-
-
-
+\todo{cite Xuan}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -812,22 +853,22 @@ critical values of a smooth function $\R^n \to \R^m$ has measure zero;
 extensions exist to smooth mapping between differential manifolds.  In
 our algebraic context, we will use the following definitions.
 
-Consider a polynomial mapping $\Psi : Y \rightarrow \C^m$ from a
-smooth $n$-equidimensional locally open set $Y$ to $\C^m$, with $m\le
-n$. A {\em critical point} of $\Psi$ is a point $\bm y \in Y$ for
-which the image of the tangent space $T_{\bm y} Y$ by the Jacobian
-matrix $\jac_{\bm y}(\Psi)$ has dimension less than $m$. For instance,
+Consider a polynomial mapping $\Phi : Y \rightarrow \C^m$ from a
+smooth $n$-equidimensional locally closed set $Y$ to $\C^m$, with
+$m\le n$. A {\em critical point} of $\Phi$ is a point $\bm y \in Y$
+for which the image of the tangent space $T_{\bm y} Y$ by the Jacobian
+matrix $\jac(\Phi,\bm y)$ has dimension less than $m$. For instance,
 the case that will interest us in this section is when $Y$ is Zariski
 open in $\C^n$, in which case we have $T_{\bm y} Y=\C^n$ for all $\bm
-y$ in $Y$, and the condition is equivalent to the Jacobian of $\Psi$
+y$ in $Y$, and the condition is equivalent to the Jacobian of $\Phi$
 having rank less than $m$ at $\bm y$. {\em Critical values} are the
-images by $\Psi$ of critical points; the complement of this set are
+images by $\Phi$ of critical points; the complement of this set are
 the {\em regular values}. Notice then, a regular value is not
-necessarily in the image of~$\Psi$.
+necessarily in the image of~$\Phi$.
 
 One can then give ``algebraic'' versions of Sard's lemma: for
 instance,~\cite[(3.7)]{Mumford76} shows that for $Y$ an irreducible
-algebraic set and $\Psi$ dominant, the critical values of $\Psi$ are
+algebraic set and $\Phi$ dominant, the critical values of $\Phi$ are
 contained in a strict algebraic subset of $\C^m$; below, we will rely
 on a straightforward generalization given in~\cite{TWT}. See
 also~\cite[Chapter~9]{bochnak1998real} for the semi-algebraic case.
@@ -867,22 +908,23 @@ version this result is the following.
   $\Phi(X_1,X_2,\Theta) = (f(X_1,X_2), X_1-\Theta)$ (so $m=n=2$ and
   $s=1$). One checks that the Jacobian of $\Phi$ with respect to
   $(X_1,X_2,\Theta)$ has full rank two at any point in $\Phi^{-1}(0)$,
-  so that $\bz$ is a regular value of $ \Phi$ and therefore the
+  so that $0$ is a regular value of $ \Phi$ and therefore the
   assumptions of the proposition apply.
 
   We then deduce that a non-zero polynomial $\Gamma \in \C[\Theta]$
   exists, with degree at most $d^{4}$ with the property that, if
   $\vartheta$ in $\C$ does not cancel $\Gamma$ then $0$ is a regular
-  value of the induced mapping $ \Phi_{\bm \vt}$. That is, for all
-  $\vartheta$ in $\C$ except at most $d^4$ values, the ideal
+  value of the induced mapping $ \Phi_{\vartheta}$. In particular, for
+  all $\vartheta$ in $\C$ except at most $d^4$ values, the ideal
   $(f(X_1,X_2), X_1-\vartheta)$ is radical in $\C[X_1,X_2]$;
   equivalently, $f(\vartheta, X_2)$ is squarefree.
 \end{ex}
-We could of course obtain the same result (with a sharper degree
-bound) by considering the discriminant of $f$ with respect to $X_2$,
-but the construction above will be useful later on, in a generalized
-form. Note that the degree bound in the proposition could be
-strenghtened by considering \td
+In this example, we could of course obtain the same result (with a
+sharper degree bound) by considering the discriminant of $f$ with
+respect to $X_2$, but the construction above will be useful later on,
+in a generalized form. (In this example, the bound $d^4$ could be
+sharpened by utilizing the fact that only one of the polynomials
+defining $\Phi$ has degree $d$, whereas the other one is linear.)
 
 The rest of the subsection is devoted to the proof of the proposition.
 The proof of \cite[Theorem B.3]{TWT} already shows the existence of
@@ -895,40 +937,33 @@ establishing a bound on the degree of $\Gamma$.
 
 \subsection{Proof of the proposition}
 
-In the context of Thom's weak transversality, the bad parameters show
-up as the critical values of a certain projection; the proof begins by
-characterizing the critical points of this function. In what follows,
-we use the notation of Proposition~\ref{prop:weak_t}, so that we
-consider $m$ polynomials $\Phi$ that depend on variables
+In the context of Thom's weak transversality, the ``bad'' parameter
+values show up as the critical values of a certain projection. In what
+follows, we use the notation of Proposition~\ref{prop:weak_t}, so that
+we consider $m$ polynomials $\Phi$ that depend on variables
 $X_1,\dots,X_n$ and $\Theta_1,\dots,\Theta_s$, with $m \le n$, and an
 open set $\sO \subset \C^n$.
 
 Put $Y = \Phi^{-1}(0) \cap (\sO \times \C^s)$, and let $V$ be the
-Zariski closure of $Y.$ If $V$ is empty, there is nothing to do, since
+Zariski closure of $Y.$ If $Y$ is empty, there is nothing to do, since
 all values $\thetab$ in $\C^\dt$ satisfy the conclusion of the
-proposition. We therefore assume that $V$ is not empty. Take $(\xb,
-\thetab)$ in $Y$; then by assumption, $\jac_{(\xb,\thetab)}({\Phi})$
-has full rank $m$. Since in a neighborhood of $(\xb,\thetab)$, $V$
-coincides with ${\Phi}^{-1}(0) \cap (\sO \times \C^s)$, the Jacobian
+proposition. We therefore assume that $Y$ is not empty. Take $(\xb,
+\thetab)$ in $Y$; then by assumption, $\jac({\Phi},(\xb,\thetab))$ has
+full rank $m$. Since in a neighborhood of $(\xb,\thetab)$, $V$
+coincides with $Y={\Phi}^{-1}(0) \cap (\sO \times \C^s)$, the Jacobian
 criterion~\cite[Corollary 16.20]{ECA} implies that there is a unique
 irreducible component $V_{(\xb,\thetab)}$ of $V$ that contains
 $(\xb,\thetab),$ that $(\xb,\thetab)$ is regular on this component and
-that $\dim V_{(\xb,\thetab)}=n+s-m$. Since every irreducible component
-of $V$ contains such a point $(\xb,\thetab)$, this implies that $Y$ is
-a smooth, $(n+s-m)$-equidimensional locally open set.
-
-%% Furthermore, it
-%% also follows that for $(\xb,\thetab)$ in $Y$,
-%% $T_{(\xb,\thetab)}Y=T_{(\xb,\thetab)}V$.
-    
-Now, consider the projection
+that $\dim V_{(\xb,\thetab)}=n+s-m$. This implies that $Y$ is a
+smooth, $(n+s-m)$-equidimensional locally closed set.  Now, consider
+the projection
 %
 \begin{align*}
   \pi: \C^{n+\dt} &\rightarrow\C^{\dt} \\
   (\xb, \thetab)&\mapsto\thetab, 
 \end{align*}
 %
-and let $Z$ be the set of critical points of $\pi_{|Y}$; that is, \[Z
+and let $Z$ be the set of critical points of  the restriction $\pi_{|Y}$ of $\pi$ to $Y$; that is, \[Z
 := \{(\xb,\bm \thetab) \in Y~|~\dim (\pi(T_{\xb,\bm \thetab}Y))<s\}.\]
 The projection $\pi(Z) \subset \C^s$ is thus the set of critical values
 of $\pi_{|Y}$.
@@ -938,62 +973,58 @@ of $\pi_{|Y}$.
   $\C^s$.
 \end{lemma}
 \begin{proof}
-  Let $Z^{'}$ be the critical points of $\pi_{|\reg(V)}$; by the
-  algebraic form of Sard's lemma in \cite[Theorem~3.7]{Mumford76} (for
-  irreducible $V$) and~\cite[Proposition~B.2]{TWT} (for general $V$),
-  the Zariski closure $\overline{\pi(Z^{'})}$ is a strict closed
-  subset of $\C^s$. Now, at any point $(\xb,\thetab)$ of $Y$, the
-  tangent spaces $T_{(\xb,\thetab)} Y$ and $T_{(\xb,\thetab)} V$
-  coincide. As a result, $Z$ is contained in $Z^{'}$, and the claim
-  follows.
+  The discussion above implies that $\reg(V)$ is a smooth,
+  $(n+s-m)$-equidimensional locally closed set containing $Y$.  Let
+  then $Z^{'}$ be the critical points of $\pi_{|\reg(V)}$; by the
+  algebraic form of Sard's lemma as given in
+  \cite[Theorem~3.7]{Mumford76} (for irreducible $V$)
+  and~\cite[Proposition~B.2]{TWT} (for general $V$), the Zariski
+  closure $\overline{\pi(Z^{'})}$ is a strict closed subset of
+  $\C^s$. Now, at any point $(\xb,\thetab)$ of $Y$, the tangent spaces
+  $T_{(\xb,\thetab)} Y$ and $T_{(\xb,\thetab)} \reg(V)$ coincide. As a
+  result, $Z$ is contained in $Z^{'}$, and the claim follows.
 \end{proof}
 
 \noindent 
 We can now explain how $\thetab$ being a regular value of $\pi_{|Y}$
-relates to $0$ being a regular value of $\Phi_{\thetab}$. In what
+relates to $0$ being a regular value of $\Phi_{\thetab}$.  In what
 follows, we write our indeterminates as blocks of variables, with
-$\Xb=X_1,\dots,X_n$ and $\Thetab = \Theta_1,\dots,\Theta_s$, and we
-let $\bm J$ denote the $m \times n$ Jacobian matrix of $\Phi$ with
-respect to $\Xb$ (so that for any $(\xb,\thetab)$, $\bm
-J(\xb,\thetab)$ is then the Jacobian matrix of $\Phi_{\thetab}$ taken
-at $\xb$).
-
+$\Xb=X_1,\dots,X_n$ and $\Thetab = \Theta_1,\dots,\Theta_s$. When 
+not explicitly mentioned, Jacobian matrices involve derivatives
+with respect to both $\bm X$ and $\bm \Theta$.
 
 \begin{lemma}\label{prop:rankJ}
   For $(\xb,\thetab)$ in $Y$, $(\xb,\thetab)$ is in $Z$ if and only if
-  $\bm J(\xb,\thetab)$ has rank less than $m$.
+  $\jac_{\bm X}(\Phi,(\xb,\thetab))$ has rank less than $m$.
 \end{lemma}
 \begin{proof}
-  Let
-  $\bm M$ denote the $(s+m) \times (s+n)$ Jacobian matrix of $\pi$
-  and $\Phi$ with respect to $\Xb$ and $\Thetab$, 
-  that is,
+  Let $\bm M$ denote the $(s+m) \times (s+n)$ Jacobian matrix of $\pi$
+  and $\Phi$ with respect to $X_1,\dots,X_n$ and
+  $\Theta_1,\dots,\Theta_s$, that is,
   \begin{align*}
     \bm M &= 
     \bbm 
-    \jac_{\Xb,\Thetab}(\pi)\\
-    \jac_{\Xb,\Thetab}(\Phi) 
+    \jac(\pi)\\
+    \jac(\Phi) 
     \ebm 
     =
     \bbm 
     \textbf{0}_{\dt \times n}\hspace{5mm}\textbf{I}_{\dt} \\
-    \jac_{\Xb,\Thetab}(\Phi)
+    \jac(\Phi)
     \ebm.
   \end{align*}
-  Take $(\xb,\thetab)$ on $Y$, and let $\bm K(\xb,\thetab)$ be the
-  Jacobian matrix $\jac_{\Xb,\Thetab}(\Phi)$ taken at $(\xb,\thetab)$.
-  Then, the rank of $\bm M(\xb,\thetab)$ can be written as
-  $\textup{rank}(\bm K(\xb,\thetab)) + \textup{rank}([\textbf{0}_{\dt
-      \times n}~\textbf{I}_{\dt}] \mid \ker \bm K(\xb,\thetab))$, where
-  the latter is the rank of the restriction of $[\textbf{0}_{\dt
-      \times n}~\textbf{I}_{\dt}]$ to the nullspace of
-  $\bm K(\xb,\thetab)$.
+  Take $(\xb,\thetab)$ on $Y$. Then, the rank of $\bm M(\xb,\thetab)$
+  can be written as $\textup{rank}(\jac(\Phi,(\xb,\thetab))) +
+  \textup{rank}([\textbf{0}_{\dt \times n}~\textbf{I}_{\dt}] \mid \ker
+   \jac(\Phi,(\xb,\thetab)))$, where the latter is the rank of the
+  restriction of $[\textbf{0}_{\dt \times n}~\textbf{I}_{\dt}]$ to the
+  nullspace of $\jac(\Phi,(\xb,\thetab))$.
 
   Since $(\xb,\thetab)$ is in $Y$ and since $0$ is a regular value of
-  $\Phi$, $\bm K(\xb,\thetab)$ has full rank $m$. On the other hand,
-  the nullspace of $\bm K(\xb,\thetab)$ is the tangent space
+  $\Phi$, $\jac (\Phi,(\xb,\thetab))$ has full rank $m$. On the other
+  hand, the nullspace of that matrix is the tangent space
   $T_{\xb,\thetab} Y$, and $\textup{rank}([\textbf{0}_{\dt \times
-      n}~\textbf{I}_{\dt}] \mid \ker \bm K(\xb,\thetab))$ is the
+      n}~\textbf{I}_{\dt}] \mid \ker \jac(\Phi,(\xb,\thetab)))$ is the
   dimension of $\pi(T_{\xb,\thetab} Y)$.  In other words, the rank of
   $\bm M(\xb,\thetab)$ is equal to $m+\dim(\pi(T_{\xb,\thetab} Y))$.
 
@@ -1005,81 +1036,87 @@ at $\xb$).
    \bm M(\xb,\thetab)&= 
     \bbm 
     \textbf{0}_{\dt \times n} &\textbf{I}_{\dt} \\
-    \bm J(\xb,\thetab)     &\bm J'(\xb,\thetab)
-    \ebm,
-  \end{align*}
-  where $\bm J'$ consists of the remaining columns of the Jacobian matrix of
-  $\Phi$.  Then, the rank of the former matrix is equal to the rank
-  of
-  \begin{align*}
-   \bm M(\xb,\thetab)&= 
-    \bbm 
-    \textbf{0}_{\dt \times n} &\textbf{I}_{\dt} \\
-    \bm J(\xb,\thetab)     & \bm 0_{m \times s}
+     \jac_{\bm X}(\Phi,(\xb,\thetab))     &\jac_{\bm \Theta}(\Phi, (\xb,\thetab))
     \ebm.
   \end{align*}
-  The lemma follows.
+  This shows that the rank of $\bm M(\xb,\thetab)$ 
+  is equal $s + \textup{rank}(\jac_{\bm X}(\Phi,(\xb,\thetab)))$,
+  and  the lemma follows.
 \end{proof}
 
 As a result, suppose we take $\thetab$ in $\C^\dt - {\pi(Z)}$.  Then
-for all $\xb$ in $\Phi_{\thetab}^{-1}(\bm 0) \cap \sO$,
-$(\xb,\thetab)$ is in $Y$, so it is not in $Z$; the previous lemma
-then implies that the Jacobian matrix of $\Phi_{\thetab}$ has full
-rank $m$ at $\xb$. In other words, $0$ is a regular value of
-$\Phi_{\thetab}$. To prove Proposition~\ref{prop:weak_t}, it is thus
-enough to establish the existence of a non-zero polynomial of degree
-at most $d^{m+n}$ that vanishes on $\overline{\pi(Z)}$. We already
-established that $\overline{\pi(Z)}$ is a strict subset of $\C^\dt$,
-so the only missing ingredient to prove that is has degree
-at most $d^{m+n}$.
+for all $\xb$ in $\Phi_{\thetab}^{-1}(0) \cap \sO$, $(\xb,\thetab)$ is
+in $Y$, so it is not in $Z$; the previous lemma then implies that the
+Jacobian matrix of $\Phi_{\thetab}$, which is $\jac_{\bm X}(\Phi,(\bm
+X,\thetab))$, has full rank $m$ at $\xb$. In other words, $0$ is a
+regular value of $\Phi_{\thetab}$ in the open set $\sO$. To prove
+Proposition~\ref{prop:weak_t}, it is thus enough to establish the
+existence of a non-zero polynomial of degree at most $d^{m+n}$ that
+vanishes on $\overline{\pi(Z)}$. We already established that
+$\overline{\pi(Z)}$ is a strict subset of $\C^\dt$, so the only
+missing ingredient to prove that it has degree at most $d^{m+n}$.
 
 We start by bounding above the degree of $\overline{Z}$.
 The previous lemma shows the equality
 \[Z = \{ (\xb,\thetab) \in \Omega \times \C^\dt \ \mid \Phi(\xb,\thetab) =0
-\text{~and~} {\rm rank}(\bm J(\xb,\thetab)) < m\}.\] Since all
-polynomials in $\Phi$ have degree at most $d$, and all entries of $\bm
-J$ at most $d-1$, we can apply Corollary~\ref{coro:degree}, so as to
-deduce that $\deg(\overline{Z}) \le d^{m+n}$. This implies 
-that $\overline{\pi(\overline Z)}$ has degree at most $d^{m+n}$,
-and the equality 
-$\overline{\pi(\overline Z)}
-=\overline{\pi(Z)}$ allows us to conclude the proof.
+\text{~and~} {\rm rank}(\jac_{\bm X}(\Phi,(\xb,\thetab))) < m\}.\]
+Since all polynomials in $\Phi$ have degree at most $d$, and all
+entries of $\jac_{\bm X}(\Phi)$ at most $d-1$, we can apply
+Corollary~\ref{coro:degree}, so as to deduce that $\deg(\overline{Z})
+\le d^{m+n}$. This implies that $\overline{\pi(\overline Z)}$ has
+degree at most $d^{m+n}$, and the equality $\overline{\pi(\overline
+  Z)} =\overline{\pi(Z)}$ allows us to conclude the proof.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Polar varieties}
+\section{Overview of the main algorithm}
 
-Let $V=V(F)\subset \C^n$ be an equidimensional algebraic set, with $F
-= (f_1,\hdots,f_p)$ a sequence of polynomials in
+Let $F = (f_1,\hdots,f_p)$ be a sequence of polynomials in
 $\C[X_1,\hdots,X_n]$. Suppose that the ideal $\langle F \rangle
-\subset \C[X_1,\hdots,X_n]$ is radical and that $V$ is smooth of
-dimension $\delta= n-p$.
+\subset \C[X_1,\hdots,X_n]$ is radical and that $V(F)$ is smooth and
+equidimensional of dimension $\delta= n-p$.
+
+In this section, we give a high-level description of an algorithm
+from~\cite{EMP} that computes at least one point on each connected
+component of $V(F) \cap \R^n$. Correctness of this algorithm was
+established in~\cite{EMP} provided we are in generic coordinates: the
+algorithm solves a family of systems of equations that describe points
+on the {\em polar varieties} of $V(F)$, and being in generic
+coordinates ensures several desirable properties for these polar
+varieties.
+
+After a brief review of the basic properties of polar varieties, we
+sketch the main algorithm and highlight what properties are needed for
+its correctness (the next sections will give quantitative statements
+regarding the genericity of these properties). In that, we mainly
+follow~\cite{EMP}, but we also introduce requirements related to
+Lagrange systems, as introduced in Section~\ref{ssec:detvar}, as they
+will be of help in further sections.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Definition and first properties}
+\subsection{Polar varieties}
 
-Recall that, for $i \in \{1,\hdots,n\},$ we denote by $\pi_i$ the
-projection
-%
+Let $F$ be as in the preamble and let $V=V(F)$. Recall that, for $i
+\in \{1,\hdots,n\},$ we denote by $\pi_i$ the projection
 \begin{align*}
   \C^n &\rightarrow \C^i \\
   (x_1,\hdots,x_n) &\mapsto  (x_1,\hdots,x_i).    
 \end{align*} 
-For $i \le \delta$, the $i$-th \textit{polar variety} $\Wi$ of $V$ is
+For $i \le \delta$, the $i$-th \textit{polar variety} $W(i,F)$  is
 the set of critical points of the restriction of $\pi_i$ to $V$, that
 is,
-\[\Wi := \left\{\xb \in V~|~\dim \pi_i(T_\xb V) < i\right\}.\]
+\[W(i,F) := \left\{\xb \in V~|~\dim \pi_i(T_\xb V) < i\right\}.\]
 We naturally extend this definition to $i=\delta+1$, by setting
-$W(\pi_{\delta+1},F)=V$.
+$W({\delta+1},F)=V$.
 
-For $1\le i \le \delta+1$, let $\bm J$, resp.\ $\bm J_i$, denote the
+For $1\le i \le \delta+1$, let $\jac(F)$, resp.\ $\jac(F, i)$, denote the
 Jacobian matrix of $F=(f_1,\hdots,f_p)$ with respect to
 $(X_{1},\hdots,X_n)$, resp.\ to $(X_{i+1},\hdots,X_n):$
 \[
-\bm J=
+\jac(F)=
 \left[ 
 \begin{array}{ccc}
 \frac{\pa f_1}{\pa X_{1}}&\hdots& \frac{\pa f_1}{\pa X_{n}} \\
@@ -1088,7 +1125,7 @@ $(X_{1},\hdots,X_n)$, resp.\ to $(X_{i+1},\hdots,X_n):$
 \end{array}
 \right ],
 \quad
-\bm J_i=
+\jac(F, i)=
 \left[ 
 \begin{array}{ccc}
 \frac{\pa f_1}{\pa X_{i+1}}&\hdots& \frac{\pa f_1}{\pa X_{n}} \\
@@ -1098,71 +1135,55 @@ $(X_{1},\hdots,X_n)$, resp.\ to $(X_{i+1},\hdots,X_n):$
 \right]. 
 \]
 Since $F$ generates a radical ideal, for any $\xb$ in $V$, the tangent
-space $T_\xb(V)$ is the kernel of $\bm J(\xb)$; the assumption that
+space $T_\xb(V)$ is the kernel of $\jac(F,\xb)$; the assumption that
 $V$ be $\delta$-equidimensional and smooth implies that this kernel
-has dimension $\delta=n-p$ at all such $\xb$.
-
-
-Let then $S_i =\binom{n-i}{p}$ be the number of $p$-minors in $\bm
-J_i$, and let $M_{i,1},\hdots,M_{i,S_i}$ be these minors (for
-$i=\delta+1$, $S_{\delta+1}=0$ since $\bm J_{d+1}$ has size $p \times
-(p-1)$). Then, our definitions imply that $\Wi$ is the zero-set of the
-polynomials $\big(f_1,\hdots,f_p,M_{i,1},\hdots,M_{i,S_{i}}\big)$.
-
-\begin{lemma}
-  For $i=1,\dots,\delta+1$, the degree of $W(\pi_i,F)$ is at most
-  $d^{n+p}$.
-\end{lemma}
-\begin{proof}
-  For $i \le \delta$, this is a consequence of
-  Proposition~\ref{coro:degree}, since all polynomials $f_1,\dots,f_p$
-  have degree at most $d$, and all entries in $\bm J_i$ have degree at
-  most $d-1$ (that proposition works in an open set, and consider a
-  locally closed determinantal locus; here, the open set in question
-  is simply $\C^n$, and our determinantal locus $W(\pi_i,F)$ is thus
-  Zariski closed); the resulting degree bound is $d^{n+p-i} \le
-  d^{n+p}$.  For $i=\delta+1$, $W(\pi_{\delta+1},F)$ has degree at
-  most $d^p \le d^{n+p}$ as a consequence of B\'ezout's theorem.
-\end{proof}
-
- 
-
-\begin{ex} (\cite[Example 3.1]{TWT})
-  Let $f = X_1^2 + X_2^2 + X_3^2-1\in \C[X_1,X_2,X_3]$ and consider
-  the hypersurface $V=V(f) \subset \mathbb{C}^{3}$. The critical
-  points $W(\pi_2,F)$ of the projection $\pi_2: (x_1,x_2,x_3) \mapsto
-  (x_1,x_2)$ on $V$ are defined by
-  \[
-  X_1^2 + X_2^2 + X_3^2-1=X_3=0,
-  \]
-  whereas the critical points $W(\pi_1,F)$ of the projection $\pi_1: (x_1,x_2,x_3)
-  \mapsto x_1$ on $V$ are defined by
-  \[
-  X_1^2 + X_2^2 + X_3^2-1=X_2=X_3=0.
-  \]
-  In both cases, the dimension of $W(\pi_i,F)$ is $i-1$.
-  \begin{figure}[h]
-    %% \includegraphics[width=0.75\linewidth]{pi1Andpi2.png}
-    \centering
-    \caption{The polar varieties $W(1, F)$ and $W(2, F)$.}
-\end{figure}
-\end{ex}
-
-%% The following simple inequality on the degree of polar varieties will 
-%% be useful in the sequel.
-%% \begin{prop}\label{prop:degreePolarV}
-%%   Let $F=(f_1,\hdots,f_p) \in \C[X_1,\hdots,X_n]^p$ be a sequence of
-%%   polynomials generating a radical ideal and defining a smooth
-%%   $\delta$-equidimensional algebraic set $V$, with $\delta=n-p$. If
-%%   $f_1,\dots,f_p$ have degree at most $d$, then for
-%%   $i=1,\dots,\delta+1$, the degree of $\Wi$ is at most $(nd)^n$.
-%% \end{prop}
+has dimension $\delta=n-p$ at all such $\xb$. It follows that 
+we can rephrase the definition of $W(i,F)$ as
+\[W(i,F) = \left\{\xb \in \C^n~|~ f_1(\xb)=\cdots=f_s(\xb)=0 
+\text{~and~} {\rm rank}(\jac(F,i,\xb)) < p\right\}.\] Let $P_i
+=\binom{n-i}{p}$ be the number of $p$-minors in $\jac(F,i)$, and let
+$M_{i,1},\hdots,M_{i,P_i}$ be these minors (for $i=\delta+1$,
+$P_{\delta+1}=0$ since $\jac(F,{\delta+1})$ has size $p \times
+(p-1)$). Then, as in Section~\ref{ssec:detvar}, we deduce that
+$W(i,F)$ is defined by the polynomials
+\begin{equation}\label{eq:frkJ}
+\frkJ(i,F) = \big(f_1,\hdots,f_p,M_{i,1},\hdots,M_{i,P_{i}}\big).  
+\end{equation}
+%% \begin{lemma}
+%%   For $i=1,\dots,\delta+1$, the degree of $W(\pi_i,F)$ is at most
+%%   $d^{n+p}$.
+%% \end{lemma}
 %% \begin{proof}
-%%   All polynomials defining $\Wi$ have degree at most $nd$; the
-%%   conclusion then follows from \cite[Proposition 2.3]{Heintz1980}.
+%%   For $i \le \delta$, this is a consequence of
+%%   Proposition~\ref{coro:degree}, since all polynomials $f_1,\dots,f_p$
+%%   have degree at most $d$, and all entries in $\jac(F, i)$ have degree at
+%%   most $d-1$ (that proposition works in an open set, and consider a
+%%   locally closed determinantal locus; here, the open set in question
+%%   is simply $\C^n$, and our determinantal locus $W(\pi_i,F)$ is thus
+%%   Zariski closed); the resulting degree bound is $d^{n+p-i} \le
+%%   d^{n+p}$.  For $i=\delta+1$, $W(\pi_{\delta+1},F)$ has degree at
+%%   most $d^p \le d^{n+p}$ as a consequence of B\'ezout's theorem.
 %% \end{proof}
-
-
+%% \begin{ex} (\cite[Example 3.1]{TWT})
+%%   Let $f = X_1^2 + X_2^2 + X_3^2-1\in \C[X_1,X_2,X_3]$ and consider
+%%   the hypersurface $V=V(f) \subset \mathbb{C}^{3}$. The critical
+%%   points $W(\pi_2,F)$ of the projection $\pi_2: (x_1,x_2,x_3) \mapsto
+%%   (x_1,x_2)$ on $V$ are defined by
+%%   \[
+%%   X_1^2 + X_2^2 + X_3^2-1=X_3=0,
+%%   \]
+%%   whereas the critical points $W(\pi_1,F)$ of the projection $\pi_1: (x_1,x_2,x_3)
+%%   \mapsto x_1$ on $V$ are defined by
+%%   \[
+%%   X_1^2 + X_2^2 + X_3^2-1=X_2=X_3=0.
+%%   \]
+%%   In both cases, the dimension of $W(\pi_i,F)$ is $i-1$.
+%%   \begin{figure}[h]
+%%     %% \includegraphics[width=0.75\linewidth]{pi1Andpi2.png}
+%%     \centering
+%%     \caption{The polar varieties $W(1, F)$ and $W(2, F)$.}
+%% \end{figure}
+%% \end{ex}
 The downside to defining polar varieties using minors of the truncated
 Jacobian matrix is that these equations are in general not complete
 intersection, due to the relations between minors of a matrix (the
@@ -1170,114 +1191,107 @@ hypersurface case is an exception, since in this case only partial
 derivatives are used to define polar varieties). For both the
 polynomial system algorithm we will use below, or an application we
 will make of an effective Nullstellensatz, it will be necessary to
-have equations in complete intersection. To make this possible, we use
-the alternative modeling of polar varieties that uses Lagrange
-variables from Section~\ref{ssec:detvar} (this already underlies the
-proof of Proposition~\ref{coro:degree}, used in the lemma above).
-
-We may thus consider the zero-set the polynomials
-\begin{equation}\label{eqdef:sIif}
-  \sI(i,F)
-  = \big(F, [L_1~\cdots~L_p]\cdot \bm J_i\big ) \in \C[X_1,\dots,X_n,L_1,\dots,L_p]^{p+n-i},
-\end{equation}
-As in Section~\ref{ssec:detvar}, we will want to discard from the
-zero-set of these equations in $\C^{n+p}$ those components where all
-$L_i$'s vanish identically. However, we also want our equations to
-form a complete intersection, which the saturation needed to remove
-such components is unlikely to guarantee.
-
-Instead, we will introduce a single additional equation, of the form
-$u_1 L_1 + \cdots + u_p L_p -1$, for certain $(u_1,\dots,u_p)$ in
-$\C$. Introducing this equation discards all solutions with $L_1 =
-\cdots = L_p =0$, but other components of interests may be removed as
-well; in the algorithm, we will use random $u_i$'s and quantify bad
-choices. Thus, for $\ub = (u_1,\hdots,u_p) \in \C^p,$ we will define the 
-following polynomials:
+have equations without such relations. To make this possible, we use
+an alternative modeling of polar varieties that uses Lagrange
+variables, as in Section~\ref{ssec:detvar}. We may thus consider the zero-set the polynomials
+\[ \big(F,\ [L_1~\cdots~L_p]\cdot \jac(F, i)\big ) \in \C[X_1,\dots,X_n,L_1,\dots,L_p]^{p+n-i},\]
+but as before, we will want to discard from the zero-set of these
+equations in $\C^{n+p}$ those components where all $L_i$'s vanish
+identically. However, the saturation needed to remove such components
+is unlikely to yield convenient sets of generators.  We will again
+introduce a single additional equation, of the form $u_1 L_1 + \cdots
++ u_p L_p -1$, for a certain $\bm u = (u_1,\dots,u_p)$ in
+$\C^p$. Thus, for such a vector $\ub$, we define the following
+polynomials:
 \begin{equation}\label{eqdef:Iil}
-\Iil= 
-\big (F,\ [L_1~\cdots~L_p]\cdot \bm J_i,\ u_1 L_1 + \cdots + u_p L_p -1 \big )
+\frkL(i,F,\bm u)= 
+\big (F,\ [L_1~\cdots~L_p]\cdot \jac(F, i),\ u_1 L_1 + \cdots + u_p L_p -1 \big )
 \in \C[X_1,\dots,X_n,L_1,\dots,L_p]^{p+n-i+1}.
 \end{equation}
-\begin{ex}
-Consider again $f=X_1^2 + X_2^2 + X_3^2-1 \in \C[X_1,X_2,X_3]$ and
-\[V(X_1^2 + X_2^2 + X_3^2-1)\subset \C^3.\]
-Since $\jac(X_1^2 + X_2^2 + X_3^2-1,2)=2X_3,$ the Lagrangian modeling
-gives us
-\[
- V(X_1^2 + X_2^2 + X_3^2-1, LX_3, L-1) = V(X_1^2 + X_2^2-1,X_3,L-1),
-\]
-where the equations on the right hand side are a lexicographically
-ordered Gr\"obner basis of the ideal $\la X_1^2 + X_2^2 + X_3^2-1,
-LX_3, L-1 \ra.$ Notice that we have only 1 Lagrange multiplier, $L$,
-and we have $\ub=(u)=(1)$, but any $u \not = 0$ would suffice here. We
-therefore have that \[ \pi_{\Xb}(V(X_1^2 + X_2^2-1,X_3,L-1))\]
-describes the set where
-\[ X_1^2 + X_2^2 + X_3^2-1 = X_3 = 0\] and therefore describes the polar variety $W(\pi_2,F).$
-\end{ex}
+Introducing the last equation discards all solutions with $L_1 =
+\cdots = L_p =0$, but other components of interest may be removed as
+well. However, Proposition~\ref{prop:projection} shows that for a {\em
+  generic} vector $\bm u$, the Zariski closure of the projection of
+the zero-set of these equations on the $X_1,\dots,X_n$-space is indeed
+$W(i,F)$.  In the algorithm, we will use random $u_i$'s; the former
+proposition will allow us to quantify bad choices.
+
+%% \begin{ex}
+%% Consider again $f=X_1^2 + X_2^2 + X_3^2-1 \in \C[X_1,X_2,X_3]$ and
+%% \[V(X_1^2 + X_2^2 + X_3^2-1)\subset \C^3.\]
+%% Since $\jac(X_1^2 + X_2^2 + X_3^2-1,2)=2X_3,$ the Lagrangian modeling
+%% gives us
+%% \[
+%%  V(X_1^2 + X_2^2 + X_3^2-1, LX_3, L-1) = V(X_1^2 + X_2^2-1,X_3,L-1),
+%% \]
+%% where the equations on the right hand side are a lexicographically
+%% ordered Gr\"obner basis of the ideal $\la X_1^2 + X_2^2 + X_3^2-1,
+%% LX_3, L-1 \ra.$ Notice that we have only 1 Lagrange multiplier, $L$,
+%% and we have $\ub=(u)=(1)$, but any $u \not = 0$ would suffice here. We
+%% therefore have that \[ \pi_{\Xb}(V(X_1^2 + X_2^2-1,X_3,L-1))\]
+%% describes the set where
+%% \[ X_1^2 + X_2^2 + X_3^2-1 = X_3 = 0\] and therefore describes the polar variety $W(\pi_2,F).$
+%% \end{ex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{The main algorithm}
+\subsection{The algorithm}
 
-Let $F$ be as before. In this subsection, we briefly recall an
-algorithm described in~\cite{EMP} that computes at least one point on
-each connected component of $V(F) \cap \R^n$. 
+All notation being as before, we can now give the outline of Safey El
+Din and Schost's algorithm for computing at least one point in each
+connected component of $V(F) \cap\R^n$. To ensure its correctness, we
+will need certain genericity assumptions, which will be discussed in
+detail in the next sections.
 
-To ensure correctness, we will need certain genericity assumptions,
-which will be discussed in detail below. For the moment, we simply
-give a high-level description of the algorithm. After applying a
-randomly chosen change of variables $\mA$, we choose random
-$\sigma_1,\dots,\sigma_{\delta}$ in $\C$. Then, for
-$i=1,\dots,\delta+1$, we compute (in the new coordinates) the
-points $\xb=(x_1,\dots,x_n)$ satisfying
+After applying a randomly chosen change of variables $\mA$, we further
+choose random $\bm\sigma=(\sigma_1,\dots,\sigma_{\delta})$ in
+$\C^{\delta}$, with $\delta = n -p$. Then, for $i=1,\dots,\delta+1$,
+we compute (in the new coordinates) the points $\xb=(x_1,\dots,x_n)$
+satisfying
 \begin{equation}\label{eq:syst}
-x_1 = \sigma_1,\hdots,x_{i-1} = \sigma_{i-1},\ F(\xb)=0,\ {\rm rank} (\bm J_i(\xb)) < p.
+x_1 = \sigma_1,\hdots,x_{i-1} = \sigma_{i-1},\ f_1(\xb)=\cdots=f_p(\xb)=0,\ {\rm rank} (\jac(F, i,\xb)) < p.
 \end{equation}
 In geometric terms, this means that we compute the intersection of
-$W(\pi_i,F)$ with the fiber $\pi_i^{-1}(\sigma_1,\dots,\sigma_{i-1})$.
+$W(i,F)$ with the fiber $\pi_i^{-1}(\sigma_1,\dots,\sigma_{i-1})$.
 Then, we return the union of all these sets.
 
 Departing from~\cite{EMP}, and following the discussion in the
 previous subsection, we will avoid solving the system generated by
-$F=f_1,\dots,f_p$ and the $p$-minors of $\bm J_i$: to control costs,
-it will be beneficial to use Lagrange systems of~\eqref{eqdef:sIif}
-and~\eqref{eqdef:Iil} instead. Hence, our genericity assumption will
-concern these equations. Then, for $i=1,\dots,\delta+1$, we define the 
+$F=(f_1,\dots,f_p)$ and the $p$-minors of $\jac(F, i)$: to control
+costs, it will be beneficial to use the Lagrange system
+of~\eqref{eqdef:Iil} instead. Hence, our genericity assumptions will
+concern these equations. For $i=1,\dots,\delta+1$, we define the
 following properties:
 \begin{description}
-\item [$\bm H_i(1):$] $W(\pi_i,F)$ is either empty or $(i-1)$-equidimensional;
-\item [$\bm H_i(2):$] $W(\pi_i,F)$ is either empty or in Noether position for
-  $\pi_{i-1}$;
-\item [$\bm H_i(3):$] $0$ is a regular value of the $n+p-i$ polynomials
-  $F,\ [L_1~\cdots~L_p]\cdot \bm J_i$ in the open set defined by
-  $(L_1,\dots,L_p) \ne (0,\dots,0)$.
+\item [$\bm H_i(1):$] $W(i,F)$ is either empty or $(i-1)$-equidimensional;
+\item [$\bm H_i(2):$] $0$ is a regular value of the $n+p-i$ polynomials
+  $F,\ [L_1~\cdots~L_p]\cdot \jac(F, i)$ in the open set defined by
+  $(L_1,\dots,L_p) \ne (0,\dots,0)$;
+\item [$\bm H_i(3):$] assuming $\bm H_i(1)$ holds, $W(i,F)$ is either
+  empty or in Noether position for $\pi_{i-1}$.
 \end{description}
 As we will see, these properties hold after applying a generic change
-of variables. The first two ensure that Eq.~\eqref{eq:syst} defines a
-finite set (as a consequence of the definition of Noether position),
-and guarantee that the output of the algorithm contains at least one
-point on each connected component of $V(F) \cap \R^n$ (this is proved
-in~\cite[Theorem~2]{EMP}). The last one will be used to establish that
-assumption $\bm H^{'}_i$ defined below holds generically.
+of variables. Properties $\bm H_i(1)$ and $\bm H_i(3)$ ensure that
+Eq.~\eqref{eq:syst} defines a finite set (as a consequence of the
+definition of Noether position), and guarantee that the output of the
+algorithm contains at least one point on each connected component of
+$V(F) \cap \R^n$ (this is proved in~\cite[Theorem~2]{EMP}). The second
+one will be used to establish that assumption $\bm H^{'}_i$ defined
+below holds generically.
 
 Indeed, assuming (possibly after applying a change of variables) that
 $F$ satisfies $\bm H_i$, we define our second genericity property:
 \begin{description}
 \item [$\bm H^{'}_i:$] $\bm \sigma$ is such that $0$ is a regular value of the $n+p-1$
   polynomials
-  \[ X_1 - \sigma_1, \dots, X_{i-1} - \sigma_{i-1},\ F,\ [L_1~\cdots~L_p]\cdot \bm J_i, \]
+  \[ X_1 - \sigma_1, \dots, X_{i-1} - \sigma_{i-1},\ F,\ [L_1~\cdots~L_p]\cdot \jac(F, i), \]
   in the open set defined by $(L_1,\dots,L_p) \ne (0,\dots,0)$.
-%% \item For any $(\xb,\bm \ell) \in \C^{n+p}$ that cancels all $n+p-1$
-%%   polynomials
-%%   \[ X_1 - \sigma_1, \dots, X_{i-1} - \sigma_{i-1},\ F,\ [L_1~\cdots~L_p]\cdot \bm J_i, \]
-%%   and with $\bm\ell$ non-zero, the Jacobian matrix of these
-%%   polynomials has full rank $n+p-1$ at $(\xb,\bm \ell)$.
 \end{description}
 Again, we will see that this property holds for a generic choice of
 $\bm\sigma$ and that as a consequence, $0$ is a regular value of the
 $n+p$ polynomials
 \begin{equation}\label{eq:syst2}
-  X_1 - \sigma_1, \dots, X_{i-1} - \sigma_{i-1},\ F,\ [L_1~\cdots~L_p]\cdot \bm J_i,\ u_1 L_1 + \cdots + u_p L_p -1.
+  X_1 - \sigma_1, \dots, X_{i-1} - \sigma_{i-1},\ F,\ [L_1~\cdots~L_p]\cdot \jac(F, i),\ u_1 L_1 + \cdots + u_p L_p -1.
 \end{equation}
 In particular, these equations admit finitely many solutions.
 
@@ -1287,9 +1301,9 @@ both systems~\eqref{eq:syst} and~\eqref{eq:syst2} have finitely many
 solutions. In order to find the solutions of~\eqref{eq:syst}, we will
 compute those of~\eqref{eq:syst2} and project them on the
 $X_1,\dots,X_n$-space; we choose to solve equations~\eqref{eq:syst2},
-since we can use the algorithm in~\cite{SH}, for which a complete bit
-complexity analysis is available. To guarantee success, we will rely
-on the last genericity property:
+since for this input, we can use the algorithm in~\cite{SH}, for which
+a complete bit complexity analysis is available. To guarantee success
+of this approach, we will rely on our last genericity property:
 \begin{description}
 \item [$\bm H^{''}_i:$] $\bm u$ is such that the projections of the
   solutions of~\eqref{eq:syst2} on the $X_1,\dots,X_n$-space are the
@@ -1301,56 +1315,51 @@ choice of $\bm u$ (notice that since~\eqref{eq:syst2} has finitely
 many solutions, taking the Zariski closure, as done in the
 proposition, is not necessary in this case).
 
-
-
-
-%% \noindent 
-%% When $F$ satisfies $\bm H_i(3)$ then $\eqref{sys:minors}$ is finite. And when $F$ and $\sigma$ satisfy $\bm H_i^{'}$, then each solution $\xb$ of $\eqref{sys:minors}$ corresponds to an irreducible compoent $Z$ with $\xb \in Z$ and $\lb_Z(\xb)$ well defined and not zero. We in addition say that $\bm u$ satisfies $\bm H_i^{''}$ when, 
-%% \[
-%% \ub \cdot l_Z(\xb) \not = 0
-%% \]
-%% for each solution $\xb$ of \eqref{sys:minors}.
-%% \noindent 
-%% We prove the following.  
-%% %
-%% \begin{theorem}\label{theo:NoetherPositionG}
-%%   For $i=1,\dots,n-p+1$, there exists a non-zero polynomial $\D_i\in\C[\A]$ of degree at most $6n^2(2d)^{5n}$ such that if $\mA \in
-%%   \C^{n\times n}$ does not cancel $\D_i$, then
-%%   $F^\mA$ satisfies $\textbf{H}_i$.
-%% \end{theorem}
-%% %
-%% \begin{theorem}\label{theo:sigmaG}
-%%   For $i=1,\dots,n-p+1$, suppose that $F$ satisfies $\textbf{H}_i$, then there exists a non-zero
-%%   polynomial $\Xi_{i} \in \C[S_1,\dots,S_{i-1}]$ of degree at most
-%%   $3n(nd)^{3n}$ such that if $\bm \sigma \in \C^{i-1}$ does not
-%%   cancel $\Xi_{i}$, then $F$ and $\bm \sigma$ satisfy $\textbf{H}_i'$.
-%% \end{theorem}
-%% %
-%% \begin{theorem}\label{the:u}
-%%   For $i=1,\dots,n-p+1$, suppose that $F$ satisfies $\textbf{H}_i$ and suppose that $F$ and $\bm \sigma$ satisfy $\textbf{H}_i^{'},$ there exists a non-zero
-%%   polynomial $\Upsilon_{i} \in \C[T_1,\dots,T_{p}]$ of degree at most $(nd)^{n}$ such that if $\bm u \in \C^{p}$ does not
-%%   cancel $\Upsilon_{i}$, then $\bm u$ satisfies $\textbf{H}_i{''}$.
-%% \end{theorem}
-%% %
+The next three sections prove the claims made above on the genericity
+of these properties: $\bm H_i(1)$ and $\bm H_i(2)$ in
+Section~\ref{sec:applications}, as a first application of weak
+transversality; $\bm H_i(3)$ in Section~\ref{ssec:Hi2}, as an
+application of an effective Nullstellensatz; and $\bm H'_i$ in
+Section~\ref{Sec:Hip}, as another first of weak transversality
+(essentially, Sard's lemma). In all cases, we gave quantitative form
+of these genericity statements. As we pointed out above,
+Proposition~\ref{prop:projection} is enough to prove that $\bm H''_i$
+holds for generic $\bm u$, and already gives a quantitative statement.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Genericity of ${\bf H}_i(1)$ and ${\bf H}_i(3)$}
+\section{Genericity of ${\bf H}_i(1)$ and ${\bf H}_i(2)$}
 \label{sec:applications}
 
-Let $F=(f_1,\hdots,f_p) \in \ZZ[X_1,\hdots,X_n]^p$ be a sequence of
-polynomials defining a radical ideal, and where the degree of each
-polynomial is at most $d$. Also, assume that the variety $V(F) \subset
-\C^n$ is smooth. Recall that $\A$ denotes the matrix of indeterminates
-with entries $(\frak A_{j,k})_{1\le j,k \le n}$.
+Notation in this section is as before: we let $F=(f_1,\hdots,f_p) \in
+\ZZ[X_1,\hdots,X_n]^p$ be a sequence of polynomials defining a radical
+ideal, and where the degree of each polynomial is at most $d$; we 
+also assume that the zero-set $V(F) \subset \C^n$ is smooth 
+and $\delta$-equidimensional, with $\delta=n-p$. 
 
+Consider an $n \times n$ matrix $\A$ with indeterminates with entries
+$(\frak A_{j,k})_{1\le j,k \le n}$. In this section, we prove the
+following proposition.
 
-For $=1,\dots,\delta+1$, with $\delta = n-p$, let $\Xb=X_1,\dots,X_n$
-and let $\bm K_i(\Xb,\A)$ denote the $(p+i)\times n$ matrix
+\begin{prop}\label{prop:Hi12}
+  For $i=1,\dots,\delta+1$, there exists a non-zero polynomial
+  $\D_{i,1}$ in $\C[(\frak A_{j,k})_{1\le j,k \le n}]$ and of degree
+  at most $n(d^{5n}+1)$ and with the following property. For $\mA$ in
+  $\C^{n\times n}$, if $\mA$ does not cancel $\D_{i,1}$, then $F^\mA$
+  satisfies ${\bf H}_i(1)$ and ${\bf H}_i(2)$.
+\end{prop}
+The rest of this section is devoted to the proof of the proposition;
+it is based on a construction introduced by Giusti, Heintz {\it et
+  al.} (see for instance~\cite{BaGiHeSaSh10}). In all that follows,
+$i$ is fixed in $1,\dots,\delta+1$; we then let $\A_{\le i}$ denote
+the $in$ indeterminates $(\frak A_{j,k})_{1\le j \le i, 1 \le k \le
+  n}$. Writing $\bm X=X_1,\dots,X_n$, we let $\bm K_i(\bm X,\A_{\le
+  i})$ denote the $(p+i)\times n$ matrix
 \[
-\bm K_i(\Xb,\A)=
+\bm
+K_i(\bm X, \A_{\le i})=
 \bbm 
 \jac(F)\\
 \A_{1,1}~~ \hdots ~~\A_{1,n}\\
@@ -1363,523 +1372,462 @@ form $\bm a = (\bm a_1,\hdots,\bm a_i)$ with $\bm a_i \in \C^n$;
 we say that $\bm a$ has rank $i$
 when $\bm a$ is a sequence of linearly independent vectors.  Then
 for such an $\bm a$, $\bm K_i(\Xb,\bm a)$ is naturally defined with the
-indeterminates evaluated at $\bm a$. 
+indeterminates $\A_{\le i}$ evaluated at $\bm a$. 
 
-Writing $\bm \lambda =(\lambda_1,\dots,\lambda_p)$ and 
-$\bm \vartheta =(\vartheta_1,\dots,\vartheta_i)$, 
- let $\Phi$ define the polynomial mapping
-\begin{align*}
-  \C^{n+p+i}\times \C^{i n} &\rightarrow \C^{n+p}\\
-  (\xb,\bm \lambda, \thetab, \bm a)&
-  \mapsto
-  \left(F(\xb),[\lambda_1 ~\cdots~ \lambda_p~ \vartheta_1 ~\cdots~ \vartheta_i ] \cdot \bm K_i(\xb,\bm a)
-  \right)
-\end{align*}
-and for $\bm a$ in $\C^{ni}$, let $\Phi_{\bm a}$ the induced mapping   
-\begin{align*}
-  \C^{n+p+i} &\rightarrow \C^{n+p}\\
-  (\xb,\bm \lambda,\bm \thetab)&\mapsto \Phi(\xb,\bm \lambda,\bm \thetab,\bm a).
-\end{align*}
-Let $\sA \subset \C^{n+p+i}$ be the open set defined by the condition
-$\bm \lambda=(\lambda_1,\hdots,\lambda_p) \not = 0$. In \cite[Section
+Let $\Phi: \C^{n+p+i}\times \C^{i n} \to \C^{n+p}$ be  the polynomial mapping
+in indeterminates 
+$\bm X=X_1,\dots,X_n$, $\bm L=L_1,\dots,L_p$, $\bm T=T_1,\dots,T_p$ 
+and $\A_{\le i}$ 
+defined as
+\[\Phi = ( F,\ [L_1 ~\cdots~L_p~T_1~\cdots~T_i] \cdot \bm K_i ),\]
+and for $\bm a$ in $\C^{ni}$, let $\Phi_{\bm a}: \C^{n+p+i} \to
+\C^{n+p}$ the induced mapping $\Phi_{\bm a} = \Phi(\bm X, \bm L, \bm
+T, \bm a)$ in variables $\bm X$, $\bm L$ and $\bm T$.
+
+Let further $\sA \subset \C^{n+p+i}$ be the open set defined by the
+condition $(L_1,\dots,L_p) \ne (0,\dots,0)$. In \cite[Section
   3.2]{BaGiHeSaSh10}, it is shown that, for any $(\xb, \bm \lambda,\bm
 \thetab, \bm a)$ in $\sA \times \C^{in}$, the Jacobian matrix
-$\jac(\Phi)$ has full rank $p + n$ at $(\xb, \bm \lambda, \bm \thetab,
-\bm a)$. In particular, this is true for $(\xb, \bm \lambda, \bm
-\thetab, \bm a)$ in $\Phi^{-1}(0)$, so that $0$ is a regular value of
-$\Phi$ on $\sA \times \C^{in}$. 
-
+$\jac(\Phi)$, taken with respect to all indeterminates $\bm X,\bm
+L,\bm T,\A_{\le i}$, has full rank $p + n$ at $(\xb, \bm \lambda, \bm
+\thetab, \bm a)$. In particular, this is true for $(\xb, \bm \lambda,
+\bm \thetab, \bm a)$ in $\Phi^{-1}(0)$, so that $0$ is a regular value
+of $\Phi$ on $\sA \times \C^{in}$.
 It therefore follows by Proposition \ref{prop:weak_t} that there
 exists a non-zero polynomial $\Gamma_i \in
 \C[\A_{1,1},\hdots,\A_{i,n}]$ of degree at most
 \[
 d^{(n+p+i)+(n+p)} \le d^{5n},
 \]
-such that if $\ab \in \C^{i \times n}$ does not cancel $\Gamma_i$,
+such that if $\ab \in \C^{i n}$ does not cancel $\Gamma_i$,
 then $0$ is a regular value of $\Phi_{\bm a}$ on $\sA$. That is, for
 $(\xb, \bm \lambda,\bm \thetab) \in \sA \cap \Phi^{-1}_{\bm a}(0)$,
 the Jacobian matrix $\jac(\Phi_{\bm a})$ has full rank $n+p$
 at ${(\xb, \bm \lambda,\bm \thetab)}$.
-    
-
-Let $\fB=\A^{-1}$ in $\C(\A)^{n \times n}$ and let
+   
+Let $\fB=\A^{-1}$ in $\C((\frak A_{j,k})_{1\le j,k \le n})^{n \times n}$ and let
 $\fB_1=[\fB_{1,1},\hdots,\fB_{1,n}],\hdots,\fB_n=[\fB_{n,1},\hdots,\fB_{n,n}]$
 denote the rows of $\fB.$ Set
 \[
 \Delta_{i,1} := \Gamma_i(\fB_1,\hdots,\fB_i)\cdot (\det( \A))^{\deg (\gi)+1}. 
 \]
 By multiplying through by $(\det( \A))^{\deg( \gi)+1},$ we cancel all
-denominators and make $\D_{i,1}$ a polynomial divible by $\det(\A)$.
+denominators and make $\D_{i,1}$ a polynomial multiple of $\det(\A)$.
 \begin{lemma}
   The degree of $\Delta_{i,1}$ is at most $n(d^{5n}+1).$
 \end{lemma}
 \begin{proof}
   Assume that 
   \[
-  \fB_{i,j}=\fN_{i,j}/{\rm det}(\A),~ \fN_{i,j},\det(\A)\in \C[\A] \text{\todo{notation $\A$ used for two things}}.
+  \fB_{s,t}=\fN_{s,t}/{\rm det}(\A) \quad\text{with}\quad \fN_{s,t},\det(\A) \text{~in~} \C[(\frak A_{j,k})_{1\le j,k \le n}],
   \]
-  Then, by Cramer's formulas, we have $\deg( \fN_{i,j}),\deg(\det(\A))
-  \leq n,$ and since we have cleared all denominators by multiplying
-  through with $(\det( \A))^{\deg (\gi)+1},$ and guaranteed the
-  presence of an extra factor $\det(\A)$, we therefore obtain
+  for $1 \le s,t \le n$. Then, by Cramer's formulas, we have $\deg(
+  \fN_{s,t}),\deg(\det(\A)) \leq n,$ and since we have cleared all
+  denominators by multiplying through with $(\det( \A))^{\deg
+    (\gi)+1},$ and guaranteed the presence of an extra factor
+  $\det(\A)$, we therefore obtain
   \[
   \deg( \Delta_{i,1}) \leq n\deg( \gi) + n \leq n(d^{5n}+1). \qedhere
   \]
 \end{proof}
-The main ingredients in the proof of the following proposition are
-taken from~\cite{TWT}, with no modification; they itself follow
-previous work such as~\cite{BaGiHeSaSh10}.
-\begin{prop}
-  For $\mA \in \C^{n\times n}$, if $\mA$ does not cancel $\D_{i,1}$,
-  then $\mA$ is invertible and the polar variety $W(\pi_i,F^\mA)$ is
+We first prove that $\Delta_{i,1}$ allows us to control when $F^\mA$
+satisfies ${\bf H}_i(1)$.  The main ingredients in the proof of the
+following lemma are taken from~\cite{TWT}, with no modification;
+this reference itself follows previous work such as~\cite{BaGiHeSaSh10}.
+\begin{lemma}
+  For $\mA$ in $\C^{n\times n}$, if $\mA$ does not cancel $\D_{i,1}$,
+  then $\mA$ is invertible and the polar variety $W(i,F^\mA)$ is
   either empty or $(i-1)$-equidimensional.
-\end{prop}
+\end{lemma}
 \begin{proof}
   Consider $\bm A \in \C^{n \times n}$ that does not cancels
   $\D_{i,1}$.  Since $\det(\A)$ divides $\D_{i,1}$, $\bm A$ is
   invertible, and by construction the first $i$ rows $\bm b$ of $\bm
   A^{-1}$ do not cancel $\gi$. We put
   \[
-  Y := \left\{\xb \in V(F)~|~\rk (\bm K_i(\Xb,\bm b)) < p+i\right\}. \quad \text{\todo{notation for $\bm K$}}
+  Y := \left\{\xb \in V(F)~|~\rk (\bm K_i(\bm x,\bm b)) < p+i\right\}. 
   \]
   Lemma B.5 from~\cite{TWT} shows that all irreducible components of
-  $Y$ have dimension at least $i-1$; our assumption on $\bm b$ allows
-  us to apply Lemma B.11 from that reference, which shows that all
-  irreducible components of $\dim Y$ have dimension at most $i-1$.
-  Therefore, $Y$ is either empty or ($i-1)$-equidimensional. To
-  conclude the proof, we use the equality
+  $Y$ have dimension at least $i-1$; this is essentially Eagon and
+  Northcott's result on determinantal varieties~\cite{EN62}, and does
+  not depend on our choice of $\bm b$. On the other hand, our
+  assumption on $\bm b$ allows us to apply Lemma B.11 from~\cite{TWT},
+  which shows that all irreducible components of $Y$ have
+  dimension at most $i-1$.  Therefore, $Y$ is either empty or
+  ($i-1)$-equidimensional. To conclude the proof, we use the equality
   \[
-  Y^{\mA} = W\left(\pi_i,V\left(F^{\mA}\right)\right),
+  Y^{\mA} = W\left(i,F^{\mA}\right),
   \]
   established in the same reference immediately before Lemma~B.10.
-  %% Indeed, consider the identity $\jac(F^{\mA}) = \jac(F)^{\mA}\mA$ and notice that
-  %% \[
-  %% \bm K_i(\mA\xb,\bm b)
-  %% =
-  %% \bbm 
-  %% \jac_{\xb}(F)^\mA\\
-  %% \bm b
-  %% \ebm
-  %% =
-  %% \bbm 
-  %%   \jac_{\xb}(F^\mA)\mA^{-1}\\
-  %%   \bbm
-  %%   \bm 1_i ~~~~~ \bm 0
-  %%   \ebm\mA^{-1} 
-  %%    \ebm
-  %%    =
-  %%    \bbm 
-  %%   \jac_{\xb}(F^\mA)\\
-  %%   \jac_{\xb}(\pi_i)
-  %%    \ebm
-  %%   \mA^{-1}
-  %%   \]
-  %%   and therefore 
-  %%   \[
-  %%   \rk (\bm K_i(\mA\xb,\bm b))
-  %%   =
-  %%   \rk
-  %%    \bbm 
-  %%   \jac_{\xb}(F^\mA)\\
-  %%   \jac_{\xb}(\pi_i)
-  %%    \ebm.
-  %%   \]
-  %%   \todo{not clear}
-  %%   Furthermore, since $V(F)$ is smooth, it follows from \cite[Corollary
-  %%     16.20]{ECA} that for all $\xb$ in $V(F), \jac_{\xb}(F)$ has full
-  %%   rank $n - \dim V = n -(n-p) = p$. Therefore
-  %%   \begin{align*}
-  %%    Y^{\mA} &= \left\{\xb \in V(F^{\mA})~
-  %%   \big|~\rk \jac_{\xb}(F^{\mA})=p
-  %%   \textrm{ and }
-  %%   \rk     
-  %%   \bbm 
-  %%   \jac_{\xb}(^{\mA})\\
-  %%   \jac_{\xb}(\pi_i)
-  %%    \ebm
-  %%    < p+i\right\} \\
-  %%    &= W\left(\pi_i,V\left(F^\mA\right)\right). 
-  %%   \end{align*}
 \end{proof}
-
-
-\begin{prop}
-  For $\mA \in \C^{n\times n}$, if $\mA$ does not cancel $\D_{i,1}$,
+We conclude this section with the second property, ${\bf H}_i(2)$.
+\begin{lemma}
+  For $\mA$ in $\C^{n\times n}$, if $\mA$ does not cancel $\D_{i,1}$,
   then $0$ is a regular value of the $n+p-i$ polynomials
-  $F,\ [L_1~\cdots~L_p]\cdot \bm J_i$ in the open set defined by
-  $(L_1,\dots,L_p) \ne (0,\dots,0)$.  \td{notation $L$ or $\lambda$}
-\end{prop}
+  $F^\mA,\ [L_1~\cdots~L_p]\cdot \mathrm {jac}(F^\mA,i)$ in the open
+  set defined by $(L_1,\dots,L_p) \ne (0,\dots,0)$.
+\end{lemma}
 \begin{proof}
-  Take $\mA$ in $\C^{n \times n}$ so that $\Delta_{i,1}(\mA) \not = 0$,
-  and again let $\bm b$ denote the first $i$ rows of $\mA^{-1}.$ Let
-  $T_1,\hdots,T_i$ be new indeterminates. By assumption, for $(\xb, \bm
-  \lambda, \bm \thetab) \in \sA \cap \Phi^{-1}_{\bm b}(\bz)$, the
-  Jacobian matrix of the polynomials
-    \[
-    \left(F,\ [L_1 ~\cdots~ L_p~ T_1 ~\cdots~ T_i ] \cdot 
-   \bm K_i(\Xb,\bm b)
-    \right)
-    \]
-    has full rank $p + n$. The Jacobian matrix of the polynomials
-    \[
-    \left(F(\mA\bm X),\ [L_1 ~\cdots~ L_p~ T_1 ~\cdots~ T_i ] \cdot \bm K_i(\mA \Xb,[\bm I_i\ \bm 0])
-    \right)
-    \]    
-    taken with respect to the variables
-    $X_1,\dots,X_n,L_1,\hdots,L_p,T_1,\hdots,T_i$ is equal to 
-    \begin{align*}
+  Take $\mA$ in $\C^{n \times n}$ so that $\Delta_{i,1}(\mA) \not =
+  0$, and let $(\xb,\bm\ell) \in \C^{n+p}$ be a zero of the $n+p-i$
+  polynomials $F^\mA$ and $[L_1~\cdots~L_p]\cdot \mathrm {jac}(F^\mA,i)$,
+  with $\bm \ell$ non-zero. We have to show that the Jacobian matrix
+  of these polynomials has full rank $n+p-i$ at $(\xb,\bm\ell)$.
+
+  We define a vector $\thetab = [\vartheta_1 ~\cdots~\vartheta_i] \in
+  \C^i$ by writing $\bm \ell \cdot \mathrm{jac}(F^\mA) = [
+    -\vartheta_1 ~\cdots~-\vartheta_i ~0~\cdots~0 ]$ (the trailing
+  zeros result from our assumption on $\xb$ and $\bm\ell$). It
+  follows that $(\xb,\bm \ell,\thetab)$ cancels the equations
+  \begin{equation}\label{eq:poly0}
+  F^\mA, \quad [L_1 ~\cdots~ L_p~ T_1 ~\cdots~ T_i] \bbm \mathrm{jac}(F^\mA) \\ \bm I_i~~\bm 0_{i \times (n-i)} \ebm,
+  \end{equation}
+  where the Jacobian matrix of $F$ is taken with respect to the
+  variables $\bm X= X_1,\dots,X_n$. We then post-multiply the
+  right-hand matrix by $\mA^{-1}$, and use the fact that ${\rm
+    jac}(F^\mA) = {\rm jac}(F)^\mA \, \mA$.  This shows that $(\xb,\bm
+  \ell,\thetab)$ also cancels the polynomials
+  \begin{equation}\label{eq:poly1}
+  F^\mA, \quad [L_1 ~\cdots~ L_p~ T_1 ~\cdots~ T_i] \bbm \mathrm{jac}(F)^\mA \\ \bm b  \ebm,    
+  \end{equation}
+  where again $\bm b$ denotes the first $i$ rows of $\mA^{-1}$.
+  Setting $\xb'=\mA^{-1} \xb$, we deduce that the point $(\xb',\bm\ell,\thetab)$ 
+  cancels 
+  \begin{equation}\label{eq:poly2}
+    F, \quad [L_1 ~\cdots~ L_p~ T_1 ~\cdots~ T_i] \bbm \mathrm{jac}(F) \\ \bm b  \ebm,    
+  \end{equation}
+  that is, the polynomials $\Phi_{\bm b}$ defined in the preamble.
+  The assumption on $\mA$ shows that $0$ is a regular value of this
+  mapping in the open set defined by $(L_1,\dots,L_p) \ne
+  (0,\dots,0)$.  Since $\bm \ell$ is by definition non-zero, this
+  implies that the Jacobian matrix of the polynomials in
+  Eq.~\eqref{eq:poly2} has full rank $n+p$ at
+  $(\xb',\bm\ell,\thetab)$. Back in the original coordinates, we
+  deduce that the Jacobian matrix of the polynomials in
+  Eq.~\eqref{eq:poly1} has full rank $n+p$ at
+  $(\xb,\bm\ell,\thetab)$. Right multiplication by $\mA^{-1}$
+  in~\eqref{eq:poly2} amounts to performing a linear combination of
+  the equations; hence, the Jacobian matrix of the polynomials in
+  Eq.~\eqref{eq:poly0} has full rank $n+p$ at $(\xb,\bm\ell,\thetab)$
+  as well.
+
+  The Jacobian matrix of these polynomials taken with respect to the
+  variables $X_1,\dots,X_n$, $L_1,\hdots,L_p$ and $T_1,\hdots,T_i$ is
+  equal to
+  \begin{align*}
     \left[ 
-    \begin{array}{cc}
-    \jac_{\bm X}(F^{\mA})~~~~~ \bz_{p \times p} & \bz_{p\times i}\\
-    \jac_{\bm X,\bm L}\left([\bm L, \bm T ] \cdot 
-    \bbm 
-    \jac_{\bm X}(F^{\mA})\\
-    \jac_{\bm X}(\pi_i)\\
-    \ebm\right) & \bmat \bm I_{i}\\ \bz_{p\times i} \emat\\
-    \end{array}
-    \right]
+      \begin{array}{cc}
+        \jac(F^{\mA})~~~~~ \bz_{p \times p} & \bz_{p\times i}\\
+        \jac_{\bm X,\bm L}\left([\bm L, \bm T ] \cdot 
+        \bbm 
+        \jac(F^{\mA})\\
+        \bm I_i~~\bm 0_{i \times n-i} \\
+        \ebm\right) & \bmat \bm I_{i}\\ \bz_{(n-i)\times i} \emat\\
+      \end{array}
+      \right]
     &=
     \left[ 
-    \begin{array}{c|c}
-    \jac_{(\xb,\lb)}(F^{\mA}) & \bz_{p\times i} \\
-    \ast \ast \ast & I_{i}\\
-    \jac_{(\xb,\lb)}\left(\bm l \cdot \jac_{\xb}(F^{\mA},i) \right)& \bz_{p\times i}
-    \end{array}
-    \right].
+      \begin{array}{cc}
+        \jac(F^{\mA}) ~~~~ \bz_{p \times p} & \bz_{p\times i} \\
+        \ast \ast \ast & \bm I_{i}\\
+    \jac_{\bm X,\bm L}\left(\bm L \cdot \jac(F^{\mA},i) \right)& \bz_{(n-i)\times i}
+      \end{array}
+      \right].
     \end{align*}
-    %
-
-
-
-Now, from the chain rule $\jac(F^\mA)=\jac(F)^\mA \mA$,
-we get
-    \[
-    \bm K_i(\mA\xb,\bm b)
-    =
-    \bbm 
-    \jac(F)^\mA\\
-    \bm b
-     \ebm
-     =
-    \bbm 
-    \jac(F^\mA)\mA^{-1}\\
-    \bbm
-    \bm I_i ~~~~~ \bm 0
-    \ebm\mA^{-1} 
-     \ebm
-     =
-     \bbm 
-    \jac(F^\mA)\\
-    \jac(\pi_i)
-     \ebm
-    \mA^{-1}
-    \]
-    and therefore, for any $\xb$,
-    \[
-    \rk( \bm K_i(\mA\xb,\bm b))
-    =
-    \rk\left (
-     \bbm 
-    \jac(F^\mA)\\
-    \jac(\pi_i)
-     \ebm (\xb) \right ).
-    \] 
-
-
-
-
-
-
-    Therefore, after rearranging blocks and after removing $i$ columns, we can see that 
-    %
+    Therefore, after removing $i$ rows and columns, we can see that
+    the submatrix
     \begin{align}
-    \jac_{(\xb, \lb)}\left( F^{\mA},\bm l \cdot \jac_{\xb}(F^{\mA},i)\right) =
     \left[ 
     \begin{array}{c}
-    \jac_{(\xb,\lb)}(F^{\mA}) \\
-    \jac_{(\xb,\lb)}\left(\bm l \cdot \jac_{\xb}(F^{\mA},i) \right) 
+    \jac(F^{\mA}) ~~~~ \bz_{p \times p}\\
+    \jac_{\bm X,\bm L}\left(\bm L \cdot \jac(F^{\mA},i) \right) 
     \end{array}
     \right]
     \end{align}
-    has full rank $p + n-i$. Now, recall that
-    \[
-    \bm l \cdot \jac_{\xb}(F^{\mA},i) = \lagFA,
-    \]
-    and therefore it becomes clear that, at any 
-    \[(\xb,\lb) \in V(\IilAnu)=\WilAnu,\]
-    the Jacobian of the polynomials 
-    \[
-    \left(F^{\mA},\lagFA\right)
-    \]
-    has full rank $n+p-i$. 
-    \end{proof}
-    
-
-
-    \begin{prop}\label{prop:RadLagPolarV}
-     Let $\ub = (u_1,\hdots,u_p) \in \C^p$ be any complex point. Then,
-     for any \[(\xb,\lb)\in
-     \mathscr{W}_{\ub}\left(\pi_i,V(F^{\mA})\right) \subset
-     \C^{n+p},\] the Jacobian matrix of the polynomials
-     \[
-    \left( F^{\mA},\lagFA,\udl-1\right) 
-    \]
- has full rank $n+p-i+1$ at $(\xb,\lb).$ 
-    \end{prop}
-    \begin{proof}
-    Note that $(\xb,\lb)\in\mathscr{W}_{\ub}(\pi_i,V(F^{\mA}))$
-    implies that $(\xb,\lb)\in\mathscr{W}(\pi_i,V(F^{\mA}))$; thus, by
-    Proposition \ref{prop:LagIdeal}, the Jacobian of the
-    polynomials \[\sI(i,F^{\mA}) = (F^{\mA},\lagFA)\] has full rank
-    $n+p-i$ at $(\xb,\lb)$. The conclusion therefore holds if
-    $[\bz~|~\ub]$ is not in the row space of the Jacobian of the
-    polynomials
-    \[
-    \left(F^{\mA},\lagFA,\udl -1\right),
-    \]
-    for any $(\xb,\bm l)$ that cancels equations. This matrix is equal to
-    \[
-    \left[ 
-    \begin{array}{c|c|c}
-    \frac{\pa f_1^{\mA}}{\pa X_1}(\xb) \hdots \frac{\pa f_1^{\mA}}{\pa X_n}(\xb) & \bz_{1\times p} & \bz_{1\times p}\\
-    \ddots & \ddots & \ddots\\
-    \frac{\pa f_p^{\mA}}{\pa X_1}(\xb) \hdots \frac{\pa f_p^{\mA}}{\pa X_n}(\xb) & \bz_{1\times p} & \bz_{1\times p}\\
-    \ddots &\jac_{\xb}(F^{\mA},i)^T & \bz_{n-i+1\times p}\\
-    \bz_{1 \times p} & u_1 \hdots u_p & l_1 \hdots l_p 
-    \end{array}
-    \right];
-    \]
-    consider the upper left block
-    \[
-    \left[ 
-    \begin{array}{c|c}
-    A & \bz_{p\times p} \\
-    B & C 
-    \end{array}
-    \right]
-    :=
-    \left[ 
-    \begin{array}{c|c}
-    \frac{\pa f_1^{\mA}}{\pa X_1}(\xb) \hdots \frac{\pa f_1^{\mA}}{\pa X_n}(\xb) & \bz_{1\times p} \\
-    \ddots & \ddots \\
-    \frac{\pa f_p^{\mA}}{\pa X_1}(\xb) \hdots \frac{\pa f_p^{\mA}}{\pa X_n}(\xb) & \bz_{1\times p} \\
-    \ddots &\jac_{\xb}(F^{\mA},i)^T
-    \end{array}
-    \right],
-    \]
-    and suppose for contradiction that $[\bz~|~\ub]$ is in the row-space. Then 
-    \[
-    [\bz~|~\ub]
-    =
-    \lambda [A~|\bz] + \mu[B~|~C]
-    \]
-    and 
-    \[
-    \ub = \mu \cdot C = \mu \cdot \jac_{\xb} (F^{\mA},i)^T
-    \]
-    so that 
-    \[
-    \ub^T = \jac_{\xb} (F^{\mA},i) \cdot \mu^T.
-    \]
-    Now we have a contradiction because, $(\xb,\lb)$ is such that 
-    \begin{align*}
-        &\lb \cdot \jac_{\xb} (F^{\mA},i)=0\\
-        \Rightarrow
-        ~&\lb \cdot \jac_{\xb} (F^{\mA},i) \mu^T= 0\\
-        \Rightarrow
-        ~&~\lb \cdot \ub^T = 0,
-    \end{align*}
-    when by assumption $\lb \cdot \ub^T = 1.$ 
-    \end{proof}
-    %
-    %
-    \begin{corollary}\label{cor:LagIdealRadical}
-Let $\ub = (u_1,\hdots,u_p) \in \C^p$ be any complex point. Then, for any \[(\xb,\lb)\in \mathscr{W}_{\ub}(\pi_i,V(F^{\mA})) \subset \C^{n+p}\] the ideal defined by $\sI_{\ub}(i,F^{\mA}) :$\[ \left(F^{\mA},\lagFA,\sum_{i=1}^p u_iL_i-1\right)\] is radical.
-    \end{corollary}
-    \begin{proof}
-    Given Proposition \ref{prop:RadLagPolarV}, the conclusion now follows from the Jacobian Criterion~\cite[Corollary 16.20]{ECA}.
-    \end{proof}
-    %
-    %
-    \begin{prop}\label{prop:polarVs2}
-Let $\ub = (u_1,\hdots,u_p) \in \C^p$ be any complex point. Then we have the inclusion
-    \[
-    \sqrt{\frak{I}(i,F^{\mA})} \subset \IilA.
-    \]
-    \end{prop}
-    \begin{proof}
-    First note that $\IiA \subset \sqrt{\IilA}.$ Indeed, let $f \in \IiA$ and \[\bm \alpha = (\xb,\lb) \in V(\IilA)=\WilA.\] Then $\sum_{i=1}^p u_i l_i = 1$, so that $\lb \not = (0,\hdots,0)$ is in the left null space and therefore the rank of $\jac_{\xb} (F,i)$ is less than $p.$ Therefore all minors are zero at $\xb$ and $f(\bm \alpha)= f(\xb,\lb)=f(\xb)=0,$ so that $f \in \sqrt{\IilA}$ and $\IiA \subset \sqrt{\IilA}.$
-    \par 
-    Now, since by Corollary \ref{cor:LagIdealRadical}, $\sqrt{\IilA} = \IilA$, we have the inclusion
-    \[
-    \sqrt{\frak{I}(i,F^{\mA})} \subset \sqrt{\IilA} = \IilA.
-    \]
-    \end{proof}
-    %
-    %
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    has full rank $p + n-i$ at $(\xb,\bm\ell)$. 
+\end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Proof of the Noether position property $\textbf{H}_i(3)$}\label{ssec:Hi2}
 
+\section{Genericity of $\textbf{H}_i(3)$}\label{ssec:Hi2}
 
-Consider a sequence of polynomials $F= (f_1,\hdots,f_p) \in \ZZ[X_1,\hdots,X_n]^p,$ with degrees at most $d$, defining a radical ideal $\langle F \rangle \subset \C[X_1,\hdots,X_n]$ and a smooth variety $V=V(F) \subset \C^n$ with $\dim V = n-p$. We prove that there exists a non-zero polynomial $\D_{i}$ in $\C[\A]$ of degree at most $6n^2(2d)^{5n}$ such that if $\mA$ does not cancel $\D_{i}$, then $F^{\mA}$ satisfies  $\bm H_i$.
-
-Recall that we let $\Xb = (X_1, \hdots , X_n)$ be a sequence of variables, and for $l \in \{1,\hdots,n\}$ we let $\Xb_{\leq l}$ be the subsequence of variables $(X_1, \hdots , X_l)$. Consider again the $n\times n$ matrix of indeterminates
-\[\A=(\A_{j,k})_{1 \le j,k \le n}\] and the field $\C(\A)$,
-and define $F^{\A}=(f_1^{\A},\hdots,f_p^{\A})$  as \[(f_1(\A\Xb),\hdots,f_p(\A\Xb)) \in \C(\A)[\Xb]^p.\]  
-%Since $i$ is fixed, to
-%simplify notation, let $\I^\A$ denote the polynomials $\I(i,F^\A)= \big (F^\A, \minorsfA \big )$ in
-%$\C(\A)[\Xb]$, and let $\Il^\A$ denote the polynomials $\IilfA= \big (F^\A, \bm L \cdot \jac_{\xb}(F^\A,i),\ub^T\cdot\Lb-1 \big )$ in
-%$\C(\A)[\Xb,\Lb]$. Let $W^\A$ denote  $W(\pi_i,V(F^\A))$ and let $\Wl^\A$ denote  $\WilfA$. 
-
-
-
-Some related results appear in the literature. For instance, Lemma 5
-in~\cite{JeSa10} or Proposition 4.5
+Notation being as before, we now discuss the last genericity property
+that depends on our choice of coordinates. We already showed that in
+generic coordinates, the polar variety $W(i, F)$ is either empty or
+$(i-1)$-equidimensional. It remains to do the same for $\bm H_i(3)$, 
+that is, to prove that if it is not empty, $W(i, F)$ is generically in Noether
+position for $\pi_{i-1}$. We will prove the following, where $\D_{i,1}$ is
+from Proposition~\ref{prop:Hi12}.
+\begin{prop}
+  For $i=1,\dots,\delta+1$, there exists a non-zero polynomial
+  $\D_{i,2}$ in $\C[(\A_{j,k})_{1 \le j,k \le n}]$ of degree at most
+  $6n^2(2d)^{5n}$ such that if $\mA$ does not cancel $\D_{i,1}
+  \D_{i,2}$, then $F^{\mA}$ satisfies $\bm H_i(1)$, $\bm H_i(2)$ and
+  $\bm H_i(3)$.
+\end{prop}
+Some results in a similar vein appear in the literature. For instance,
+Lemma 5 in~\cite{JeSa10} or Proposition 4.5
 in~\cite{SharpEstimatesForTheEffectiveN} are quantitative Noether
-position statements. However, Theorems~\ref{theo:H} and
-\ref{theo:NoetherPositionG} do not follow from these previous
-results. Indeed, those references would allow us to quantify when
-$W(\pi_i,V(F))^\mA$ is in Noether position, whereas we need to
-understand when $W(\pi_i,V(F^\mA))$ is. And these two sets are in
-general different; for instance, their dimensions may vary.
+position statements. However, our results do not follow from these
+previous references, as these previous works analyse the probability
+that for a {\em fixed} algebraic set $V$, $V^\mA$ be in Noether
+position.  This does not solve our question, since
+$W(i,V(F^\mA))$, which we are interested in, is in general
+different from $W(i,V(F))^\mA$.
+
+Instead, we will rely on the proof given in~\cite{EMP} that
+$W(i,V(F^\mA))$ is in Noether position for a generic $\mA$.  However,
+we will not directly analyse the constructions used in that reference,
+since they involve e.g. primary decomposition in $\C((\A_{j,k})_{1 \le
+  j,k \le n})[X_1,\dots,X_n]$, and the resulting degree bounds would
+be way beyond our target. We will instead combine results
+from~\cite{EMP} with an effective form of the Nullstellensatz given
+in~\cite{EN}; in particular, we have to use Lagrange systems to
+describe polar variety, since systems of minors do not satisfy
+assumptions needed to apply this effective Nullstellensatz.
+ 
+The rest of this section is devoted to the proof of this proposition.
+From now on, we fix $i$ in $0,\dots,\delta+1$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Degree bounds for the integral dependence relationship} 
-%
-In Section~\ref{sec:applications}, we saw that
-$F^\A$ satisfies $\bm H_i(1)$, so that $\WifA$ is equidimensional of dimension $i-1$. We
-now point out that $F^\A$ also satisfies $\bm H_i(3)$.
-\begin{lemma}\label{lem:6.1}
- The extension $$\C(\A)[\Xb_{\leq i-1}]\rightarrow
- \C(\A)[\Xb]/\IifAr$$ is integral.
+
+\subsection{Preliminaries}
+
+Property ${\bm H}_i(2)$ states that $0$ is a regular value of the
+$n+p-i$ polynomials $F,\ [L_1~\cdots~L_p]\cdot \mathrm {jac}(F,i)$ in
+the open set defined by $(L_1,\dots,L_p) \ne (0,\dots,0)$; we saw it
+holds in generic coordinates. We start by establishing some
+consequences of this fact for the polynomials ${\frkL}(i, F, \bm u)$
+of Eq.~\eqref{eqdef:Iil}.
+\begin{lemma}\label{prop:RadLagPolarV}
+  Suppose that $0$ is a regular value of the $n+p-i$ polynomials
+  $F,\ [L_1~\cdots~L_p]\cdot \mathrm {jac}(F,i)$ in the open set
+  defined by $(L_1,\dots,L_p) \ne (0,\dots,0)$. Then, for any $\ub =
+  (u_1,\hdots,u_p)$ in $\C^p$, the $n+p-i+1$ polynomials
+  \begin{equation*}
+    {\frkL}(i, F, \bm u) = F,\ [L_1~\cdots~L_p]\cdot \jac(F, i),\ u_1 L_1 + \cdots + u_p L_p -1
+  \end{equation*}
+  define a radical ideal, either trivial or $(i-1)$-equidimensional.
 \end{lemma}
-%
 \begin{proof}
-  Let $(\fp_\ell)_{1 \le \ell \leq L}$ be the prime components of $\IifAr$. By \cite[Proposition 1]{EMP}, for all
-  $\ell$,
+  Take $(\xb,\bm \ell)$ in $\C^{n+p}$ that cancels the $n+p-i+1$
+  polynomials in~\eqref{eqdef:Iil}. We prove that the Jacobian matrix
+  of these equations has has full rank $n+p-i+1$ at $(\xb,\bm\ell)$;
+  the conclusion then follows from the Jacobian criterion.
+
+  Since $\bm\ell$ cannot be zero, our assumption implies that the
+  Jacobian of the polynomials $F$ and $[L_1~\cdots~L_p]\cdot \mathrm
+  {jac}(F,i)$ has full rank $n+p-i$ at $(\xb,\bm\ell)$. The conclusion
+  therefore holds if ${\rm grad}(u_1 L_1 + \cdots + u_p L_p-1) = [
+    {\bm 0}_{1 \times n} ~ u_1~ \cdots ~u_p ]$ is not in the row space
+  of this matrix at $(\xb,\bm\ell)$. The Jacobian matrix of $F$ and
+  $[L_1~\cdots~L_p]\cdot \mathrm {jac}(F,i)$ is equal to
   \[
-    \C(\A)[\textbf{X}_{\leq i-1}]\rightarrow\C(\A)[\Xb]/\fp_\ell
-  \] 
-  is integral. Therefore polynomials
-  $q_{\ell,j}\in\C(\A)[\textbf{X}_{\leq i-1},X_j]$ exist, all monic in
-  $X_j$, with $q_{\ell,j}(X_j)\in \fp_\ell$ for each $j$ in
-  $\{i,\hdots,n-p+1\}.$ Thence, \[Q_{j} := \prod_{1 \le \ell\le L}
-  q_{\ell,j}\] is monic in $X_j$ and satisfies $ Q_{j} \in \sqrt{\IifA}$, for
-  each $j \in \{i,\hdots,n-p+1\}.$ This proves our claim.
+  \left[ 
+    \begin{array}{cc}
+      \jac(F) & {\bm 0}_{p \times p}\\
+     *** &  \jac(F,i)^T 
+    \end{array}
+    \right].
+  \]
+  Suppose that $[ {\bm 0}_{1 \times n} ~ u_1~ \cdots ~u_p]$ is in the
+  row-space of this matrix. Considering the last $p$ columns gives us
+  an equality $[u_1 ~ \cdots ~ u_p] = \bm \mu \jac(F,i)^T $, for
+  some $\bm \mu$ in $\C^{1 \times (n-i)}$. Right-multiplying by $\bm
+  \ell^T \in \C^{p \times 1}$, we obtain $1 = 0$, a contradiction.
 \end{proof}
-%
-\noindent 
-Now let $\ub \in \C^p$ be any complex number. 
-\begin{corollary}\label{lem:6.2}
- The extension $$\C(\A)[\Xb_{\leq i-1}]\rightarrow
- \C(\A)[\Xb]/(\IilfA \cap \C(\A)[\Xb])$$ is integral.
+
+The result carries over to our original polynomials in generic
+coordinates. In what follows, just as we defined $F^\mA$ for $\mA$ in
+$\C^{n\times n}$, we define $F^{\A}=(f_1^{\A},\hdots,f_p^{\A})$
+as \[(f_1(\A\Xb),\hdots,f_p(\A\Xb)) \in \C((\A_{j,k})_{1 \le j,k \le
+  n})[X_1,\dots,X_n]^p.\]
+
+\begin{corollary}\label{prop:RadLagPolarV}
+  For any $\ub = (u_1,\hdots,u_p)$ in $\C^p$, the $n+p-i+1$
+  polynomials
+  \begin{equation}\label{eqdef:frkLgen}
+    {\frkL}(i, F^\A, \bm u) = F^\A,\ [L_1~\cdots~L_p]\cdot \jac(F^\A, i),\ u_1 L_1 + \cdots + u_p L_p -1
+  \end{equation}
+  define a radical ideal in $\C((\A_{j,k})_{1 \le j,k \le
+    n})[X_1,\dots,X_n,L_1,\dots,L_p]$.
 \end{corollary}
-%
 \begin{proof}
-By Lemma \ref{lem:6.1}, polynomials
-  $P_{j}\in\C(\A)[\Xb_{\leq i-1},X_j]$ exist, all monic in
-  $X_j$, with $P_{j}(X_j)\in \IifAr$ for each $j$ in
-  $\{i,\hdots,n-p+1\}.$ By Proposition \ref{prop:polarVs2}, 
-  \[
-  \sqrt{\IifA} \subset \IilfA,
-  \]
-  and therefore $P_{j}(X_j)\in \IilfA$ for each $j$ in 
-  $\{i,\hdots,n-p+1\}$ and 
-  \[
-  \C(\A)[\Xb_{\leq i-1}]\rightarrow
- \C(\A)[\Xb]/(\IilfA \cap \C(\A)[\Xb])
-  \]
- is integral.
+  Proposition~\ref{prop:Hi12} and the previous lemma show that for
+  $\mA$ in a Zariski-dense subset of $\C^{n\times n}$, ${\frkL}(i,
+  F^\mA, \bm u)$ is radical in $\C[X_1,\dots,X_n,L_1,\dots,L_p]$; as a
+  result, this must also be the case for the ideal ${\frkL}(i, F^\A,
+  \bm u)$ in $\C((\A_{j,k})_{1 \le j,k \le
+    n})[X_1,\dots,X_n,L_1,\dots,L_p]$.
 \end{proof}
-%
-\noindent
-If $P$ is any polynomial in $\C(\frak A)[\Xb]$, we will let
-$D \in \C[\frak A]$ be the minimal common denominator of all its
-coefficients, and we will write $\overline P := D P$, so that
-$\overline P$ is in $\C[\A,\Xb]$.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    \begin{lemma} 
-    For each $j \in \{i,\dots,n-p+1\}$, there exists $P_j$ in $
-    \C(\A)[\Xb_{\leq i-1},X_j]$, monic in $X_j$, with $\pjb$ in
-    $\IilfA$, and such that $\deg(\pjb)\leq (2d)^{2n}.$
-    \end{lemma} 
+\subsection{Degree bounds for integral dependence relationships} 
 
+The results in Section~\ref{sec:applications} imply that $F^\A$
+satisfies $\bm H_i(1)$, so that $W(i,F^\A)$ is either empty or
+equidimensional of dimension $i-1$. We now point out that $F^\A$ also
+satisfies $\bm H_i(3)$. In what follows, we let ${\frkJ}(i,F^\A)$ be
+the ideal generated by $F^\A$ and all $p$-minors of $\jac(F^\A,i)$ in
+$\C((\A_{j,k})_{1 \le j,k \le n})[X_1,\dots,X_n]$; in particular, the
+defining ideal of $W(i,F^\A)$ is $\sqrt{{\frkJ}(i, F^\A)}$.  For $\bm
+u$ in $\C^p$, recall also the definition of the Lagrange system
+${\frkL}(i, F^\A, \bm u)$ for $F^\A$ given in
+Eq.~\eqref{eqdef:frkLgen}.
+Our first lemma is a direct application of results from~\cite{EMP}.
+\begin{lemma}\label{lem:6.1}
+  Let $\bm u$ be in $\C^p$.  For $j=i,\dots,n$, there exists a
+  polynomial $Q_j \in \C((\A_{j,k})_{1 \le j,k \le
+    n})[X_1,\dots,X_{i-1},X_j]$, monic in $X_j$ and with $Q_{j}$ in
+  ${\frkL}(i, F^\A, \bm u)$.
+\end{lemma}
 \begin{proof}
-     We let $\frak L^\A$ denote the extension of $\IilfA \cap \C(\A)[\Xb]$ given by 
+  Proposition~\ref{prop:projection} gives the inclusion
+  $\sqrt{\frak{I}(i,F^\A)} \subset \sqrt{{\frkL}(i, F^\A, \bm u)}$,
+  and Corollary~\ref{prop:RadLagPolarV} shows that ${\frkL}(i, F^\A,
+  \bm u)$ is a radical ideal, so that we have $\sqrt{\frak{I}(i,F^\A)}
+  \subset{\frkL}(i, F^\A, \bm u)$. Thus, it is enough to exhibit
+  polynomials $Q_j$ with the required properties and that belong to
+  $\sqrt{\frak{I}(i,F^\A)}$.
+  
+  If $W(i,F^\A)$ is empty, then $\sqrt{{\frkJ}(i, F^\A)}$ is the
+  trivial ideal, so we simply take $Q_j=1$ for all $j$.  Otherwise,
+  let $(\fp_\ell)_{1 \le \ell \leq L}$ be the prime components of
+  $\sqrt{{\frkJ}(i, F^\A)}$.  By assumption, $L \ge 1$ and all $\fp_\ell$ have
+  dimension $i-1$. By \cite[Proposition 1]{EMP}, for all $\ell$,
   \[
-  \frak
-  L^\A =(\IilfA \cap \C(\A)[\Xb])\cdot \C(\frak A, \Xb_{\leq i-1})[X_i,\dots,X_n].
+    \C((\A_{j,k})_{1 \le j,k \le n})[X_1,\dots,X_{i-1}]\rightarrow\C((\A_{j,k})_{1 \le j,k \le n})[X_1,\dots,X_n]/\fp_\ell
+  \] 
+  is injective and integral. Therefore polynomials
+  $q_{\ell,j}\in\C((\A_{j,k})_{1 \le j,k \le n})[X_1,\dots,X_{i-1},X_j]$ exist, all monic in
+  $X_j$, with $q_{\ell,j}\in \fp_\ell$ for each $j$ in
+  $\{i,\hdots,n\}.$ Thence, \[Q_{j} := \prod_{1 \le \ell\le L}
+  q_{\ell,j}\] is monic in $X_j$ and satisfies $ Q_{j} \in
+  \sqrt{\frak{I}(i,F^\A)}$, for each $j \in \{i,\hdots,n\}.$ 
+\end{proof}
+The former lemma does not directly give us degree bounds on the
+polynomials $Q_j$. This is the objective of the next step, where we
+control degree with respect to all unknowns involved, $X_1,\dots,X_n$
+as well as $\A_{1,1},\dots,\A_{n,n}$.  In this respect, if $P$ is any
+polynomial in $\C((\A_{j,k})_{1 \le j,k \le n})[X_1,\dots,X_n]$, we
+will let $D \in \C[(\A_{j,k})_{1 \le j,k \le n}]$ be the minimal
+common denominator of all its coefficients, and we will write
+$\overline P := D P$, so that $\overline P$ is in $\C[(\A_{j,k})_{1
+    \le j,k \le n},X_1,\dots,X_n]$.
+
+
+\begin{proof} \todo{what do we prove?}
+  Consider the following ideals: they all have for generators the
+  polynomials $\frkJ(i,F^\A)$, that is, $F^\A$ and the $p$-minors of
+  $\jac(F^\A, i)$, but they lie in different polynomial rings.
+  \begin{itemize}
+  \item $K$ is the ideal defined by these generators in the polynomial
+    ring $\C[(\A_{j,k})_{1 \le j,k \le n}),X_1,\dots,X_n]$ in $n^2+n$
+    indeterminates.
+  \item 
+  \end{itemize}
+
+
+
+  Let further $Z$ be the zero-set of $K$ in $\C^{n^2 + n}$. Since all
+  polynomials in $F^\A$, resp.\ $\jac(F^\A, i)$, have respective
+  degrees at most $2d$ in $\C[(\A_{j,k})_{1 \le j,k \le
+      n}),X_1,\dots,X_n]$, resp. $2d-1$, Corollary~\ref{coro:degree}
+  shows that $Z$ has degree at most $(2d)^{2n}$.
+  
+  Let further $K'$ be the ideal generated by the polynomials
+  $\frkJ(i,F^\A)$, but this time in $\C((\A_{j,k})_{1 \le j,k \le
+    n}),X_1,\dots,X_{i-1})[X_i,\dots,X_n]$. Let $P_j$ be the minimal
+  of $X_j$ modulo $\sqrt{K'}$. Then, $P_j$ is in $\C((\A_{j,k})_{1 \le
+    j,k \le n})[X_1,\dots,X_{i-1},X_j]$ and $\overline {P_j}$ has
+  total degree at most $\deg(Z)$.
+
+  By construction, there exists a non-negative integer $m$ such that 
+  $P_j^m$ is in $K'$.  bla bla bla
+\end{proof}
+
+
+\begin{lemma} 
+  For $j = i,\dots,n$, there exists $P_j$ in
+  $\C((\A_{j,k})_{1 \le j,k \le n})[X_1,\dots,X_{i-1},X_j]$, monic in $X_j$, with $P_{j}$ in
+  ${\frkL}(i, F^\A, \bm u)$ and $\deg(\bar P_j)\leq (2d)^{2n}.$
+\end{lemma} 
+\begin{proof}
+  If ${\frkL}(i, F^\A, \bm u)$ is the trivial ideal, we take $P_j=1$
+  for all $j$ and we are done. Otherwise, as we pointed out in the
+  proof of the previous lemma, this ideal is radical, with all its
+  prime components of dimension $i-1$.
+
+  As a result, the existence of the polynomials $Q_j$ established
+  above implies that all prime components of ${\frkL}(i, F^\A, \bm u)$
+  intersect $\C((\A_{j,k})_{1 \le j,k \le n})[X_1,\dots,X_{i-1}]$
+  trivially; in particular, ${\frkL}(i, F^\A, \bm u) \cap
+  \C(\A)[X_1,\dots,X_{i-1}] = \{ 0\}$. Thus, if we denote by $\frak K$
+  the extension of ${\frkL}(i, F^\A, \bm u) \cap
+  \C(\A)[X_1,\dots,X_n]$ given by
+  \[
+  \frak K :=({\frkL}(i, F^\A, \bm u) \cap \C(\A)[X_1,\dots,X_n])\cdot \C(\frak A, X_1,\dots,X_{i-1})[X_i,\dots,X_n],
   \]
-  By Corollary \ref{lem:6.2}, $Q_j\in\C(\A)[\textbf{X}_{\leq i-1},X_j],$ exists, monic in $X_j$, with 
-    \[
-    Q_j(X_j) \in \IilfA \cap \C(\A)[\Xb].
-    \]
   Thence,
   \begin{equation}\label{eq:3}
-    \C(\frak A, \Xb_{\leq i-1}) \to \C(\frak A,
-    \Xb_{\leq i-1})[X_i,\dots,X_n]/\frak L^\A
+    \C(\frak A, X_1,\dots,X_{i-1}) \to \C(\frak A, X_1,\dots,X_{i-1})[X_i,\dots,X_n]/\frak K
   \end{equation}
-    is an algebraic extension. Let $P_j \in \C(\A)(\textbf{X}_{\leq i-1})[X_j]$ 
-be the minimal polynomial of $X_j$ in \eqref{eq:3}, and note that $P_j$ is monic in $X_j.$ 
-    Hence, $Q_j$ is also in the extension $\frak{L}^\A$, and thus $P_j$ divides $Q_j$ in $\C(\A)(\textbf{X}_{\leq i-1})[X_j].$ We can therefore write 
-    \begin{align*}
-    &Q_j = P_jR_j,~~~~ P_j,R_j \in \C(\A)(\textbf{X}_{\leq i-1})[X_j]-\C(\A)(\textbf{X}_{\leq i-1}).
-    \end{align*}
-    It then follows by Gauss's lemma that 
-    \begin{align*}
-    Q_j = p_jr_j, ~~~~p_j,r_j \in \C(\A)[\textbf{X}_{\leq i-1}][X_j]-\C(\A),
-    \end{align*}
-    and such that $\mu_j \in \C(\A)(\Xb_{\leq i-1})$ exists with 
-    \[
-    P_j = \mu_j p_j,~~~~ R_j = \mu_j^{-1}r_j.
-    \]
-    Since $Q_j$ is monic in $X_j$, $p_j$ and $r_j$ must also be monic in $X_j$, and $\mu_j$ must be the coefficient of the highest degree term of $P_j$ in $X_j.$ Since $P_j$ is monic in $X_j$, $\mu_j =1$ and hence \[P_j=1\cdot p_j=p_j \in \C(\A)[\textbf{X}_{\leq i-1}][X_j].\]
+  is an injective ring extension, and $\C(\frak A,
+  X_1,\dots,X_{i-1})[X_i,\dots,X_n]/\frak K$ is a finite-dimensional
+  vector space over $\C(\frak A, X_1,\dots,X_{i-1})$. For
+  $j=i,\dots,n$, we can then define the minimal polynomial $P_j$ of
+  (the multiplication by) $X_j$ in the extension~\eqref{eq:3}; this is
+  a monic polynomial in $\C(\A)(X_1,\dots,X_{i-1})[X_j]$.  Using the
+  existence of $Q_j$ monic in $X_j$, we now prove that $P_j$ is
+  polynomial in $X_1,\dots,X_{i-1}$; we will conclude the proof using
+  known degree bounds on $P_j$.
 
-  \noindent 
-  Now, consider the polynomials $\IilfA:$
-\[
- \left(F^{\A}, \lagFfA,\udl-1 \right)
-\]
-in $\C[\A,\Xb,\Lb]$, let $\frak W$ be their zero-set, and let $\deg(\frak W)$ be its
-  degree, in the sense of~\cite{H}. Since $\pjb$ is a polynomial in $\C[\A,\Xb]$, Proposition~1 in~\cite{CGR} 
-  implies that $\pjb$ has degree at most $\deg(\frak W)$. Since all
-  polynomials defining $\frak W$, seen in $\C[\A,\Xb,\Lb]$, have
-  degree at most $2d$, the B\'ezout inequality of~\cite{H} gives
-  \[\deg(\pjb) \le (2d)^{n+p-i+1} \le (2d)^{2n}.\]
+  The polynomial $Q_j$ also belongs to $\frak K$, so that $P_j$
+  divides $Q_j$ in $\C(\A,X_1,\dots,X_{i-1})[X_j].$ We can therefore
+  write
+  \begin{align*}
+    Q_j &= P_jR_j,~~~~ P_j,R_j \in \C(\A,X_1,\dots,X_{i-1})[X_j].
+  \end{align*}
+  It then follows by Gauss's lemma that we can write
+  \begin{align*}
+    Q_j = p_jr_j, ~~~~p_j,r_j \in \C(\A)[X_1,\dots,X_{i-1},X_j],
+  \end{align*}
+  such that $\mu_j \in \C(\A,X_1,\dots,X_{i-1})$ exists with 
+  \[
+  P_j = \mu_j p_j,~~~~ R_j = \mu_j^{-1}r_j.
+  \]
+  Since $Q_j$ is monic in $X_j$, $p_j$ and $r_j$ must also be monic in
+  $X_j$, so $\mu_j$ must be the coefficient of the highest degree term
+  of $P_j$ in $X_j.$ Since $P_j$ is monic in $X_j$, $\mu_j =1$ and
+  hence \[P_j=1\cdot p_j=p_j \in \C(\A)[X_1,\dots,X_{i-1},X_j].\] It
+  follows that $P_j$ belongs to $\frak K \cap
+  \C(\A)[X_1,\dots,X_{i-1},X_j]$. Now, we pointed out that 
+  
+  Now, consider the polynomials  ${\frkL}(i, F^\A, \bm u)$, 
+  \[
+  F^\A,\ [L_1~\cdots~L_p]\cdot \jac(F^\A, i),\ u_1 L_1 + \cdots + u_p L_p -1
+  \]
+  in the polynomial ring in $n^2+n+p$ variables
+  $\C[\A,X_1,\dots,X_n,L_1,\dots,L_p]$, let $\frak W$ be their
+  zero-set, and let $\deg(\frak W)$ be its degree, in the sense
+  of~\cite{H}. Then, Proposition~1 in~\cite{CGR} implies that $P_j$
+  has degree at most $\deg(\frak W)$. Since all polynomials defining
+  $\frak W$, seen in $\C[\A,X_1,\dots,X_n,L_1,\dots,L_p]$, have degree
+  at most $2d$, the B\'ezout inequality of~\cite{H} gives
+  \[\deg(P_j) \le (2d)^{n+p-i+1} \le (2d)^{2n}.\qedhere\]
 \end{proof}
 
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Applying the effective Nullstellensatz}
-Now we apply the Nullstellensatz for $\pjb$ with the ideal membership for $\IilfA.$ Let $T$ be a new variable; applying the
-Nullstellensatz in $\C(\A)[\Xb,\Lb][T]$, and clearing
-denominators, we obtain the existence of $\alpha_j$ in
-$\C[\A]-\{0\}$ and $ C_{j,\ell},B_j$ in
+
+\subsection{Applying the effective Nullstellensatz}
+
+Now we apply the Nullstellensatz for $\pjb$ with the ideal membership
+for $\IilfA.$ Let $T$ be a new variable; applying the Nullstellensatz
+in $\C(\A)[\Xb,\Lb][T]$, and clearing denominators, we obtain the
+existence of $\alpha_j$ in $\C[\A]-\{0\}$ and $ C_{j,\ell},B_j$ in
 $\C[\A][\Xb,\Lb][T]$, such that
 \begin{align*}
 \alpha_j = \sum_{\ell=1}^{n+p-i+1} C_{j,\ell} G_\ell + B_j (1-\pjb T),\\  G_\ell \in 
@@ -1967,10 +1915,12 @@ $$\deg(\D_i) \le nd^{5n} +  4n^2(2d)^{4n} + n(2d)^{2n} \leq 6n^2(2d)^{5n}.$$
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Proof of $\textbf{H}_i(3)$}
-Now assume that $\ub \in \mathscr{O}$, where $\sO$ is from $\eqref{eq:sO}.$ It remains to show that if $\mA \in \C^{n\times n}$ does not cancel $\D_{i}$ then
+
+\subsection{Proof of $\textbf{H}_i(3)$}
+
+Now assume that $\ub \in \mathscr{O}$, where $\sO$ is from
+$\eqref{eq:sO}.$ It remains to show that if $\mA \in \C^{n\times n}$
+does not cancel $\D_{i}$ then
 \[
  \C[\Xb_{\leq i-1}]\rightarrow \C[\Xb]/\IiA
 \]

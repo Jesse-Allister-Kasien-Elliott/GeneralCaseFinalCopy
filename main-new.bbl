@@ -1,0 +1,219 @@
+\begin{thebibliography}{10}
+
+\bibitem{ABRW}
+M.~Alonso, E.~Becker, M.-F. Roy, and T.~W{\"o}rmann.
+\newblock Zeroes, multiplicities and idempotents for zerodimensional systems.
+\newblock In {\em Algorithms in algebraic geometry and applications.
+  Proceedings of MEGA'94}, volume 142 of {\em Progress in Mathematics}, pages
+  1--15. Birkha\"user, 1996.
+
+\bibitem{BaGiHe14}
+B.~Bank, M.~Giusti, and J.~Heintz.
+\newblock Point searching in real singular complete intersection varieties:
+  Algorithms of intrinsic complexity.
+\newblock {\em Mathematics of Computation}, 83:873--897, 2014.
+
+\bibitem{BaGiHeLePa12}
+B.~Bank, M.~Giusti, J.~Heintz, L.~Lehmann, and L.-M. Pardo.
+\newblock Algorithms of intrinsic complexity for point searching in compact
+  real singular hypersurfaces.
+\newblock {\em Foundations of Computational Mathematics}, 12:75--122, 2012.
+
+\bibitem{BaGiHeMb97}
+B.~Bank, M.~Giusti, J.~Heintz, and G.~Mbakop.
+\newblock Polar varieties and efficient real equation solving: The hypersurface
+  case.
+\newblock {\em Journal of Complexity}, 13(1):5--27, 1997.
+
+\bibitem{BaGiHeMb01}
+B.~Bank, M.~Giusti, J.~Heintz, and G.-M. Mbakop.
+\newblock Polar varieties and efficient real elimination.
+\newblock {\em Mathematische Zeitschrift}, 238(1):115--144, 2001.
+
+\bibitem{BaGiHePa05}
+B.~Bank, M.~Giusti, J.~Heintz, and L.-M. Pardo.
+\newblock Generalized polar varieties: geometry and algorithms.
+\newblock {\em Journal of Complexity}, 21(4):377--412, 2005.
+
+\bibitem{BaGiHeSaSh10}
+B.~Bank, M.~Giusti, and M.~Safey El Din E.~Schost Heintz, J.
+\newblock On the geometry of polar varieties.
+\newblock {\em Communication and Computing}, 21(1):33--83, 2010.
+
+\bibitem{BaPoRo03}
+S.~Basu, R.~Pollack, and M.-F. Roy.
+\newblock {\em Algorithms in Real Algebraic Geometry}, volume~10 of {\em
+  Algorithms and computation in mathematics}.
+\newblock Springer-Verlag, 2003.
+
+\bibitem{BaSt83}
+W.~Baur and V.~Strassen.
+\newblock The complexity of partial derivatives.
+\newblock {\em Theoret. Comput. Sci.}, 22(3):317--330, 1983.
+
+\bibitem{bochnak1998real}
+J.~Bochnak, M.~Coste, and M.-F. Roy.
+\newblock {\em Real algebraic geometry}.
+\newblock Ergebnisse der Mathematik und ihrer Grenzgebite. Springer-Verlag,
+  1998.
+
+\bibitem{EN}
+C.~D'Andrea, T.~Krick and M.~Sombra.
+\newblock Heights of varieties in muliprojective spaces and arithmetic
+  nullstellensatz.
+\newblock {\em Annales scientifiques de l'École Normale Supérieure},
+  46(4):549--627, Aug 2013.
+
+\bibitem{demazure2000bifurcations}
+M.~Demazure.
+\newblock {\em Bifurcations and catastrophes: geometry of solutions to
+  nonlinear problems}.
+\newblock Springer, 2000.
+
+\bibitem{EN62}
+J.~Eagon and D.~Northcott.
+\newblock Ideals defined by matrices and a certain complex associated with
+  them.
+\newblock {\em Proceedings of the Royal Society of London. Series A.
+  Mathematical and Physical Sciences}, 269(1337):188--204, 1962.
+
+\bibitem{ECA}
+D.~Eisenbud.
+\newblock {\em Commutative Algebra with a View Toward Algebraic Geometry},
+  volume 150 of {\em Graduate Texts in Mathematics}.
+\newblock Springer-Verlag, New York, 1st. edition, 1995.
+
+\bibitem{GiMo89}
+P.~Gianni and T.~Mora.
+\newblock Algebraic solution of systems of polynomial equations using
+  {G}roebner bases.
+\newblock In {\em AAECC}, volume 356 of {\em LNCS}, pages 247--257. Springer,
+  1989.
+
+\bibitem{ElGiSh20}
+M.~Giesbrecht, J.~Elliott and \'E.~Schost.
+\newblock On the bit complexity of finding points in connected components of a
+  smooth real hypersurface.
+\newblock {\em ISSAC}, July 2020.
+
+\bibitem{GiHaHeMoMoPa97}
+M.~Giusti, K.~H{\"a}gele, J.~Heintz, J.-E. Morais, J.-L. Monta{\~n}a, and L.-M.
+  Pardo.
+\newblock Lower bounds for diophantine approximation.
+\newblock {\em J. of Pure and Applied Algebra}, 117/118:277--317, 1997.
+
+\bibitem{GiHeMoMoPa98}
+M.~Giusti, J.~Heintz, J.-E. Morais, J.~Morgenstern, and L.-M. Pardo.
+\newblock Straight-line programs in geometric elimination theory.
+\newblock {\em Journal of Pure and Applied Algebra}, 124:101--146, 1998.
+
+\bibitem{GiHeMoPa95}
+M.~Giusti, J.~Heintz, J.-E. Morais, and L.-M. Pardo.
+\newblock When polynomial equation systems can be solved fast?
+\newblock In {\em AAECC-11}, volume 948 of {\em LNCS}, pages 205--231.
+  Springer, 1995.
+
+\bibitem{GrVo88}
+D.~Grigoriev and N.~Vorobjov.
+\newblock Solving systems of polynomial inequalities in subexponential time.
+\newblock {\em J. Symbolic Comput.}, 5:37--64, 1988.
+
+\bibitem{H}
+J.~Heintz.
+\newblock Definability and fast quantifier elimination in algebraically closed
+  fields.
+\newblock {\em Theoretical Computer Science}, 24(3):239--277, May 1983.
+
+\bibitem{Heintz1980}
+J.~Heintz and C.P. Schnorr.
+\newblock Testing polynomials which are easy to compute.
+\newblock {\em STOC '80: Proceedings of the twelfth annual ACM symposium on
+  Theory of computing}, 1980.
+
+\bibitem{JeSa10}
+G. Jeronimo and J. Sabia.
+\newblock Effective equidimensional decomposition of affine varieties.
+\newblock \emph{Journal of Pure and Applied Algebra}, 169:229--248, 2002.
+
+\bibitem{SharpEstimatesForTheEffectiveN}
+T.~Krick, L.-M. Pardo, and M.~Sombra.
+\newblock Sharp estimates for the arithmetic nullstellensatz.
+\newblock {\em Duke Mathematical Journal}, 109(3):521--598, 2001.
+
+\bibitem{Kronecker82}
+L.~Kronecker.
+\newblock Grundz{\"u}ge einer arithmetischen {T}heorie der algebraischen
+  {G}r{\"o}ssen.
+\newblock {\em Journal f\"ur die reine und angewandte Mathematik}, 92:1--122,
+  1882.
+
+\bibitem{Macaulay16}
+F.~Macaulay.
+\newblock {\em The Algebraic Theory of Modular Systems}.
+\newblock Cambridge University Press, 1916.
+
+\bibitem{Mumford76}
+D.~Mumford.
+\newblock {\em Algebraic Geometry 1 : complex algebraic varieties}.
+\newblock Classics in {M}athematics. Springer, 1976.
+
+\bibitem{Piene78}
+R.~Piene.
+\newblock Polar classes of singular varieties.
+\newblock In {\em Annales Scientifiques de l'{\'E}cole Normale Sup{\'e}rieure},
+  volume~11, pages 247--276, 1978.
+
+\bibitem{Rouillier99}
+F.~Rouillier.
+\newblock Solving zero-dimensional systems through the {R}ational {U}nivariate
+  {R}epresentation.
+\newblock {\em Applicable Algebra in Engineering, Communication and Computing},
+  9(5):433--461, 1999.
+
+\bibitem{CGR}
+E.~Schost.
+\newblock Computing parametric geometric resolutions.
+\newblock {\em Applicable Algebra in Engineering, Communication and Computing},
+  5:349--393, July 2002.
+
+\bibitem{EMP}
+E.~Schost and M.~Safey~El Din.
+\newblock Polar varieties and computation of one point in each connected
+  component of a smooth real algebraic set.
+\newblock {\em ISSAC}, pages 224--231, Aug 2003.
+
+\bibitem{SchostMohabBabySteps2011}
+E.~Schost and M.~Safey~El Din.
+\newblock A baby steps/giant steps probabilistic algorithm for computing
+  roadmaps in smooth bounded real hypersurface.
+\newblock {\em Discrete and Computational Geometry}, 5:181--220, 2011.
+
+\bibitem{TWT}
+E.~Schost and M.~Safey~El Din.
+\newblock A nearly optimal algorithm for deciding connectivity queries in
+  smooth and bounded real algebraic sets.
+\newblock {\em Journal of the ACM}, 63(6):1--48, February 2017.
+
+\bibitem{SH}
+E.~Schost and M.~Safey~El Din.
+\newblock Bit complexity for multi-homogeneous system solving application to
+  polynomial minimization.
+\newblock {\em Journal of Symbolic Computation}, 87:176--206, May 2018.
+
+\bibitem{SchostMohabBabySteps2014}
+E.~Schost, B.~Saugata, M-F Roy, and M.~Safey~El Din.
+\newblock A baby step-giant step roadmap algorithm for general algebraic sets,.
+\newblock {\em Foundations of Computational Mathematics}, 14:1117--1172, 2014.
+
+\bibitem{Shafarevich77}
+I.~Shafarevich.
+\newblock {\em Basic Algebraic Geometry 1}.
+\newblock Springer Verlag, 1977.
+
+\bibitem{Teissier88}
+B.~Teissier.
+\newblock Quelques points de l'histoire des vari\'et\'es polaires, de poncelet
+  \`a nos jours.
+\newblock In {\em S\'em. Annales Univ. Blaise Pascal}, volume~4, 1988.
+
+\end{thebibliography}

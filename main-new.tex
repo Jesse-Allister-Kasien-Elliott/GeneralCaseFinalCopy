@@ -1561,9 +1561,9 @@ that is, to prove that if it is not empty, $W(i, F)$ is generically in Noether
 position for $\pi_{i-1}$. We will prove the following, where $\D_{i,1}$ is
 from Proposition~\ref{prop:Hi12}.
 \begin{prop}\label{prop:Hi123}
-  For $i=1,\dots,\delta+1$, there exists a non-zero polynomial
+  For $i=1,\dots,\delta+1$, there exists a non-zero 
   $\D_{i,2}$ in $\C[(\A_{k,m})_{1 \le k,m \le n}]$ of degree at most
-  $6n^2(2d)^{5n}$ such that if $\mA$ does not cancel $\D_{i,1}
+  $4n^2(2d)^{4n}$ such that if $\mA$ does not cancel $\D_{i,1}
   \D_{i,2}$, then $F^{\mA}$ satisfies $\bm H_i(1)$, $\bm H_i(2)$ and
   $\bm H_i(3)$.
 \end{prop}
@@ -1817,55 +1817,6 @@ $\overline P$ is in $\C[(\A_{k,m})_{1 \le k,m \le n},X_1,\dots,X_n]$.
   this finishes the proof.
 \end{proof}
 
-
-%% \begin{lemma} 
-%% \end{lemma} 
-%% \begin{proof}
-%%   If ${\frkL}(i, F^\A, \bm u)$ is the trivial ideal, we take $P_j=1$
-%%   for all $j$ and we are done. Otherwise, as we pointed out in the
-%%   proof of the previous lemma, this ideal is radical, with all its
-%%   prime components of dimension $i-1$.
-
-%%   As a result, the existence of the polynomials $Q_j$ established
-%%   above implies that all prime components of ${\frkL}(i, F^\A, \bm u)$
-%%   intersect $\C((\A_{k,m})_{1 \le k,m \le n})[X_1,\dots,X_{i-1}]$
-%%   trivially; in particular, ${\frkL}(i, F^\A, \bm u) \cap
-%%   \C(\A)[X_1,\dots,X_{i-1}] = \{ 0\}$. Thus, if we denote by $\frak K$
-%%   the extension of ${\frkL}(i, F^\A, \bm u) \cap
-%%   \C(\A)[X_1,\dots,X_n]$ given by
-%%   \[
-%%   \frak K :=({\frkL}(i, F^\A, \bm u) \cap \C(\A)[X_1,\dots,X_n])\cdot \C(\frak A, X_1,\dots,X_{i-1})[X_i,\dots,X_n],
-%%   \]
-%%   Thence,
-%%   \begin{equation}\label{eq:3}
-%%     \C(\frak A, X_1,\dots,X_{i-1}) \to \C(\frak A, X_1,\dots,X_{i-1})[X_i,\dots,X_n]/\frak K
-%%   \end{equation}
-%%   is an injective ring extension, and $\C(\frak A,
-%%   X_1,\dots,X_{i-1})[X_i,\dots,X_n]/\frak K$ is a finite-dimensional
-%%   vector space over $\C(\frak A, X_1,\dots,X_{i-1})$. For
-%%   $j=i,\dots,n$, we can then define the minimal polynomial $P_j$ of
-%%   (the multiplication by) $X_j$ in the extension~\eqref{eq:3}; this is
-%%   a monic polynomial in $\C(\A)(X_1,\dots,X_{i-1})[X_j]$.  Using the
-%%   existence of $Q_j$ monic in $X_j$, we now prove that $P_j$ is
-%%   polynomial in $X_1,\dots,X_{i-1}$; we will conclude the proof using
-%%   known degree bounds on $P_j$.
-
-%%  Now, we pointed out that 
-  
-%%   Now, consider the polynomials  ${\frkL}(i, F^\A, \bm u)$, 
-%%   \[
-%%   F^\A,\ [L_1~\cdots~L_p]\cdot \jac(F^\A, i),\ u_1 L_1 + \cdots + u_p L_p -1
-%%   \]
-%%   in the polynomial ring in $n^2+n+p$ variables
-%%   $\C[\A,X_1,\dots,X_n,L_1,\dots,L_p]$, let $\frak W$ be their
-%%   zero-set, and let $\deg(\frak W)$ be its degree, in the sense
-%%   of~\cite{H}. Then, Proposition~1 in~\cite{CGR} implies that $P_j$
-%%   has degree at most $\deg(\frak W)$. Since all polynomials defining
-%%   $\frak W$, seen in $\C[\A,X_1,\dots,X_n,L_1,\dots,L_p]$, have degree
-%%   at most $2d$, the B\'ezout inequality of~\cite{H} gives
-%%   \[\deg(P_j) \le (2d)^{n+p-i+1} \le (2d)^{2n}.\qedhere\]
-%% \end{proof}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Applying the effective Nullstellensatz}
@@ -1972,133 +1923,142 @@ the degree bound.
 \end{proof}
 
 \noindent
-To estimate the degree of $\D_{i}$, what remains is to give an upper
-bound on the degrees of $\alpha_i,\dots,\alpha_n$. This will come as an
-application of the effective Nullstellensatz given in~\cite{EN}, for
-which we first need to determine degree bounds, separately in $\Xb,\Lb,T$
-and $\A,$ of the polynomials in the membership relationship. We have
+To estimate the degree of $\D_{i,2}$, what remains is to give an upper
+bound on the degrees of $\alpha_i,\dots,\alpha_n$. This will come as
+an application of the effective Nullstellensatz given in~\cite{EN}
+over the function field $\C((\A_{k,m})_{1 \le k,m \le n},\frak
+u_1,\dots,\frak u_p)$. For this, we first need to determine degree
+bounds, separately in the actual indeterminates $
+X_1,\dots,X_n,L_1,\dots,L_p,T$ and in the ``constants'' $(\A_{k,m})_{1
+  \le k,m \le n},\frak u_1,\dots,\frak u_p$, of the polynomials in the
+membership relationship; we denote the former by $\deg_{\bm X, \bm L,
+  T}$ and the latter by $\deg_{\A,\frak u}$. Then, we have
 \begin{align*}
 \deg_{\Xb,\Lb,T}
-\left\{ 
-F^{\A},\lagFfA, \udl-1
-\right\}
+\left\{ G_1,\dots,G_{n+p-i+1}, \frak u_1 L_1 + \cdots + \frak u_p L_p-1\right\}
 \leq d, ~
 \deg_{\Xb,\Lb,T}(1-T\pjb) \leq (2d)^{2n} +1, 
 \end{align*}
-and we have 
+and 
 \begin{align*}
-\deg_{\A}  
-\left\{ 
-F^{\A},\lagFfA, \udl-1
-\right\} 
-\leq d,~\textrm{and }
-\deg_{\A}(1-T\pjb)& \leq (2d)^{2n}.
+\deg_{\A,\frak u}  
+\left\{  G_1,\dots,G_{n+p-i+1}, \frak u_1 L_1 + \cdots + \frak u_p L_p-1\right\} 
+\leq d~\textrm{and}
+\deg_{\A,\frak u}(1-T\pjb)& \leq (2d)^{2n}.
 \end{align*}
-For each $j \in \{i,\hdots,n-p+1\},$ since  the number of equations in the ideal we consider is less than or equal to the ambient dimension, it follows from \cite[Theorem 0.5]{EN} that  
+For each $j \in \{i,\hdots,n-p+1\},$ since the number of equations in
+the ideal we consider is less than or equal to the ambient dimension $n+p+1$,
+it follows from \cite[Theorem 0.5]{EN} that
 \[
-\deg(\alpha_j) \le (2n+2)d^{2n+1}((2d)^{2n}+1);
+\deg(A_j)  \le (2n+2)d^{2n+1}((2d)^{2n}+1);
 \]
-we will use
-the slightly less precise bound \[\deg(\alpha_j) \le 4n(2d)^{4n}.\] Since $\D_{i,1}$ has degree at most
-$nd^{5n}$ and all $D_j$'s have degree at most $(2d)^{2n}$, this gives
-the upper bound
-$$\deg(\D_i) \le nd^{5n} +  4n^2(2d)^{4n} + n(2d)^{2n} \leq 6n^2(2d)^{5n}.$$
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Proof of $\textbf{H}_i(3)$}
-
-Now assume that $\ub \in \mathscr{O}$, where $\sO$ is from
-$\eqref{eq:sO}.$ It remains to show that if $\mA \in \C^{n\times n}$
-does not cancel $\D_{i}$ then
-\[
- \C[\Xb_{\leq i-1}]\rightarrow \C[\Xb]/\IiA
-\]
-is integral. 
-\noindent
-By Lemma \ref{lem:6.4}, the extension
-\[
- \C[\Xb_{\leq i-1}]\rightarrow \C[\Xb]/(\IilA \cap \C[\Xb])
-\]
-is integral, and thus polynomials 
-\[
-Q_j \in \C[\Xb_{\leq i-1},T]
-\]
-exists, monic in $T$, for each $j \in \{i,\hdots,n-p+1\},$ with
-\begin{align*}
-Q_j(X_1,\hdots,X_{i-1},X_j) \in \IilA \cap \C[\Xb].
-\end{align*}
-%
-Since $\ub \in \sO$, by Proposition~\ref{prop:polarVs1}, $Q_j \in \IiAr.$ Hence, there exists some $k \in \mathbb{N}-\{0\}$ with $Q_j^{k} \in\IiA$, where $Q_j^k$ is monic in $X_j,$ and therefore
-\[
- \C[\Xb_{\leq i-1}]\rightarrow \C[\Xb]/\IiA
-\]
-is integral. This completes the proof of Theorem \ref{theo:NoetherPositionG}.
+we will use the slightly less precise bound \[\deg(\alpha_j) \le
+4n(2d)^{4n}.\] In particular, the same bound holds for the degree
+of $\alpha_j$, and this gives
+\[\deg(\D_{i,2}) \le 4n^2(2d)^{4n}.\]
+This concludes the proof of Proposition~\ref{prop:Hi123}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Proof of $\textbf{H}_i^{'}$}\label{Sec:Hip}
+\section{Genericity of $\textbf{H}_i^{'}$}\label{Sec:Hip}
 
-Consider a sequence of polynomials $F= (f_1,\hdots,f_p) \in
-\ZZ[X_1,\hdots,X_n]^p,$ with degrees at most $d$, defining a radical
-ideal $\langle F \rangle \subset \C[X_1,\hdots,X_n]$ and a smooth
-variety $V=V(F) \subset \C^n$ with $\dim V = n-p$.  We now assume that
-$F$ satisfies $\textbf{H}_i$, and we prove the following: {\em there
-  exists a non-zero polynomial
-  \[
-  \Xi_{i,1} \in
-  \C[S_1,\dots,S_{i-1}]
-  \]
-  of degree at most $d^{3n}$ such that if $
-  \bm \sigma = (\sigma_1,\hdots,\sigma_{i-1}) \in \C^{i-1}$ does not cancel
-  $\Xi_{i,1}$, then for any $(\xb,\lb) \in \sW(\pi_i,V(F))$, the Jacobian of the system of polynomials
-  $$\left(X_1-\sigma_1,\dots,X_{i-1}-\sigma_{i-1},F,\lagF\right)$$ has full rank $n+p-1$.}
+We still consider a sequence of polynomials $F= (f_1,\hdots,f_p) \in
+\C[X_1,\hdots,X_n]^p$ as before; in particular, recall we write
+$\delta = n-p$ and that $d$ is an upper bound on the degrees of
+$f_1,\dots,f_p$.  Besides, we now also assume that $F$ satisfies all
+assumptions $\bm H_i$, and we prove the following.
 
-\smallskip
-
-Let $\Psi: \C^{n+p} \times \C^{i-1} \rightarrow \C^{n}$ be the mapping defined by the polynomials
+\begin{prop}\label{prop:hi2}
+  Under the assumptions above, for $i=1,\dots,\delta+1$, there exists
+  a non-zero polynomial
+  \[  \Xi_{i} \in \C[S_1,\dots,S_{i-1}] \]
+  of degree at most $d^{3n}$ such that if $ \bm \sigma =
+  (\sigma_1,\hdots,\sigma_{i-1}) \in \C^{i-1}$ does not cancel
+  $\Xi_{i}$, then for any $\bm u=(u_1,\dots,u_p)$ in $\C^p$,
+ $0$ is a regular value of the $n+p$ polynomials in $\C[X_1,\dots,X_n,L_1,\dots,L_p]$
+  \begin{equation*}
+    X_1 - \sigma_1, \dots, X_{i-1} - \sigma_{i-1},\ F,\ [L_1~\cdots~L_p]\cdot \jac(F, i),\ u_1 L_1 + \cdots + u_p L_p -1.
+  \end{equation*}
+\end{prop}
+The proof occupies the rest of this section; as usual, the index $i$
+is fixed throughout.  Let $\Psi: \C^{n+p} \times \C^{i-1} \rightarrow
+\C^{n}$ be the mapping defined by the $n+p-1$ polynomials
 \[
-  \left(X_1-S_1,\dots,X_{i-1}-S_{i-1},F,\lagF\right).
+X_1 - S_1, \dots, X_{i-1} - S_{i-1},\ F,\ [L_1~\cdots~L_p]\cdot \jac(F, i)
 \]
-%
+in indeterminates $X_1,\dots,X_n,L_1,\hdots,L_p,S_1,\dots,S_{i-1}$.
 \begin{lemma}
-  $\bz$ is a regular value of $\Psi.$
+  $0$ is a regular value of $\Psi$ in the open set $\Omega \times
+  \C^{i-1} \subset \C^{n+p} \times \C^{i-1}$, here $\Omega \subset
+  \C^{n+p}$ is defined by $(L_1,\dots,L_p) \ne (0,\dots,0)$.
 \end{lemma}
 \begin{proof}
-At all zeros $(\xb,\lb,\bm \sigma)$ of $\Psi,$ the Jacobian matrix of
-$\Psi$ has full rank $n+p-1$. Indeed, indexing columns 
-    by 
-    \[
-    X_1,\dots,X_n,L_1,\hdots,L_p,S_1,\dots,S_{i-1},
-    \]
-    this matrix is equal to
-    \[
-    \left[ 
+  We claim that at all zeros $(\xb,\bm \ell,\bm \sigma)$ of $\Psi$,
+  with $\bm \ell$ non-zero, the Jacobian matrix of $\Psi$ has full
+  rank $n+p-1$ at $(\xb,\bm \ell,\bm \sigma)$. Indeed, indexing columns by
+  \[
+  X_1,\dots,X_n,L_1,\hdots,L_p,S_1,\dots,S_{i-1},
+  \]
+  this matrix is equal to
+  \[
+  \left[ 
     \begin{array}{cc}
-    \begin{array}{cc}
-    \bI_{i-1}     & \bz_{(i-1)\times (n+p-i+1)}  
-    \end{array}  &-\bI_{i-1}\\
-    \jac_{(\xb,\bm l)}\left( F,\lb \cdot \jac_{\xb} (F,i)  \right) & \bz_{(n+p-i)\times (i-1)}
+      \begin{array}{cc}
+        \bm I_{i-1}     & \bz_{(i-1)\times (n+p-i+1)}  
+      \end{array}  &-\bm I_{i-1}\\
+      \jac_{(\bm X,\bm L)}\left( F,\ \bm L \cdot \jac (F,i)  \right) & \bz_{(n+p-i)\times (i-1)}
     \end{array}
     \right].
-    \]
-    Recall that by $\bm G_i(2)$, the Jacobian matrix $\jac_{(\xb,\bm l)}\left( F,\lb \cdot \jac_{\xb} (F,i) \right)$ has full rank $n+p-i$ at any zero $(\xb,\bm l)$. Hence, the entire    
-    matrix must have full rank $n+p-1$. Thus,  $\bz$ is a regular value of $\Psi.$
-    \end{proof}
+  \]
+  Because $\ell$ is non-zero, $\bm H_i(2)$ shows that the Jacobian
+  matrix $\jac_{\bm X,\bm L}\left(F,\ [L_1~\cdots~L_p] \cdot \jac
+  (F,i) \right)$ has full rank $n+p-i$ at $(\xb,\bm \ell)$. Hence, the
+  entire matrix must have full rank $n+p-1$ at $(\xb,\bm \ell,\bm
+  \sigma)$, and $0$ is a regular value of $\Psi$.
+\end{proof}
 
 Since all polynomials defining $\Psi$ have degree at most $d$, it
 follows by Proposition~\ref{prop:weak_t} that there exists a non-zero
-polynomial $\Xi_{i,1}$ in $\C[S_1,\dots,S_{i-1}]$ of degree at most
-$d^{(n+p)+(n)}\leq d^{3n},$ with the property that, if $\Xi_{i,1}(\bm \sigma)\neq 0$ then at any root $(\xb,\lb)$ of
-\[
-\left(X_1-\sigma_1,\dots,X_{i-1}-\sigma_{i-1},F,\lagF\right),
-\] 
-  the Jacobian matrix of these
-equations has full rank $n+p-1$. 
+polynomial $\Xi_{i}$ in $\C[S_1,\dots,S_{i-1}]$ of degree at most
+$d^{(n+p)+(n)}\leq d^{3n},$ with the property that, if $\Xi_{i}(\bm
+\sigma)\neq 0$ then at any root $(\xb,\bm\ell)$ of the induced 
+mapping $\psi_{\bm\sigma}$ given by
+\begin{equation}\label{eqdef:fiber}
+X_1-\sigma_1,\dots,X_{i-1}-\sigma_{i-1},\ F,\ [L_1~\cdots~L_p]\cdot \jac(F, i),  
+\end{equation}
+if $\bm \ell$ non-zero, then the Jacobian matrix of these equations
+has full rank $n+p-1$ at $(\xb,\bm\ell)$.
 
+We can now finish the proof of Proposition~\ref{prop:hi2}, along the
+lines of the proof of Lemma~\ref{prop:RadLagPolarV}. Suppose that
+$\Xi_{i}(\bm \sigma)$ is non-zero, let $\bm u = (u_1,\dots,u_p)$ be
+arbitrary in $\C^p$ and take $(\xb,\bm \ell)$ in $\C^{n+p}$ that
+cancels the $n+p$ polynomials
+\begin{equation}\label{eqdef:fiber2} 
+X_1 - \sigma_1, \dots, X_{i-1} - \sigma_{i-1},\ F,\ [L_1~\cdots~L_p]\cdot \jac(F, i),\ u_1 L_1 + \cdots + u_p L_p -1. 
+\end{equation}
+Since $\bm\ell$ is necessarily non-zero, the previous discussion
+implies that the Jacobian of the polynomials in
+Eq.~\eqref{eqdef:fiber} has full rank $n+p-1$ at $(\xb,\bm\ell)$.
+This Jacobian matrix is equal to
+\[
+\left[ 
+  \begin{array}{cc}
+    \bm I_{i-1} ~ \bm 0_{(i-1) \times (n-i+1)} & \bm 0_{(i-1) \times p}\\
+    \jac(F) & {\bm 0}_{p \times p}\\
+    *** &  \jac(F,i)^T 
+    \end{array}
+  \right].
+\]
+As in the proof of Lemma~\ref{prop:RadLagPolarV}, if we suppose that
+$[ {\bm 0}_{1 \times n} ~ u_1~ \cdots ~u_p]$ is in the row-space of
+this matrix, considering the last $p$ columns and multiplying by
+$\bm\ell^T \in \C^{p\times 1}$ leads us to a contradiction. This
+proves that the Jacobian matrix of the equations in
+Eq.~\eqref{eqdef:fiber2} has full rank $n+p$ at $(\bm x,\bm \ell)$, as
+claimed.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -217,7 +217,7 @@
 %
 %
 %
-\title{Bit complexity for computing one point on each connected component of a smooth real algebraic set}
+\title{Bit complexity for computing one point in each connected component of a smooth real algebraic set}
 \author{Jesse Elliott$\dagger$, Mark Giesbrecht$\dagger$, Eric Schost$\dagger$  \\
         \small $\dagger$David R. Cheriton School of Computer Science, University of Waterloo, On, Canada \\
 }
@@ -1945,7 +1945,7 @@ coordinates), and we prove the following.
 \begin{prop}\label{prop:hi2}
  For $i=1,\dots,\delta+1$, if $F$ satisfies $\bm H_i$, there exists a
  non-zero polynomial $\Xi_{i} \in \C[S_1,\dots,S_{i-1}]$ of degree at
- most $d^{3n}$ such that if $ \bm \sigma =
+ most $d^{4n}$ such that if $ \bm \sigma =
  (\sigma_1,\hdots,\sigma_{i-1}) \in \C^{i-1}$ does not cancel
  $\Xi_{i}$, then $\bm \sigma$ satisfies assumption $\bm H'_i$, that
  is, $0$ is a regular value of the $n+p-1$ polynomials
@@ -1954,7 +1954,7 @@ coordinates), and we prove the following.
 \end{prop}
 \begin{proof}
   Let $\Psi: \C^{n+p} \times \C^{i-1} \rightarrow
-  \C^{n}$ be the mapping defined by the $n+p-1$ polynomials
+  \C^{n+p-1}$ be the mapping defined by the $n+p-1$ polynomials
   \[
   X_1 - S_1, \dots, X_{i-1} - S_{i-1},\ F,\ [L_1~\cdots~L_p]\cdot \jac(F, i)
   \]
@@ -1979,8 +1979,8 @@ coordinates), and we prove the following.
     \end{array}
     \right].
   \]
-  Because $\ell$ is non-zero, $\bm H_i(2)$ shows that the Jacobian
-  matrix $\jac_{\bm X,\bm L}\left(F,\ [L_1~\cdots~L_p] \cdot \jac
+  Because $\bm \ell$ is non-zero, $\bm H_i(2)$ shows that the Jacobian
+  matrix $\jac_{(\bm X,\bm L)}\left(F,\ [L_1~\cdots~L_p] \cdot \jac
   (F,i) \right)$ has full rank $n+p-i$ at $(\xb,\bm \ell)$. Hence, the
   entire matrix must have full rank $n+p-1$ at $(\xb,\bm \ell,\bm
   \sigma)$, and $0$ is a regular value of $\Psi$.
@@ -1988,7 +1988,7 @@ coordinates), and we prove the following.
   Since all polynomials defining $\Psi$ have degree at most $d$, it
   follows by Proposition~\ref{prop:weak_t} that there exists a non-zero
   polynomial $\Xi_{i}$ in $\C[S_1,\dots,S_{i-1}]$ of degree at most
-  $d^{(n+p)+(n)}\leq d^{3n},$ with the property that, if $\Xi_{i}(\bm
+  $d^{(n+p)+(n+p-1)}\leq d^{4n},$ with the property that, if $\Xi_{i}(\bm
   \sigma)\neq 0$ then at any root $(\xb,\bm\ell)$ of the induced 
   mapping $\psi_{\bm\sigma}$ given by
   \begin{equation}\label{eqdef:fiber}
@@ -2099,7 +2099,7 @@ zero-dimensional parameterization of $Z'_i$.
 The algorithm of~\cite{SH} also requires that the input system be
 given by a straight-line program. We build it (at Step 3) in the
 straightforward manner already suggested in the introduction: given
-$F=(f_1,\hdots,f_p)$ in $\C[X_1,\hdots,X_n]$, we can build a
+$F=(f_1,\hdots,f_p)$ in $\C[X_1,\hdots,X_n]^p$, we can build a
 straight-line program that evaluates each $f_i$ in $O(d^n)$
 operations, by computing all monomials of degree up to $d$,
 multiplying them by the corresponding coefficients in $f_i$, and
@@ -2126,10 +2126,10 @@ $O^{\sim}(d^n).$
   \KwIn{$F=(f_1,\hdots,f_p) \in \ZZ[X_1,\hdots,X_n]^p$ with $\deg(f_i) \leq d$ and $\htt(f_i) \leq b$, and $0 < \epsilon < 1$. 
     Assume that $d \ge 2$.    }
   \KwOut{$n-p+1$ zero-dimensional parameterizations, the union of whose zeros
-    includes at least one point in each connected component of $V(F) \cap \R^n$, with probability at least $1-\epsilon$} 
+    includes at least one point in each connected component of $V(F) \cap \R^n$, with probability at least $1-\epsilon$.} 
   
   \nl Construct \[S := \{1,2,\hdots,\lceil 4\epsilon^{-1}6n^3(2d)^{5n} \rceil\},\] \[T :=
-  \{1,2,\hdots,\lceil 4\epsilon^{-1}nd^{3n} \rceil \},\] 
+  \{1,2,\hdots,\lceil 4\epsilon^{-1}nd^{4n} \rceil \},\] 
   \[R :=
   \{1,2,\hdots,\lceil 4\epsilon^{-1}nd^{2n} \rceil \},\]
   and  choose  $\mA \in
@@ -2160,7 +2160,7 @@ satisfies ${\bm H}_i$, $\bm \sigma $ satisfies $\bm H_i^{'}$ and $\bm
 u$ satisfies $\bm H_i''$, and if $\scrQ_i$ is a zero-dimensional
 parametrization of the solutions of the equations~\eqref{eq:step3} at Step 3 (for all
 $i \in \{1,\hdots,n-p+1\}$), Theorem~2 in~\cite{EMP} establishes that
-the output returned in Step 7 will contain one point on each connected
+the output returned in Step 7 will contain one point in each connected
 component of $V \cap \R^n$. (The claim made in
 Subsection~\ref{ssec:algo} relied on an assertation that has since
 been proved, in Corollary~\ref{coro:8}.)
@@ -2228,7 +2228,7 @@ $\Xi_i\in \C[S_1,\dots,S_{p+i-1}]$ be the polynomials from
 Proposition~\ref{prop:hi2} applied to $F^{\mA}.$ Denote by $\Xi :=
 \prod_{i=1}^n \Xi_i,$ and note that
 \begin{align}
-    \deg( \Xi)= \sum_{i=1}^{n-p+1} \deg( \Xi_i) \leq nd^{3n}.
+    \deg( \Xi)= \sum_{i=1}^{n-p+1} \deg( \Xi_i) \leq nd^{4n}.
 \end{align}
 If $\bm \sigma \in \C^{i-1}$ does not cancel $\Xi$, then it satisfies
 $\bm H_i^{'}$ for all $i \in \{1,\hdots,n-p+1\}.$ Assume that this is
@@ -2262,7 +2262,7 @@ recall that we choose
 uniformly at random, with
 \begin{align*}
 S &= \{1,2,\hdots,\lceil 4\epsilon^{-1}6n^3(2d)^{5n}\rceil \},\\
-T &= \{1,2,\hdots,\lceil 4\epsilon^{-1}nd^{3n} \rceil \},\\
+T &= \{1,2,\hdots,\lceil 4\epsilon^{-1}nd^{4n} \rceil \},\\
 R &= \{1,2,\hdots,\lceil 4\epsilon^{-1}nd^{2n} \rceil \}.
 \end{align*}
 Using the Demillo-Lipton-Schwartz-Zippel lemma, we otbain
@@ -2319,6 +2319,7 @@ revisited using the techniques introduced here. Indeed, we have accomplished som
 
 %\blinddocument
 \bibliographystyle{plain}
+%\bibliography{main-new.bbl}
 \bibliography{refs.bib}
 %\printbibliography
 

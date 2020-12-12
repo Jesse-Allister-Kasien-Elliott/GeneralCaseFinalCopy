@@ -36,7 +36,7 @@ B.~Bank, M.~Giusti, J.~Heintz, and L.-M. Pardo.
 \newblock {\em Journal of Complexity}, 21(4):377--412, 2005.
 
 \bibitem{BaGiHeSaSh10}
-B.~Bank, M.~Giusti, and M.~Safey El Din E.~Schost Heintz, J.
+B.~Bank, M.~Giusti, J.~Heintz, M.~Safey El~Din, and \'E. Schost.
 \newblock On the geometry of polar varieties.
 \newblock {\em Communication and Computing}, 21(1):33--83, 2010.
 
@@ -57,8 +57,13 @@ J.~Bochnak, M.~Coste, and M.-F. Roy.
 \newblock Ergebnisse der Mathematik und ihrer Grenzgebite. Springer-Verlag,
   1998.
 
+\bibitem{DaSc04}
+X.~Dahan and {\'E}.~Schost.
+\newblock Sharp estimates for triangular sets.
+\newblock In {\em ISSAC}, pages 103--110. ACM, 2004.
+
 \bibitem{EN}
-C.~D'Andrea, T.~Krick and M.~Sombra.
+C.~D'Andrea, T.~Krick, and M.~Sombra.
 \newblock Heights of varieties in muliprojective spaces and arithmetic
   nullstellensatz.
 \newblock {\em Annales scientifiques de l'École Normale Supérieure},
@@ -83,18 +88,18 @@ D.~Eisenbud.
   volume 150 of {\em Graduate Texts in Mathematics}.
 \newblock Springer-Verlag, New York, 1st. edition, 1995.
 
+\bibitem{ElGiSc20}
+J.~Elliott, M.~Giesbrecht, and \'E. Schost.
+\newblock On the bit complexity of finding points in connected components of a
+  smooth real hypersurface.
+\newblock In {\em ISSAC}, pages 170--177. ACM, 2020.
+
 \bibitem{GiMo89}
 P.~Gianni and T.~Mora.
 \newblock Algebraic solution of systems of polynomial equations using
   {G}roebner bases.
 \newblock In {\em AAECC}, volume 356 of {\em LNCS}, pages 247--257. Springer,
   1989.
-
-\bibitem{ElGiSh20}
-M.~Giesbrecht, J.~Elliott and \'E.~Schost.
-\newblock On the bit complexity of finding points in connected components of a
-  smooth real hypersurface.
-\newblock {\em ISSAC}, July 2020.
 
 \bibitem{GiHaHeMoMoPa97}
 M.~Giusti, K.~H{\"a}gele, J.~Heintz, J.-E. Morais, J.-L. Monta{\~n}a, and L.-M.
@@ -131,9 +136,9 @@ J.~Heintz and C.P. Schnorr.
   Theory of computing}, 1980.
 
 \bibitem{JeSa10}
-G. Jeronimo and J. Sabia.
+G.~Jeronimo and J.~Sabia.
 \newblock Effective equidimensional decomposition of affine varieties.
-\newblock \emph{Journal of Pure and Applied Algebra}, 169:229--248, 2002.
+\newblock {\em Journal of Pure and Applied Algebra}, 169:229--248, 2002.
 
 \bibitem{SharpEstimatesForTheEffectiveN}
 T.~Krick, L.-M. Pardo, and M.~Sombra.
@@ -169,12 +174,6 @@ F.~Rouillier.
   {R}epresentation.
 \newblock {\em Applicable Algebra in Engineering, Communication and Computing},
   9(5):433--461, 1999.
-
-\bibitem{CGR}
-E.~Schost.
-\newblock Computing parametric geometric resolutions.
-\newblock {\em Applicable Algebra in Engineering, Communication and Computing},
-  5:349--393, July 2002.
 
 \bibitem{EMP}
 E.~Schost and M.~Safey~El Din.

@@ -697,37 +697,8 @@ equations
 and let $Z_{\bm u} \subset \C^{N+q}$ be its zero-set. Using the linear
 equation $u_1 L_1 + \cdots + u_q L_q -1$ allows us to discard
 solutions where $L_1 = \cdots =L_q = 0$, but unlucky choices of $\bm
-u$ may discard other components as well. The following lemma makes this 
-precise.
-
-%% \begin{lemma}\label{lemma:Z_W}
-%%   
-%% \end{lemma}
-%% \begin{proof}
-%%   Put $W := \overline{\mu(Z')}$, so that we want to prove the equality $\X=W$.
-
-%%   Let $C$ be an irreducible component of $Z'.$ There exists an open
-%%   and dense subset $C' \subset C$ such that for all $(\yb,\bm \ell)$
-%%   in $C'$, $\yb$ is in $\C^N$ and $\bm\ell$ is not identically
-%%   zero. For such points, $\bm A(\yb)$ has rank less than $m$; since
-%%   $b_1(\yb)=\cdots=b_s(\yb)=0$, $\yb$ is in $\X$. In other words,
-%%   $\mu(C')$ is contained in $\X$.  Taking the union over all
-%%   irreducible components $C$ of $Z'$, then the Zariski closure, yields
-%%   $ \overline{\mu(\cup_{C} C')} \subset {\X}$.
-%%   Since $\overline{\cup_{C} C'} = Z'$,
-%%   we get 
-%%   \[
-%%   W = \overline{\mu(Z')} = \overline{\mu(\overline{\cup_{C} C'})}
-%%   = \overline{\mu(\cup_{C} C')} \subset {\X},
-%%   \]
-%%   where the last inclusion follows from the previous paragraph. On the
-%%   other hand, by construction, $\X$ is contained in $\mu(Z')$, since
-%%   for any $\yb$ in $\X$, there exists $\bm \ell$ non-zero in $\C^q$
-%%   such that $ \bm \ell \cdot \bm A(\yb) = \bm 0.$ Hence, we have
-%%   \[
-%%   \X\subset\mu(Z')\subset \overline{\mu(Z')} = W \subset{\X}.\qedhere
-%%   \]
-%% \end{proof}
+u$ may discard other components as well. The following proposition
+makes this more precise.
 
 \begin{prop}\label{prop:projection}
   For any $\bm u$ in $\C^q$, we have the inclusion $\mu(Z_{\bm u})
@@ -1235,7 +1206,7 @@ proposition will allow us to quantify bad choices.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{The algorithm}
+\subsection{The algorithm}\label{ssec:algo}
 
 All notation being as before, we can now give the outline of Safey El
 Din and Schost's algorithm for computing at least one point in each
@@ -1313,7 +1284,10 @@ Applying Proposition~\ref{prop:projection} to the polynomials
 in~\eqref{eq:syst2} shows that this property holds for a generic
 choice of $\bm u$ (notice that since~\eqref{eq:syst2} has finitely
 many solutions, taking the Zariski closure, as done in the
-proposition, is not necessary in this case).
+proposition, is not necessary in this case). If this is the case, the
+previous discussion shows that solving the systems~\eqref{eq:syst2},
+for $i=1,\dots,\delta+1$, and projecting their solutions on the
+$X_1,\dots,X_n$-space, solves our problem.
 
 The next three sections prove the claims made above on the genericity
 of these properties: $\bm H_i(1)$ and $\bm H_i(2)$ in
@@ -1962,46 +1936,42 @@ This concludes the proof of Proposition~\ref{prop:Hi123}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Genericity of $\textbf{H}_i^{'}$}\label{Sec:Hip}
+\section{Genericity of $\textbf{H}_i^{'}$ and consequences}\label{Sec:Hip}
 
 We still consider a sequence of polynomials $F= (f_1,\hdots,f_p) \in
 \C[X_1,\hdots,X_n]^p$ as before; in particular, recall we write
 $\delta = n-p$ and that $d$ is an upper bound on the degrees of
 $f_1,\dots,f_p$.  Besides, we now also assume that $F$ satisfies all
-assumptions $\bm H_i$, and we prove the following.
+assumptions $\bm H_i$ (for instance, because we are in generic
+coordinates), and we prove the following.
 
 \begin{prop}\label{prop:hi2}
-  Under the assumptions above, for $i=1,\dots,\delta+1$, there exists
-  a non-zero polynomial
-  \[  \Xi_{i} \in \C[S_1,\dots,S_{i-1}] \]
-  of degree at most $d^{3n}$ such that if $ \bm \sigma =
-  (\sigma_1,\hdots,\sigma_{i-1}) \in \C^{i-1}$ does not cancel
-  $\Xi_{i}$, then for any $\bm u=(u_1,\dots,u_p)$ in $\C^p$,
- $0$ is a regular value of the $n+p$ polynomials in $\C[X_1,\dots,X_n,L_1,\dots,L_p]$
-  \begin{equation*}
-    X_1 - \sigma_1, \dots, X_{i-1} - \sigma_{i-1},\ F,\ [L_1~\cdots~L_p]\cdot \jac(F, i),\ u_1 L_1 + \cdots + u_p L_p -1.
-  \end{equation*}
+ For $i=1,\dots,\delta+1$, if $F$ satisfies $\bm H_i$, there exists a
+ non-zero polynomial $\Xi_{i} \in \C[S_1,\dots,S_{i-1}]$ of degree at
+ most $d^{3n}$ such that if $ \bm \sigma =
+ (\sigma_1,\hdots,\sigma_{i-1}) \in \C^{i-1}$ does not cancel
+ $\Xi_{i}$, then $\bm \sigma$ satisfies assumption $\bm H'_i$, that
+ is, $0$ is a regular value of the $n+p-1$ polynomials
+  \[ X_1-\sigma_1,\dots,X_{i-1}-\sigma_{i-1},\ F,\ [L_1~\cdots~L_p]\cdot \jac(F, i)\]
+  in the open set defined by $(L_1,\dots,L_p) \ne (0,\dots,0)$.
 \end{prop}
-The proof occupies the rest of this section; as usual, the index $i$
-is fixed throughout.  Let $\Psi: \C^{n+p} \times \C^{i-1} \rightarrow
-\C^{n}$ be the mapping defined by the $n+p-1$ polynomials
-\[
-X_1 - S_1, \dots, X_{i-1} - S_{i-1},\ F,\ [L_1~\cdots~L_p]\cdot \jac(F, i)
-\]
-in indeterminates $X_1,\dots,X_n,L_1,\hdots,L_p,S_1,\dots,S_{i-1}$.
-\begin{lemma}
-  $0$ is a regular value of $\Psi$ in the open set $\Omega \times
-  \C^{i-1} \subset \C^{n+p} \times \C^{i-1}$, here $\Omega \subset
-  \C^{n+p}$ is defined by $(L_1,\dots,L_p) \ne (0,\dots,0)$.
-\end{lemma}
 \begin{proof}
-  We claim that at all zeros $(\xb,\bm \ell,\bm \sigma)$ of $\Psi$,
-  with $\bm \ell$ non-zero, the Jacobian matrix of $\Psi$ has full
-  rank $n+p-1$ at $(\xb,\bm \ell,\bm \sigma)$. Indeed, indexing columns by
+  Let $\Psi: \C^{n+p} \times \C^{i-1} \rightarrow
+  \C^{n}$ be the mapping defined by the $n+p-1$ polynomials
+  \[
+  X_1 - S_1, \dots, X_{i-1} - S_{i-1},\ F,\ [L_1~\cdots~L_p]\cdot \jac(F, i)
+  \]
+  in indeterminates $X_1,\dots,X_n,L_1,\hdots,L_p,S_1,\dots,S_{i-1}$.
+  We claim that $0$ is a regular value of $\Psi$ in the open set $\Omega
+  \times \C^{i-1} \subset \C^{n+p} \times \C^{i-1}$, here $\Omega
+  \subset \C^{n+p}$ is defined by $(L_1,\dots,L_p) \ne (0,\dots,0)$.
+  
+  Consider a zero $(\xb,\bm \ell,\bm \sigma)$ of $\Psi$, with $\bm \ell$
+  non-zero. Indexing columns by
   \[
   X_1,\dots,X_n,L_1,\hdots,L_p,S_1,\dots,S_{i-1},
   \]
-  this matrix is equal to
+  the Jacobian matrix of $\Psi$ is equal to
   \[
   \left[ 
     \begin{array}{cc}
@@ -2017,164 +1987,221 @@ in indeterminates $X_1,\dots,X_n,L_1,\hdots,L_p,S_1,\dots,S_{i-1}$.
   (F,i) \right)$ has full rank $n+p-i$ at $(\xb,\bm \ell)$. Hence, the
   entire matrix must have full rank $n+p-1$ at $(\xb,\bm \ell,\bm
   \sigma)$, and $0$ is a regular value of $\Psi$.
+  
+  Since all polynomials defining $\Psi$ have degree at most $d$, it
+  follows by Proposition~\ref{prop:weak_t} that there exists a non-zero
+  polynomial $\Xi_{i}$ in $\C[S_1,\dots,S_{i-1}]$ of degree at most
+  $d^{(n+p)+(n)}\leq d^{3n},$ with the property that, if $\Xi_{i}(\bm
+  \sigma)\neq 0$ then at any root $(\xb,\bm\ell)$ of the induced 
+  mapping $\psi_{\bm\sigma}$ given by
+  \begin{equation}\label{eqdef:fiber}
+    X_1-\sigma_1,\dots,X_{i-1}-\sigma_{i-1},\ F,\ [L_1~\cdots~L_p]\cdot \jac(F, i),  
+  \end{equation}
+  if $\bm \ell$ non-zero, then the Jacobian matrix of these equations
+  has full rank $n+p-1$ at $(\xb,\bm\ell)$. The proposition is proved.
 \end{proof}
 
-Since all polynomials defining $\Psi$ have degree at most $d$, it
-follows by Proposition~\ref{prop:weak_t} that there exists a non-zero
-polynomial $\Xi_{i}$ in $\C[S_1,\dots,S_{i-1}]$ of degree at most
-$d^{(n+p)+(n)}\leq d^{3n},$ with the property that, if $\Xi_{i}(\bm
-\sigma)\neq 0$ then at any root $(\xb,\bm\ell)$ of the induced 
-mapping $\psi_{\bm\sigma}$ given by
-\begin{equation}\label{eqdef:fiber}
-X_1-\sigma_1,\dots,X_{i-1}-\sigma_{i-1},\ F,\ [L_1~\cdots~L_p]\cdot \jac(F, i),  
-\end{equation}
-if $\bm \ell$ non-zero, then the Jacobian matrix of these equations
-has full rank $n+p-1$ at $(\xb,\bm\ell)$.
 
-We can now finish the proof of Proposition~\ref{prop:hi2}, along the
-lines of the proof of Lemma~\ref{prop:RadLagPolarV}. Suppose that
-$\Xi_{i}(\bm \sigma)$ is non-zero, let $\bm u = (u_1,\dots,u_p)$ be
-arbitrary in $\C^p$ and take $(\xb,\bm \ell)$ in $\C^{n+p}$ that
-cancels the $n+p$ polynomials
-\begin{equation}\label{eqdef:fiber2} 
-X_1 - \sigma_1, \dots, X_{i-1} - \sigma_{i-1},\ F,\ [L_1~\cdots~L_p]\cdot \jac(F, i),\ u_1 L_1 + \cdots + u_p L_p -1. 
-\end{equation}
-Since $\bm\ell$ is necessarily non-zero, the previous discussion
-implies that the Jacobian of the polynomials in
-Eq.~\eqref{eqdef:fiber} has full rank $n+p-1$ at $(\xb,\bm\ell)$.
-This Jacobian matrix is equal to
-\[
-\left[ 
-  \begin{array}{cc}
-    \bm I_{i-1} ~ \bm 0_{(i-1) \times (n-i+1)} & \bm 0_{(i-1) \times p}\\
-    \jac(F) & {\bm 0}_{p \times p}\\
-    *** &  \jac(F,i)^T 
+We will use this property through the following corollary, which we
+already mentioned in Subsection~\ref{ssec:algo}.
+\begin{corollary}\label{coro:8}
+ For $i=1,\dots,\delta+1$, if $F$ satisfies $\bm H_i$ and $\bm \sigma$
+ satisfies $\bm H'_i$, then for any $\bm u=(u_1,\dots,u_p)$
+ in $\C^p$, $0$ is a regular value of the $n+p$ polynomials
+  \begin{equation*}
+    X_1 - \sigma_1, \dots, X_{i-1} - \sigma_{i-1},\ F,\ [L_1~\cdots~L_p]\cdot \jac(F, i),\ u_1 L_1 + \cdots + u_p L_p -1.
+  \end{equation*}
+\end{corollary}
+\begin{proof}
+  The proof is similar to that of Lemma~\ref{prop:RadLagPolarV}. Suppose that
+  $\Xi_{i}(\bm \sigma)$ is non-zero, let $\bm u = (u_1,\dots,u_p)$ be
+  arbitrary in $\C^p$ and take $(\xb,\bm \ell)$ in $\C^{n+p}$ that
+  cancels the $n+p$ polynomials
+  \begin{equation}\label{eqdef:fiber2} 
+    X_1 - \sigma_1, \dots, X_{i-1} - \sigma_{i-1},\ F,\ [L_1~\cdots~L_p]\cdot \jac(F, i),\ u_1 L_1 + \cdots + u_p L_p -1. 
+  \end{equation}
+  Since $\bm\ell$ is necessarily non-zero, the previous discussion
+  implies that the Jacobian of the polynomials in
+  Eq.~\eqref{eqdef:fiber} has full rank $n+p-1$ at $(\xb,\bm\ell)$.
+  This Jacobian matrix is equal to
+  \[
+  \left[ 
+    \begin{array}{cc}
+      \bm I_{i-1} ~ \bm 0_{(i-1) \times (n-i+1)} & \bm 0_{(i-1) \times p}\\
+      \jac(F) & {\bm 0}_{p \times p}\\
+      *** &  \jac(F,i)^T 
     \end{array}
-  \right].
-\]
-As in the proof of Lemma~\ref{prop:RadLagPolarV}, if we suppose that
-$[ {\bm 0}_{1 \times n} ~ u_1~ \cdots ~u_p]$ is in the row-space of
-this matrix, considering the last $p$ columns and multiplying by
-$\bm\ell^T \in \C^{p\times 1}$ leads us to a contradiction. This
-proves that the Jacobian matrix of the equations in
-Eq.~\eqref{eqdef:fiber2} has full rank $n+p$ at $(\bm x,\bm \ell)$, as
-claimed.
+    \right].
+  \]
+  As in the proof of Lemma~\ref{prop:RadLagPolarV}, if we suppose that
+  $[ {\bm 0}_{1 \times n} ~ u_1~ \cdots ~u_p]$ is in the row-space of
+  this matrix, considering the last $p$ columns and multiplying by
+  $\bm\ell^T \in \C^{p\times 1}$ leads us to a contradiction. This
+  proves that the Jacobian matrix of the equations in
+  Eq.~\eqref{eqdef:fiber2} has full rank $n+p$ at $(\bm x,\bm \ell)$,
+  as claimed.
+\end{proof}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Proof of Theoreom \ref{theo:main}}
+\section{Analysis of the main algorithm}
+
+We conclude this paper by revisiting the algorithm sketched in
+Subsection~\ref{ssec:algo}. The probability analysis is based on the
+quantitative genericity results we established in the previous
+sections, using the DeMillo-Lipton-Schwartz-Zippel lemma. {\em In order to
+simplify some big-O estimates, we assume that the bound $d$ on the
+degrees of the input polynomials satisfies $d \ge 2$, since the case
+of linear polynomials is trivial.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Pseudocode}
-%
-The following is our main algorithm. In step 4, we use \cite[Algorithm 2]{SH} to solve a square
-system. This subroutine is randomized; in order to guarantee a higher
-probability of success, we repeat the calculation $k$ times, for a
-well-chosen parameter $k$. This subroutine also requires that the input system be given by a
-straight-line program. We build it (at Step 3) in the straightforward
-manner already suggested in the introduction: given $F=(f_1,\hdots,f_p)$ in $\C[X_1,\hdots,X_n]$, we can build
-a straight-line program that evaluates each $f_i$ in $O(d^n)$ operations, by
-computing all monomials of degree up to $d$, multiplying them by the
-corresponding coefficients in $f_i$, and adding results. To obtain a
-straight-line program for $f_i^\mA$, we add $O(n^2)$ steps corresponding
-to the application of the change of variables $\mA$. The number of operations here is thus
+\subsection{Description of the pseudocode}
+
+The algorithm is randomized and takes as input a parameter $\epsilon
+\in (0,1)$; the choices made in the algorithm guarantee that the
+probability of success is at least $1-\epsilon$. 
+
+Randomness occurs in part due to the various choices we make (change
+of variables $\mA$, parameter $\bm \sigma$, parameter~$\bm u$).
+Besides, at Step 4, we use a minor modification of \cite[Algorithm
+  2]{SH} to solve the system
 \[
-O(nd^n + n^3) = O^{\sim}(d^n).
+X_1 - \sigma_1, \dots, X_{i-1} - \sigma_{i-1},\ F,\ [L_1~\cdots~L_p]\cdot \jac(F, i),\ u_1 L_1 + \cdots + u_p L_p -1.  
 \]
-From this, we can compute and evaluate the required partial derivatives in the Jacobian of $F^\mA$ in
+of $n+p$ equations in $n+p$ unknowns
+$X_1,\dots,X_n,L_1,\dots,L_p$. This subroutine is randomized as well;
+in order to guarantee a higher probability of success, we repeat the
+calculation $k$ times, for a well-chosen parameter $k$, and keep the
+output with the largest cardinality (we discuss this in our
+probability analysis below). Upon success, we have obtained a
+zero-dimensional parameterization
+$\scrQ_i=((q_i,v_{i,1},\dots,v_{i,n+p}),\lambda_i)$ of the solutions
+$Z_i$ of these equations, but we are only interested in the projection
+$Z'_i$ of these points on the $X_1,\dots,X_n$-space. Recall that
+$\scrQ_i$ is such that
+\begin{itemize}
+\item $\lambda_i(v_{i,1},\dots,v_{i,n+p})=T q_i' \bmod q_i$, with
+  $\lambda_i$ a $\Q$-linear form in $X_1,\dots,X_n,L_1,\dots,L_p$;
+\item we have the equality $Z_i=\left \{\left(
+  \frac{v_{i,1}(\tau)}{q'(\tau)},\dots,\frac{v_{i,n+p}(\tau)}{q'(\tau)}\right
+  ) \ \mid \ q(\tau)=0 \right \}.$
+\end{itemize}
+The only constraint on $\lambda_i$ is that it takes pairwise distinct
+values on the points of $Z_i$. Now, since the equations defining $Z_i$
+are linear in $L_1,\dots,L_p$, the projection $Z_i \to Z'_i$ is
+one-to-one; this means that we can take $\lambda_i$ depending on
+$X_1,\dots,X_n$ only. This constraint can be enforced at no extra cost
+in the algorithm of~\cite{SH}; if this is the case, then
+$\scrQ'_i=((q_i,v_{i,1},\dots,v_{i,n}),\lambda_i)$ is a
+zero-dimensional parameterization of $Z'_i$.
+
+The algorithm of~\cite{SH} also requires that the input system be
+given by a straight-line program. We build it (at Step 3) in the
+straightforward manner already suggested in the introduction: given
+$F=(f_1,\hdots,f_p)$ in $\C[X_1,\hdots,X_n]$, we can build a
+straight-line program that evaluates each $f_i$ in $O(d^n)$
+operations, by computing all monomials of degree up to $d$,
+multiplying them by the corresponding coefficients in $f_i$, and
+adding results. To obtain a straight-line program for $f_i^\mA$, we
+add $O(n^2)$ steps corresponding to the application of the change of
+variables $\mA$. The number of operations here is thus
 \[
-O(n^2d^n) = O^{\sim}(d^n)
+O(nd^n + n^3) = O^{\sim}(d^n);
 \]
-operations ~\cite{BaSt83}.
-Then, the matrix vector product with the vector of Lagrange multipliers adds a cost that is polynomial in $n$ and which we can therefore neglect in the soft oh notation. Finally, we add the linear equations
-$X_1-\sigma_1,\hdots,X_{i-1}-\sigma_{i-1}$; this gives $\Gamma_i$, and the total cost for computing the straight line program is $O^{\sim}(d^n).$
-%\newpage
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%% ALGORITHM %
-    %%%%%%%%%%%%%%%%%
-    \begin{algorithm}[!h]
-    \KwIn{$F=(f_1,\hdots,f_p) \in \ZZ[X_1,\hdots,X_n]^p$ with $\deg f_i \leq d$ and $\htt f_i \leq b$, and $0 < \epsilon < 1$}
-    \KwOut{$n$ zero-dimensional parameterizations, the union of whose zeros
+note that here, we use the assumption $d \ge 2$.
+From this, we can compute and evaluate the required partial
+derivatives in the Jacobian of $F^\mA$ in
+\[
+O(nd^n) = O^{\sim}(d^n)
+\]
+operations ~\cite{BaSt83}.  Then, the matrix vector product with the
+vector of Lagrange multipliers adds a cost that is polynomial in $n$
+and which we can therefore neglect in the soft-O notation. Finally, we
+add the linear equations $X_1-\sigma_1,\hdots,X_{i-1}-\sigma_{i-1}$;
+this gives the straight-line program $\Gamma_i$, whose length is
+$O^{\sim}(d^n).$
+
+\begin{algorithm}[!h]
+  \KwIn{$F=(f_1,\hdots,f_p) \in \ZZ[X_1,\hdots,X_n]^p$ with $\deg(f_i) \leq d$ and $\htt(f_i) \leq b$, and $0 < \epsilon < 1$. 
+    Assume that $d \ge 2$.    }
+  \KwOut{$n-p+1$ zero-dimensional parameterizations, the union of whose zeros
     includes at least one point in each connected component of $V(F) \cap \R^n$, with probability at least $1-\epsilon$} 
-
-    \nl Construct \[S := \{1,2,\hdots,\lceil 4\epsilon^{-1}6n^3(2d)^{5n} \rceil\},\] \[T :=
-    \{1,2,\hdots,\lceil 4\epsilon^{-1}3n^2(nd)^{3n} \rceil \},\] and 
-    \[R :=
-    \{1,2,\hdots,\lceil 4\epsilon^{-1}(nd)^n \rceil \},\]
-    and randomly choose $\mA \in
-    S^{n^2}, \bm \sigma \in T^{n-1},$ and $\ub \in R^p$\; 
-
-
-    \caption{{Main Algorithm} \label{alg:1}} 
-
-    \nl \For{$i\gets1$ \KwTo $n$}{
+  
+  \nl Construct \[S := \{1,2,\hdots,\lceil 4\epsilon^{-1}6n^3(2d)^{5n} \rceil\},\] \[T :=
+  \{1,2,\hdots,\lceil 4\epsilon^{-1}nd^{3n} \rceil \},\] 
+  \[R :=
+  \{1,2,\hdots,\lceil 4\epsilon^{-1}nd^{2n} \rceil \},\]
+  and  choose  $\mA \in
+  S^{n^2}$, $\bm \sigma \in T^{n-1}$ and $\ub \in R^p$ uniformly at random\; 
+  
+  \caption{{Main Algorithm} \label{alg:1}} 
+  
+  \nl \For{$i\gets1$ \KwTo $n-p+1$}{
     \nl Build a straight-line program $\Gamma_i$ that computes the equations
-    \[
-    \left\{X_1-\sigma_1,\hdots,X_{i-1}-\sigma_{i-1},F^{\mA}, \lagFA,\sum_{i=1}^{p}u_iL_i-1 \right\}\;
-    \]
-    \nl Run \cite[Algorithm 2]{SH} $k \geq \lg(4n/\epsilon)$ times
+    \begin{equation}\label{eq:step3}
+      X_1 - \sigma_1, \dots, X_{i-1} - \sigma_{i-1},\ F,\ [L_1~\cdots~L_p]\cdot \jac(F, i),\ u_1 L_1 + \cdots + u_p L_p -1.        
+    \end{equation}
+    \nl Run \cite[Algorithm 2]{SH} $k \geq \log_2(4n/\epsilon)$ times
     with input $\Gamma_i$\;
-
+    
     \nl Let $\mathscr{Q}_i$ be the highest cardinality
-    zero-dimensional parameterization returned in step 4\; 
+    zero-dimensional parameterization returned in Step 4\; 
     
-    \nl  Compute a parameterization of the projection of $\mathscr{Q}_i$ onto the $\Xb$-space, and let $\mathscr{Q}^{'}_i$ denote this new parameterization \; 
+    \nl Compute a parameterization of the projection of
+    $\mathscr{Q}_i$ onto the $X_1,\dots,X_n$-space, and let $\mathscr{Q}^{'}_i$
+    denote this new parameterization \;
     
-    } 
-    \nl  \Return $[\mathscr{Q}^{'}_1,\hdots,\mathscr{Q}^{'}_{n}]$.
-    \end{algorithm}
-    %%%%% ALGORITHM %
-    %%%%%%%%%%%%%%%%%
-    
-
-
-If $F^\mA$ satisfies ${\bm H}_i$, and $F^\mA$ and $\bm \sigma $ satisfy $\bm H_i^{'}$, for all $i \in \{1,\hdots,n-p+1\}$, then Theorem~2 in~\cite{EMP}  tells us that the parameterizations returned in step 5 are zero dimensional. Then, if $\ub$ satisfies $\bm H_{i}^{''},$ for all $i \in \{1,\hdots,n-p+1\}$, Proposition \ref{prop:correctness} tells us that the polar varieties are contained in the projections of the Lagrangian systems and therefore Theorem~2 in~\cite{EMP} also establishes that the parameterizations returned in step 7 will contain one point on each connected component of $V \cap \R^n$. 
-
-
-
+  } 
+  \nl  \Return $[\mathscr{Q}^{'}_1,\hdots,\mathscr{Q}^{'}_{n-p+1}]$.
+\end{algorithm}
+As we already pointed out in Subsection~\ref{ssec:algo}, if $F^\mA$
+satisfies ${\bm H}_i$, $\bm \sigma $ satisfies $\bm H_i^{'}$ and $\bm
+u$ satisfies $\bm H_i''$, and if $\scrQ_i$ is a zero-dimensional
+parametrization of the solutions of the equations~\eqref{eq:step3} at Step 3 (for all
+$i \in \{1,\hdots,n-p+1\}$), Theorem~2 in~\cite{EMP} establishes that
+the output returned in Step 7 will contain one point on each connected
+component of $V \cap \R^n$. (The claim made in
+Subsection~\ref{ssec:algo} relied on an assertation that has since
+been proved, in Corollary~\ref{coro:8}.)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Bit operation cost} 
-%
-The following lists the costs for each step of Algorithm \ref{alg:1}:
 
-\noindent
-    (1) We defined $S := \{1,2,\hdots,\lceil 3\epsilon^{-1}6n^3(2d)^{5n} \rceil \}$
-      and therefore the height of any $a_{i,j} \in S$ is at most
-    \[
-    \log 3/{\epsilon} + \log(6n^3(2d)^{5n}) \in O^{\sim}(\log 1/{\epsilon} + n\log d).
-    \]
-Since $|R| < |T| < |S|,$ we also have that the height of any $\sigma_{k} \in T$ and $u_{l} \in R$ is at most the same.
-\newline 
-\noindent  
-    (3)
-    After computing the partial derivatives in the Jacobian matrix, the height grows by at
-    most another factor of $\log d$. Thus, all polynomials in the
-    system considered at Step 3 have height 
-    \[
-    O^{\sim}(b + d(\log 1 /
-    \epsilon + n\log d))
-    =
-        O^{\sim}(b + d\log 1 /
-    \epsilon + dn).
-    \]
-    All integer coefficients appearing in $\Gamma_i$ 
-    satisfy the same bound.    
-    %% Furthermore, preparing the
-    %% straight line program for the gradient of $f$ does not introduce
-    %% large integers. The integers in $\grad (f)$ are of the same
-    %% magnitude as in $\Gamma$.
-     
-\noindent  
-    (4)   
-    As a result, after applying \cite[Algorithm 2]{SH} $k$ times
-      for each index $i$, with $k = O(\log n + \log 1 / \epsilon)$,
-      the total boolean cost of the algorithm is
+The following lists the costs for each step of Algorithm \ref{alg:1},
+assuming that the input polynomials have degree $d$ and integer
+coefficients of height at most $b$.
+
+\smallskip\noindent
+(1) We defined $S := \{1,2,\hdots,\lceil 4\epsilon^{-1}6n^3(2d)^{5n} \rceil \}$
+and therefore the height of any $a_{i,j} \in S$ is at most
+\[
+\log 4/{\epsilon} + \log(6n^3(2d)^{5n}) \in O^{\sim}(\log 1/{\epsilon} + n\log d).
+\]
+Since $|R|, |T| \le |S|,$ we also have that the height of any
+$\sigma_{k} \in T$ and $u_{\ell} \in R$ admits the same upper bound.
+
+\smallskip\noindent (3) After computing the partial derivatives in the
+Jacobian matrix, the height grows by at most another factor of $\log
+d$. Thus, all polynomials in the system considered at Step 3 have
+height
+\[
+O^{\sim}(b + d(\log 1 /
+\epsilon + n\log d))
+=
+O^{\sim}(b + d\log 1 /
+\epsilon + dn).
+\]
+All integer coefficients appearing in the straight-line program
+$\Gamma_i$ satisfy the same bound.
+
+\smallskip\noindent (4) As a result, after applying \cite[Algorithm
+  2]{SH} $k$ times for each index $i$, with $k = O(\log n + \log 1 /
+\epsilon)$, the total boolean cost of the algorithm is
   \[
 O^{\sim}(d^{3n+2p+1}(\log1/\epsilon)(b + \log1/\epsilon))
   \]
@@ -2182,90 +2209,85 @@ O^{\sim}(d^{3n+2p+1}(\log1/\epsilon)(b + \log1/\epsilon))
   \[
 O^{\sim}(d^{n+p+1}(b + \log1/\epsilon)).
   \]
-  (6) ? 
-  \par 
 This proves the runtime estimate, as well as our bounds on the height
 of the output.
 
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Probability of success} 
-Let $\Delta_i \in \C[\A]$ be the polynomials from
-Theorem~\ref{theo:NoetherPositionG}. Denote by $\Delta := \prod_{i=1}^n \D_i,$ and
-note that
+
+Let $\Delta_{i,1}$ and $\Delta_{i,2} \in \C[(\frak A_{j,k})_{1\le j,k
+    \le n}]$ be the polynomials from Propositions~\ref{prop:Hi12}
+and~\ref{prop:Hi123}. Denote by $\Delta := \prod_{i=1}^{n-p+1}
+\D_{i,1}\D_{i,2},$ and note that
 \begin{align}
-    \deg \Delta \leq \sum_{i=1}^{n-p+1} \deg \Delta_i \leq 6n^3(2d)^{5n}.
+    \deg( \Delta) = \sum_{i=1}^{n-p+1} \deg( \D_{i,1})+\deg(\D_{i,2})
+    \leq 6n^3(2d)^{5n}.
 \end{align}
 If $\mA \in \C^{n \times n}$ does not cancel $\Delta,$ then $\mA$ is
 invertible and $F^\mA$ satisfies $\bm H_i$ for all $i$ in
 $\{1,\hdots,n-p+1\}.$ Now, assuming that $\mA$ is such a matrix, let
-$\Xi_i\in \C[S_1,\dots,S_{p+i-1}]$ be the polynomials from Theorem \ref{theo:sigmaG} applied to
-$F^{\mA}.$ Denote by $\Xi := \prod_{i=1}^n \Xi_i,$ and note that
+$\Xi_i\in \C[S_1,\dots,S_{p+i-1}]$ be the polynomials from
+Proposition~\ref{prop:hi2} applied to $F^{\mA}.$ Denote by $\Xi :=
+\prod_{i=1}^n \Xi_i,$ and note that
 \begin{align}
-    \deg \Xi \leq \sum_{i=1}^{n-p+1} \deg \Xi_i \leq nd^{5n}.
+    \deg( \Xi)= \sum_{i=1}^{n-p+1} \deg( \Xi_i) \leq nd^{3n}.
 \end{align}
-If $\bm \sigma \in \C^{i-1}$ does not cancel $\Xi$, then $F^{\mA}$ and
-$\bm \sigma$ satisfy $\bm H_i^{'}$ for all $i \in
-\{1,\hdots,n-p+1\}.$ And finally, denote by $\Upsilon := \prod_{i=1}^{n-p+1} \Upsilon_i,$ and
-note that
+If $\bm \sigma \in \C^{i-1}$ does not cancel $\Xi$, then it satisfies
+$\bm H_i^{'}$ for all $i \in \{1,\hdots,n-p+1\}.$ Assume that this is
+the case.
+
+As argued in Subsection~\ref{ssec:algo}, the last condition on our
+parameters is that $\bm u$ satisfy $\bm H_i''$ for all $i$. For a
+given index $i$, Proposition~\ref{prop:projection} shows the existence
+of a non-zero polynomial $\Upsilon_i$ in $\C[U_1,\dots,U_p]$ such that
+if $\Upsilon_i(u_1,\dots,u_p)$ is non-zero, $\bm H_i''$ holds; in
+addition, that proposition and Corollary~\ref{coro:degree} give an
+upper bound on $d^{n+p}$ for the degree of $\Upsilon_i$. We denote by
+$\Upsilon := \prod_{i=1}^{n-p+1} \Upsilon_i,$ and note that
 \begin{align}
-    \deg \Upsilon \leq \sum_{i=1}^{n-p+1} \deg \Upsilon_i \leq n(nd)^n.
+    \deg( \Upsilon) = \sum_{i=1}^{n-p+1} \deg( \Upsilon_i) \leq nd^{2n}.
 \end{align}
 If $\ub \in \C^{p}$ does not cancel $\Upsilon$, then $\ub$ satisfies $\bm H_i^{''}$ for all $i \in
 \{1,\hdots,n-p+1\}.$
-\par 
-As we argued above, the algorithm is guaranteed to
-succeed, as long as our call to Algorithm 2 in~\cite{SH} succeeds. That latter reference establishes that by repeating the calculation $k$ times, and keeping the output of highest degree among those $k$ results, we succeed with probability at least $1-(1/2)^k$. When Algorithm 2 does not succeed, it either returns a proper subset of the solutions, or FAIL. Note that Algorithm 2 is shown to succeed in a single run with  probability at least $1-11/32,$ and we bound the probability of success with $1-1/2$ for simplicity. 
-Now, by construction of
+
+Then, the algorithm is guaranteed to succeed, as long as our call to
+Algorithm 2 in~\cite{SH} succeeds in solving the equations at
+Step~3. That reference establishes that by repeating the calculation
+$k$ times, and keeping the output of highest degree among those $k$
+results, we succeed with probability at least $1-(1/2)^k$. When
+Algorithm 2 does not succeed, it either returns a proper subset of the
+solutions, or FAIL. Note that Algorithm 2 is shown to succeed in a
+single run with probability at least $1-11/32,$ and we bound the
+probability of success with $1-1/2$ for simplicity.  Now, 
+recall that we choose
+ $\mA$ in $S^{n^2}$, $\bm \sigma$ in $T^{n-1}$ and $\ub$ in $R^{p}$ 
+uniformly at random, with
+\begin{align*}
+S &= \{1,2,\hdots,\lceil 4\epsilon^{-1}6n^3(2d)^{5n}\rceil \},\\
+T &= \{1,2,\hdots,\lceil 4\epsilon^{-1}nd^{3n} \rceil \},\\
+R &= \{1,2,\hdots,\lceil 4\epsilon^{-1}nd^{2n} \rceil \}.
+\end{align*}
+Using the Demillo-Lipton-Schwartz-Zippel lemma, we otbain
 \[
-S := \{1,2,\hdots,\lceil 4\epsilon^{-1}6n^3(2d)^{5n}\rceil \},
-\] 
-\[
-T := \{1,2,\hdots,\lceil 4\epsilon^{-1}3n^2(nd)^{3n} \rceil \},
-\] 
-and 
-\[
-R := \{1,2,\hdots,\lceil 4\epsilon^{-1}n(nd)^n \rceil \},
+\pr[\Delta(\mA)=0] \leq  \frac{\deg\Delta}{|S|} = \epsilon/4.
 \]
-where $\mA \in S^{n^2}, \bm \sigma \in T^{n-1}$ and $\ub \in R^{p}$ are randomly chosen, we have 
-%
-\[
-\pr[\Delta(\mA)=0] \leq  \frac{\deg\Delta}{|S|} = \epsilon/4,
-\]
+If this is the case, then 
 \[
 \pr[\Xi(\bm \sigma)=0] \leq  \frac{\deg\Xi}{|T|} = \epsilon/4,
 \]
-and
+and if this is the case, then
 \[
 \pr[\Upsilon(\ub)=0] \leq  \frac{\deg\Upsilon}{|R|} = \epsilon/4.
 \]
-Let $\mathscr{E}$ be the event that the parameterizations
-$[\mathscr{Q}_1^{'},\hdots,\mathscr{Q}_{n}^{'}]$ returned in step 7 of
-Algorithm \ref{alg:1} are correct. Then, the probability of success is equal to
-\begin{align*}
- &\pr[\Delta(\mA)\ne 0] \times \pr[\Xi(\bm \sigma)\ne 0 ~|~\Delta(\mA) \ne 0] \times \pr[\Upsilon(\ub)\ne 0 ~|~\Delta(\mA)\Xi(\bm \sigma) \ne 0]\\ \times ~& \pr[\mathscr{E}~|~
-   \Delta(\mA)\Xi(\bm \sigma)\Upsilon(\ub) \ne 0].
-\end{align*}
-Set $k = \lg(4n/\epsilon)$ so that 
-\[
-(1-2^{-k})^n = (1 - \epsilon/(4n))^n \geq 1 - \epsilon/4,
-\]
-by Bernoulli's inequality. Therefore, 
-\begin{align*}
-\pr[\textrm{success}] &\geq (1- \epsilon/4)(1- \epsilon/4)(1-
-\epsilon/4) \pr[\mathscr{E}~|~
-   \Delta(\mA)\Xi(\bm \sigma)\Upsilon(\ub) \ne 0]\\ 
-& \geq (1- \epsilon/4)(1- \epsilon/4)(1-
-\epsilon/4)(1-2^{-k})^n \\ & \geq (1- \epsilon/4)(1- \epsilon/4)(1- \epsilon/4)(1-
-\epsilon/4)\\ & \geq 1 - \epsilon.
-\end{align*}
-This finishes the proof of theorem \ref{theo:main}.
-%
-
+When all this holds, for a given index $i$, Step~4 succeeds with
+probability at least $1-1/2^k$, so the probability that all indices
+$i$ succeed is at least $(1-1/2^k)^n$; our choice of the parameter $k$
+at Step~4 ensures that this probability is at least $\epsilon/4$ as
+well. Therefore, the overall probability of success is
+at least
+\[(1-\epsilon/4)^4 \ge 1-\epsilon.\]
+This finishes the proof of Theorem~\ref{theo:main}.
 
 
 %======================================================================

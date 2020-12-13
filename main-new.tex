@@ -250,7 +250,7 @@ We analyze the bit complexity of an efficient
   Let $F=(f_1,\hdots, f_s)$ in $\mathbb{Q}[X_1, \hdots , X_n]^s$ be a sequence of polynomials with $V = V(F) \subset \C^n$ a smooth and equidimensional variety and $\langle F \rangle \subset  \C[X_1, \hdots , X_n]$ a radical ideal. Then, computing suitable sections of the
 polar varieties associated to generic projections of $V$
 gives at least one point in each connected component of
-$V \cap \mathbb{R}^n$. To obtain sharper degree estimates, rather than using a determinantal modeling of polar varieties, we model polar varieties as projections of Lagrangian systems. This modeling introduces additional genericity assumptions which we incorporate into our analysis.   
+$V \cap \mathbb{R}^n$. We use  Lagrange systems to describe polar varieties; this modeling introduces additional genericity assumptions which we incorporate into our analysis.   
 
 \keywords{Real algebraic geometry; weak transversality; Noether position; complexity}
 \end{abstract}
@@ -1532,31 +1532,31 @@ that is, to prove that if it is not empty, $W(i, F)$ is generically in Noether
 position for $\pi_{i-1}$. We will prove the following, where $\D_{i,1}$ is
 from Proposition~\ref{prop:Hi12}.
 \begin{prop}\label{prop:Hi123}
-  For $i=1,\dots,\delta+1$, there exists a non-zero 
+  For $i=1,\dots,\delta+1$, there exists a non-zero polynomial 
   $\D_{i,2}$ in $\C[(\A_{k,m})_{1 \le k,m \le n}]$ of degree at most
   $4n^2(2d)^{4n}$ such that if $\mA$ does not cancel $\D_{i,1}
   \D_{i,2}$, then $F^{\mA}$ satisfies $\bm H_i(1)$, $\bm H_i(2)$ and
   $\bm H_i(3)$.
 \end{prop}
 Some results in a similar vein appear in the literature. For instance,
-Lemma 5 in~\cite{JeSa10} or Proposition 4.5
+Lemma 5 in~\cite{JeSa10} and Proposition 4.5
 in~\cite{SharpEstimatesForTheEffectiveN} are quantitative Noether
 position statements. However, our results do not follow from these
 previous references, as these previous works analyse the probability
 that for a {\em fixed} algebraic set $V$, $V^\mA$ be in Noether
 position.  This does not solve our question, since
-$W(i,V(F^\mA))$, which we are interested in, is in general
-different from $W(i,V(F))^\mA$.
+$W(i,F^\mA)$, which we are interested in, is in general
+different from $W(i,F)^\mA$.
 
 Instead, we will rely on the proof given in~\cite{EMP} that
-$W(i,V(F^\mA))$ is in Noether position for a generic $\mA$.  However,
+$W(i,F^\mA)$ is in Noether position for a generic $\mA$.  However,
 we will not directly analyse the constructions used in that reference,
 since they involve e.g. primary decomposition in $\C((\A_{j,k})_{1 \le
   j,k \le n})[X_1,\dots,X_n]$, and the resulting degree bounds would
 be way beyond our target. We will instead combine results
 from~\cite{EMP} with an effective form of the Nullstellensatz given
 in~\cite{EN}; in particular, we have to use Lagrange systems to
-describe polar variety, since systems of minors do not satisfy
+describe polar varieties, since systems of minors do not satisfy
 assumptions needed to apply this effective Nullstellensatz.
  
 The rest of this section is devoted to the proof of this proposition.
@@ -1975,7 +1975,7 @@ coordinates), and we prove the following.
       \begin{array}{cc}
         \bm I_{i-1}     & \bz_{(i-1)\times (n+p-i+1)}  
       \end{array}  &-\bm I_{i-1}\\
-      \jac_{(\bm X,\bm L)}\left( F,\ \bm L \cdot \jac (F,i)  \right) & \bz_{(n+p-i)\times (i-1)}
+      \jac_{\bm X,\bm L}\left( F,\ \bm L \cdot \jac (F,i)  \right) & \bz_{(n+p-i)\times (i-1)}
     \end{array}
     \right].
   \]

@@ -1047,7 +1047,7 @@ $\C[X_1,\hdots,X_n]$. Suppose that the ideal $\langle F \rangle
 equidimensional of dimension $\delta= n-p$.
 
 In this section, we give a high-level description of an algorithm
-from~\cite{EMP} that computes at least one point on each connected
+from~\cite{EMP} that computes at least one point in each connected
 component of $V(F) \cap \R^n$. Correctness of this algorithm was
 established in~\cite{EMP} provided we are in generic coordinates: the
 algorithm solves a family of systems of equations that describe points
@@ -1107,7 +1107,7 @@ space $T_\xb(V)$ is the kernel of $\jac(F,\xb)$; the assumption that
 $V$ be $\delta$-equidimensional and smooth implies that this kernel
 has dimension $\delta=n-p$ at all such $\xb$. It follows that 
 we can rephrase the definition of $W(i,F)$ as
-\[W(i,F) = \left\{\xb \in \C^n~|~ f_1(\xb)=\cdots=f_s(\xb)=0 
+\[W(i,F) = \left\{\xb \in \C^n~|~ f_1(\xb)=\cdots=f_p(\xb)=0 
 \text{~and~} {\rm rank}(\jac(F,i,\xb)) < p\right\}.\] Let $P_i
 =\binom{n-i}{p}$ be the number of $p$-minors in $\jac(F,i)$, and let
 $M_{i,1},\hdots,M_{i,P_i}$ be these minors (for $i=\delta+1$,
@@ -1157,11 +1157,11 @@ Jacobian matrix is that these equations are in general not complete
 intersection, due to the relations between minors of a matrix (the
 hypersurface case is an exception, since in this case only partial
 derivatives are used to define polar varieties). For both the
-polynomial system algorithm we will use below, or an application we
+polynomial system algorithm we will use below, and an application we
 will make of an effective Nullstellensatz, it will be necessary to
 have equations without such relations. To make this possible, we use
 an alternative modeling of polar varieties that uses Lagrange
-variables, as in Section~\ref{ssec:detvar}. We may thus consider the zero-set the polynomials
+variables, as in Section~\ref{ssec:detvar}. We may thus consider the zero-set of the polynomials
 \[ \big(F,\ [L_1~\cdots~L_p]\cdot \jac(F, i)\big ) \in \C[X_1,\dots,X_n,L_1,\dots,L_p]^{p+n-i},\]
 but as before, we will want to discard from the zero-set of these
 equations in $\C^{n+p}$ those components where all $L_i$'s vanish
@@ -1242,7 +1242,7 @@ As we will see, these properties hold after applying a generic change
 of variables. Properties $\bm H_i(1)$ and $\bm H_i(3)$ ensure that
 Eq.~\eqref{eq:syst} defines a finite set (as a consequence of the
 definition of Noether position), and guarantee that the output of the
-algorithm contains at least one point on each connected component of
+algorithm contains at least one point in each connected component of
 $V(F) \cap \R^n$ (this is proved in~\cite[Theorem~2]{EMP}). The second
 one will be used to establish that assumption $\bm H^{'}_i$ defined
 below holds generically.
@@ -1352,7 +1352,7 @@ and $\A_{\le i}$
 defined as
 \[\Phi = ( F,\ [L_1 ~\cdots~L_p~T_1~\cdots~T_i] \cdot \bm K_i ),\]
 and for $\bm a$ in $\C^{ni}$, let $\Phi_{\bm a}: \C^{n+p+i} \to
-\C^{n+p}$ the induced mapping $\Phi_{\bm a} = \Phi(\bm X, \bm L, \bm
+\C^{n+p}$ be the induced mapping $\Phi_{\bm a} = \Phi(\bm X, \bm L, \bm
 T, \bm a)$ in variables $\bm X$, $\bm L$ and $\bm T$.
 
 Let further $\sA \subset \C^{n+p+i}$ be the open set defined by the
@@ -2067,7 +2067,7 @@ of variables $\mA$, parameter $\bm \sigma$, parameter~$\bm u$).
 Besides, at Step 4, we use a minor modification of \cite[Algorithm
   2]{SH} to solve the system
 \[
-X_1 - \sigma_1, \dots, X_{i-1} - \sigma_{i-1},\ F,\ [L_1~\cdots~L_p]\cdot \jac(F, i),\ u_1 L_1 + \cdots + u_p L_p -1.  
+X_1 - \sigma_1, \dots, X_{i-1} - \sigma_{i-1},\ F^{\mA},\ [L_1~\cdots~L_p]\cdot \jac(F^{\mA}, i),\ u_1 L_1 + \cdots + u_p L_p -1.  
 \]
 of $n+p$ equations in $n+p$ unknowns
 $X_1,\dots,X_n,L_1,\dots,L_p$. This subroutine is randomized as well;

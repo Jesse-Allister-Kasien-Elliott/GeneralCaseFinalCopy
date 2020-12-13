@@ -218,8 +218,8 @@
 %
 %
 \title{Bit complexity for computing one point in each connected component of a smooth real algebraic set}
-\author{Jesse Elliott$\dagger$, Mark Giesbrecht$\dagger$, Eric Schost$\dagger$  \\
-        \small $\dagger$David R. Cheriton School of Computer Science, University of Waterloo, On, Canada \\
+\author{Jesse Elliott, Mark Giesbrecht, \'Eric Schost  \\
+  \small David R. Cheriton School of Computer Science, University of Waterloo, On, Canada \\
 }
 \date{} % Comment this line to show today's date
 %
@@ -234,29 +234,34 @@
 %
 %
 \begin{abstract}
-We analyze the bit complexity of an efficient
-  algorithm for the computation of at least one point in each
-  connected component of a smooth real algebraic set. This work is a continuation of an analysis by Elliott, Giesbrecht, and Schost ({\em On the bit complexity of finding points in connected components of a smooth real hypersurface}, ISSAC'20), where the hypersurface case was analyzed. In this paper, we extend the analysis to the more general algebraic set case. We determine the bit complexity for computing at least one point in each connected component of a smooth real algebraic set.  
-    
-    The analysis is of an algorithm by Safey El Din and Schost ({\em
-    Polar varieties and computation of one point in each connected
-    component of a smooth real algebraic set}, ISSAC'03). This
-  algorithm uses random changes of variables that are proven to
-  generically ensure certain desirable geometric properties. The
-  cost of the algorithm was given in an algebraic complexity
-  model. We analyze the bit complexity and the error probability, and we provide a
-  quantitative analysis of the genericity statements. 
-  
-  Let $F=(f_1,\hdots, f_p)$ in $\mathbb{Q}[X_1, \hdots , X_n]^p$ be a sequence of polynomials with $V = V(F) \subset \C^n$ a smooth and equidimensional variety and $\langle F \rangle \subset  \C[X_1, \hdots , X_n]$ a radical ideal. Then, computing suitable sections of the
-polar varieties associated to generic projections of $V$
-gives at least one point in each connected component of
-$V \cap \mathbb{R}^n$. We use Lagrange systems to describe polar varieties; this modeling introduces additional genericity assumptions which we incorporate into our analysis.   
+We analyze the bit complexity of an algorithm for the computation of
+at least one point in each connected component of a smooth real
+algebraic set. This work is a continuation of our analysis or
+hypersurface case ({\em On the bit complexity of finding points in
+  connected components of a smooth real hypersurface}, ISSAC'20). In
+this paper, we extend the analysis to more general cases.
 
-\keywords{Real algebraic geometry; weak transversality; Noether position; complexity}
+Let $F=(f_1,\hdots, f_p)$ in $\mathbb{Z}[X_1, \hdots , X_n]^p$ be a
+sequence of polynomials with $V = V(F) \subset \C^n$ smooth and
+equidimensional variety and $\langle F \rangle \subset \C[X_1, \hdots
+  , X_n]$ a radical ideal. To compute at least one point in each
+connected component of $V \cap \mathbb{R}^n$, our starting point is an
+algorithm by Safey El Din and Schost ({\em Polar varieties and
+  computation of one point in each connected component of a smooth
+  real algebraic set}, ISSAC'03). This algorithm uses random changes
+of variables that are proven to generically ensure certain desirable
+geometric properties. The cost of the algorithm was given in an
+algebraic complexity model; here, we analyze the bit complexity and
+the error probability, and we provide a quantitative analysis of the
+genericity statements. In particular, we are led to use Lagrange
+systems to describe polar varieties, as they make it simpler to
+rely on techniques such as weak transversality and an effective 
+Nullstellensatz.
+
+\keywords{Real algebraic geometry; weak transversality; Noether
+  position; complexity}
 \end{abstract}
 %
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -276,7 +281,7 @@ of polynomials $F = (f_1,\hdots,f_p)$ in
 $\ZZ[X_1,\dots,X_n]$. Algorithms for this task have been known for
 decades, and their complexity is to some extent well
 understood. Suppose that all $f_i$'s have degree at most $d$, and
-coefficients of bit-size at most $h$. Without making any assumption on
+coefficients of bit-size at most $b$. Without making any assumption on
 these polynomials, the algorithm given
 in~\cite[Section~13.1]{BaPoRo03} solves our problem using $d^{O(n)}$
 operations in $\Q$; in addition, the output of the algorithm is
@@ -293,11 +298,12 @@ rather large: the algorithm relies on infinitesimal deformations, that
 affect runtime non-trivially.
 
 In this paper, we will work under the additional assumption that
-$V=V(f_1,\dots,f_p)$ is a {\em smooth} complex algebraic set, and that
-$f_1,\dots,f_p$ form a regular reduced sequence (we explain these
-terms in the next section)\td.  We place ourselves in the continuation of
-the line of work initiated by~\cite{BaGiHeMb97}: that reference deals
-with cases where $V$ is smooth and $V \cap \R^n$ is compact, pointing
+$V=V(f_1,\dots,f_p)$ is a {\em smooth} complex algebraic set,
+equidimensional of dimension $\delta=n-p$, and that $f_1,\dots,f_p$
+generate a radical ideal (we explain these terms in the next
+section). We place ourselves in the continuation of the line of work
+initiated by~\cite{BaGiHeMb97}: that reference deals with cases where
+$V$ is a smooth hypersurface and $V \cap \R^n$ is compact, pointing
 out how {\em polar varieties} (that were introduced in the 1930's in
 order to define characteristic classes~\cite{Piene78,Teissier88}) can
 play a role in effective real geometry. This paper was extended in
@@ -307,8 +313,8 @@ compactness assumption~\cite{EMP,BaGiHePa05}; the smoothness
 assumption was then partly dropped in~\cite{BaGiHe14,BaGiHeLePa12}.
 
 Our starting point is the algorithm in~\cite{EMP}, whose assumptions
-are slightly more general than ours (the  reduced regular sequence
-assumption is not needed). In the cases we consider in this paper, its
+are slightly more general than ours ($V$ is not required to have
+dimension $\delta=n-p$). In the cases we consider in this paper, its
 runtime is ${ n \choose p}{}^{2+o(1)}d^{(4+o(1))n}$ operations in
 $\Q$.  As with many results in this vein, the algorithm is randomized,
 as we need to assume that we are in generic coordinates; this is done
@@ -319,28 +325,28 @@ randomized.  Altogether, we choose $n^{O(1)}$ random vectors, each of
 them in an affine space of dimension $n^{O(1)}$; every time a choice
 is made, there exists a hypersurface of the parameter space that one
 has to avoid in order to guarantee success. In this paper, we revisit
-this algorithm and give a complete analysis of its probability of
-success and its bit complexity.
+this algorithm, modify it in part, and give a complete analysis of its
+probability of success and its bit complexity.
 
 This work is a continuation of the analysis of the hypersurface case
-that we gave in~\cite{ElGiSc20} (that is, the case $p=1$). In this
-paper, we extend this analysis to reduced regular sequences. A very
+that we gave in~\cite{ElGiSc20} (that is, the case $p=1$). A very
 useful property in the hypersurface case is that polar varieties can
 be described by straightforward equations (the partial derivatives of
 the input polynomial) that form a regular sequence, at least in
 generic coordinates. In higher codimension, this is not the case
 anymore: the natural description of polar varieties now involves
-minors of the Jacobian matrix of the input equations. The resulting
-equations are in general not a complete intersection anymore, which
-makes it impossible to extend direcly several arguments we used
-in~\cite{ElGiSc20}. 
+minors of the Jacobian matrix of the input equations (this is the
+approach used in~\cite{EMP}). The resulting equations are in general
+not a complete intersection anymore, which makes it impossible to
+extend directly several arguments we used in~\cite{ElGiSc20}.
 
 Our solution is to use a description of polar varieties by means of
-bso-called Lagrange equations. These equations are complete
+so-called Lagrange equations. These equations are complete
 intersections (in generic coordinates), but they involve more
 variables. As such, they describe algebraic sets that cover polar
 varieties; we will discuss in detail the relationship between these
-two presentations.
+two presentations, using in particular several results
+from~\cite{BaGiHeSaSh10,TWT}.
 
 
 \paragraph*{Data structures.} 
@@ -380,29 +386,26 @@ of all non-zero coefficients of $f$, then the \textit{height}
 $\htt(f)$ of $f$ is defined as the maximum of the logarithms of $v$
 and of the absolute values of the coefficients of $vf$.
 
-
-
-
 \begin{theorem}\label{theo:main}
   Let $F= (f_1,\hdots,f_p)\in\ZZ[X_1,\hdots,X_n]^p$ be a sequence of
   polynomials with $\deg(f_i) \leq d$ and $\htt(f_i) \leq b$. Suppose
-  that the ideal $\langle F \rangle \subset \C[X_1,\hdots,X_n]$ is
-  radical and that $V=V(F) \subset \C^n$ is smooth with $\dim V =
-  n-p$. Also suppose that $0 < \epsilon < 1.$ \td
+  that the ideal generated by $f_1,\dots,f_p$ is radical and that
+  $V=V(F) \subset \C^n$ is smooth and equidimensional of dimension
+  $n-p$. Also suppose that $0 < \epsilon < 1.$ 
 
   There exists a randomized algorithm that takes $F$ and $\epsilon$ as
-  input and produces $n$ zero-dimensional parameterizations, the union
+  input and produces $n-p+1$ zero-dimensional parameterizations, the union
   of whose zeros includes at least one point in each connected
   component of $V(F) \cap \R^n$, with probability at least
   $1-\epsilon$. Otherwise, the algorithm either returns a proper
   subset of the points, or FAIL.  In any case, the algorithm uses
   \[
-  \td
+  O^{\sim}(d^{3n+2p+1}\log(1/\epsilon)(b + \log(1/\epsilon)))
   \]
   bit operations. The polynomials in the output have degree at most
   $d^{n+p},$ and height
   \[
-  \td
+  O^{\sim}(d^{n+p+1}(b + \log(1/\epsilon))).
   \]
 \end{theorem}
 
@@ -424,64 +427,70 @@ define {\em polar varieties}, which will play a crucial role in this
 paper. Let $V=V(F)$, for $F=(f_1,\dots,f_p)$ as in the theorem. For $i
 \in \{1,\hdots,n-1\},$ denote by $\pi_i:\C^n \rightarrow \C^i$ the
 projection $(x_1,\hdots,x_n) \mapsto (x_1,\hdots,x_i)$.  The $i$-th
-\textit{polar variety} \[W(\pi_i,V) := \{\xb \in V~|~\dim \pi_i(T_\xb
+\textit{polar variety} \[W(i,F) := \{\xb \in V~|~\dim \pi_i(T_\xb
 V) < i\}\] is the set of critical points of $\pi_i$ on $V$.  We will
 recall below that it is defined by the vanishing of all $p$-minors
 $M_{i,1},\dots,M_{i,S_i}$ of the last $n-i$ columns of the Jacobian
 matrix of $F$, together with the equations $F$ themselves (here, $S_i$
 is simply the binomial number $\binom{n-i}{p}$).
 
-In general, we cannot say much about the geometry of $W(\pi_i,V)$, but
-if we apply a generic change of coordinates $\mA$ to $f$, then
-$W(\pi_i,V)$ is known to be equidimensional of dimension $(i-1)$ or
-empty~\cite{BaGiHeMb97}, and to be in so-called {\em Noether
-  position}~\cite{EMP} (background notions in algebraic geometry are
-in~\cite{Mumford76,Shafarevich77,ECA}; we will recall key
-definitions). If this is the case, it suffices to choose arbitrary
-$\sigma_1,\dots,\sigma_{n-1}$ in $\Q$, and solve the systems defined
-by
+In general, we cannot say much about the geometry of $W(i,F)$, but if
+we apply a generic change of coordinates $\mA$ to $F$, then $W(i,F)$
+is known to be equidimensional of dimension $(i-1)$ or
+empty~\cite{BaGiHeMb97,BaGiHeSaSh10,TWT}, and to be in so-called {\em
+  Noether position}~\cite{EMP} (background notions in algebraic
+geometry are in~\cite{Mumford76,Shafarevich77,ECA}; we will recall key
+definitions). If this is the case, the algorithm in~\cite{EMP} chooses
+arbitrary $\sigma_1,\dots,\sigma_{n-1}$ in $\Q$ and solves the systems
+defined by
 \begin{equation}\label{eq:syst1}
   X_1-\sigma_1 = \dots = X_{i-1}-\sigma_{i-1} = f_1 = \cdots = f_p = M_{i,1} = \cdots = M_{i,S_i} = 0
 \end{equation}
-for $i=1,\dots,n$.  They all admit finitely many solutions, and
+for $i=1,\dots,n-p+1$.  They all admit finitely many solutions, and
 Theorem~2 in~\cite{EMP} proves that the union of their solution sets
 contains one point on each connected component of $V \cap \R^n$.
 
-Our main contribution is to analyze precisely what conditions on our
-change of coordinates $\mA$ guarantee success. This is done by
+One of our contributions is to analyze precisely what conditions on
+the change of coordinates $\mA$ guarantee success. This is done by
 revisiting the key ingredients in the proofs given
-in~\cite{BaGiHeMb97} and~\cite{EMP}, and giving quantitative versions
-of these results, bounding the degree of the hypersurfaces we have to
-avoid.  To solve the equations~\eqref{eq:syst}, we use the algorithm
-in~\cite{SH}, for which a complete bit complexity analysis is
-available.
+in~\cite{BaGiHeSaSh10,EMP}, and giving quantitative versions of these
+results, bounding the degree of the hypersurfaces we have to avoid.
 
-This work should be seen as a first step toward the analysis of
-further randomized algorithms in real algebraic geometry. An immediate
-follow-up question would be to handle the case of algebraic sets
-defined by {\em regular sequences}: the algorithm in~\cite{EMP} still
-applies, but the modifications needed are beyond the scope of this
-publication. Further still, randomized algorithms for deciding {\em
-  connectivity queries} on smooth, compact algebraic sets have been
-developed in a series of papers
-\cite{SchostMohabBabySteps2011,SchostMohabBabySteps2014}, and could be
-revisited using the techniques introduced here.
-
+We actually do not solve the equations~\eqref{eq:syst1}, since the
+(large) number of minors $S_i$ makes this analysis difficult.  Instead,
+we replace~\eqref{eq:syst1} by equations involving Lagrange
+multipliers. Proving correctness requires us to guarantee further
+genericity properties, but once this is done, we can rely on algorithm
+in~\cite{SH} to solve these equations, for which a complete bit
+complexity analysis is available.
 
 \paragraph*{Further work.}
-This work should be seen as a generalization of \cite{ElGiSc20}, where
-the analysis was done for the hypersurface case. In addition, this
-work should also be seen as a step toward the analysis of further
-randomized algorithms in real algebraic geometry.  In particular,
-randomized algorithms for deciding {\em connectivity queries} on
-smooth, compact algebraic sets have been developed in a series of
-papers \cite{SchostMohabBabySteps2011,SchostMohabBabySteps2014}, and
-could be revisited using the techniques introduced here. The
-techniques would apply to algorithms in real algebraic geometry where
-transversality or Noether position are required geometric properties
-established by a random change of coordinates.
+This paper is an extension of~\cite{ElGiSc20}, where the analysis was
+done for the hypersurface case. In addition, this work should also be
+seen as a step toward the analysis of further randomized algorithms in
+real algebraic geometry.  In particular, randomized algorithms for
+deciding {\em connectivity queries} on smooth, compact algebraic sets
+have been developed in a series of papers
+\cite{SchostMohabBabySteps2011,SchostMohabBabySteps2014}, and could be
+revisited using the techniques introduced here. The techniques would
+apply to algorithms in real algebraic geometry where transversality or
+Noether position are required geometric properties established by a
+random change of coordinates.
 
-\paragraph*{Outline.} \td
+\paragraph*{Outline.} The next section summarizes the main concepts from 
+algebraic geometry needed in this paper. In Section~\ref{ssec:detvar},
+we compare the descriptions of determinantal varieties by the
+vanishing of matrix minors, and through the use of Lagrange
+multipliers; these results, while rather simple, are used throughout.
+A first application is in Section~\ref{sec:wt}, where we give a
+quantitative form of Thom's ``weak transversality lemma''.
+
+Section~\ref{sec:overview} introduces polar varieties and discuess the
+algorithm sketched above and the genericity conditions required for it
+to succeed. These conditions are studied in details in
+Sections~\ref{sec:applications},~\ref{ssec:Hi2} and~\ref{Sec:Hip};
+this allows us to complete the analysis of the algorithm in
+Section~\ref{sec:analysis}, thereby proving Theorem~\ref{theo:main}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -624,16 +633,6 @@ that $Y$ is smooth if all its points are regular.
 Open sets are locally closed. As another example, for any
 $d$-equidimensional algebraic set $V$, $\reg(V)$ is a smooth
 $d$-equidimensional locally closed set.
-
-%% We will also have to consider matrices with generic entries. For this,
-%% we introduce $n^2$ new indeterminates $(\frak A_{j,k})_{1\le j,k \le
-%%   n}$. Then, $\A$ will denote the matrix with entries $(\frak
-%% A_{j,k})_{1\le j,k \le n}$, $\C(\A)$ will denote the rational function
-%% field $\C((\frak A_{j,k})_{1\le j,k \le n})$ and $\C[\A]$ the
-%% polynomial ring $\C[(\frak A_{j,k})_{1\le j,k \le n}]$.  For $g$ as
-%% above, we will then define the polynomial $g^\A:=g(\A \Xb)$, 
-%% which we may consider in either
-%% $\C(\A)[X_1,\dots,X_n]$ or $\C[\A,X_1,\dots,X_n]$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -800,7 +799,7 @@ makes this more precise.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Weak transversality}
+\section{Weak transversality}\label{sec:wt}
 
 Several of the generic properties of polar varieties are consequences
 of {\em weak transversality}, which is an important extension of
@@ -1039,7 +1038,7 @@ degree at most $d^{m+n}$, and the equality $\overline{\pi(\overline
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Overview of the main algorithm}
+\section{Overview of the main algorithm}\label{sec:overview}
 
 Let $F = (f_1,\hdots,f_p)$ be a sequence of polynomials in
 $\C[X_1,\hdots,X_n]$. Suppose that the ideal $\langle F \rangle
@@ -2044,7 +2043,7 @@ already mentioned in Subsection~\ref{ssec:algo}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Analysis of the main algorithm}
+\section{Analysis of the main algorithm}\label{sec:analysis}
 
 We conclude this paper by revisiting the algorithm sketched in
 Subsection~\ref{ssec:algo}. The probability analysis is based on the

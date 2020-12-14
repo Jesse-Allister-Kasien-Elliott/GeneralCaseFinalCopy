@@ -242,7 +242,7 @@ hypersurface case ({\em On the bit complexity of finding points in
 this paper, we extend the analysis to more general cases.
 
 Let $F=(f_1,\hdots, f_p)$ in $\mathbb{Z}[X_1, \hdots , X_n]^p$ be a
-sequence of polynomials with $V = V(F) \subset \C^n$ smooth and
+sequence of polynomials with $V = V(F) \subset \C^n$ a smooth and
 equidimensional variety and $\langle F \rangle \subset \C[X_1, \hdots
   , X_n]$ a radical ideal. To compute at least one point in each
 connected component of $V \cap \mathbb{R}^n$, our starting point is an
@@ -278,7 +278,7 @@ decide if $S$ is empty or not.
 We consider the case where $S$ is given as $S=V \cap \R^n$, where
 $V=V(F) \subset \C^n$ is a complex algebraic set defined by a sequence
 of polynomials $F = (f_1,\hdots,f_p)$ in
-$\ZZ[X_1,\dots,X_n]$. Algorithms for this task have been known for
+$\ZZ[X_1,\dots,X_n]^p$. Algorithms for this task have been known for
 decades, and their complexity is to some extent well
 understood. Suppose that all $f_i$'s have degree at most $d$, and
 coefficients of bit-size at most $b$. Without making any assumption on
@@ -419,8 +419,8 @@ evaluates $F$). Any polynomial of degree $d$ in $n$ variables can be
 computed by a straight-line program that does $O(d^n)$ operations:
 evaluate all monomials of degree up to $d$ in $n$ variables, multiply
 them by their respective coefficients and sum the results. However,
-some inputs may be given by shorter straight-line program, and the
-algorithm would actually be able to benefit from this.
+some inputs may be given by a shorter straight-line program, and the
+algorithm would actually benefit from this.
 
 The algorithm itself is rather simple. To describe it, we need to
 define {\em polar varieties}, which will play a crucial role in this
@@ -454,13 +454,13 @@ One of our contributions is to analyze precisely what conditions on
 the change of coordinates $\mA$ guarantee success. This is done by
 revisiting the key ingredients in the proofs given
 in~\cite{BaGiHeSaSh10,EMP}, and giving quantitative versions of these
-results, bounding the degree of the hypersurfaces we have to avoid.
+results, bounding the degrees of the hypersurfaces we have to avoid.
 
 We actually do not solve the equations~\eqref{eq:syst1}, since the
 (large) number of minors $S_i$ makes this analysis difficult.  Instead,
 we replace~\eqref{eq:syst1} by equations involving Lagrange
 multipliers. Proving correctness requires us to guarantee further
-genericity properties, but once this is done, we can rely on algorithm
+genericity properties, but once this is done, we can rely on the algorithm
 in~\cite{SH} to solve these equations, for which a complete bit
 complexity analysis is available.
 
@@ -485,7 +485,7 @@ multipliers; these results, while rather simple, are used throughout.
 A first application is in Section~\ref{sec:wt}, where we give a
 quantitative form of Thom's ``weak transversality lemma''.
 
-Section~\ref{sec:overview} introduces polar varieties and discuess the
+Section~\ref{sec:overview} introduces polar varieties and discuses the
 algorithm sketched above and the genericity conditions required for it
 to succeed. These conditions are studied in details in
 Sections~\ref{sec:applications},~\ref{ssec:Hi2} and~\ref{Sec:Hip};
@@ -2267,7 +2267,7 @@ S &= \{1,2,\hdots,\lceil 4\epsilon^{-1}5n^3(2d)^{5n}\rceil \},\\
 T &= \{1,2,\hdots,\lceil 4\epsilon^{-1}nd^{4n} \rceil \},\\
 R &= \{1,2,\hdots,\lceil 4\epsilon^{-1}nd^{2n} \rceil \}.
 \end{align*}
-Using the Demillo-Lipton-Schwartz-Zippel lemma, we otbain
+Using the Demillo-Lipton-Schwartz-Zippel lemma, we obtain
 \[
 \pr[\Delta(\mA)=0] \leq  \frac{\deg\Delta}{|S|} = \epsilon/4.
 \]

@@ -2142,17 +2142,15 @@ $O^{\sim}(d^n).$
   \nl \For{$i\gets1$ \KwTo $n-p+1$}{
     \nl Build a straight-line program $\Gamma_i$ that computes the equations
     \begin{equation}\label{eq:step3}
-      X_1 - \sigma_1, \dots, X_{i-1} - \sigma_{i-1},\ F^{\mA},\ [L_1~\cdots~L_p]\cdot \jac(F^{\mA}, i),\ u_1 L_1 + \cdots + u_p L_p -1.        
+      X_1 - \sigma_1, \dots, X_{i-1} - \sigma_{i-1},\ F^{\mA},\ [L_1~\cdots~L_p]\cdot \jac(F^{\mA}, i),\ u_1 L_1 + \cdots + u_p L_p -1;        
     \end{equation}
     \nl Run \cite[Algorithm 2]{SH} $k \geq \log_2(4n/\epsilon)$ times
     with input $\Gamma_i$\;
     
-    \nl Let $\mathscr{Q}_i$ be the highest cardinality
+    \nl Let $\mathscr{Q}_i=((q_i,v_{i,1},\dots,v_{i,n+p}),\lambda_i)$ be the highest cardinality
     zero-dimensional parameterization returned in Step 4\; 
     
-    \nl Compute a parameterization of the projection of
-    $\mathscr{Q}_i$ onto the $X_1,\dots,X_n$-space, and let $\mathscr{Q}^{'}_i$
-    denote this new parameterization \;
+    \nl Denote by $\mathscr{Q}_i^{'}=((q_i,v_{i,1},\dots,v_{i,n}),\lambda_i)$ the parameterization of the projection of $\mathscr{Q}_i$ onto the $X_1,\dots,X_n$-space\;
     
   } 
   \nl  \Return $[\mathscr{Q}^{'}_1,\hdots,\mathscr{Q}^{'}_{n-p+1}]$.
@@ -2226,9 +2224,9 @@ and~\ref{prop:Hi123}. Denote by $\Delta := \prod_{i=1}^{n-p+1}
 If $\mA \in \C^{n \times n}$ does not cancel $\Delta,$ then $\mA$ is
 invertible and $F^\mA$ satisfies $\bm H_i$ for all $i$ in
 $\{1,\hdots,n-p+1\}.$ Now, assuming that $\mA$ is such a matrix, let
-$\Xi_i\in \C[S_1,\dots,S_{p+i-1}]$ be the polynomials from
+$\Xi_i\in \C[S_1,\dots,S_{i-1}]$ be the polynomials from
 Proposition~\ref{prop:hi2} applied to $F^{\mA}.$ Denote by $\Xi :=
-\prod_{i=1}^n \Xi_i,$ and note that
+\prod_{i=1}^{n-p+1} \Xi_i,$ and note that
 \begin{align}
     \deg( \Xi)= \sum_{i=1}^{n-p+1} \deg( \Xi_i) \leq nd^{4n}.
 \end{align}

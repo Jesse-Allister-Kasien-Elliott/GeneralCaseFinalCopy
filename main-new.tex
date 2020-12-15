@@ -211,8 +211,8 @@
 % Keywords command
 \providecommand{\keywords}[1]
 {
-  \small	
-  \textbf{\textit{Keywords---}} #1
+  \smallskip\noindent\small	
+  \textbf{\textbf{Keywords---}} #1
 }
 %
 %
@@ -288,14 +288,14 @@ operations in $\Q$; in addition, the output of the algorithm is
 represented by polynomials of degree $d^{O(n)}$, with coefficients of
 bit-size $hd^{O(n)}$. The key idea behind this algorithm goes back
 to~\cite{GrVo88}: sample points are found through the computation of
-critical points of well-chosen functions on $V(f_1,\dots,f_p)$.
+critical points of well-chosen functions on $V$.
 
-The number of connected components of $V(f_1,\dots,f_p)$ admits the
-lower bound $d^{\Omega(n)}$, so up to polynomial factors this result
-is optimal. However, due to the generality of the algorithm, the
-constant hidden in the exponent $O(n)$ in its runtime turns out to be
-rather large: the algorithm relies on infinitesimal deformations, that
-affect runtime non-trivially.
+The number of connected components of $V$ admits the lower bound
+$d^{\Omega(n)}$, so up to polynomial factors this result is
+optimal. However, due to the generality of the algorithm, the constant
+hidden in the exponent $O(n)$ in its runtime turns out to be rather
+large: the algorithm relies on infinitesimal deformations, that affect
+runtime non-trivially.
 
 In this paper, we will work under the additional assumption that
 $V=V(f_1,\dots,f_p)$ is a {\em smooth} complex algebraic set,
@@ -485,9 +485,9 @@ multipliers; these results, while rather simple, are used throughout.
 A first application is in Section~\ref{sec:wt}, where we give a
 quantitative form of Thom's ``weak transversality lemma''.
 
-Section~\ref{sec:overview} introduces polar varieties and discuses the
+Section~\ref{sec:overview} introduces polar varieties and discusses the
 algorithm sketched above and the genericity conditions required for it
-to succeed. These conditions are studied in details in
+to succeed. These conditions are studied in detail in
 Sections~\ref{sec:applications},~\ref{ssec:Hi2} and~\ref{Sec:Hip};
 this allows us to complete the analysis of the algorithm in
 Section~\ref{sec:analysis}, thereby proving Theorem~\ref{theo:main}.
@@ -504,11 +504,11 @@ material are~\cite{Mumford76,Shafarevich77,ECA}.
 
 \paragraph*{Algebraic sets.} An algebraic set $V \subset \C^n$ is the set of common 
 zeros of an ideal $I$ in $\C[X_1,\hdots,X_n].$ Conversely, the ideal
-of a subset $V$ of $\C^n$, the set of polynomials in
-$\C[X_1,\dots,X_n]$ that vanish at all points of $V$ is called the
+of a subset $V$ of $\C^n$, that is, the set of polynomials in
+$\C[X_1,\dots,X_n]$ that vanish at all points of $V$, is called the
 \textit{ideal} of $V$; this is a radical ideal, which we write $I(V)$.
 
-The smallest algebraic set containing an arbitrary $Y$ is called 
+The smallest algebraic set containing an arbitrary set $Y$ is called 
 the {\em Zariski closure} of $Y$ and written $\overline Y$.
 
 \paragraph*{Irreducible decomposition.}
@@ -523,7 +523,7 @@ V = V_1 \cup V_2 \cup \cdots \cup V_r,
 with $V_i \not \subset V_j$ for all $i \ne j$. The sets
 $V_1,\dots,V_r$ are called the {\em irreducible components} of $V$;
 they are uniquely defined, up to order. In terms of ideals, $I(V)$
-being radical, it admits a decomposition an irredundant intersection
+being radical, it admits a decomposition as an irredundant intersection
 of prime ideals $I_1,\dots,I_r$; the irreducible algebraic sets
 $V(I_1),\dots,V(I_r)$ are the irreducible components of $V$.
 
@@ -550,7 +550,7 @@ $\deg(f)$. We particularly care about algebraic sets of dimension zero; by
 definition, these sets are finite and their degree is equal to their
 cardinality.
 
-We will often apply the B\'ezout’s bound from \cite[Theorem 1]{H},
+We will often apply the B\'ezout bound from \cite[Theorem 1]{H},
 which says that $\deg(V \cap V') \le \deg(V) \deg(V')$ holds for all
 algebraic sets $V,V'$. A last useful property is that for any linear
 mapping $\psi: \C^n \to \C^m$, $\deg(\overline{ \psi(V)}) \le \deg(V)$.
@@ -573,7 +573,7 @@ thus finite and not empty.
 \paragraph*{Gradient vectors and Jacobian matrices.} The gradient vector 
 of a polynomial $f \in \C[X_1,\dots,X_n]$ is written $\grad(f) \in
 \C[X_1,\dots,X_n]^{1 \times n}$ (so this is a row vector). Most of the
-time, the variables with respect to which we differentiate is clear
+time, the variables with respect to which we differentiate are clear
 from the context, but we may write $\grad_{\bm X}(f)$ for clarity,
 with $\bm X=X_1,\dots,X_n$.
 
@@ -646,12 +646,12 @@ $\C[Y_1,\dots,Y_N]^{q \times r}$, with $q \le r$, together with some
 equations $B=(b_1,\dots,b_s)$ in $\C[Y_1,\dots,Y_N]$, we consider the
 locus $\X$ defined as 
 \[\X = \{\yb \in \C^N \ \mid \ b_1(\yb) = \cdots = b_s(\yb) =0 
-     \text{~and~} {\rm rank}(\bm A(\yb)) < q\}.\]
-Our first goal here is to give a degree bound for $\X$; this will be
-used twice, in the next section for our discussion of the weak
-transversality lemma (in a slightly general context where we work in
-an open subset of $\C^N$), then also to control the degrees of polar
-varieties.
+     \text{~and~} {\rm rank}(\bm A(\yb)) < q\}.\] One of our goals
+     here is to give a degree bound for $\X$; this will be used twice,
+     in the next section for our discussion of the weak transversality
+     lemma (in a slightly more general context where we work in an
+     open subset of $\C^N$), then also to control the degrees of the
+     systems of equations we will solve.
 
 Consider the polynomials
 \[\frkJ(\bm A, B) = (b_1,\dots,b_s,M_1,\dots,M_P),\]
@@ -666,7 +666,7 @@ our target bound in the context of weak transversality, for instance.
 
 Instead, we use Lagrange systems. We let $L_1,\hdots,L_q$ be new
 variables, thought of as Lagrange multipliers, and consider the
-``Lagrange polynomials'' given by the entries of $ [ L_1 ~\cdots~
+``Lagrange polynomials'' given as the $r$ entries of $ [ L_1 ~\cdots~
   L_q]\cdot \bm A$. We denote by $Z \subset \C^{N+q}$ the algebraic set
 defined by the vanishing of
 \[ ( b_1,\dots,b_s, \  [ L_1 ~\cdots~ L_q]\cdot \bm A )\]
@@ -708,22 +708,23 @@ makes this more precise.
   hyperplanes.
 \end{prop}
 \begin{proof}
-  If $(\bm y, \bm \ell)$ cancels all polynomials in ${\frkJ(\bm
-    A, B)}$, then $\bm \ell$ is non-zero, so that $\bm A(\bm y)$ is
-  rank-defective. As a consequence, $\bm y$ is in $\X$.
+  If $(\bm y, \bm \ell)$ cancels all polynomials in ${\frkL(\bm A,
+    B,\bm u)}$, then $\bm \ell$ is non-zero, so that $\bm A(\bm y)$ is
+  rank-deficient. As a consequence, $\bm y$ is in $\X$. Thiss proves
+  the first assertion.
 
-  For the converse, let $\X_1,\dots,\X_K$ be the irreducible components
-  of $\X$.  For any given $k$ in $\{1,\dots,K\}$, since all $q$-minors
-  of $\mA$ vanish on $\X_k$, they vanish in the function field
-  $\C(\X_k)$, so $\mA$ has rank less than $q$ as a matrix over
+  For the second one, let $\X_1,\dots,\X_K$ be the irreducible
+  components of $\X$.  For any given $k$ in $\{1,\dots,K\}$, since all
+  $q$-minors of $\mA$ vanish on $\X_k$, they vanish in the function
+  field $\C(\X_k)$, so $\mA$ has rank less than $q$ as a matrix over
   $\C(\X_k)$. Thus, there exists a non-zero vector of rational
   functions
-  \[\bm \ell_k = (\ell_{k,1},\hdots,\ell_{k,q})=\left(\frac{N_{k,1}}{D_k},\hdots,\frac{N_{k,q}}{D_k}\right)\in \C(\X_k)^q,\]
+  \[\bm \ell_k = (\ell_{k,1},\hdots,\ell_{k,q})=\left(\frac{N_{k,1}}{D_k},\hdots,\frac{N_{k,q}}{D_k}\right)\in \C(\X_k)^{ q},\]
   such that $\bm \ell_k  \cdot \bm A = 0$ in $\C(\X_k)^r$ 
 (here, we see $\bm \ell_k$ in $\C(\X_k)^{1 \times q}$).
   For definiteness, assume that $N_{k,\iota_k} \ne 0.$ Then, in particular,
   $\X'_k = \X_k - V( D_k N_{k,\iota_k})$ is dense in $\X_k$; for 
-  $\bm y$ in $\X'_k$, $\bm\ell_k(\bm y)$ is well-defined and still
+  $\bm y$ in $\X'_k$, $\bm\ell_k(\bm y)$ is well-defined, non-zero, and still
   satisfies $\bm \ell_k(\bm y) \cdot \bm A(\bm y) = 0$.
   
   Then, pick a point $\bm y_k$ in $\X'_k$, so that
@@ -734,7 +735,7 @@ makes this more precise.
   \mathscr{O}_k := 
   \left\{\bm u \in \C^q~|~ \bm \ell_k(\bm y_k) \cdot \bm u \ne 0\right \},
   \]
-  with $\bm \ell_k(\bm y_k)$ in $\C^{1 \times q}$ and $\bm u$ in
+  where in the dot product we take $\bm \ell_k(\bm y_k)$ in $\C^{1 \times q}$ and $\bm u$ in
   $\C^{q \times 1}$.  Finally, we let $\mathscr{O} := \cap_{1 \le k
     \le K} \mathscr{O}_{k}$, which is open, non-empty, and defined 
   as the complement of $K \le \deg(\X)$ hyperplanes, as claimed. We now prove
@@ -753,8 +754,8 @@ makes this more precise.
   \ell_k(\bm y_k)\cdot \bm u$ is non-zero, with $\bm y_k$ in $\X'_k$, shows that
   $\X''_k$ is not empty. In particular, it is dense in $\X_k$.   
 
-  Take $\bm y$ in $\X_k$. Then, $\alpha:=\bm \ell(\bm y)\cdot \bm u$
-  is non-zero, set we can define $\bm \ell' := 1/\alpha\ \bm\ell(\bm y)$.
+  Take $\bm y$ in $\X''_k$. Then, $\alpha:=\bm \ell_k(\bm y)\cdot \bm u$
+  is non-zero, set we can define $\bm \ell' := 1/\alpha\ \bm\ell_k(\bm y)$.
   Then, $\bm \ell'$ is still in the left nullspace of $\bm A(\bm y)$,
   and by construction $ \bm \ell'\cdot \bm u =1$, so that $(\bm y, \bm
   \ell')$ is in $Z_{\bm u}$. In other words, $\X''_k$ is contained in
@@ -772,7 +773,7 @@ makes this more precise.
 \begin{proof}
   Choose $\bm u$ in the set $\mathscr{O}$ of the previous lemma.  The
   algebraic set $Z_{\bm u}$ is defined by $s$ equations of respective
-  degrees at most $d_1,\dots,d_s$, $r$ equations of degre at most
+  degrees at most $d_1,\dots,d_s$, $r$ equations of degree at most
   $d'+1$ and a linear equation. It follows from B\'ezout's
   Theorem~\cite{H} that $\deg(Z_{\bm u}) \leq d_1 \cdots d_s
   (d'+1)^r$. Degree does not increase through projection, so the
@@ -896,7 +897,7 @@ in a generalized form. (In this example, the bound $d^4$ could be
 sharpened by utilizing the fact that only one of the polynomials
 defining $\Phi$ has degree $d$, whereas the other one is linear.)
 
-The rest of the subsection is devoted to the proof of the proposition.
+The rest of the section is devoted to the proof of the proposition.
 The proof of \cite[Theorem B.3]{TWT} already shows the existence of
 $\Gamma$; it is essentially the classical proof for smooth
 mappings~\cite[Section~3.7]{demazure2000bifurcations}, written in an
@@ -907,13 +908,13 @@ establishing a bound on the degree of $\Gamma$.
 
 \subsection{Proof of the proposition}
 
-In the context of Thom's weak transversality, the ``bad'' parameter
-values show up as the critical values of a certain projection. In what
-follows, we use the notation of Proposition~\ref{prop:weak_t}, so that
-we consider $m$ polynomials $\Phi$ that depend on variables
+In what follows, we use the notation of Proposition~\ref{prop:weak_t},
+so that we consider $m$ polynomials $\Phi$ that depend on variables
 $X_1,\dots,X_n$ and $\Theta_1,\dots,\Theta_s$, with $m \le n$, and an
 open set $\sO \subset \C^n$.
 
+In the context of Thom's weak transversality, the ``bad'' parameter
+values show up as the critical values of a certain projection. 
 Put $Y = \Phi^{-1}(0) \cap (\sO \times \C^s)$, and let $V$ be the
 Zariski closure of $Y.$ If $Y$ is empty, there is nothing to do, since
 all values $\thetab$ in $\C^\dt$ satisfy the conclusion of the
@@ -1119,41 +1120,6 @@ $W(i,F)$ is defined by the polynomials
 \begin{equation}\label{eq:frkJ}
 \frkJ(i,F) = \big(f_1,\hdots,f_p,M_{i,1},\hdots,M_{i,P_{i}}\big).  
 \end{equation}
-%% \begin{lemma}
-%%   For $i=1,\dots,\delta+1$, the degree of $W(\pi_i,F)$ is at most
-%%   $d^{n+p}$.
-%% \end{lemma}
-%% \begin{proof}
-%%   For $i \le \delta$, this is a consequence of
-%%   Proposition~\ref{coro:degree}, since all polynomials $f_1,\dots,f_p$
-%%   have degree at most $d$, and all entries in $\jac(F, i)$ have degree at
-%%   most $d-1$ (that proposition works in an open set, and consider a
-%%   locally closed determinantal locus; here, the open set in question
-%%   is simply $\C^n$, and our determinantal locus $W(\pi_i,F)$ is thus
-%%   Zariski closed); the resulting degree bound is $d^{n+p-i} \le
-%%   d^{n+p}$.  For $i=\delta+1$, $W(\pi_{\delta+1},F)$ has degree at
-%%   most $d^p \le d^{n+p}$ as a consequence of B\'ezout's theorem.
-%% \end{proof}
-%% \begin{ex} (\cite[Example 3.1]{TWT})
-%%   Let $f = X_1^2 + X_2^2 + X_3^2-1\in \C[X_1,X_2,X_3]$ and consider
-%%   the hypersurface $V=V(f) \subset \mathbb{C}^{3}$. The critical
-%%   points $W(\pi_2,F)$ of the projection $\pi_2: (x_1,x_2,x_3) \mapsto
-%%   (x_1,x_2)$ on $V$ are defined by
-%%   \[
-%%   X_1^2 + X_2^2 + X_3^2-1=X_3=0,
-%%   \]
-%%   whereas the critical points $W(\pi_1,F)$ of the projection $\pi_1: (x_1,x_2,x_3)
-%%   \mapsto x_1$ on $V$ are defined by
-%%   \[
-%%   X_1^2 + X_2^2 + X_3^2-1=X_2=X_3=0.
-%%   \]
-%%   In both cases, the dimension of $W(\pi_i,F)$ is $i-1$.
-%%   \begin{figure}[h]
-%%     %% \includegraphics[width=0.75\linewidth]{pi1Andpi2.png}
-%%     \centering
-%%     \caption{The polar varieties $W(1, F)$ and $W(2, F)$.}
-%% \end{figure}
-%% \end{ex}
 The downside to defining polar varieties using minors of the truncated
 Jacobian matrix is that these equations are in general not complete
 intersection, due to the relations between minors of a matrix (the
@@ -1167,8 +1133,8 @@ variables, as in Section~\ref{ssec:detvar}. We may thus consider the zero-set of
 \[ \big(F,\ [L_1~\cdots~L_p]\cdot \jac(F, i)\big ) \in \C[X_1,\dots,X_n,L_1,\dots,L_p]^{p+n-i},\]
 but as before, we will want to discard from the zero-set of these
 equations in $\C^{n+p}$ those components where all $L_i$'s vanish
-identically. However, the saturation needed to remove such components
-is unlikely to yield convenient sets of generators.  We will again
+identically. We pointed out that the saturation needed to remove such components
+is unlikely to yield convenient sets of generators, so we will again
 introduce a single additional equation, of the form $u_1 L_1 + \cdots
 + u_p L_p -1$, for a certain $\bm u = (u_1,\dots,u_p)$ in
 $\C^p$. Thus, for such a vector $\ub$, we define the following
@@ -1185,23 +1151,6 @@ well. However, Proposition~\ref{prop:projection} shows that for a {\em
 the zero-set of these equations on the $X_1,\dots,X_n$-space is indeed
 $W(i,F)$.  In the algorithm, we will use random $u_i$'s; the former
 proposition will allow us to quantify bad choices.
-
-%% \begin{ex}
-%% Consider again $f=X_1^2 + X_2^2 + X_3^2-1 \in \C[X_1,X_2,X_3]$ and
-%% \[V(X_1^2 + X_2^2 + X_3^2-1)\subset \C^3.\]
-%% Since $\jac(X_1^2 + X_2^2 + X_3^2-1,2)=2X_3,$ the Lagrangian modeling
-%% gives us
-%% \[
-%%  V(X_1^2 + X_2^2 + X_3^2-1, LX_3, L-1) = V(X_1^2 + X_2^2-1,X_3,L-1),
-%% \]
-%% where the equations on the right hand side are a lexicographically
-%% ordered Gr\"obner basis of the ideal $\la X_1^2 + X_2^2 + X_3^2-1,
-%% LX_3, L-1 \ra.$ Notice that we have only 1 Lagrange multiplier, $L$,
-%% and we have $\ub=(u)=(1)$, but any $u \not = 0$ would suffice here. We
-%% therefore have that \[ \pi_{\Xb}(V(X_1^2 + X_2^2-1,X_3,L-1))\]
-%% describes the set where
-%% \[ X_1^2 + X_2^2 + X_3^2-1 = X_3 = 0\] and therefore describes the polar variety $W(\pi_2,F).$
-%% \end{ex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1229,9 +1178,9 @@ Departing from~\cite{EMP}, and following the discussion in the
 previous subsection, we will avoid solving the system generated by
 $F=(f_1,\dots,f_p)$ and the $p$-minors of $\jac(F, i)$: to control
 costs, it will be beneficial to use the Lagrange system
-of~\eqref{eqdef:Iil} instead. Hence, our genericity assumptions will
-concern these equations. For $i=1,\dots,\delta+1$, we define the
-following properties:
+of~\eqref{eqdef:Iil} instead. Hence, some of our genericity
+assumptions will concern these equations. For $i=1,\dots,\delta+1$, we
+define the following properties:
 \begin{description}
 \item [$\bm H_i(1):$] $W(i,F)$ is either empty or $(i-1)$-equidimensional;
 \item [$\bm H_i(2):$] $0$ is a regular value of the $n+p-i$ polynomials
@@ -1265,7 +1214,7 @@ $n+p$ polynomials
 \end{equation}
 In particular, these equations admit finitely many solutions.
 
-Suppose that for some $i$ in $\{1,\dots,\delta+1\}$, if $F$ satisfies
+Suppose that for some $i$ in $\{1,\dots,\delta+1\}$,  $F$ satisfies
 $\bm H_i$ and $\bm \sigma$ satisfies $\bm H_i^{'}$; then, we know that
 both systems~\eqref{eq:syst} and~\eqref{eq:syst2} have finitely many
 solutions. In order to find the solutions of~\eqref{eq:syst}, we will
@@ -1318,7 +1267,7 @@ following proposition.
 
 \begin{prop}\label{prop:Hi12}
   For $i=1,\dots,\delta+1$, there exists a non-zero polynomial
-  $\D_{i,1}$ in $\C[(\frak A_{j,k})_{1\le j,k \le n}]$ and of degree
+  $\D_{i,1}$ in $\C[(\frak A_{j,k})_{1\le j,k \le n}]$ of degree
   at most $n(d^{5n}+1)$ and with the following property. For $\mA$ in
   $\C^{n\times n}$, if $\mA$ does not cancel $\D_{i,1}$, then $F^\mA$
   satisfies ${\bf H}_i(1)$ and ${\bf H}_i(2)$.
